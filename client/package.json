@@ -48,7 +48,7 @@
         ],
         "rules": {
           "import/no-anonymous-default-export": "off",
-          "semi": "true"
+          "semi": 1
         }
       }
     ]
