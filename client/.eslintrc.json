@@ -20,12 +20,21 @@
     "no-restricted-syntax": ["off", "ForOfStatement"], // disallow specified syntax(ex. WithStatement)
     "prefer-arrow-callback": "error", // Require using arrow functions for callbacks
     "require-await": "error",
-    "arrow-parens": ["error", "as-needed"], // a => {}
+    "arrow-parens": [2, "always"], // a => {}
     "no-param-reassign": ["error", { "props": false }],
     "no-unused-expressions": ["error", {
       "allowTernary": true,      // a || b
       "allowShortCircuit": true, // a ? b : 0
       "allowTaggedTemplates": true
+    }],
+    "import/no-anonymous-default-export": ["error", {
+      "allowArray": true,
+      "allowArrowFunction": true,
+      "allowAnonymousClass": true,
+      "allowAnonymousFunction": true,
+      "allowCallExpression": true, // The true value here is for backward compatibility
+      "allowLiteral": true,
+      "allowObject": true
     }],
     "indent": ["error", 2],
     // "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
