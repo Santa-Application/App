@@ -3,7 +3,9 @@ import { Heading } from 'components';
 function App() {
   return (
     <div className="App">
-      <Heading level={1} content="오늘 기분타? 그럼 산타!" />
+      <Heading level={1} content="SANTA" />
+      <Heading level={2} content="Reviews" />
+      <Heading level={3} content="제목" />
     </div>
   );
 }
