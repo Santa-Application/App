@@ -1,4 +1,5 @@
 {
+  "extends": "react-app",
   "rules": {
     // "off" or 0 - turn the rule off
     // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
@@ -26,6 +27,7 @@
       "allowShortCircuit": true, // a ? b : 0
       "allowTaggedTemplates": true
     }],
+    "indent": ["error", 2],
     // "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "max-len": ["error", {
       "code": 120,
