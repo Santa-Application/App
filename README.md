@@ -1,10 +1,14 @@
-<h1 align="center">Santa Application</h1>
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/42370712/114342717-4b434980-9b97-11eb-8888-3c549a3e8800.png">
+</p>
+<p align="center">
+<img align="center" style="width:30%" src="https://cdn.discordapp.com/attachments/824929055458983976/831000472067506197/1ce1d94989526fca.png">
+</p>
 <!-- ## 데모 -->
 
 <h3 align="center">Tech Stack<h3>
 
-<h3 align="center" style="font-weight:800">Front</h3>
+<h4 align="center">Front</h4>
 <p align="center">
   <img src="https://img.shields.io/badge/React-17.0.1-skyblue?logo=React">
   <img src="https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=white&style=flat">
@@ -13,7 +17,7 @@
   <img src="https://img.shields.io/badge/-ReactRouter-CA4245?logo=react-router&logoColor=white&style=flat">
   <img src="https://img.shields.io/badge/-FramerMotion-d2c?logo=framer&logoColor=white&style=flat">
 </p>
-<h3 align="center">Back</h3>
+<h4 align="center">Back</h4>
 <p align="center">
   <img src="https://img.shields.io/badge/-NodeJS-339933?logo=node.js&logoColor=white&style=flat">
   <img src="https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white&style=flat">
@@ -22,7 +26,7 @@
   <img src="https://img.shields.io/badge/-AmazonS3-569A31?logo=amazon-s3&logoColor=white&style=flat">
 </p>
   
-<h3 align="center">Coding utilities and others</h3>
+<h4 align="center">Coding Utilities and Others</h4>
 <p align="center">
   <img src="https://img.shields.io/badge/-Figma-F24E1E?logo=figma&logoColor=white&style=flat">
   <img src="https://img.shields.io/badge/-ESlint-4B32C3?logo=eslint&logoColor=white&style=flat">
@@ -32,7 +36,9 @@
   <img src="https://img.shields.io/badge/-Notion-000000?logo=notion&logoColor=white&style=flat">
 </p>
 
+<h2 align="center">Application flow</h2>
 
+<img src="https://user-images.githubusercontent.com/42370712/114342540-f43d7480-9b96-11eb-9386-ae8dbb8ce14c.png">
 
 ## 팀원
 
