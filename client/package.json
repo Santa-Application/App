@@ -19,6 +19,7 @@
     "react-datepicker": "^3.7.0",
     "react-dom": "^17.0.2",
     "react-helmet-async": "^1.0.9",
+    "react-infinite-scroll-component": "^6.0.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -73,6 +74,7 @@
     "@storybook/addon-links": "^6.2.7",
     "@storybook/node-logger": "^6.2.7",
     "@storybook/preset-create-react-app": "^3.1.7",
-    "@storybook/react": "^6.2.7"
+    "@storybook/react": "^6.2.7",
+    "storybook-addon-designs": "^6.0.0-alpha.3"
   }
 }
