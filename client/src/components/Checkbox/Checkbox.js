@@ -1,4 +1,3 @@
-import { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { checkbox } from './Checkbox.module.scss';
 import 'styles/common.scss';
@@ -9,15 +8,9 @@ const Checkbox = ({
   inputClassName,
   icon,
   isChecked,
+  onChange,
   ...restProps
 }) => {
-  // const [isChecked, setIsChecked] = useState(false);
-
-  // const handleCheckbox = useCallback(() => {
-  //   // dispatch()
-  //   setIsChecked(!isChecked);
-  // }, [isChecked]);
-
   const labelClasses = classNames(labelClassName);
   const checkboxClasses = classNames(checkbox, inputClassName);
 
@@ -27,11 +20,10 @@ const Checkbox = ({
         type="checkbox"
         className={checkboxClasses}
         name="checkbox"
-        // onChange={handleCheckbox}
+        onChange={onChange}
         checked={isChecked}
       />
       {icon}
-
       {/* {icon && <Icon />} */}
     </label>
   );
@@ -42,11 +34,14 @@ Checkbox.defaultProps = {
   inputClassName: '',
   icon: false,
   isChecked: false,
+  onChange: null,
 };
 Checkbox.propTypes = {
   labelClassName: PropTypes.string,
   inputClassName: PropTypes.string,
   icon: PropTypes.bool,
+  isChecked: PropTypes.bool.isRequired,
+  onChange: PropTypes.oneOfType([PropTypes.func, null]),
 };
 
 export default Checkbox;
