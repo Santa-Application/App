@@ -5,7 +5,7 @@ import Button from './Button';
 
 export default {
   // 컴포넌트 설명을 입력하면 Storybook에 카테고리 되어 표시됩니다.
-  title: 'UI/Control/Button',
+  title: 'Components/Button',
   // 컴포넌트 설정
   component: Button,
   // 전달 인자 유형 설정

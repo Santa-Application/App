@@ -6,7 +6,7 @@ export default {
   argTypes: {
     isChecked: {
       type: 'boolean',
-      description: '체크 된 상태인지?',
+      description: '체크 상태를 전달받습니다.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -14,23 +14,20 @@ export default {
         type: 'boolean',
       },
     },
-    icon: {
-      type: 'boolean',
-      description: '체크박스 아이콘이 있는지?',
-      table: {
-        type: { summary: 'boolean' },
-      },
-    },
     onChange: {
       action: 'checked!',
-      description: '체크 했을 때 실행되는 함수입니다',
+      description: '변경 이벤트(함수)를 전달받습니다.(checked상태 업데이트)',
       table: {
         category: 'Events',
+        type: { summary: 'function' },
       },
+    },
+    children: {
+      description: '라디오 버튼의 내용을 전달받습니다.',
     },
   },
 };
 
 const Template = (args) => <Checkbox {...args} />;
 
-export const LikeCheckbox = Template.bind({});
+export const Like = Template.bind({});
