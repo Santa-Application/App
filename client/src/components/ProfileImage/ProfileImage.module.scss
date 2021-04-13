@@ -6,6 +6,21 @@
   border: 0.4rem solid $gray;
 }
 
+.large {
+  width: 9.2rem;
+  height: 9.2rem;
+}
+
+.medium {
+  width: 4.6rem;
+  height: 4.6rem;
+}
+
+.small {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
 .image {
   width: inherit;
   margin-top: 50%;

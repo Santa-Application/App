@@ -11,14 +11,38 @@ export default {
         type: { summary: 'string' },
       },
     },
+    size: {
+      type: 'string',
+      description: '프로필 이미지 크기를 전달받습니다.',
+      table: {
+        type: { summary: 'string' },
+      },
+      control: {
+        type: 'radio',
+        options: ['large', 'medium', 'small'],
+      },
+    },
   },
 };
 
 const Template = (args) => <ProfileImage {...args} />;
 
-export const Profile = Template.bind({});
+export const Large = Template.bind({});
+export const Medium = Template.bind({});
+export const Small = Template.bind({});
 
-Profile.args = {
+Large.args = {
   src:
     'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
+  size: 'large',
+};
+Medium.args = {
+  src:
+    'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
+  size: 'medium',
+};
+Small.args = {
+  src:
+    'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
+  size: 'small',
 };
