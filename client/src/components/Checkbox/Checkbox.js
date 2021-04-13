@@ -41,7 +41,7 @@ Checkbox.propTypes = {
   inputClassName: PropTypes.string,
   icon: PropTypes.bool,
   isChecked: PropTypes.bool.isRequired,
-  onChange: PropTypes.oneOfType([PropTypes.func, null]),
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
 };
 
 export default Checkbox;
