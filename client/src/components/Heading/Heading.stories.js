@@ -6,7 +6,7 @@ export default {
   argTypes: {
     level: {
       type: { name: 'number', required: true },
-      description: '헤딩 레벨을 1~6안에서 지정해주세요',
+      description: '헤딩 레벨을 전달받습니다.',
       table: {
         type: { summary: 'number' },
       },
@@ -14,13 +14,6 @@ export default {
     },
     content: {
       description: '헤딩에 들어갈 텍스트를 설정합니다',
-      type: 'string',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
-    className: {
-      description: '요소의 클래스 이름을 지정해주세요',
       type: 'string',
       table: {
         type: { summary: 'string' },
