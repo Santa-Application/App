@@ -1,0 +1,35 @@
+@import 'styles/';
+
+.selectBoxContainer {
+  border-radius: 10px;
+  box-shadow: $boxShadow;
+  width: 90vw;
+}
+
+.selectBoxButton {
+  @include flex(space-between, center, row, nowrap);
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  p {
+    margin-right: 1rem;
+  }
+}
+
+.selectBoxList {
+  max-height: 18rem;
+  overflow-y: scroll;
+
+  li {
+    border-top: 1px solid $lightGray;
+
+    &:hover {
+      background-color: rgba($color: $lightGray, $alpha: 0.2);
+    }
+
+    button {
+      @include flex(center, left, column, wrap);
+      padding: 0.8rem 1.5rem;
+      width: 100%;
+    }
+  }
+}
