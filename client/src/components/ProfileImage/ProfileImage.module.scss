@@ -1,0 +1,13 @@
+@import 'styles/';
+
+.container {
+  overflow: hidden;
+  border-radius: 50%;
+  border: 0.4rem solid $gray;
+}
+
+.image {
+  width: inherit;
+  margin-top: 50%;
+  transform: translateY(-50%);
+}
