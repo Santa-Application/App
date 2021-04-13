@@ -1,0 +1,36 @@
+
+.button {
+  padding: 1rem 2.8rem;
+  color: #FFFFFF;
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  border-radius: 3rem;
+  box-shadow: .0rem .4rem .4rem rgba(0, 0, 0, 0.25);
+  border: none;
+  box-sizing: border-box;
+  outline-color: #FC7145;
+
+  
+}
+
+.primary {
+  background-color: #FC7145
+}
+
+.secondary {
+  background-color: #FFFFFF;
+  border: .1rem solid #F76707;
+  color: #F76707;
+}
+
+[disabled] {
+  background-color: #CED3E3;
+  border: none;
+  color: #FFFFFF;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}
