@@ -6,11 +6,9 @@ export default {
   argTypes: {
     level: {
       type: { name: 'number', required: true },
-      defaultValue: 2,
-      description: '1~6까지 헤딩 레벨을 지정해주세요',
+      description: '헤딩 레벨을 1~6안에서 지정해주세요',
       table: {
         type: { summary: 'number' },
-        defaultValue: { summary: 2 },
       },
       control: { min: 1, max: 6 },
     },
@@ -19,7 +17,6 @@ export default {
       type: 'string',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: '' },
       },
     },
     className: {
@@ -27,7 +24,6 @@ export default {
       type: 'string',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: '' },
       },
     },
   },
