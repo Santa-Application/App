@@ -1,0 +1,37 @@
+@import 'styles';
+
+.container {
+  width: 160px;
+  border-radius: $borderRadiusSmall;
+  overflow: hidden;
+  box-shadow: $boxShadow;
+
+  img {
+    width: 100%;
+  }
+
+  div {
+    background-color: $white;
+    padding: 1rem 1.2rem;
+  }
+
+  p {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    color: $darkGray;
+    font-size: 1.4rem;
+    font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  time {
+    color: $lightGray;
+    font-size: 1rem;
+  }
+
+  span {
+    float: right;
+  }
+}
