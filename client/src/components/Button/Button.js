@@ -19,7 +19,7 @@ const Button = ({
   const composeClasses = classNames(
     button,
     secondary ? secondaryClass : primary
-  )
+  );
 
 
 
