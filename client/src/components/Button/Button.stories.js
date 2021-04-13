@@ -1,5 +1,5 @@
 // Story를 구성할 컴포넌트 파일 불러오기
-import Button from './Button'
+import Button from './Button';
 
 /* ------------------------------------------------------------------- */
 
@@ -41,4 +41,4 @@ export const RegularButton = Template.bind({});
 RegularButton.storyName = 'Regular';
 RegularButton.args = {
   type: 'submit'
-}
+};
