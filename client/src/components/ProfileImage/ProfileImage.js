@@ -1,14 +1,8 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import {
-  container,
-  image,
-  large,
-  medium,
-  small,
-} from './ProfileImage.module.scss';
+import { container, large, medium, small } from './ProfileImage.module.scss';
 
-const checkProfileSize = (size) => {
+const checkProfileSize = size => {
   switch (size) {
     case 'large':
       return large;
@@ -28,7 +22,7 @@ const ProfileImage = ({ size, src, containerClassName, ...restProps }) => {
   );
   return (
     <div className={containerClasses}>
-      <img src={src} alt="" className={image} />
+      <img src={src} alt="" />
     </div>
   );
 };
