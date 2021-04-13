@@ -4,11 +4,11 @@ import 'styles/common.scss';
 import classNames from 'classnames';
 
 const Checkbox = ({
-  labelClassName,
-  inputClassName,
-  icon,
   isChecked,
   onChange,
+  children,
+  labelClassName,
+  inputClassName,
   ...restProps
 }) => {
   const labelClasses = classNames(labelClassName);
@@ -23,25 +23,20 @@ const Checkbox = ({
         onChange={onChange}
         checked={isChecked}
       />
-      {icon}
-      {/* {icon && <Icon />} */}
+      {children}
     </label>
   );
 };
 
 Checkbox.defaultProps = {
-  labelClassName: '',
-  inputClassName: '',
-  icon: false,
   isChecked: false,
   onChange: null,
+  children: null,
 };
 Checkbox.propTypes = {
-  labelClassName: PropTypes.string,
-  inputClassName: PropTypes.string,
-  icon: PropTypes.bool,
   isChecked: PropTypes.bool.isRequired,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  children: PropTypes.node,
 };
 
 export default Checkbox;
