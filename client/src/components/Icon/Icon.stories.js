@@ -4,7 +4,7 @@ import Icon from './Icon';
 /* ------------------------------------------------------------------- */
 
 export default {
-  title: 'UI/Component/Icon',
+  title: 'Components/Icon',
   component: Icon,
   argTypes: {
     shape: {
