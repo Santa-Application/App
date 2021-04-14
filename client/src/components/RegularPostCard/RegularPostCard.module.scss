@@ -1,0 +1,36 @@
+@import 'styles';
+
+.container {
+  width: 160px;
+  border-radius: $borderRadiusSmall;
+  overflow: hidden;
+  box-shadow: $boxShadow;
+}
+
+.image {
+  width: 100%;
+}
+
+.textContainer {
+  background-color: $white;
+  padding: 1rem 1rem;
+}
+
+.title {
+  width: 100%;
+  margin-bottom: 0.5rem;
+
+  color: $darkGray;
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.time {
+  margin-right: 6%;
+  color: $lightGray;
+  font-size: 1.2rem;
+}
