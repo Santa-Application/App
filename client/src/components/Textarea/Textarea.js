@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { textarea } from './Textarea.module.scss';
 import classNames from 'classnames';
+import { textarea } from './Textarea.module.scss';
 
 const Textarea = ({ value, onChange, className, ...restProps }) => {
   const textareaClasses = classNames(className, textarea);
@@ -18,6 +18,7 @@ Textarea.defaultProps = {
   value: '',
   onChange: null,
 };
+
 Textarea.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
