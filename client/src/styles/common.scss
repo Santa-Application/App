@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 html {
   font-size: 10px;
 }
@@ -11,4 +13,30 @@ html {
   height: 1px;
   margin: -1px;
   white-space: nowrap;
+}
+
+// scroll style
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $lightGray;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $darkGray;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: $primary;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
 }
