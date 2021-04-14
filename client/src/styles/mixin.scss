@@ -11,6 +11,12 @@
   align-items: center;
 }
 
+@mixin flex-row($justify) {
+  display: flex;
+  justify-content: $justify;
+  align-items: center;
+}
+
 @mixin defaultPosition {
   position: absolute;
   top: 0;
