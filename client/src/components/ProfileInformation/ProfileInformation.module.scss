@@ -1,0 +1,23 @@
+
+.information {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.4);
+  width: 2.4rem;
+
+  span {
+    font-size: 2.4rem;
+    font-weight: 400;
+  }
+  
+  svg {
+    flex-shrink: 0;
+    height: 2.4rem;
+    width: 2.4rem;
+  }
+
+  p {
+    margin-top: .4rem;
+  }
+}
