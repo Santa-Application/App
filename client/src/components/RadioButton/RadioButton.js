@@ -3,7 +3,7 @@ import { ReactComponent as Unchecked } from './assets/checked=false.svg';
 import { ReactComponent as Checked } from './assets/checked=true.svg';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { container, input, label, icon } from './RadioButton.module.scss';
+import { container, radioButton, label, icon } from './RadioButton.module.scss';
 
 const RadioButton = ({
   id,
@@ -42,7 +42,7 @@ const RadioButton = ({
         name={name}
         checked={checked}
         onChange={onChange}
-        className={input}
+        className={radioButton}
       />
       <label htmlFor={id} className={labelClasses}>
         <CheckIcon

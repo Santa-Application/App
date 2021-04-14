@@ -15,10 +15,10 @@ const RegularPostCard = ({
   postTitle,
   postDate: postingDate,
   mountainName,
-  containerClassName,
+  className,
   ...restProps
 }) => {
-  const containerClasses = classNames(containerClassName, container);
+  const containerClasses = classNames(className.container, container);
 
   return (
     <div className={containerClasses}>
@@ -46,7 +46,7 @@ RegularPostCard.defaultProps = {
   postTitle: '',
   postDate: null,
   mountainName: '',
-  containerClassName: '',
+  className: {},
 };
 
 RegularPostCard.propTypes = {
@@ -54,7 +54,7 @@ RegularPostCard.propTypes = {
   postTitle: PropTypes.string.isRequired,
   postDate: PropTypes.object.isRequired,
   mountainName: PropTypes.string.isRequired,
-  containerClassName: PropTypes.string,
+  className: PropTypes.object,
 };
 
 export default RegularPostCard;
