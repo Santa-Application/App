@@ -1,5 +1,17 @@
 
 .tag {
-  width: 1.2rem;
   font-size: 1.2rem;
+  font-family: 'Roboto';
+  display: inline-block;
+  
+  span {
+    margin-left: .2rem;
+    line-height: 1.2rem;
+  }
+  
+  svg {
+    width:1.3rem;
+    height:1.3rem;
+    vertical-align: -10%;
+  }
 }

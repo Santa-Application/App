@@ -36,10 +36,10 @@ const Tag = ({ type, contents = { mountainName: '인왕산' } }) => {
   }
 
   return (
-    <>
-      <Icon className={tag} shape={shape}/>
-      <span className={tag}>{displayContent}</span>
-    </>
+    <div className={tag}>
+      <Icon shape={shape}/>
+      <span>{displayContent}</span>
+    </div>
   );
 };
 

@@ -30,4 +30,37 @@ export default {
 
 const Template = (args) => <Tag {...args} />
 
-export const DefaultTag = Template.bind({});
+export const DefaultTag = Template.bind({})
+
+export const PersonTag = Template.bind({});
+PersonTag.args ={
+  type: 'person',
+  contents: {
+    person: 6,
+  }
+};
+
+export const MountainTag = Template.bind({});
+MountainTag.args = {
+  type: 'mountain',
+  contents: {
+    mountainName: '설악산',
+  }
+};
+
+export const DateTag = Template.bind({});
+DateTag.args = {
+  type: 'date',
+  contents: {
+    year: 2021,
+    month: 4,
+    day: 14
+  }
+}
+export const GenderTag = Template.bind({});
+GenderTag.args = {
+  type: 'gender',
+  contents: {
+    gender: 'both'
+  }
+}
