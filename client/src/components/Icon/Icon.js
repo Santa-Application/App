@@ -44,7 +44,6 @@ const Icon = ({ shape, ...restProps }) => {
   return <RenderIcon/>; 
 };
 
-export default Icon;
 
 Icon.propTypes = {
   shape: oneOf(['calendar', 'close', 'edit', 'female', 'genderBoth', 'back',
@@ -55,3 +54,6 @@ Icon.propTypes = {
 Icon.defaultProps = {
   shape: 'level1'
 };
+
+
+export default Icon;
