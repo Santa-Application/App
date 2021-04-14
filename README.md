@@ -75,3 +75,4 @@ Santa는 증가하는 2030 세대의 등산 열풍에 의해 탄생된 아이디
 <img src="https://user-images.githubusercontent.com/72931773/114325789-d8bd7400-9b6c-11eb-91b1-31b3c0a0b764.png" width="70%" />
 
 <!-- ## 프로젝트 구조도 -->
+[디자인시안](https://www.figma.com/file/vMttsM3y4KtX8Ubj6Ij7nJ/Santa?node-id=8%3A27)
