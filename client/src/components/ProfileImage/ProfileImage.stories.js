@@ -1,18 +1,17 @@
 import ProfileImage from './ProfileImage';
 
 export default {
-  title: 'ProfileImage',
+  title: 'Components/ProfileImage',
   component: ProfileImage,
   argTypes: {
     src: {
-      type: { name: 'string', required: true },
+      required: true,
       description: '이미지 경로를 전달받습니다.',
       table: {
         type: { summary: 'string' },
       },
     },
     size: {
-      type: 'string',
       description: '프로필 이미지 크기를 전달받습니다.',
       table: {
         type: { summary: 'string' },
@@ -22,10 +21,15 @@ export default {
         options: ['large', 'medium', 'small'],
       },
     },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
-const Template = (args) => <ProfileImage {...args} />;
+const Template = args => <ProfileImage {...args} />;
 
 export const Large = Template.bind({});
 export const Medium = Template.bind({});
