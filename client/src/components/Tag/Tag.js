@@ -15,7 +15,7 @@ const Tag = ({ type, contents = { mountainName: '인왕산' } }) => {
       break;
     case 'date': 
       shape = 'calendar';
-      displayContent = `${contents.year}년 ${contents.month}월 ${contents.day}일`;
+      displayContent = `${contents.year}년 ${contents.month}월 ${contents.date}일`;
       break;
     case 'person': 
       shape = 'member';
