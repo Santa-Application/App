@@ -25,14 +25,15 @@ export default {
       type: 'boolean',
       description: 'label을 사용자에게 표시할지 결정합니다.',
     },
-    className: {
+    name: {
       type: 'string',
-      description: '사용자 정의 클래스 이름을 설정할 수 있습니다.',
+      description:
+        '폼 컨트롤 시, 사용자가 입력한 값과 매칭되는 네임 값을 설정합니다.',
     },
   },
 };
 
-const Template = (args) => <Input {...args} />;
+const Template = args => <Input {...args} />;
 
 export const Text = Template.bind({});
 Text.args = {
@@ -40,7 +41,7 @@ Text.args = {
   label: '텍스트',
   type: 'text',
   labelVisible: false,
-  className: 'input',
+  name: 'text',
 };
 
 export const Email = Template.bind({});
@@ -49,7 +50,7 @@ Email.args = {
   label: '이메일 주소',
   type: 'email',
   labelVisible: false,
-  className: 'input',
+  name: 'email',
 };
 
 export const Password = Template.bind({});
@@ -58,5 +59,5 @@ Password.args = {
   label: '비밀번호',
   type: 'password',
   labelVisible: false,
-  className: 'input',
+  name: 'password',
 };
