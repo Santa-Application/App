@@ -49,11 +49,11 @@ Tag.defaultProps = {
   type: 'mountain',
   contents: {
     mountainName: '인왕산',
-    year: 1947,
-    month: 6,
-    day: 24,
-    person: 2,
-    gender: 'female'
+    year: 2000,
+    month: 1,
+    date: 1,
+    person: 1,
+    gender: 'male'
   }
 };
 

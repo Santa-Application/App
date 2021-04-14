@@ -54,7 +54,7 @@ DateTag.args = {
   contents: {
     year: 2021,
     month: 4,
-    day: 14
+    date: 14
   }
 }
 export const GenderTag = Template.bind({});
