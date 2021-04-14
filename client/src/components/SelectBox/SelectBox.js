@@ -5,7 +5,7 @@ import {
   selectBoxButton,
   selectBoxList,
 } from './SelectBox.module.scss';
-import { string, bool, func, array } from 'prop-types';
+import PropTypes, { string, bool, func, array, arrayOf } from 'prop-types';
 import classNames from 'classnames';
 
 const SelectBox = ({
@@ -85,9 +85,15 @@ SelectBox.propTypes = {
   className: string,
   isOpened: bool,
   selectItem: string.isRequired,
-  handleOpenSelectBox: func,
-  handleClickItem: func,
-  data: array,
+  handleOpenSelectBox: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.oneOf([null]),
+  ]),
+  handleClickItem: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.oneOf([null]),
+  ]),
+  data: arrayOf(string),
 };
 
 export default SelectBox;

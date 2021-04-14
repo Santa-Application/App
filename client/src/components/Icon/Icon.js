@@ -18,42 +18,89 @@ import { ReactComponent as SelectClose } from './assets/select-close.svg';
 import { ReactComponent as SelectOpen } from './assets/select-open.svg';
 
 const Icon = ({ shape, ...restProps }) => {
-
   let RenderIcon = '';
   switch (shape) {
     default:
-    case 'calendar': RenderIcon = Calendar; break;
-    case 'close': RenderIcon = Close; break;
-    case 'edit': RenderIcon = Edit; break;
-    case 'female': RenderIcon = Female; break;
-    case 'genderBoth': RenderIcon = GenderBoth; break;
-    case 'back': RenderIcon = Back; break;
-    case 'likeFalse': RenderIcon = LikeFalse; break;
-    case 'likeTrue': RenderIcon = LikeTrue; break;
-    case 'logout': RenderIcon = Logout; break;
-    case 'male': RenderIcon = Male; break;
-    case 'member': RenderIcon = Member; break;
-    case 'menu': RenderIcon = Menu; break;
-    case 'level1': RenderIcon = Level1; break;
-    case 'level2': RenderIcon = Level2; break;
-    case 'level3': RenderIcon = Level3; break;
-    case 'selectClose': RenderIcon = SelectClose; break;
-    case 'selectOpen': RenderIcon = SelectOpen; break;
+    case 'calendar':
+      RenderIcon = Calendar;
+      break;
+    case 'close':
+      RenderIcon = Close;
+      break;
+    case 'edit':
+      RenderIcon = Edit;
+      break;
+    case 'female':
+      RenderIcon = Female;
+      break;
+    case 'genderBoth':
+      RenderIcon = GenderBoth;
+      break;
+    case 'back':
+      RenderIcon = Back;
+      break;
+    case 'likeFalse':
+      RenderIcon = LikeFalse;
+      break;
+    case 'likeTrue':
+      RenderIcon = LikeTrue;
+      break;
+    case 'logout':
+      RenderIcon = Logout;
+      break;
+    case 'male':
+      RenderIcon = Male;
+      break;
+    case 'member':
+      RenderIcon = Member;
+      break;
+    case 'menu':
+      RenderIcon = Menu;
+      break;
+    case 'level1':
+      RenderIcon = Level1;
+      break;
+    case 'level2':
+      RenderIcon = Level2;
+      break;
+    case 'level3':
+      RenderIcon = Level3;
+      break;
+    case 'selectClose':
+      RenderIcon = SelectClose;
+      break;
+    case 'selectOpen':
+      RenderIcon = SelectOpen;
+      break;
   }
 
-  return <RenderIcon/>; 
+  return <RenderIcon {...restProps} />;
 };
 
-
 Icon.propTypes = {
-  shape: oneOf(['calendar', 'close', 'edit', 'female', 'genderBoth', 'back',
-    'likeFalse', 'likeTrue', 'logout', 'male', 'member', 'menu', 'level1', 'level2', 'level3',
-    'selectClose', 'selectOpen'])
+  shape: oneOf([
+    'calendar',
+    'close',
+    'edit',
+    'female',
+    'genderBoth',
+    'back',
+    'likeFalse',
+    'likeTrue',
+    'logout',
+    'male',
+    'member',
+    'menu',
+    'level1',
+    'level2',
+    'level3',
+    'selectClose',
+    'selectOpen',
+  ]),
 };
 
 Icon.defaultProps = {
-  shape: 'level1'
+  shape: 'level1',
 };
-
 
 export default Icon;

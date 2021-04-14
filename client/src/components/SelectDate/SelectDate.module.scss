@@ -1,0 +1,17 @@
+@import 'styles/';
+
+.selectDateBox {
+  display: block;
+  font-size: 1.2rem;
+  color: $darkGray;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: $boxShadow;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+}
+
+.selectDateIcon {
+  margin-left: 0.5rem;
+  vertical-align: -10%;
+}
