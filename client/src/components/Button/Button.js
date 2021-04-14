@@ -3,25 +3,22 @@ import { string, bool, node, func } from 'prop-types';
 import {
   button,
   primary,
-  secondary as secondaryClass
+  secondary as secondaryClass,
 } from './Button.module.scss';
 
 const Button = ({
   secondary,
-  type, 
-  disabled, 
-  value, 
+  type,
+  disabled,
+  value,
   className,
   onClick,
   ...restProps
 }) => {
-
   const composeClasses = classNames(
     button,
     secondary ? secondaryClass : primary
   );
-
-
 
   return (
     <button
@@ -55,5 +52,5 @@ Button.propTypes = {
   value: string,
   chidren: node,
   className: string,
-  onClick: func
+  onClick: func,
 };

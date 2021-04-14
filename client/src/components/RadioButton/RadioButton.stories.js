@@ -24,6 +24,10 @@ export default {
     },
     children: {
       description: '라디오 버튼의 내용을 전달받습니다.',
+      control: {
+        type: 'radio',
+        options: ['여성', '남성', '상관없음'],
+      },
     },
   },
 };

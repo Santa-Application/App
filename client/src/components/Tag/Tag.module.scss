@@ -1,17 +1,19 @@
+@import 'styles/variables.scss';
 
 .tag {
+  color: $darkGray;
   font-size: 1.2rem;
   font-family: 'Roboto';
   display: inline-block;
-  
+
   span {
-    margin-left: .2rem;
+    margin-left: 0.2rem;
     line-height: 1.2rem;
   }
-  
+
   svg {
-    width:1.3rem;
-    height:1.3rem;
+    width: 1.3rem;
+    height: 1.3rem;
     vertical-align: -10%;
   }
 }
