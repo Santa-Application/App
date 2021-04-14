@@ -1,13 +1,20 @@
-import classNames from 'classnames';
+import { Heading, Tag } from 'components';
+import { postDate } from 'utils';
 import PropTypes from 'prop-types';
-import { container } from './RegularPostCard.module.scss';
+import classNames from 'classnames';
+import {
+  container,
+  image,
+  textContainer,
+  title,
+  time,
+} from './RegularPostCard.module.scss';
 
 const RegularPostCard = ({
   src,
   postTitle,
-  postDate,
-  postDateInKorean,
-  mountain,
+  postDate: postingDate,
+  mountainName,
   containerClassName,
   ...restProps
 }) => {
@@ -15,11 +22,20 @@ const RegularPostCard = ({
 
   return (
     <div className={containerClasses}>
-      <img src={src} alt="" />
-      <div>
-        <p>{postTitle}</p>
-        <time dateTime={postDate}>{postDateInKorean}</time>
-        <span>{mountain}</span>
+      <img src={src} alt="" className={image} />
+      <div className={textContainer}>
+        <Heading level={3} className={title}>
+          {postTitle}
+        </Heading>
+        <time dateTime={postDate.getPostDate(postingDate)} className={time}>
+          {postDate.getPostDateInKorean(postingDate)}
+        </time>
+        <Tag
+          type="mountain"
+          contents={{
+            mountainName,
+          }}
+        ></Tag>
       </div>
     </div>
   );
@@ -28,16 +44,17 @@ const RegularPostCard = ({
 RegularPostCard.defaultProps = {
   src: '',
   postTitle: '',
-  postDate: '',
-  postDateInKorean: '',
-  mountain: '',
+  postDate: null,
+  mountainName: '',
+  containerClassName: '',
 };
+
 RegularPostCard.propTypes = {
   src: PropTypes.string.isRequired,
   postTitle: PropTypes.string.isRequired,
-  postDate: PropTypes.string,
-  postDateInKorean: PropTypes.string.isRequired,
-  mountain: PropTypes.string.isRequired,
+  postDate: PropTypes.object.isRequired,
+  mountainName: PropTypes.string.isRequired,
+  containerClassName: PropTypes.string,
 };
 
 export default RegularPostCard;
