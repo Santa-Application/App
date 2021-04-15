@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const recruitPostSchema = Schema({
+  postTitle: { type: String, required: true, maxLength: 30 },
   publisherId: { type: String, required: true },
   publisherName: { type: String, required: true },
   postingDate: { type: Date, default: Date.now, required: true },
@@ -12,9 +13,11 @@ const recruitPostSchema = Schema({
   recruitingAge: { 
     min: { type: Number, min: 1, max: 100 }, 
     max: { type: Number, min: 1, max: 100 }, 
-    required: true },
+    required: true 
+  },
   recruitingNumber: { type: Number, required: true },
   description: String,
+  recruitees: [String]
 });
 
 module.exports = model('RecruitPost', recruitPostSchema);
