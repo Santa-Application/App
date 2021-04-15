@@ -1,3 +1,4 @@
+@import 'styles';
 
 .profileInfoCard {
   display: flex;
@@ -24,7 +25,7 @@
     margin-top: .7rem;
     font-family: 'Roboto';
     font-size: 1.2rem;
-    opacity: 70%;
+    color: $darkGray;
   }
 
   .summary {
