@@ -30,7 +30,7 @@ export default {
         },
       },
       control: {
-        control: 'object',
+        type: 'object',
       },
     },
   },
