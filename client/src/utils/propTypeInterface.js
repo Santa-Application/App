@@ -44,3 +44,18 @@ export const userData = {
   followers: PropTypes.number,
   following: PropTypes.arrayOf(PropTypes.string), // user.name를 요소로 갖는 배열
 };
+
+export const recruitPostCardData = {
+  postTitle: PropTypes.string,
+  mountainName: PropTypes.string,
+  recruitingDate: PropTypes.object, // Date 객체
+  recruitingNumber: PropTypes.number,
+  recruitingGender: PropTypes.oneOf(['female', 'male', 'genderBoth']),
+};
+
+export const regularPostCardData = {
+  postTitle: PropTypes.string,
+  imageUrl: PropTypes.string,
+  mountainName: PropTypes.string,
+  postingDate: PropTypes.object, // Date 객체
+};
