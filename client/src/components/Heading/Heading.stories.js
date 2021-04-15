@@ -5,8 +5,7 @@ export default {
   component: Heading,
   argTypes: {
     level: {
-      type: '헤딩 레벨',
-      required: true,
+      type: { name: '헤딩 레벨', required: true },
       description: '헤딩 레벨을 전달받습니다.',
       table: {
         type: { summary: 'number' },
@@ -18,6 +17,9 @@ export default {
       description: '헤딩에 들어갈 텍스트를 설정합니다',
       table: {
         type: { summary: 'string' },
+      },
+      control: {
+        type: 'text',
       },
     },
     className: {

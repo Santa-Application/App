@@ -22,6 +22,11 @@ export default {
         type: { summary: 'function' },
       },
     },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 

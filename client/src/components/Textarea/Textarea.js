@@ -17,11 +17,13 @@ const Textarea = ({ value, onChange, className, ...restProps }) => {
 Textarea.defaultProps = {
   value: '',
   onChange: null,
+  className: '',
 };
 
 Textarea.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  className: PropTypes.string,
 };
 
 export default Textarea;
