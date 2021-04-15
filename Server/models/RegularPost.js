@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const regularPostSchema = Schema({
+  postTitle: { type: String, required: true, maxLength: 30 },
   publisherId: { type: String, required: true },
   publisherName: { type: String, required: true },
   postingDate: { type: Date, default: Date.now , required: true },
