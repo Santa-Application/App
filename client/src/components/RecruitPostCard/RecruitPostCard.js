@@ -1,5 +1,5 @@
 import { Heading, ProfileImage, Tag } from 'components';
-import { postDate, propTypesInterface } from 'utils';
+import { postDate, propTypeInterface } from 'utils';
 import PropTypes from 'prop-types';
 import {
   container,
@@ -11,12 +11,12 @@ import {
 const RecruitPostCard = ({ publisherImageUrl, postData, ...restProps }) => {
   const {
     postTitle,
+    recruitingDate,
     mountainName,
     recruitingNumber: person,
     recruitingGender: gender,
-    postingDate,
   } = postData;
-  const { year, month, date } = postDate.getPostDateObject(postingDate);
+  const { year, month, date } = postDate.getPostDateObject(recruitingDate);
 
   return (
     <div className={container} {...restProps}>
@@ -46,25 +46,17 @@ const RecruitPostCard = ({ publisherImageUrl, postData, ...restProps }) => {
 RecruitPostCard.defaultProps = {
   publisherImageUrl: '',
   postData: {
-    publisherId: '',
-    publisherName: '',
-    postingDate: {},
-    views: 0,
-    mountainName: '',
     postTitle: '',
+    mountainName: '',
     recruitingDate: {},
-    recruitingLevels: ['초급자'],
-    recruitingGender: '상관없음',
-    recruitingAge: { min: 1, max: 100 },
     recruitingNumber: 0,
-    description: '',
-    recruitees: [],
+    recruitingGender: '상관없음',
   },
 };
 
 RecruitPostCard.propTypes = {
   publisherImageUrl: PropTypes.string.isRequired,
-  postData: PropTypes.shape(propTypesInterface.recruitPostData).isRequired,
+  postData: PropTypes.shape(propTypeInterface.recruitPostCardData).isRequired,
 };
 
 export default RecruitPostCard;
