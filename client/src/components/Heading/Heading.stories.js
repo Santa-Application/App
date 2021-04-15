@@ -10,7 +10,7 @@ export default {
       table: {
         type: { summary: 'number' },
       },
-      control: { min: 1, max: 6 },
+      control: { type: 'number', min: 1, max: 6 },
     },
     children: {
       type: '헤딩 텍스트',
