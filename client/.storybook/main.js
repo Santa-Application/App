@@ -8,6 +8,9 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/preset-create-react-app",
     "@storybook/addon-a11y",
-    "@storybook/addon-knobs"
+    "@storybook/addon-knobs",
+    "@storybook/addon-links",
+    "storybook-addon-designs",
+    "storybook-addon-material-ui"
   ]
 }
