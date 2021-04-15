@@ -1,0 +1,36 @@
+
+.profileInfoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85vw;
+
+  .header {
+    display: flex;
+    font-family: 'Roboto';
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 1rem;
+
+    .editButton {
+      margin-left: .3rem;
+      padding: 0;
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+
+  .introduce {
+    margin-top: .7rem;
+    font-family: 'Roboto';
+    font-size: 1.2rem;
+    opacity: 70%;
+  }
+
+  .summary {
+    margin-top: 3.4rem;
+    width: 60vw;
+    display: flex;
+    justify-content: space-around;
+  }
+}
