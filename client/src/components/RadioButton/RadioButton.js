@@ -72,8 +72,9 @@ RadioButton.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['female', 'male', 'genderBoth']).isRequired,
   iconSize: PropTypes.number,
-  checked: PropTypes.bool,
-  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+    .isRequired,
   className: PropTypes.string,
 };
 
