@@ -1,0 +1,13 @@
+@import 'styles';
+
+.container {
+  @include flex-row(flex-start);
+}
+
+.name {
+  margin-left: 0.6em;
+
+  color: $darkGray;
+  font-size: 1.6rem;
+  font-weight: 700;
+}

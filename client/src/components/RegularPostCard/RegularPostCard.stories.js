@@ -45,7 +45,7 @@ export default {
         type: 'text',
       },
     },
-    containerClassName: {
+    className: {
       table: {
         disable: true,
       },
