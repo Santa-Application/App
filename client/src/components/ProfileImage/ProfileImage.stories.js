@@ -5,13 +5,14 @@ export default {
   component: ProfileImage,
   argTypes: {
     src: {
-      required: true,
-      description: '이미지 경로를 전달받습니다.',
+      type: { name: '프로필 이미지 경로', required: true },
+      description: '프로필 이미지 경로를 전달받습니다.',
       table: {
         type: { summary: 'string' },
       },
     },
     size: {
+      type: { name: '프로필 이미지 크기', required: true },
       description: '프로필 이미지 크기를 전달받습니다.',
       table: {
         type: { summary: 'string' },
