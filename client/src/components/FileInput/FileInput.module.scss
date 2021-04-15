@@ -1,0 +1,23 @@
+@import 'styles/';
+
+.fileInput {
+  label {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    box-shadow: $boxShadow;
+  }
+
+  input[type='file'] {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    clip-path: polygon(0 0, 0 0, 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    white-space: nowrap;
+  }
+}
