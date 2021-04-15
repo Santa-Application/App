@@ -16,7 +16,6 @@ export default {
       control: { type: 'radio' },
       description: '개인 정보에 대한 요약을 나타내는 컴포넌트입니다. 다음 중에서 고를 수 있습니다.',
       options: ['나이', '성별', '레벨'],
-
     },
     options: {
       name: 'options',
