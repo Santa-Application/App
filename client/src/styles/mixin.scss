@@ -1,0 +1,24 @@
+@mixin flex($justify, $align, $direction, $wrap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-flow: $direction $wrap;
+}
+
+@mixin flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-row($justify) {
+  display: flex;
+  justify-content: $justify;
+  align-items: center;
+}
+
+@mixin defaultPosition {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

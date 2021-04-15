@@ -1,0 +1,35 @@
+@import 'styles';
+
+.button {
+  padding: 1rem 2.8rem;
+  color: $white;
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  border-radius: $borderRadiusLarge;
+  box-shadow: $boxShadow;
+  border: none;
+  box-sizing: border-box;
+  outline-color: $primary;
+}
+
+.primary {
+  background-color: $primary
+}
+
+.secondary {
+  background-color: $white;
+  border: .1rem solid $primary;
+  color: $primary;
+}
+
+[disabled] {
+  background-color: $gray;
+  border: none;
+  color: $white;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}

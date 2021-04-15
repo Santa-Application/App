@@ -1,0 +1,62 @@
+import { Icon } from 'components';
+import { string, object } from 'prop-types';
+import { tag } from './Tag.module.scss';
+
+const Tag = ({ type, contents = { mountainName: '인왕산' } }) => {
+  let shape = '';
+  let displayContent = '';
+
+  switch (type) {
+    default:
+    case 'mountain':
+      shape = 'level1';
+      displayContent = `${contents.mountainName}`;
+      break;
+    case 'date':
+      shape = 'calendar';
+      displayContent = `${contents.year}년 ${contents.month}월 ${contents.date}일`;
+      break;
+    case 'person':
+      shape = 'member';
+      displayContent = `${contents.person}명`;
+      break;
+    case 'gender':
+      if (contents.gender === 'female') {
+        shape = 'female';
+        displayContent = '여성';
+      } else if (contents.gender === 'male') {
+        shape = 'male';
+        displayContent = '남성';
+      } else {
+        shape = 'genderBoth';
+        displayContent = '상관없음';
+      }
+      break;
+  }
+
+  return (
+    <div className={tag}>
+      <Icon shape={shape} />
+      <span>{displayContent}</span>
+    </div>
+  );
+};
+
+export default Tag;
+
+Tag.defaultProps = {
+  type: 'mountain',
+  contents: {
+    mountainName: '인왕산',
+    year: 2000,
+    month: 1,
+    date: 1,
+    person: 1,
+    gender: 'genderBoth',
+  },
+};
+
+Tag.propTypes = {
+  type: string,
+  contents: object,
+};
