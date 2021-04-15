@@ -6,12 +6,12 @@
   font-weight: 700;
 }
 
-.applicantContainer {
+.recruiteesContainer {
   @include flex-row(flex-start);
 
   margin-top: 1.2em;
 }
 
-.applicant {
+.recruitees {
   margin-right: 1.2em;
 }
