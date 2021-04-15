@@ -9,7 +9,10 @@ const recruitPostSchema = Schema({
   recruitingDate: { type: Date, required: true },
   recruitingLevels: [{ type: String, required: true }],
   recruitingGender: { type: String, required: true },
-  recruitingAge: { type: Number, required: true },
+  recruitingAge: { 
+    min: { type: Number, min: 1, max: 100 }, 
+    max: { type: Number, min: 1, max: 100 }, 
+    required: true },
   recruitingNumber: { type: Number, required: true },
   description: String,
 });
