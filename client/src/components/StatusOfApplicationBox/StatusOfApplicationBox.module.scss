@@ -1,4 +1,4 @@
-@import 'styles/';
+@import 'styles';
 
 .title {
   color: $darkGray;
@@ -8,6 +8,7 @@
 
 .applicantContainer {
   @include flex-row(flex-start);
+
   margin-top: 1.2em;
 }
 

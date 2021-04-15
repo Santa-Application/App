@@ -1,13 +1,16 @@
-@import 'styles/';
+@import 'styles';
 
 .container {
-  overflow: hidden;
   border-radius: $borderRadiusComplete;
   border: 0.2rem solid $gray;
 
+  overflow: hidden;
+
   img {
     width: 100%;
+
     margin-top: 50%;
+
     transform: translateY(-50%);
   }
 }

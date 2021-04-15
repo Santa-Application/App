@@ -1,5 +1,4 @@
-@import 'styles/variables';
-@import 'styles/mixin';
+@import 'styles';
 
 .container {
   @include flex(left, center, row, wrap);
@@ -12,9 +11,11 @@
 .postInfo {
   @include flex(center, left, column, wrap);
   flex-grow: 1;
+
   min-width: 0;
-  margin-left: 2%;
   width: 70%;
+
+  margin-left: 2%;
 }
 
 .title {
