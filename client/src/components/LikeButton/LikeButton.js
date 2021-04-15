@@ -1,13 +1,13 @@
 import { Checkbox } from 'components';
 import PropTypes from 'prop-types';
 
-const LikeButton = ({ id, isChecked, onChange, ...restProps }) => {
+const LikeButton = ({ id, checked, onChange, ...restProps }) => {
   return (
     <Checkbox
       id={id}
       name="likes"
-      checkboxIcon={isChecked ? 'likeTrue' : 'likeFalse'}
-      checked={isChecked}
+      checkboxIcon={checked ? 'likeTrue' : 'likeFalse'}
+      checked={checked}
       onChange={onChange}
     />
   );
@@ -15,14 +15,15 @@ const LikeButton = ({ id, isChecked, onChange, ...restProps }) => {
 
 LikeButton.defaultProps = {
   id: '',
-  isChecked: false,
+  checked: false,
   onChange: null,
 };
 
 LikeButton.propTypes = {
   id: PropTypes.string.isRequired,
-  isChecked: PropTypes.bool,
-  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+    .isRequired,
 };
 
 export default LikeButton;
