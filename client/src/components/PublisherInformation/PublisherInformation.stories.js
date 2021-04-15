@@ -8,10 +8,16 @@ export default {
       type: { name: '작성자 정보', required: true },
       description: '작성자 정보가 담긴 객체가 전달됩니다.',
       table: {
-        type: { summary: 'object' },
+        type: {
+          summary: 'object',
+          detail: `{
+  name: 'string',
+  imageUrl: 'string'
+}`,
+        },
       },
       control: {
-        disable: true,
+        type: 'object',
       },
     },
     className: {
