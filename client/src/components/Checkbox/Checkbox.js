@@ -3,19 +3,16 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { container, checkbox, label } from './Checkbox.module.scss';
 
-const Checkbox = (
-  {
-    id,
-    name,
-    checked,
-    onChange,
-    checkboxIcon,
-    children,
-    className,
-    ...restProps
-  },
-  ref
-) => {
+const Checkbox = ({
+  id,
+  name,
+  checked,
+  onChange,
+  checkboxIcon,
+  children,
+  className,
+  ...restProps
+}) => {
   const labelClasses = classNames(className.label, label);
   const checkboxClasses = classNames(className.checkbox, checkbox);
 
@@ -50,8 +47,9 @@ Checkbox.defaultProps = {
 Checkbox.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  checked: PropTypes.bool,
-  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+    .isRequired,
   checkboxIcon: PropTypes.oneOf(['likeTrue', 'likeFalse']),
   children: PropTypes.string,
   className: PropTypes.object,
