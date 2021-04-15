@@ -2,6 +2,7 @@
 
 .container {
   @include flex(left, center, row, wrap);
+  width: 85vw;
   padding: 0.8em 1em;
 
   border-radius: $borderRadiusSmall;

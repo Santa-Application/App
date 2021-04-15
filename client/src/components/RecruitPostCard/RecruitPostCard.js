@@ -1,5 +1,5 @@
 import { Heading, ProfileImage, Tag } from 'components';
-import { postDate } from 'utils';
+import { postDate, propTypesInterface } from 'utils';
 import PropTypes from 'prop-types';
 import {
   container,
@@ -8,31 +8,25 @@ import {
   tagList,
 } from './RecruitPostCard.module.scss';
 
-const RecruitPostCard = ({
-  src,
-  postTitle,
-  mountainName,
-  postDate: postingDate,
-  person,
-  gender,
-  ...restProps
-}) => {
+const RecruitPostCard = ({ publisherImageUrl, postData, ...restProps }) => {
+  const {
+    postTitle,
+    mountainName,
+    recruitingNumber: person,
+    recruitingGender: gender,
+    postingDate,
+  } = postData;
   const { year, month, date } = postDate.getPostDateObject(postingDate);
 
   return (
     <div className={container} {...restProps}>
-      <ProfileImage src={src} size="medium" />
+      <ProfileImage src={publisherImageUrl} size="medium" />
       <div className={postInfo}>
         <Heading level={3} className={title}>
           {postTitle}
         </Heading>
         <div className={tagList}>
-          <Tag
-            type="mountain"
-            contents={{
-              mountainName,
-            }}
-          />
+          <Tag type="mountain" contents={{ mountainName }} />
           <Tag
             type="date"
             contents={{
@@ -41,18 +35,8 @@ const RecruitPostCard = ({
               date,
             }}
           />
-          <Tag
-            type="person"
-            contents={{
-              person,
-            }}
-          />
-          <Tag
-            type="gender"
-            contents={{
-              gender,
-            }}
-          />
+          <Tag type="person" contents={{ person }} />
+          <Tag type="gender" contents={{ gender }} />
         </div>
       </div>
     </div>
@@ -60,21 +44,27 @@ const RecruitPostCard = ({
 };
 
 RecruitPostCard.defaultProps = {
-  src: '',
-  postTitle: '',
-  mountainName: '',
-  postDate: null,
-  person: 1,
-  gender: 'genderBoth',
+  publisherImageUrl: '',
+  postData: {
+    publisherId: '',
+    publisherName: '',
+    postingDate: {},
+    views: 0,
+    mountainName: '',
+    postTitle: '',
+    recruitingDate: {},
+    recruitingLevels: ['초급자'],
+    recruitingGender: '상관없음',
+    recruitingAge: { min: 1, max: 100 },
+    recruitingNumber: 0,
+    description: '',
+    recruitees: [],
+  },
 };
 
 RecruitPostCard.propTypes = {
-  src: PropTypes.string.isRequired,
-  postTitle: PropTypes.string.isRequired,
-  mountainName: PropTypes.string.isRequired,
-  postDate: PropTypes.object.isRequired,
-  person: PropTypes.number.isRequired,
-  gender: PropTypes.oneOf(['female', 'male', 'genderBoth']).isRequired,
+  publisherImageUrl: PropTypes.string.isRequired,
+  postData: PropTypes.shape(propTypesInterface.recruitPostData).isRequired,
 };
 
 export default RecruitPostCard;
