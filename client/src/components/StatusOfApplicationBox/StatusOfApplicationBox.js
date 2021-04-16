@@ -1,11 +1,11 @@
-import classNames from 'classnames';
 import { ProfileImage } from 'components';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {
   container,
   title,
-  applicantContainer,
-  applicant,
+  recruiteesContainer,
+  recruitees,
 } from './StatusOfApplicationBox.module.scss';
 
 const StatusOfApplicationBox = ({ images, className, ...restProps }) => {
@@ -14,9 +14,9 @@ const StatusOfApplicationBox = ({ images, className, ...restProps }) => {
   return (
     <div className={container}>
       <p className={titleClasses}>신청 현황</p>
-      <div className={applicantContainer}>
+      <div className={recruiteesContainer}>
         {images.map(image => (
-          <ProfileImage src={image} size="small" className={applicant} />
+          <ProfileImage src={image} size="small" className={recruitees} />
         ))}
       </div>
     </div>

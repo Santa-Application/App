@@ -10,6 +10,9 @@ export default {
       table: {
         type: { summary: 'string' },
       },
+      control: {
+        type: 'text',
+      },
     },
     size: {
       type: { name: '프로필 이미지 크기', required: true },

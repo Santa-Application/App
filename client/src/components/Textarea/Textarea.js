@@ -7,9 +7,11 @@ const Textarea = ({ value, onChange, className, ...restProps }) => {
 
   return (
     <label>
-      <textarea onChange={onChange} className={textareaClasses}>
-        {value}
-      </textarea>
+      <textarea
+        onChange={onChange}
+        className={textareaClasses}
+        value={value}
+      ></textarea>
     </label>
   );
 };
@@ -17,11 +19,14 @@ const Textarea = ({ value, onChange, className, ...restProps }) => {
 Textarea.defaultProps = {
   value: '',
   onChange: null,
+  className: '',
 };
 
 Textarea.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+    .isRequired,
+  className: PropTypes.string,
 };
 
 export default Textarea;

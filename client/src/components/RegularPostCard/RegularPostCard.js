@@ -1,5 +1,5 @@
 import { Heading, Tag } from 'components';
-import { postDate } from 'utils';
+import { postDate, propTypeInterface } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -10,19 +10,14 @@ import {
   time,
 } from './RegularPostCard.module.scss';
 
-const RegularPostCard = ({
-  src,
-  postTitle,
-  postDate: postingDate,
-  mountainName,
-  className,
-  ...restProps
-}) => {
+const RegularPostCard = ({ postData, className, ...restProps }) => {
+  const { postTitle, postingDate, imageUrl, mountainName } = postData;
+
   const containerClasses = classNames(className.container, container);
 
   return (
     <div className={containerClasses}>
-      <img src={src} alt="" className={image} />
+      <img src={imageUrl} alt="" className={image} />
       <div className={textContainer}>
         <Heading level={3} className={title}>
           {postTitle}
@@ -42,18 +37,17 @@ const RegularPostCard = ({
 };
 
 RegularPostCard.defaultProps = {
-  src: '',
-  postTitle: '',
-  postDate: null,
-  mountainName: '',
+  postData: {
+    postTitle: '',
+    imageUrl: '',
+    mountainName: '',
+    postingDate: {},
+  },
   className: {},
 };
 
 RegularPostCard.propTypes = {
-  src: PropTypes.string.isRequired,
-  postTitle: PropTypes.string.isRequired,
-  postDate: PropTypes.object.isRequired,
-  mountainName: PropTypes.string.isRequired,
+  postData: PropTypes.shape(propTypeInterface.regularPostCardData).isRequired,
   className: PropTypes.object,
 };
 
