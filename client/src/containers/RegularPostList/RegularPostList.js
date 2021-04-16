@@ -26,11 +26,15 @@ const RegularPostList = ({ className, ...restProps }) => {
 
   return (
     <ul className={regularPostListContainerClasses}>
-      {regularPostListData.map(postData => (
-        <RegularPostCard
-          postData={postData}
-          className={{ container: reviewPostCard }}
-        />
+      {regularPostListData.map((postData, index) => (
+        <li key={index}>
+          <a href="/">
+            <RegularPostCard
+              postData={postData}
+              className={{ container: reviewPostCard }}
+            />
+          </a>
+        </li>
       ))}
     </ul>
   );

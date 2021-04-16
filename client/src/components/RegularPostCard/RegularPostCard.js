@@ -26,12 +26,7 @@ const RegularPostCard = ({ postData, className, ...restProps }) => {
         <time dateTime={postDate.getPostDate(postingDate)} className={time}>
           {postDate.getPostDateInKorean(postingDate)}
         </time>
-        <Tag
-          type="mountain"
-          contents={{
-            mountainName,
-          }}
-        ></Tag>
+        <Tag type="mountain" content={mountainName}></Tag>
       </div>
     </div>
   );
