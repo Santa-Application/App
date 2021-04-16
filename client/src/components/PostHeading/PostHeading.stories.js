@@ -8,10 +8,17 @@ export default {
       type: { name: '포스트 정보', required: true },
       description: '포스트 정보가 담긴 객체가 전달됩니다.',
       table: {
-        type: { summary: 'object' },
+        type: {
+          summary: 'object',
+          detail: `{
+  postTitle: 'string',
+  postingDate: 'Date object',
+  views: 'number'
+}`,
+        },
       },
       control: {
-        disable: true,
+        type: 'object',
       },
     },
     className: {
@@ -28,8 +35,8 @@ export const Review = Template.bind({});
 
 Review.args = {
   postData: {
-    title: '드디어 정상~~~',
-    date: new Date(),
+    postTitle: '드디어 정상~~~',
+    postingDate: new Date(),
     views: 16,
   },
 };

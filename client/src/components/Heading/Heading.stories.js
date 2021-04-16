@@ -5,19 +5,21 @@ export default {
   component: Heading,
   argTypes: {
     level: {
-      type: '헤딩 레벨',
-      required: true,
+      type: { name: '헤딩 레벨', required: true },
       description: '헤딩 레벨을 전달받습니다.',
       table: {
         type: { summary: 'number' },
       },
-      control: { min: 1, max: 6 },
+      control: { type: 'number', min: 1, max: 6 },
     },
-    children: {
+    content: {
       type: '헤딩 텍스트',
       description: '헤딩에 들어갈 텍스트를 설정합니다',
       table: {
         type: { summary: 'string' },
+      },
+      control: {
+        type: 'text',
       },
     },
     className: {
@@ -36,13 +38,13 @@ export const FormHeading = Template.bind({});
 
 AppHeading.args = {
   level: 1,
-  children: 'SANTA',
+  content: 'SANTA',
 };
 PageHeading.args = {
   level: 2,
-  children: 'Reviews',
+  content: 'Reviews',
 };
 FormHeading.args = {
   level: 3,
-  children: '제목',
+  content: '제목',
 };
