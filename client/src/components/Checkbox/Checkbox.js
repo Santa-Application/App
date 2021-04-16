@@ -1,42 +1,58 @@
+import { Icon } from 'components';
 import PropTypes from 'prop-types';
-import { checkbox } from './Checkbox.module.scss';
-import 'styles/common.scss';
 import classNames from 'classnames';
+import { container, checkbox, label } from './Checkbox.module.scss';
 
 const Checkbox = ({
-  isChecked,
+  id,
+  name,
+  checked,
   onChange,
+  checkboxIcon,
   children,
-  labelClassName,
-  inputClassName,
+  className,
   ...restProps
 }) => {
-  const labelClasses = classNames(labelClassName);
-  const checkboxClasses = classNames(checkbox, inputClassName);
+  const labelClasses = classNames(className.label, label);
+  const checkboxClasses = classNames(className.checkbox, checkbox);
 
   return (
-    <label className={labelClasses}>
+    <div className={container}>
       <input
+        id={id}
         type="checkbox"
+        name={name}
+        checked={checked}
         className={checkboxClasses}
-        name="checkbox"
         onChange={onChange}
-        checked={isChecked}
       />
-      {children}
-    </label>
+      <label htmlFor={id} className={labelClasses}>
+        {checkboxIcon && <Icon shape={checkboxIcon} />}
+        {children}
+      </label>
+    </div>
   );
 };
 
 Checkbox.defaultProps = {
-  isChecked: false,
+  id: '',
+  name: '',
+  checked: false,
   onChange: null,
-  children: null,
+  checkboxIcon: '',
+  children: '',
+  className: {},
 };
+
 Checkbox.propTypes = {
-  isChecked: PropTypes.bool.isRequired,
-  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
-  children: PropTypes.node,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+    .isRequired,
+  checkboxIcon: PropTypes.oneOf(['likeTrue', 'likeFalse']),
+  children: PropTypes.string,
+  className: PropTypes.object,
 };
 
 export default Checkbox;

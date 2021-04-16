@@ -11,31 +11,41 @@ import {
 } from './PostHeading.module.scss';
 
 const PostHeading = ({ postData, className, ...restProps }) => {
+  const { postTitle, postingDate, views: postingViews } = postData;
+
   const containerClasses = classNames(className.container, container);
   const titleClasses = classNames(className.title, title);
 
   return (
     <div className={containerClasses}>
       <Heading level={2} className={titleClasses}>
-        {postData.title}
+        {postTitle}
       </Heading>
       <div className={infoContainer}>
-        <time dateTime={postDate.getPostDate(postData.date)} className={date}>
-          {postDate.getPostDateInKorean(postData.date)}
+        <time dateTime={postDate.getPostDate(postingDate)} className={date}>
+          {postDate.getPostDateInKorean(postingDate)}
         </time>
-        <p className={views}>조회수 {postData.views}</p>
+        <p className={views}>조회수 {postingViews}</p>
       </div>
     </div>
   );
 };
 
 PostHeading.defaultProps = {
-  postData: {},
+  postData: {
+    postTitle: '',
+    postingDate: {},
+    views: 0,
+  },
   className: '',
 };
 
 PostHeading.propTypes = {
-  postData: PropTypes.object.isRequired,
+  postData: PropTypes.shape({
+    postTitle: PropTypes.string,
+    postingDate: PropTypes.object,
+    views: PropTypes.number,
+  }).isRequired,
   className: PropTypes.string,
 };
 
