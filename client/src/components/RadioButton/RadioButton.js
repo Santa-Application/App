@@ -16,17 +16,17 @@ const RadioButton = ({
   className: { label: labelClassName },
   ...restProps
 }) => {
-  let text = '';
+  let labelText = '';
   switch (type) {
     case 'female':
-      text = '여성';
+      labelText = '여성';
       break;
     case 'male':
-      text = '남성';
+      labelText = '남성';
       break;
     case 'genderBoth':
     default:
-      text = '상관없음';
+      labelText = '상관없음';
   }
 
   const iconSizeWithUnit = `${iconSize}rem`;
@@ -50,7 +50,7 @@ const RadioButton = ({
           width={iconSizeWithUnit}
           height={iconSizeWithUnit}
         />
-        {text}
+        {labelText}
         <Icon shape={type} />
       </label>
     </div>
@@ -72,8 +72,9 @@ RadioButton.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['female', 'male', 'genderBoth']).isRequired,
   iconSize: PropTypes.number,
-  checked: PropTypes.bool,
-  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
+    .isRequired,
   className: PropTypes.string,
 };
 

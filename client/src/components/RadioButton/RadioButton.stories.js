@@ -14,27 +14,6 @@ export default {
         disable: true,
       },
     },
-    checked: {
-      type: { name: '체크 상태' },
-      description: '체크 상태를 전달받습니다.',
-      table: {
-        type: { summary: 'boolean' },
-      },
-      control: {
-        type: 'boolean',
-      },
-    },
-    onChange: {
-      type: { name: '체크 상태 변경 이벤트' },
-      description: '변경 이벤트(함수)를 전달받습니다.(checked 상태 업데이트)',
-      table: {
-        category: 'Event',
-        type: { summary: 'function' },
-      },
-      control: {
-        disable: true,
-      },
-    },
     type: {
       type: { name: '라디오 버튼 타입', required: true },
       description: '라디오 버튼의 타입을 지정합니다.',
@@ -56,6 +35,27 @@ export default {
         type: 'number',
         min: 1,
         step: 0.1,
+      },
+    },
+    checked: {
+      type: { name: '체크 상태', required: true },
+      description: '체크 상태를 전달받습니다.',
+      table: {
+        type: { summary: 'boolean' },
+      },
+      control: {
+        type: 'boolean',
+      },
+    },
+    onChange: {
+      type: { name: '체크 상태 변경 이벤트 핸들러', required: true },
+      description: '체크 상태 변경 이벤트 핸들러를 전달받습니다.',
+      table: {
+        category: 'Event',
+        type: { summary: 'function' },
+      },
+      control: {
+        disable: true,
       },
     },
     className: {
