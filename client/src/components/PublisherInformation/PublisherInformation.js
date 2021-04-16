@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { container, name } from './PublisherInformation.module.scss';
 
 const PublisherInformation = ({ publisherData, className, ...restProps }) => {
-  const { imageUrl, name: publisherName } = publisherData;
+  const { publisherImageUrl, publisherName } = publisherData;
 
   return (
     <div className={container}>
-      <ProfileImage src={imageUrl} size="medium" />
+      <ProfileImage src={publisherImageUrl} size="medium" />
       <span className={name}>{publisherName}</span>
     </div>
   );
@@ -15,16 +15,16 @@ const PublisherInformation = ({ publisherData, className, ...restProps }) => {
 
 PublisherInformation.defaultProps = {
   publisherData: {
-    name: '',
-    imageUrl: '',
+    publisherName: '',
+    publisherImageUrl: '',
   },
   className: '',
 };
 
 PublisherInformation.propTypes = {
   publisherData: PropTypes.exact({
-    name: PropTypes.string,
-    imageUrl: PropTypes.string,
+    publisherName: PropTypes.string,
+    publisherImageUrl: PropTypes.string,
   }).isRequired,
   className: PropTypes.string,
 };

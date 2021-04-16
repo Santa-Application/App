@@ -13,7 +13,7 @@ import {
 const PostHeading = ({ postData, className, ...restProps }) => {
   const { postTitle, postingDate, views: postingViews } = postData;
 
-  const containerClasses = classNames(className.container, container);
+  const containerClasses = classNames(className.headingContainer, container);
   const titleClasses = classNames(className.title, title);
 
   return (
@@ -35,12 +35,12 @@ PostHeading.defaultProps = {
     postingDate: {},
     views: 0,
   },
-  className: '',
+  className: {},
 };
 
 PostHeading.propTypes = {
   postData: PropTypes.exact(propTypeInterface.postHeadingData).isRequired,
-  className: PropTypes.string,
+  className: PropTypes.object,
 };
 
 export default PostHeading;

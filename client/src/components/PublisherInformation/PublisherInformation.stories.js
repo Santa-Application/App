@@ -34,8 +34,8 @@ export const Review = Template.bind({});
 
 Review.args = {
   publisherData: {
-    name: 'ejinaaa',
-    imageUrl:
+    publisherName: 'ejinaaa',
+    publisherImageUrl:
       'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
   },
 };
