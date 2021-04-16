@@ -14,7 +14,7 @@ export default {
   publisherImageUrl: 'string',
   postTitle: 'string',
   mountainName: 'string',
-  recruitingDate: 'Date object',
+  recruitingDate: 'string',
   recruitingNumber: 'number',
   recruitingGender: 'array',
 }`,
@@ -22,6 +22,11 @@ export default {
       },
       control: {
         type: 'object',
+      },
+    },
+    className: {
+      table: {
+        disable: true,
       },
     },
   },
@@ -37,7 +42,7 @@ Mobile.args = {
       'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
     postTitle: '재밌는 등산 메이트 구해요오~~',
     mountainName: '인왕산',
-    recruitingDate: new Date(),
+    recruitingDate: '2021년 4월 23일',
     recruitingNumber: 3,
     recruitingGender: 'male',
   },

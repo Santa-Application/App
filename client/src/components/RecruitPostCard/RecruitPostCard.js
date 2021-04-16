@@ -23,7 +23,7 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
   const containerClasses = classNames(className.container, container);
 
   return (
-    <div className={containerClasses} {...restProps}>
+    <div className={containerClasses}>
       <ProfileImage src={publisherImageUrl} size="medium" />
       <div className={postInfo}>
         <Heading level={3} className={title} content={postTitle}></Heading>
@@ -48,10 +48,12 @@ RecruitPostCard.defaultProps = {
     recruitingGender: 'genderBoth',
     recruitingGenderText: '상관없음',
   },
+  className: {},
 };
 
 RecruitPostCard.propTypes = {
   postData: PropTypes.exact(propTypeInterface.recruitPostCardData).isRequired,
+  className: PropTypes.objectOf(PropTypes.string),
 };
 
 export default RecruitPostCard;
