@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   container,
+  imageContainer,
   image,
   textContainer,
   title,
@@ -17,11 +18,11 @@ const RegularPostCard = ({ postData, className, ...restProps }) => {
 
   return (
     <div className={containerClasses}>
-      <img src={imageUrl} alt="" className={image} />
+      <div className={imageContainer}>
+        <img src={imageUrl} alt="" className={image} />
+      </div>
       <div className={textContainer}>
-        <Heading level={3} className={title}>
-          {postTitle}
-        </Heading>
+        <Heading level={3} className={title} content={postTitle}></Heading>
         <time dateTime={postDate.getPostDate(postingDate)} className={time}>
           {postDate.getPostDateInKorean(postingDate)}
         </time>
