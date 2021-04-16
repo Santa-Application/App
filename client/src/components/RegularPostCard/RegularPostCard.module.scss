@@ -2,13 +2,16 @@
 
 .container {
   width: 39vw;
+
   border-radius: $borderRadiusSmall;
   box-shadow: $boxShadow;
+
   overflow: hidden;
 }
 
 .imageContainer {
   height: 25vw;
+
   overflow: hidden;
 }
 
@@ -17,8 +20,9 @@
 }
 
 .textContainer {
-  background-color: $white;
   padding: 1rem 1rem;
+
+  background-color: $white;
 }
 
 .title {
@@ -36,6 +40,7 @@
 
 .time {
   margin-right: 6%;
+
   color: $gray;
   font-size: 1.2rem;
 }

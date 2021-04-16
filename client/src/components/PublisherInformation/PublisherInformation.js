@@ -22,7 +22,7 @@ PublisherInformation.defaultProps = {
 };
 
 PublisherInformation.propTypes = {
-  publisherData: PropTypes.shape({
+  publisherData: PropTypes.exact({
     name: PropTypes.string,
     imageUrl: PropTypes.string,
   }).isRequired,

@@ -31,8 +31,6 @@ const postListData = api.getRecruitPostListData(
 
 // component
 const RecruitPostList = ({ className, ...restProps }) => {
-  const recruitPostCardClasses = classNames(recruitPostCard);
-
   return (
     <ul>
       {postListData.map((postData, index) => (
@@ -42,7 +40,7 @@ const RecruitPostList = ({ className, ...restProps }) => {
               postData={{
                 ...postData,
               }}
-              className={{ container: recruitPostCardClasses }}
+              className={{ container: recruitPostCard }}
             />
           </a>
         </li>

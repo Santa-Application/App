@@ -43,7 +43,7 @@ RegularPostCard.defaultProps = {
 };
 
 RegularPostCard.propTypes = {
-  postData: PropTypes.shape(propTypeInterface.regularPostCardData).isRequired,
+  postData: PropTypes.exact(propTypeInterface.regularPostCardData).isRequired,
   className: PropTypes.object,
 };
 
