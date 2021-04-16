@@ -1,0 +1,11 @@
+@import 'styles';
+
+.reviewPostListContainer {
+  @include flex(space-between, normal, row, wrap);
+  width: 85vw;
+  margin: 0 auto;
+}
+
+.reviewPostCard {
+  margin-bottom: 3em;
+}
