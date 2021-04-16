@@ -15,8 +15,13 @@ const StatusOfApplicationBox = ({ images, className, ...restProps }) => {
     <div className={container}>
       <p className={titleClasses}>신청 현황</p>
       <div className={recruiteesContainer}>
-        {images.map(image => (
-          <ProfileImage src={image} size="small" className={recruitees} />
+        {images.map((image, index) => (
+          <ProfileImage
+            key={index}
+            src={image}
+            size="small"
+            className={recruitees}
+          />
         ))}
       </div>
     </div>
