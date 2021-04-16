@@ -61,3 +61,9 @@ export const regularPostCardData = {
   mountainName: PropTypes.string,
   postingDate: PropTypes.object, // Date 객체
 };
+
+export const postHeadingData = {
+  postTitle: PropTypes.string,
+  postingDate: PropTypes.object, // Date 객체
+  views: PropTypes.number,
+};
