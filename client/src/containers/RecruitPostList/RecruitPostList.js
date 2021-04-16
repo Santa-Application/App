@@ -1,5 +1,5 @@
 import { RecruitPostCard } from 'components';
-import { postDate } from 'utils';
+import { api } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { recruitPostCard } from './RecruitPostList.module.scss';
@@ -24,13 +24,10 @@ const recruitPostListData = recruitPostData.map(
     };
   }
 );
-const postListData = recruitPostListData.map((data, index) => {
-  return {
-    ...data,
-    recruitingDate: postDate.getPostDateInKorean(data.recruitingDate),
-    publisherImageUrl: usersImageData[index],
-  };
-});
+const postListData = api.getRecruitPostListData(
+  recruitPostListData,
+  usersImageData
+);
 
 // component
 const RecruitPostList = ({ className, ...restProps }) => {

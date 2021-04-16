@@ -14,9 +14,10 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
     publisherImageUrl,
     postTitle,
     recruitingDate,
-    mountainName,
+    mountainName: mountain,
     recruitingNumber: person,
     recruitingGender: gender,
+    recruitingGenderText,
   } = postData;
 
   const containerClasses = classNames(className.container, container);
@@ -27,10 +28,10 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
       <div className={postInfo}>
         <Heading level={3} className={title} content={postTitle}></Heading>
         <div className={tagList}>
-          <Tag type="mountain" contents={{ mountainName }} />
-          <Tag type="date" contents={{ recruitingDate }} />
-          <Tag type="person" contents={{ person }} />
-          <Tag type="gender" contents={{ gender }} />
+          <Tag type="mountain" content={mountain} />
+          <Tag type="date" content={recruitingDate} />
+          <Tag type="person" content={`${person}명`} />
+          <Tag type={gender} content={recruitingGenderText} />
         </div>
       </div>
     </div>
@@ -44,7 +45,8 @@ RecruitPostCard.defaultProps = {
     mountainName: '',
     recruitingDate: '',
     recruitingNumber: 0,
-    recruitingGender: '상관없음',
+    recruitingGender: 'genderBoth',
+    recruitingGenderText: '상관없음',
   },
 };
 
