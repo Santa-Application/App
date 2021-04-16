@@ -1,35 +1,30 @@
+import { string, array } from 'prop-types';
+const MenuTab = ({ currentUrl, array }) => {
 
-const MenuTab = () => {
+  const menus = ['Overviews', 'Reviews', 'Recruit'];
+
   return (
-    <div role="tablist" aria-label="Entertainment">
-      <a 
-        role="tab"
-        aria-selected="true"
-        aria-controls="nils-tab"
-        id="nils"
-      >
-        Nils Frahm
-      </a>
-      <a role="tab"
-        aria-selected="false"
-        aria-controls="agnes-tab"
-        id="agnes"
-        tabindex="-1"
-      >
-        Agnes Obel
-      </a>
-      <a 
-        role="tab"
-        aria-selected="false"
-        aria-controls="complexcomplex"
-        id="complex"
-        tabindex="-1"
-        data-deletable=""
-      >
-      Joke
-      </a>
+    <div role="tablist" aria-label="menu-tabs">
+      {
+        menus.map((menu, index) => (
+          <a 
+            href={currentUrl + '/' + menu}
+            role="tab"
+            aria-selected={ index === 1 ? "true" : "false" }
+            aria-controls="nils-tab"
+            id={menu}
+          >
+            {menu}
+          </a>
+        ))
+      }
     </div>
   );
 };
 
 export default MenuTab;
+
+MenuTab.propTypes = {
+  currentUrl: string,
+  array: array
+};
