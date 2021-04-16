@@ -36,13 +36,16 @@ const RecruitPostList = ({ className, ...restProps }) => {
   return (
     <ul>
       {postListData.map((postData, index) => (
-        <RecruitPostCard
-          key={index}
-          postData={{
-            ...postData,
-          }}
-          className={{ container: recruitPostCardClasses }}
-        />
+        <li key={index}>
+          <a href="/">
+            <RecruitPostCard
+              postData={{
+                ...postData,
+              }}
+              className={{ container: recruitPostCardClasses }}
+            />
+          </a>
+        </li>
       ))}
     </ul>
   );
