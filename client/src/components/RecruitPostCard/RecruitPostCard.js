@@ -1,6 +1,7 @@
 import { Heading, ProfileImage, Tag } from 'components';
-import { postDate, propTypeInterface } from 'utils';
+import { propTypeInterface } from 'utils';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {
   container,
   title,
@@ -8,33 +9,26 @@ import {
   tagList,
 } from './RecruitPostCard.module.scss';
 
-const RecruitPostCard = ({ publisherImageUrl, postData, ...restProps }) => {
+const RecruitPostCard = ({ postData, className, ...restProps }) => {
   const {
+    publisherImageUrl,
     postTitle,
     recruitingDate,
     mountainName,
     recruitingNumber: person,
     recruitingGender: gender,
   } = postData;
-  const { year, month, date } = postDate.getPostDateObject(recruitingDate);
+
+  const containerClasses = classNames(className.container, container);
 
   return (
-    <div className={container} {...restProps}>
+    <div className={containerClasses} {...restProps}>
       <ProfileImage src={publisherImageUrl} size="medium" />
       <div className={postInfo}>
-        <Heading level={3} className={title}>
-          {postTitle}
-        </Heading>
+        <Heading level={3} className={title} content={postTitle}></Heading>
         <div className={tagList}>
           <Tag type="mountain" contents={{ mountainName }} />
-          <Tag
-            type="date"
-            contents={{
-              year,
-              month,
-              date,
-            }}
-          />
+          <Tag type="date" contents={{ recruitingDate }} />
           <Tag type="person" contents={{ person }} />
           <Tag type="gender" contents={{ gender }} />
         </div>
@@ -44,19 +38,18 @@ const RecruitPostCard = ({ publisherImageUrl, postData, ...restProps }) => {
 };
 
 RecruitPostCard.defaultProps = {
-  publisherImageUrl: '',
   postData: {
+    publisherImageUrl: '',
     postTitle: '',
     mountainName: '',
-    recruitingDate: {},
+    recruitingDate: '',
     recruitingNumber: 0,
     recruitingGender: '상관없음',
   },
 };
 
 RecruitPostCard.propTypes = {
-  publisherImageUrl: PropTypes.string.isRequired,
-  postData: PropTypes.shape(propTypeInterface.recruitPostCardData).isRequired,
+  postData: PropTypes.exact(propTypeInterface.recruitPostCardData).isRequired,
 };
 
 export default RecruitPostCard;
