@@ -7,10 +7,9 @@ export default {
   title: 'Components/MenuTab',
   component: MenuTab,
   argTypes: {
-    backgroundColor: { control: 'color' },
-    disabled: { control: 'boolean' },
   },
 }
 
 const Template = (args) => <MenuTab {...args} />
 
+export const SampleTab = Template({});
