@@ -10,4 +10,5 @@ module.exports = {
   region: process.env.S3_BUCKET_REGION,
   bucketName: process.env.S3_BUCKET_NAME,
   tokenSecret: process.env.TOKEN_SECRET,
+  publicAPIkey: process.env.GENERAL_KEY,
 };
