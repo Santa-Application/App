@@ -6,6 +6,7 @@ const { databaseURL } = require('./config/index');
 const {
   authRoute,
   mountainRoute,
+  recruitpostRoute,
 } = require('./routes/index');
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(cors());
 // Route Middlewares
 app.use('/api/user', authRoute);
 app.use('/api/mountain', mountainRoute);
+app.use('/api/recruitpost', recruitpostRoute);
 
 // app listen
 app.listen(8001, () => console.log('Server Up and running at 8001'));
