@@ -3,8 +3,7 @@
 .container {
   width: 39vw;
 
-  border-radius: $borderRadiusSmall;
-  box-shadow: $boxShadow;
+  @include rounded-box-shadow($border-radius-small);
 
   overflow: hidden;
 }
@@ -29,18 +28,12 @@
   width: 100%;
   margin-bottom: 0.5rem;
 
-  color: $darkGray;
-  font-size: 1.4rem;
-  font-weight: 700;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  @include font-dark-14-700;
+  @include ellipsis;
 }
 
 .time {
   margin-right: 6%;
 
-  color: $gray;
-  font-size: 1.2rem;
+  @include font-gray-12;
 }

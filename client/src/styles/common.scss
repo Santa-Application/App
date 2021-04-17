@@ -26,12 +26,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $lightGray;
+  background: $light-gray;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $darkGray;
+  background: $dark-gray;
 }
 
 ::-webkit-scrollbar-thumb:active {

@@ -25,6 +25,12 @@
   left: 0;
 }
 
+// box shadow
+@mixin rounded-box-shadow($border-radius) {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
 // outline
 /*
 사용 방법
@@ -58,35 +64,35 @@ a:focus {
 // text style
 // 이름 : font-컬러-사이즈-웨이트
 @mixin font-dark-10 {
-  color: $darkGray;
+  color: $dark-gray;
   font-size: 1rem;
 }
 
 @mixin font-dark-12 {
-  color: $darkGray;
+  color: $dark-gray;
   font-size: 1.2rem;
 }
 
 @mixin font-dark-12-700 {
-  color: $darkGray;
+  color: $dark-gray;
   font-size: 1.2rem;
   font-weight: 700;
 }
 
 @mixin font-dark-14-700 {
-  color: $darkGray;
+  color: $dark-gray;
   font-size: 1.4rem;
   font-weight: 700;
 }
 
 @mixin font-dark-16-700 {
-  color: $darkGray;
+  color: $dark-gray;
   font-size: 1.4rem;
   font-weight: 700;
 }
 
 @mixin font-dark-20-700 {
-  color: $darkGray;
+  color: $dark-gray;
   font-size: 2rem;
   font-weight: 700;
 }
@@ -97,12 +103,12 @@ a:focus {
 }
 
 @mixin font-gray-12 {
-  color: $darkGray;
+  color: $dark-gray;
   font-size: 1.2rem;
 }
 
 @mixin font-white-12-700 {
-  color: $darkGray;
+  color: $dark-gray;
   font-size: 2rem;
   font-weight: 700;
 }
@@ -111,4 +117,11 @@ a:focus {
   color: $primary;
   font-size: 2.4rem;
   font-weight: 700;
+}
+
+// ellipsis
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

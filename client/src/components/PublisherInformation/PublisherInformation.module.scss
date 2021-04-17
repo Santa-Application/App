@@ -7,7 +7,5 @@
 .name {
   margin-left: 0.6em;
 
-  color: $darkGray;
-  font-size: 1.6rem;
-  font-weight: 700;
+  @include font-dark-16-700;
 }

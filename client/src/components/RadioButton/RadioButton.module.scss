@@ -14,8 +14,7 @@
   @include default-position;
   @include flex(flex-start, center, row, wrap);
 
-  color: $darkGray;
-  font-size: 1.2rem;
+  @include font-dark-12;
 }
 
 .icon {
