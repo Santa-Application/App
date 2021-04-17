@@ -21,7 +21,7 @@ const StatusOfApplicationBox = ({ images, className, ...restProps }) => {
             key={index}
             src={image}
             size="small"
-            className={recruitees}
+            className={{ container: recruitees }}
           />
         ))}
       </div>
@@ -31,12 +31,12 @@ const StatusOfApplicationBox = ({ images, className, ...restProps }) => {
 
 StatusOfApplicationBox.defaultProps = {
   images: [],
-  className: '',
+  className: {},
 };
 
 StatusOfApplicationBox.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
-  className: PropTypes.string,
+  className: PropTypes.object,
 };
 
 export default StatusOfApplicationBox;
