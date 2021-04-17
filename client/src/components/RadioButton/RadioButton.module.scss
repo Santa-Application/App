@@ -5,13 +5,13 @@
 }
 
 .radioButton {
-  @include defaultPosition;
+  @include default-position;
 
   opacity: 0;
 }
 
 .label {
-  @include defaultPosition;
+  @include default-position;
   @include flex(flex-start, center, row, wrap);
 
   color: $darkGray;
