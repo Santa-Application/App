@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import './mixin.scss';
 
 html {
   font-size: 10px;
@@ -39,4 +40,12 @@ html {
 
 ::-webkit-scrollbar-button {
   display: none;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  outline: none;
 }

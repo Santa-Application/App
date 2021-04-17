@@ -1,3 +1,4 @@
+// flex
 @mixin flex($justify, $align, $direction, $wrap) {
   display: flex;
   justify-content: $justify;
@@ -17,8 +18,97 @@
   align-items: center;
 }
 
-@mixin defaultPosition {
+// position
+@mixin default-position {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+// outline
+/*
+사용 방법
+포커스대상요소:focus {
+  > 직계자식요소(컨테이너) {
+    @include ouline(보더래디우스값);
+  }
+}
+
+ex)
+a:focus {
+  > div {
+    @include outline($borderRadiusSmall);
+  }
+}
+*/
+@mixin outline($border-radius) {
+  position: relative;
+
+  &::before {
+    content: '';
+    @include default-position;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    border-radius: $border-radius;
+    border: 2px solid $primary;
+  }
+}
+
+// text style
+// 이름 : font-컬러-사이즈-웨이트
+@mixin font-dark-10 {
+  color: $darkGray;
+  font-size: 1rem;
+}
+
+@mixin font-dark-12 {
+  color: $darkGray;
+  font-size: 1.2rem;
+}
+
+@mixin font-dark-12-700 {
+  color: $darkGray;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+@mixin font-dark-14-700 {
+  color: $darkGray;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+@mixin font-dark-16-700 {
+  color: $darkGray;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+@mixin font-dark-20-700 {
+  color: $darkGray;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+@mixin font-gray-10 {
+  color: $gray;
+  font-size: 1rem;
+}
+
+@mixin font-gray-12 {
+  color: $darkGray;
+  font-size: 1.2rem;
+}
+
+@mixin font-white-12-700 {
+  color: $darkGray;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+@mixin font-page-heading {
+  color: $primary;
+  font-size: 2.4rem;
+  font-weight: 700;
 }
