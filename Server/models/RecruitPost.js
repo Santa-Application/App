@@ -5,7 +5,7 @@ const recruitPostSchema = Schema({
   recruitingNumber: { type: Number, required: true },
   recruitingLevels: [{ type: Number, required: true }],
   recruitingSex: { type: String, required: true },
-  recruitingAge: Number,
+  recruitingAge: { type: Array },
   date: { type: Date, default: Date.now, required: true },
   description: String,
   views: { type: Number, default: 0 },
