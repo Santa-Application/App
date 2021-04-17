@@ -18,7 +18,7 @@ PublisherInformation.defaultProps = {
     publisherName: '',
     publisherImageUrl: '',
   },
-  className: '',
+  className: {},
 };
 
 PublisherInformation.propTypes = {
@@ -26,7 +26,7 @@ PublisherInformation.propTypes = {
     publisherName: PropTypes.string,
     publisherImageUrl: PropTypes.string,
   }).isRequired,
-  className: PropTypes.string,
+  className: PropTypes.object,
 };
 
 export default PublisherInformation;
