@@ -5,6 +5,7 @@ const { databaseURL } = require('./config/index');
 // Import Routes
 const {
   authRoute,
+  mountainRoute,
 } = require('./routes/index');
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(cors());
 
 // Route Middlewares
 app.use('/api/user', authRoute);
+app.use('/api/mountain', mountainRoute);
 
 // app listen
-app.listen(8001, () => console.log('Server Up and running'));
+app.listen(8001, () => console.log('Server Up and running at 8001'));
