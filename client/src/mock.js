@@ -9,9 +9,10 @@ export const recruitPostData = [
     recruitingDate: new Date(2021, 4, 17),
     recruitingLevels: ['level1'],
     recruitingGender: 'female',
-    recruitingAge: { min: 25, max: 33 },
+    recruitingAge: [25, 30],
     recruitingNumber: 2,
-    description: '재밌는 메이트분 구해요~~~~',
+    description:
+      '등산은 심장혈관 기능과 폐기능 향상에 도움이 된다. 등산을 하기 위해서는 많은 양의 에너지가 필요하다. 에너지를 근육에 공급하는 방식은 산화작용에 의한 유산소 방식(유산소 운동)과 산화작용에 관계없이 근육내 탄수화물과 인원질의 분해작용에 의한 무산소 방식(무산소 운동)이 있다. ',
     recruitees: ['user2'],
   },
   {
@@ -24,9 +25,10 @@ export const recruitPostData = [
     recruitingDate: new Date(2021, 4, 18),
     recruitingLevels: ['level1', 'level2', 'level3'],
     recruitingGender: 'genderBoth',
-    recruitingAge: { min: 22, max: 30 },
+    recruitingAge: [22, 30],
     recruitingNumber: 3,
-    description: '기분타는 산타 메이트분 구해요~~~~',
+    description:
+      '등산은 심장혈관 기능과 폐기능 향상에 도움이 된다. 등산을 하기 위해서는 많은 양의 에너지가 필요하다. 에너지를 근육에 공급하는 방식은 산화작용에 의한 유산소 방식(유산소 운동)과 산화작용에 관계없이 근육내 탄수화물과 인원질의 분해작용에 의한 무산소 방식(무산소 운동)이 있다. ',
     recruitees: ['user4', 'user5'],
   },
 ];

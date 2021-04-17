@@ -2,23 +2,31 @@ import { ProfileImage } from 'components';
 import PropTypes from 'prop-types';
 import { container, name } from './PublisherInformation.module.scss';
 
-const WriterInformation = ({ publisherData, className, ...restProps }) => {
+const PublisherInformation = ({ publisherData, className, ...restProps }) => {
+  const { publisherImageUrl, publisherName } = publisherData;
+
   return (
     <div className={container}>
-      <ProfileImage src={publisherData.imageUrl} size="medium" />
-      <span className={name}>{publisherData.name}</span>
+      <ProfileImage src={publisherImageUrl} size="medium" />
+      <span className={name}>{publisherName}</span>
     </div>
   );
 };
 
-WriterInformation.defaultProps = {
-  publisherData: {},
+PublisherInformation.defaultProps = {
+  publisherData: {
+    publisherName: '',
+    publisherImageUrl: '',
+  },
   className: '',
 };
 
-WriterInformation.propTypes = {
-  publisherData: PropTypes.object.isRequired,
+PublisherInformation.propTypes = {
+  publisherData: PropTypes.exact({
+    publisherName: PropTypes.string,
+    publisherImageUrl: PropTypes.string,
+  }).isRequired,
   className: PropTypes.string,
 };
 
-export default WriterInformation;
+export default PublisherInformation;

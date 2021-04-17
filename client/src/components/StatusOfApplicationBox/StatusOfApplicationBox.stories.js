@@ -8,7 +8,7 @@ export default {
       type: { name: '모집 신청자 데이터', required: true },
       description: '모집 신청자들의 데이터 정보를 받아옵니다.',
       table: {
-        type: { summary: 'array' },
+        type: { summary: 'array', detail: `['string', 'string']` },
       },
       control: {
         type: 'object',

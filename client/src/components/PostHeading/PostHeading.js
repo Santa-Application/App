@@ -1,5 +1,5 @@
 import { Heading } from 'components';
-import { postDate } from 'utils';
+import { postDate, propTypeInterface } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -13,14 +13,12 @@ import {
 const PostHeading = ({ postData, className, ...restProps }) => {
   const { postTitle, postingDate, views: postingViews } = postData;
 
-  const containerClasses = classNames(className.container, container);
+  const containerClasses = classNames(className.headingContainer, container);
   const titleClasses = classNames(className.title, title);
 
   return (
     <div className={containerClasses}>
-      <Heading level={2} className={titleClasses}>
-        {postTitle}
-      </Heading>
+      <Heading level={2} className={titleClasses} content={postTitle}></Heading>
       <div className={infoContainer}>
         <time dateTime={postDate.getPostDate(postingDate)} className={date}>
           {postDate.getPostDateInKorean(postingDate)}
@@ -37,16 +35,12 @@ PostHeading.defaultProps = {
     postingDate: {},
     views: 0,
   },
-  className: '',
+  className: {},
 };
 
 PostHeading.propTypes = {
-  postData: PropTypes.shape({
-    postTitle: PropTypes.string,
-    postingDate: PropTypes.object,
-    views: PropTypes.number,
-  }).isRequired,
-  className: PropTypes.string,
+  postData: PropTypes.exact(propTypeInterface.postHeadingData).isRequired,
+  className: PropTypes.object,
 };
 
 export default PostHeading;

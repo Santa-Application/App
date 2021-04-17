@@ -15,7 +15,7 @@ export default {
       },
     },
     size: {
-      type: { name: '프로필 이미지 크기', required: true },
+      type: '프로필 이미지 크기',
       description: '프로필 이미지 크기를 전달받습니다.',
       table: {
         type: { summary: 'string' },
