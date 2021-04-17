@@ -6,6 +6,7 @@ import { container, checkbox, label } from './Checkbox.module.scss';
 const Checkbox = ({
   id,
   name,
+  value,
   checked,
   onChange,
   checkboxIcon,
@@ -22,6 +23,7 @@ const Checkbox = ({
         id={id}
         type="checkbox"
         name={name}
+        value={value}
         checked={checked}
         className={checkboxClasses}
         onChange={onChange}
@@ -37,6 +39,7 @@ const Checkbox = ({
 Checkbox.defaultProps = {
   id: '',
   name: '',
+  value: '',
   checked: false,
   onChange: null,
   checkboxIcon: '',
@@ -47,6 +50,7 @@ Checkbox.defaultProps = {
 Checkbox.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
     .isRequired,
