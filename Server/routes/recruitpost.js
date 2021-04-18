@@ -3,15 +3,24 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
 const upload = multer({ dest: 'uploads/' });
-const { RecruitPost } = require('../models/index');
-const { uploadFile, downloadFile } = require('../utils/s3');
-const { route } = require('./auth');
+const { RecruitPost, User } = require('../models/index');
+const { downloadFile } = require('../utils/s3');
 
 // get all recruit posts.
 router.get('/', async (req, res) => {
   try {
     const all = await RecruitPost.find();
-    return res.status(200).send(all);
+    // get all the needed Data for the frontend
+    const response = all.map(async (item) => {
+      // get name of the user
+      const { name } = await User.findById(item.recruiterID);
+      // get the profile Image of the user
+      const imageURL = await downloadFile(item.recruiterID);
+      // reconfigure:)
+      return { ...item._doc, name, imageURL };
+    });
+
+    return res.status(200).send(response);
   } catch (err) {
     res.status(404).send(err);
   }
@@ -20,8 +29,23 @@ router.get('/', async (req, res) => {
 // get a individual recruit post.
 router.get('/:id', async (req, res) => {
   try {
-    const result = await RecruitPost.findOne({ _id: req.params.id });
-    res.status(200).send(result);
+    const result = await RecruitPost.findById(req.params.id);
+    // get recruiterName
+    const { name } = await User.findById(result.recruiterID);
+    // get recruiter profile ImageURL
+    const imageURL = await downloadFile(result.recruiterID);
+    // get all the applicant imageURLs
+    let recruitees = [];
+    if (result.recruitees) {
+      recruitees = result.recruitees.map(async (recruitee) => {
+        const recruiteeImageURL = await downloadFile(recruitee);
+        return { recruitee, recruiteeImageURL };
+      });
+    }
+    const response = {
+      ...result._doc, recruiterName: name, imageURL, recruitees,
+    };
+    res.status(200).send(response);
   } catch (err) {
     res.status(400).send(err);
   }
@@ -80,26 +104,35 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// Apply to join the Recruiting.
-router.patch('/:id/:applicantID', async (req, res) => {
+// Apply to join the Recruiting. => toggle?
+router.post('/:id/:applicantID', async (req, res) => {
   try {
     const { id, applicantID } = req.params;
-    const update = { recruitees: applicantID };
+
+    const originalDocument = await RecruitPost.findById(id);
+    const originalRecruitees = originalDocument.recruitees;
+
+    const update = originalRecruitees.indexOf(applicantID) === -1
+      ? { recruitees: [...originalRecruitees, applicantID] }
+      : {
+        recruitees: originalRecruitees
+          .filter((originalRecruitee) => originalRecruitee !== applicantID),
+      };
+
     const result = await RecruitPost.findByIdAndUpdate(
       id,
       update,
       { new: true },
     );
+
     const message = {
       result,
       message: 'successfully done',
     };
-
     res.status(200).send(message);
-  } catch {
-    res.status(400).send('Cannot apply!');
+  } catch (err) {
+    res.status(400).send(err);
   }
 });
-// Cancel application for recruiting.
 
 module.exports = router;

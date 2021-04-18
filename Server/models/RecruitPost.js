@@ -10,7 +10,7 @@ const recruitPostSchema = Schema({
   description: String,
   views: { type: Number, default: 0 },
   recruiterID: { type: String, required: true },
-  reruitees: [{ type: String }],
+  recruitees: [{ type: String }],
   recruitDate: { type: String, required: true },
 });
 
