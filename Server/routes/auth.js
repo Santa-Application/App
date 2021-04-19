@@ -6,10 +6,11 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const User = require('../models/User');
 const { registerValidation, loginValidation } = require('../utils/validation');
-const { uploadFile, downloadFile } = require('../utils/s3');
+const { uploadFile } = require('../utils/s3');
 
 const upload = multer({ dest: 'uploads/' });
 
+// REGISTER
 router.post('/register', upload.single('image'), async (req, res) => {
   // Validation
   const { error } = registerValidation(req.body);
