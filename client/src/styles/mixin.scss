@@ -63,14 +63,15 @@ a:focus {
 
 // text style
 // 이름 : font-컬러-사이즈-웨이트
-@mixin font-dark-10 {
+@mixin font-dark-10-400 {
   color: $dark-gray;
   font-size: 1rem;
 }
 
-@mixin font-dark-12 {
+@mixin font-dark-12-400 {
   color: $dark-gray;
   font-size: 1.2rem;
+  font-weight: 400;
 }
 
 @mixin font-dark-12-700 {
@@ -97,12 +98,12 @@ a:focus {
   font-weight: 700;
 }
 
-@mixin font-gray-10 {
+@mixin font-gray-10-400 {
   color: $gray;
   font-size: 1rem;
 }
 
-@mixin font-gray-12 {
+@mixin font-gray-12-400 {
   color: $dark-gray;
   font-size: 1.2rem;
 }

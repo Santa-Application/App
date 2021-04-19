@@ -16,16 +16,23 @@
 }
 
 .contentsContainer {
-  margin-bottom: 3em;
+  margin-bottom: 5em;
   overflow: hidden;
 
   li {
     float: left;
 
     margin-right: 1em;
+    margin-bottom: 1em;
+
+    line-height: 1.8rem;
   }
 }
 
 .statusOfRecruitees {
   margin-bottom: 8em;
+}
+
+.buttonContainer {
+  @include flex-center-center;
 }
