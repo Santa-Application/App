@@ -27,6 +27,7 @@ const FileInput = ({
           id={id}
           type="file"
           min="1"
+          accept=".gif, .jpg, .png"
           name={name}
           onChange={handleGetFileRoute}
         />
