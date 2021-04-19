@@ -11,3 +11,4 @@ export { default as RegularPostCard } from 'components/RegularPostCard/RegularPo
 export { default as SelectBox } from 'components/SelectBox/SelectBox';
 export { default as Textarea } from 'components/Textarea/Textarea';
 export { default as Tag } from 'components/Tag/Tag';
+export { default as MenuTab } from 'components/MenuTab/MenuTab';
