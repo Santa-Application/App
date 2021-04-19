@@ -1,17 +1,21 @@
 @import 'styles/';
 
 .selectDateBox {
-  display: block;
-  font-size: 1.2rem;
-  color: $darkGray;
-  border: none;
-  border-radius: 1rem;
+  @include flex(space-between, center, row, nowrap);
   box-shadow: $boxShadow;
-  padding: 0.8rem 1.5rem;
-  cursor: pointer;
-}
+  padding: 0.8em 1.5em;
+  border-radius: 1rem;
 
-.selectDateIcon {
-  margin-left: 0.5rem;
-  vertical-align: -10%;
+  input {
+    font-size: 1.2rem;
+    color: $darkGray;
+    background: transparent;
+    border: none;
+    width: 100%;
+  }
+
+  svg {
+    margin-left: 0.5rem;
+    vertical-align: -10%;
+  }
 }
