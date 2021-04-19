@@ -11,10 +11,10 @@ export default {
         type: {
           summary: 'object',
           detail: `{
-  postTitle: '',
-  imageUrl: '',
-  mountainName: '',
-  postingDate: {},
+  postTitle: 'sting',
+  imageUrl: 'string',
+  mountainName: 'string',
+  postingDate: 'Date object',
 }`,
         },
       },

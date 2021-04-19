@@ -56,8 +56,10 @@ const userSchema = Schema({
   },
   regularPosts: [String],
   recruitPosts: [String],
+  appliedRecruitPosts: [String],
   followers: { type: Number, default: 0 },
   following: [String],
+  likedRegularPosts: [String],
 });
 
 // If you want to add additional keys later, use

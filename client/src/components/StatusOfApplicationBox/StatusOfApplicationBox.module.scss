@@ -1,9 +1,7 @@
 @import 'styles';
 
 .title {
-  color: $darkGray;
-  font-size: 1.2rem;
-  font-weight: 700;
+  @include font-dark-12-700;
 }
 
 .recruiteesContainer {

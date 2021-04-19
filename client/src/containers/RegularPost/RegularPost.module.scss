@@ -1,0 +1,43 @@
+@import 'styles';
+
+.container {
+  width: 85vw;
+
+  margin: 0 auto;
+}
+
+.imageContainer {
+  margin-bottom: 5em;
+
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+}
+
+.publisherInformationContainer {
+  @include flex-row(space-between);
+  margin-bottom: 3em;
+}
+
+.headingContainer {
+  margin-bottom: 2em;
+  padding: 1em;
+}
+
+.text {
+  margin-bottom: 8em;
+  padding: 1em;
+
+  @include font-gray-12;
+  line-height: 1.8rem;
+}
+
+.buttonContainer {
+  @include flex-row(center);
+
+  button:first-child {
+    margin-right: 1em;
+  }
+}

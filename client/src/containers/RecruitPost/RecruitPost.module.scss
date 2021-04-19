@@ -1,0 +1,31 @@
+@import 'styles';
+
+.container {
+  width: 85vw;
+
+  margin: 0 auto;
+}
+
+.publisherInformationContainer {
+  margin-bottom: 3em;
+}
+
+.headingContainer {
+  margin-bottom: 2em;
+  padding: 1em;
+}
+
+.contentsContainer {
+  margin-bottom: 3em;
+  overflow: hidden;
+
+  li {
+    float: left;
+
+    margin-right: 1em;
+  }
+}
+
+.statusOfRecruitees {
+  margin-bottom: 8em;
+}

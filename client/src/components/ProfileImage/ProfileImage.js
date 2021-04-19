@@ -16,7 +16,7 @@ const checkProfileSize = size => {
 
 const ProfileImage = ({ size, src, className, ...restProps }) => {
   const containerClasses = classNames(
-    className,
+    className.container,
     container,
     checkProfileSize(size)
   );
@@ -31,13 +31,13 @@ const ProfileImage = ({ size, src, className, ...restProps }) => {
 ProfileImage.defaultProps = {
   src: '',
   size: 'medium',
-  className: '',
+  className: {},
 };
 
 ProfileImage.propTypes = {
   src: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['large', 'medium', 'small']),
-  className: PropTypes.string,
+  className: PropTypes.object,
 };
 
 export default ProfileImage;

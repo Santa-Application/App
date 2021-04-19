@@ -1,5 +1,10 @@
 import { Heading } from 'components';
-import { Checkbox } from 'components';
+import {
+  RecruitPostList,
+  RegularPostList,
+  RegularPost,
+  RecruitPost,
+} from 'containers';
 
 function App() {
   return (
@@ -7,7 +12,10 @@ function App() {
       <Heading level={1} content="SANTA" />
       <Heading level={2} content="Reviews" />
       <Heading level={3} content="제목" />
-      <Checkbox content="like" />
+      <RecruitPostList />
+      <RegularPostList />
+      <RegularPost />
+      <RecruitPost />
     </div>
   );
 }

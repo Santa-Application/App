@@ -22,17 +22,17 @@
   // width: 5rem;
   padding: 0.8rem;
   margin-left: 0.8rem;
-  border-bottom: 0.1rem solid $lightGray;
+  border-bottom: 0.1rem solid $light-gray;
   box-shadow: none;
   font-size: 1.2rem;
-  color: $darkGray;
+  color: $dark-gray;
 
   &:hover {
-    border-bottom: 0.1rem solid rgba($color: $lightGray, $alpha: 1);
+    border-bottom: 0.1rem solid rgba($color: $light-gray, $alpha: 1);
   }
 
   &:focus {
-    border-bottom: 0.1rem solid $darkGray;
+    border-bottom: 0.1rem solid $dark-gray;
     outline: none;
   }
 }

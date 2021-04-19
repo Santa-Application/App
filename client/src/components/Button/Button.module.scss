@@ -7,20 +7,20 @@
   font-weight: 700;
   font-size: 1.2rem;
   line-height: 1.5rem;
-  border-radius: $borderRadiusLarge;
-  box-shadow: $boxShadow;
+  border-radius: $border-radius-large;
+  box-shadow: $box-shadow;
   border: none;
   box-sizing: border-box;
   outline-color: $primary;
 }
 
 .primary {
-  background-color: $primary
+  background-color: $primary;
 }
 
 .secondary {
   background-color: $white;
-  border: .1rem solid $primary;
+  border: 0.1rem solid $primary;
   color: $primary;
 }
 
