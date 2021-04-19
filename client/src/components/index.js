@@ -16,3 +16,5 @@ export { default as StatusOfApplicationBox } from 'components/StatusOfApplicatio
 export { default as Textarea } from 'components/Textarea/Textarea';
 export { default as Tag } from 'components/Tag/Tag';
 export { default as MenuTab } from 'components/MenuTab/MenuTab';
+export { default as Logo } from 'components/Logo/Logo';
+export { default as Header } from 'components/Header/Header';
