@@ -1,30 +1,53 @@
-import { string, array } from 'prop-types';
-const MenuTab = ({ currentUrl, array }) => {
+import { array, string, number } from 'prop-types';
+import { menuTab } from './MenuTab.module.scss';
 
-  const menus = ['Overviews', 'Reviews', 'Recruit'];
+
+const MenuTab = ({ menus, label, selected }) => {
 
   return (
-    <div role="tablist" aria-label="menu-tabs">
+    <ul 
+      role="tablist" 
+      aria-label={label}
+      className={menuTab}
+    >
       {
         menus.map((menu, index) => (
-          <a 
-            href={currentUrl + '/' + menu}
+          <li
+            key={menu.name}
             role="tab"
-            aria-selected={ index === 1 ? "true" : "false" }
-            aria-controls="nils-tab"
-            id={menu}
+            aria-selected={index === selected ? "true" : "false"}
+            aria-controls={`${menu?.name}-tab`} // should be associated with aria-labelledby
+            tabIndex={index === 0 ? "0" : "-1"}
+            id={menu?.name}
           >
-            {menu}
-          </a>
+            <a
+              href={menu?.href}
+            >
+              {menu?.name}
+            </a>
+          </li>
         ))
       }
-    </div>
+    </ul>
   );
 };
 
 export default MenuTab;
 
 MenuTab.propTypes = {
-  currentUrl: string,
-  array: array
+  menus: array,
+  label: string, 
+  selected: number
 };
+
+MenuTab.defaultProps = {
+  menus: [ 
+    { name: 'Overview', href: '/Overview' }, 
+    { name: 'Reviews', href: '/Reviews' },
+    { name:'Recruits', href: '/Recruits' }
+  ],
+  label: '산 메뉴 탭',
+  selected: 1
+};
+
+  
