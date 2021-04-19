@@ -50,7 +50,7 @@ const SelectBox = ({
   // };
 
   return (
-    <div className={containerClasses} role="listbox" tabIndex="1">
+    <div className={containerClasses} role="listbox" tabIndex="-1">
       <button className={selectButtonClasses} onClick={handleOpenSelectBox}>
         <p>{selectItem}</p>
         <Icon shape={isOpened ? 'selectClose' : 'selectOpen'} />
@@ -59,7 +59,7 @@ const SelectBox = ({
         <ul className={selectListClasses}>
           {data.map(item => {
             return (
-              <li>
+              <li key={item.id}>
                 <button type="button" onClick={handleClickItem} role="option">
                   {item}
                 </button>
