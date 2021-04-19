@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
         const { name } = await User.findById(item.recruiterID);
         const imageURL = await downloadFile(item.recruiterID);
 
+        console.log(imageURL);
         return { ...item._doc, name, imageURL };
       }),
     );
