@@ -8,14 +8,7 @@ export default {
   argTypes: {
     menus: {
       name: 'menus',
-      control: { type: text },
-      description: 'menu tab안의 요소들을 나타내는 배열이 들어갑니다.',
-      table: {
-        type: {
-          summary: 'array',
-          detail: '배열 내의 각 요소는 객체입니다. name과 href가 들어갑니다.'
-        }
-      }
+      description: '메뉴에 들어갈 요소들이 있는 배열'
     },
     label: {
       name: 'label',
@@ -23,10 +16,12 @@ export default {
     },
     selected: {
       name: 'selected',
-      description: '요소 중에 선택된 요소의 인덱스가 들어갑니다.'
+      description: '요소 중에 선택된 요소의 인덱스가 들어갑니다.',
+      control: { type: 'number', min: 0, max: 2 }
     }
   }
 }
+
 
 const Template = (args) => <MenuTab {...args} />
 
