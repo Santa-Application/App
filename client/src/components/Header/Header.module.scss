@@ -1,2 +1,17 @@
-@import '/styles';
+@import 'styles/';
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  h1 svg {
+    height: 3rem;
+  }
+
+  button {
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+  }
+}

@@ -1,6 +1,7 @@
 import { Button, Logo, Icon }  from 'components';
+import { header } from './Header.module.scss';
 
-const Header = ({ mode }) => {
+const Header = ({ mode, style, title, href }) => {
 
   const commonProps = { 
     secondary: false, 
@@ -9,7 +10,7 @@ const Header = ({ mode }) => {
   };
 
   return (
-    <div>
+    <div className={header}>
       <Button 
         {...commonProps}
         value={'Go back button'}
@@ -20,7 +21,7 @@ const Header = ({ mode }) => {
         {...commonProps}
         value={'Logo button, goes to HomePage'}
       >
-        <Logo />
+        <Logo style={style} title ={title} href={href}/>
       </Button>
       <Button
         {...commonProps}
