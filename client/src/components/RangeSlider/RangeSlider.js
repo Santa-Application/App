@@ -80,13 +80,13 @@ const RangeSlider = ({
       height: '0.4rem',
     },
     mark: {
-      backgroundColor: '#ffffff',
+      backgroundColor: 'transparent',
       height: '0.4rem',
       width: '0.2rem',
     },
     markActive: {
       opacity: 0.5,
-      backgroundColor: '#ffffff',
+      backgroundColor: 'transparent',
     },
     markLabel: {
       transform: 'translateX(-70%) translateY(-300%)',
@@ -128,7 +128,7 @@ const RangeSlider = ({
           max={currentValue[1]}
           onChange={handleChangeMinInput}
           onClick={handleSelectInput}
-          content={content}
+          content={`${content} ~`}
         />
         <NumberInput
           className={numberInput}
