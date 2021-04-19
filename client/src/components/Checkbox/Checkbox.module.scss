@@ -5,7 +5,7 @@
 }
 
 .checkbox {
-  @include defaultPosition;
+  @include default-position;
   z-index: 100;
 
   width: 1.5em;
@@ -17,5 +17,5 @@
 }
 
 .label {
-  @include defaultPosition;
+  @include default-position;
 }

@@ -5,8 +5,7 @@
   width: 85vw;
   padding: 0.8em 1em;
 
-  border-radius: $borderRadiusSmall;
-  box-shadow: $boxShadow;
+  @include rounded-box-shadow($border-radius-small);
 
   background-color: $white;
 }
@@ -24,13 +23,9 @@
 .title {
   width: 100%;
 
-  color: $darkGray;
-  font-size: 1.4rem;
-  font-weight: 700;
+  @include font-dark-14-700;
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  @include ellipsis;
 }
 
 .tagList {

@@ -8,6 +8,7 @@ import { container, radioButton, label, icon } from './RadioButton.module.scss';
 const RadioButton = ({
   id,
   name,
+  value,
   type,
   iconSize,
   checked,
@@ -40,6 +41,7 @@ const RadioButton = ({
         id={id}
         type="radio"
         name={name}
+        value={value}
         checked={checked}
         onChange={onChange}
         className={radioButton}
@@ -60,22 +62,24 @@ const RadioButton = ({
 RadioButton.defaultProps = {
   id: '',
   name: '',
+  value: '',
   type: 'genderBoth',
   iconSize: 1.4,
   checked: false,
   onChange: null,
-  className: '',
+  className: {},
 };
 
 RadioButton.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['female', 'male', 'genderBoth']).isRequired,
   iconSize: PropTypes.number,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
     .isRequired,
-  className: PropTypes.string,
+  className: PropTypes.object,
 };
 
 export default RadioButton;

@@ -20,9 +20,9 @@ export default {
       table: {
         type: { summary: 'string' },
       },
+      options: ['large', 'medium', 'small'],
       control: {
         type: 'radio',
-        options: ['large', 'medium', 'small'],
       },
     },
     className: {

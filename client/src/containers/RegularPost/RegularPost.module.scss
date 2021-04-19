@@ -30,8 +30,7 @@
   margin-bottom: 8em;
   padding: 1em;
 
-  color: $darkGray;
-  font-size: 1.2rem;
+  @include font-gray-12;
   line-height: 1.8rem;
 }
 

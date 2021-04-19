@@ -7,9 +7,7 @@
 
   padding: 0.8em 1em;
 
-  border-radius: 1.8em;
-  box-shadow: $boxShadow;
+  @include rounded-box-shadow($border-radius-medium);
 
-  color: $darkGray;
-  font-size: 1.2rem;
+  @include font-dark-12;
 }
