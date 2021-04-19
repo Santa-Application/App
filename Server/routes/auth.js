@@ -26,6 +26,7 @@ router.post('/register', upload.single('image'), async (req, res) => {
 
   // generate imageURL(or just image Key)
   const { file } = req;
+  console.log(file);
   const { Key } = await uploadFile(file);
 
   // Create a new User

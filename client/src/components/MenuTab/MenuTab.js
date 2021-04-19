@@ -40,14 +40,6 @@ MenuTab.propTypes = {
   selected: number
 };
 
-MenuTab.defaultProps = {
-  menus: [ 
-    { name: 'Overview', href: '/Overview' }, 
-    { name: 'Reviews', href: '/Reviews' },
-    { name:'Recruits', href: '/Recruits' }
-  ],
-  label: '산 메뉴 탭',
-  selected: 1
-};
+
 
   
