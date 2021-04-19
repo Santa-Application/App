@@ -12,6 +12,7 @@ const recruitPostSchema = Schema({
   recruiterID: { type: String, required: true },
   recruitees: [{ type: String }],
   recruitDate: { type: String, required: true },
+  title: { type: String, required: true },
 });
 
 module.exports = model('RecruitPost', recruitPostSchema);
