@@ -15,3 +15,4 @@ export { default as SelectBox } from 'components/SelectBox/SelectBox';
 export { default as StatusOfApplicationBox } from 'components/StatusOfApplicationBox/StatusOfApplicationBox';
 export { default as Textarea } from 'components/Textarea/Textarea';
 export { default as Tag } from 'components/Tag/Tag';
+export { default as MenuTab } from 'components/MenuTab/MenuTab';
