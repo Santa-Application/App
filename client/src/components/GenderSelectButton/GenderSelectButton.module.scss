@@ -1,0 +1,7 @@
+@import 'styles';
+
+.container {
+  @include flex-row(space-between);
+
+  width: 50vw;
+}

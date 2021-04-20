@@ -5,13 +5,13 @@
 }
 
 .radioButton {
-  @include default-position;
+  // @include default-position;
 
   opacity: 0;
 }
 
 .label {
-  @include default-position;
+  // @include default-position;
   @include flex(flex-start, center, row, wrap);
 
   @include font-dark-12-400;
