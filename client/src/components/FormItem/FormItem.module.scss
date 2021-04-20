@@ -3,32 +3,31 @@
 .formItem {
   @include flex(center, flex-start, column, wrap);
   border: 1px solid gold;
-  
+
   h3 {
     margin-bottom: 0.5rem;
     margin-left: 1rem;
     font-size: 1.2rem;
     font-weight: 800;
-    color: $darkGray;
+    color: $dark-gray;
 
     &[required]::after {
-      content: "*";
+      content: '*';
       width: 0.5em;
       height: 0.5em;
       color: $red;
       transition: transformY(-100%);
     }
   }
-  
+
   p {
     margin-bottom: 0.5rem;
     margin-left: 1rem;
     font-size: 1rem;
-    color: $darkGray;
-  }
-  
-  input, button {
-    margin-bottom: 0.5rem;
+    color: $dark-gray;
   }
 
+  // input, button {
+  //   margin-bottom: 0.5rem;
+  // }
 }

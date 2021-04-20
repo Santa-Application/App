@@ -18,3 +18,5 @@ export { default as Tag } from 'components/Tag/Tag';
 export { default as MenuTab } from 'components/MenuTab/MenuTab';
 export { default as Logo } from 'components/Logo/Logo';
 export { default as Header } from 'components/Header/Header';
+export { default as Footer } from 'components/Footer/Footer';
+export { default as GenderSelectButton } from 'components/GenderSelectButton/GenderSelectButton';

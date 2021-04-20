@@ -8,17 +8,13 @@ import { container, radioButton, label, icon } from './RadioButton.module.scss';
 const RadioButton = ({
   id,
   name,
-  value,
-  type,
   iconSize,
-  checked,
-  onChange,
-  children,
+  field,
   className: { label: labelClassName },
   ...restProps
 }) => {
   let labelText = '';
-  switch (type) {
+  switch (id) {
     case 'female':
       labelText = '여성';
       break;
@@ -31,6 +27,7 @@ const RadioButton = ({
   }
 
   const iconSizeWithUnit = `${iconSize}rem`;
+  const checked = field.checked;
   const CheckIcon = checked ? Checked : Unchecked;
 
   const labelClasses = classNames(labelClassName, label);
@@ -39,12 +36,10 @@ const RadioButton = ({
     <div className={container}>
       <input
         id={id}
-        type="radio"
         name={name}
-        value={value}
-        checked={checked}
-        onChange={onChange}
+        type="radio"
         className={radioButton}
+        {...field}
       />
       <label htmlFor={id} className={labelClasses}>
         <CheckIcon
@@ -53,7 +48,7 @@ const RadioButton = ({
           height={iconSizeWithUnit}
         />
         {labelText}
-        <Icon shape={type} />
+        <Icon shape={id} />
       </label>
     </div>
   );
@@ -62,23 +57,16 @@ const RadioButton = ({
 RadioButton.defaultProps = {
   id: '',
   name: '',
-  value: '',
-  type: 'genderBoth',
   iconSize: 1.4,
-  checked: false,
-  onChange: null,
+  field: {},
   className: {},
 };
 
 RadioButton.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['female', 'male', 'genderBoth']).isRequired,
+  field: PropTypes.object.isRequired,
   iconSize: PropTypes.number,
-  checked: PropTypes.bool.isRequired,
-  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])])
-    .isRequired,
   className: PropTypes.object,
 };
 

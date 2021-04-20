@@ -14,22 +14,6 @@ export default {
         disable: true,
       },
     },
-    value: {
-      table: {
-        disable: true,
-      },
-    },
-    type: {
-      type: { name: '라디오 버튼 타입', required: true },
-      description: '라디오 버튼의 타입을 지정합니다.',
-      table: {
-        type: { summary: 'string' },
-      },
-      options: ['female', 'male', 'genderBoth'],
-      control: {
-        type: 'radio',
-      },
-    },
     iconSize: {
       type: '아이콘 사이즈',
       description: '아이콘의 사이즈를 지정합니다.',
@@ -42,24 +26,8 @@ export default {
         step: 0.1,
       },
     },
-    checked: {
-      type: { name: '체크 상태', required: true },
-      description: '체크 상태를 전달받습니다.',
+    field: {
       table: {
-        type: { summary: 'boolean' },
-      },
-      control: {
-        type: 'boolean',
-      },
-    },
-    onChange: {
-      type: { name: '체크 상태 변경 이벤트 핸들러', required: true },
-      description: '체크 상태 변경 이벤트 핸들러를 전달받습니다.',
-      table: {
-        category: 'Event',
-        type: { summary: 'function' },
-      },
-      control: {
         disable: true,
       },
     },
@@ -78,11 +46,11 @@ export const Male = Template.bind({});
 export const Both = Template.bind({});
 
 Female.args = {
-  type: 'female',
+  id: 'female',
 };
 Male.args = {
-  type: 'male',
+  id: 'male',
 };
 Both.args = {
-  type: 'genderBoth',
+  id: 'genderBoth',
 };

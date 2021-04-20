@@ -2,16 +2,17 @@ import { ReactComponent as LogoBlack } from './assets/LogoBlack.svg';
 import { ReactComponent as LogoWhite } from './assets/LogoWhite.svg';
 import { string } from 'prop-types';
 
-
-const Logo = ({ style = 'black', title, href }) => {
-
+const Logo = ({ mode = 'black', title, href = '/' }) => {
+  
   const explanation = title || '산타 어플리케이션';
 
   return (
     <h1>
       <a href={href}>
         {
-          style === 'white' ? <LogoWhite title={explanation}/> : <LogoBlack title={explanation} />
+          mode === 'white' ? 
+            <LogoWhite title={explanation}/> : 
+            <LogoBlack title={explanation} />
         }
       </a>
     </h1>
@@ -21,7 +22,7 @@ const Logo = ({ style = 'black', title, href }) => {
 export default Logo;
 
 Logo.propTypes = {
-  style: string,
+  mode: string,
   title: string,
   href: string
 };
