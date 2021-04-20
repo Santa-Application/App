@@ -1,4 +1,5 @@
 import React from 'react';
+import { Field, ErrorMessage, Form } from 'formik';
 import Heading from 'components/Heading/Heading';
 import Input from 'components/Input/Input';
 import FileInput from 'components/FileInput/FileInput';
@@ -12,46 +13,91 @@ import Textarea from 'components/Textarea/Textarea';
 import { formItem } from './FormItem.module.scss';
 import { object } from 'prop-types';
 
-const FormItem = ({ headingProps, descProps, inputProps, ...restProps }) => {
-  const FormInput = () => {
+/* --------------------------
+
+
+상위 컴포넌트에서 사용할 때의 예시
+
+const App = () => {
+  return (<FormItem
+    headingProps={{
+      level: 3,
+      content: '등산 메이트 나이대',
+    }}
+    descProps={{
+      content: '같이 등산할 메이트의 나이대를 정해주세요',
+    }}
+    inputProps={{
+      formType: 'rangeSlider',
+      name: 'rangeSlider',
+      currentValue: currentValue,
+      onChange: {
+        slider: handleChangeSlider,
+        minInput: handleChangeMinInput,
+        maxInput: handleChangeMaxInput,
+      },
+      onClick: handleSelectInput,
+      content: valueUnit,
+    }}
+  />)
+}
+
+-------------------------- */
+
+const renderFormInput = formType => {
+  const FormInput = props => {
     let Comp = '';
-    switch (inputProps.formType) {
+
+    switch (formType) {
+      case 'date':
+        Comp = SelectDate;
+        break;
       case 'file':
-        Comp = <FileInput {...inputProps} />;
+        Comp = FileInput;
         break;
       case 'number':
-        Comp = <NumberInput {...inputProps} />;
+        Comp = NumberInput;
         break;
       case 'radio':
-        Comp = <RadioButton {...inputProps} />;
+        Comp = RadioButton;
         break;
       case 'rangeSlider':
-        Comp = <RangeSlider {...inputProps} />;
+        Comp = RangeSlider;
         break;
       case 'select':
-        Comp = <SelectBox {...inputProps} />;
-        break;
-      case 'date':
-        Comp = <SelectDate {...inputProps} />;
+        Comp = SelectBox;
         break;
       case 'textarea':
-        Comp = <Textarea {...inputProps} />;
+        Comp = Textarea;
         break;
       case 'text':
-        Comp = <Input {...inputProps} />;
+        Comp = Input;
         break;
 
       default:
         throw new Error('해당하는 input 타입이 존재하지 않습니다.');
     }
-    return Comp;
+
+    return <Comp {...props} />;
   };
 
+  // 디버깅 목적
+  FormInput.displayName = 'FormInput';
+
+  return FormInput;
+};
+
+const FormItem = ({ headingProps, descProps, inputProps, ...restProps }) => {
   return (
     <div className={formItem} {...restProps}>
-      <Heading level={headingProps.level} content={headingProps.content} />
-      <p>{descProps.content}</p>
-      <FormInput />
+      <Heading
+        level={headingProps.level}
+        content={headingProps.content}
+        aria-labelledby={inputProps.id}
+      />
+      <p aria-describedby={inputProps.id}>{descProps.content}</p>
+      <Field component={renderFormInput(inputProps.formType)} {...inputProps} />
+      {/* <ErrorMessage /> */}
     </div>
   );
 };
@@ -67,5 +113,5 @@ FormItem.defaultProps = {
 FormItem.propTypes = {
   headingProps: object.isRequired,
   descProps: object.isRequired,
-  inputProps: object.isRequired,
+  // inputProps: object.isRequired,
 };

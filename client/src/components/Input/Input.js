@@ -2,48 +2,44 @@ import React from 'react';
 import { bool, string } from 'prop-types';
 import { input, a11yHidden } from './Input.module.scss';
 import classNames from 'classnames';
+import { useField } from 'formik';
 
-const Input = ({
-  id,
-  type,
-  label,
-  className,
-  labelVisible,
-  name,
-  ...restProps
-}) => {
+const Input = ({ field, ...inputProps }) => {
+  const { type, id, name, value, className } = inputProps;
+  // const [field, meta] = useField({ ...inputProps, type: 'text' });
+
   const inputClasses = classNames(input, className);
-
+  // console.log({ field });
+  // console.log(inputProps);
   return (
-    <div>
-      <label htmlFor={id} className={labelVisible ? '' : `${a11yHidden}`}>
-        {label}
-      </label>
-      <input
-        id={id}
-        type={type}
-        className={inputClasses}
-        {...restProps}
-        name={name}
-      />
-    </div>
+    <input
+      type={type}
+      id={id}
+      name={name}
+      // value={value}
+      className={inputClasses}
+      {...field}
+    />
   );
 };
 
 Input.defaultTypes = {
+  type: 'text',
   id: '',
+  name: '',
+  value: '',
   labelVisible: false,
   className: '',
-  name: '',
 };
 
 Input.propTypes = {
-  id: string.isRequired,
-  label: string.isRequired,
-  type: string.isRequired,
+  // type: string.isRequired,
+  // id: string.isRequired,
+  // name: string.isRequired,
+  // value: string.isRequired,
+  // label: string.isRequired,
   labelVisible: bool,
   className: string,
-  name: string,
 };
 
 export default Input;
