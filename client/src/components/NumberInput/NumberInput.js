@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { string } from 'prop-types';
+import { string, number } from 'prop-types';
 import React from 'react';
 import { numberInput } from './NumberInput.module.scss';
 
-const NumberInput = ({ id, className, name, content }) => {
+const NumberInput = ({ id, className, name, content, value, ...restProps }) => {
   const numberInputClasses = classNames(className, numberInput);
   return (
     <>
@@ -13,8 +13,10 @@ const NumberInput = ({ id, className, name, content }) => {
         min="1"
         className={numberInputClasses}
         name={name}
+        value={value}
+        {...restProps}
       />{' '}
-      {content}
+      <span>{content}</span>
     </>
   );
 };
@@ -31,6 +33,7 @@ NumberInput.propTypes = {
   className: string,
   name: string,
   content: string,
+  value: number,
 };
 
 export default NumberInput;

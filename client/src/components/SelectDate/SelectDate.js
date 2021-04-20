@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { selectDateBox, selectDateIcon } from './SelectDate.module.scss';
 import classNames from 'classnames';
 import PropTypes, { object, string } from 'prop-types';
@@ -7,47 +7,40 @@ import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
 
-const SelectDate = ({
-  className,
-  selectedDate,
-  setSelectedDate,
-  handleDateSelect,
-}) => {
+const SelectDate = ({ className, ...inputProps }) => {
   const selectDateClasses = classNames(className, selectDateBox);
 
-  // const [selectedDate, setSelectedDate] = useState(new Date());
+  const { selectedDate, onSelect } = inputProps;
 
-  const CustomInput = ({ value, onClick }) => {
-    return (
-      <button className={selectDateClasses} onClick={onClick}>
-        {value}
-        <Icon className={selectDateIcon} shape="calendar" />
-      </button>
-    );
+  const handleMinDate = () => {
+    switch (inputProps.name) {
+      case 'age':
+        return null;
+      case 'hikingDate':
+        return new Date();
+      default:
+        return null;
+    }
   };
 
-  // const handleDateSelect = date => {
-  //   console.log('select date: ', date, typeof date);
-  //   console.log('start date: ', selectedDate, typeof selectedDate);
-  //   setSelectedDate(date);
-  // };
-
-  // useEffect(() => {
-  //   setSelectedDate(selectedDate);
-  // }, [selectedDate]);
-
   return (
-    <DatePicker
-      locale={ko}
-      selected={selectedDate}
-      selectsStart
-      minDate={new Date()}
-      dateFormat="yyyy-MM-dd"
-      placeholderText="YYYY-MM-DD"
-      onSelect={handleDateSelect}
-      popperModifiers={{ preventOverflow: { enabled: true } }}
-      customInput={<CustomInput />}
-    />
+    <div className={selectDateClasses}>
+      <DatePicker
+        id="datePicker"
+        locale={ko}
+        selected={selectedDate}
+        selectsStart
+        minDate={handleMinDate()}
+        dateFormat="yyyy-MM-dd"
+        placeholderText="YYYY-MM-DD"
+        onSelect={onSelect}
+        onFocus={inputProps.onFocus}
+        popperModifiers={{ preventOverflow: { enabled: true } }}
+      />
+      <label htmlFor="datePicker">
+        <Icon className={selectDateIcon} shape="calendar" />
+      </label>
+    </div>
   );
 };
 
