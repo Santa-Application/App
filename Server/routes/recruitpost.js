@@ -10,17 +10,18 @@ const { downloadFile } = require('../utils/s3');
 router.get('/', async (req, res) => {
   try {
     const all = await RecruitPost.find();
-    // get all the needed Data for the frontend
-    const response = all.map(async (item) => {
-      // get name of the user
-      const { name } = await User.findById(item.recruiterID);
-      // get the profile Image of the user
-      const imageURL = await downloadFile(item.recruiterID);
-      // reconfigure:)
-      return { ...item._doc, name, imageURL };
-    });
 
-    return res.status(200).send(response);
+    const response = await Promise.all(
+      all.map(async (item) => {
+        const { name } = await User.findById(item.recruiterID);
+        const imageURL = await downloadFile(item.recruiterID);
+
+        console.log(imageURL);
+        return { ...item._doc, name, imageURL };
+      }),
+    );
+
+    res.status(200).send(response);
   } catch (err) {
     res.status(404).send(err);
   }
