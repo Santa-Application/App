@@ -9,14 +9,7 @@ import {
 } from './RangeSlider.module.scss';
 import PropTypes, { arrayOf, number, string } from 'prop-types';
 
-const RangeSlider = ({
-  currentValue,
-  handleChangeSlider,
-  handleChangeMinInput,
-  handleChangeMaxInput,
-  handleSelectInput,
-  content,
-}) => {
+const RangeSlider = ({ ...inputProps }) => {
   const marks = [
     {
       value: 0,
@@ -118,6 +111,8 @@ const RangeSlider = ({
   //   e.target.select();
   // };
 
+  const { currentValue, onChange, onClick, content } = inputProps;
+
   return (
     <div className={rangeSliderContainer}>
       <div className={numberInputContainer}>
@@ -126,8 +121,8 @@ const RangeSlider = ({
           value={currentValue[0]}
           min="0"
           max={currentValue[1]}
-          onChange={handleChangeMinInput}
-          onClick={handleSelectInput}
+          onChange={onChange.minInput}
+          onClick={onClick}
           content={`${content} ~`}
         />
         <NumberInput
@@ -135,8 +130,8 @@ const RangeSlider = ({
           value={currentValue[1]}
           min={currentValue[0]}
           max="100"
-          onChange={handleChangeMaxInput}
-          onClick={handleSelectInput}
+          onChange={onChange.maxInput}
+          onClick={onClick}
           content={content}
         />
       </div>
@@ -152,7 +147,7 @@ const RangeSlider = ({
           markLabel: classes.markLabel,
         }}
         value={currentValue}
-        onChange={handleChangeSlider}
+        onChange={onChange.slider}
         valueLabelDisplay="on"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
