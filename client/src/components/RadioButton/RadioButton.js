@@ -7,12 +7,9 @@ import { container, radioButton, label, icon } from './RadioButton.module.scss';
 
 const RadioButton = ({
   id,
-  name,
-  value,
   type,
   iconSize,
-  checked,
-  onChange,
+  field,
   children,
   className: { label: labelClassName },
   ...restProps
@@ -31,6 +28,7 @@ const RadioButton = ({
   }
 
   const iconSizeWithUnit = `${iconSize}rem`;
+  const checked = field.value === id;
   const CheckIcon = checked ? Checked : Unchecked;
 
   const labelClasses = classNames(labelClassName, label);
@@ -40,11 +38,9 @@ const RadioButton = ({
       <input
         id={id}
         type="radio"
-        name={name}
-        value={value}
         checked={checked}
-        onChange={onChange}
         className={radioButton}
+        {...field}
       />
       <label htmlFor={id} className={labelClasses}>
         <CheckIcon
