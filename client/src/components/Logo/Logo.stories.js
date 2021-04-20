@@ -10,6 +10,10 @@ export default {
       name: 'style',
       description: 'default value는 black이고 white를 넣어주면 글자색이 white인 logo가 render됩니다.',
       options: ['white', 'black']
+    },
+    title: {
+      name: 'title',
+      description: ''
     }
   },
 }
