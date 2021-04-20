@@ -1,0 +1,23 @@
+
+
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { HomePage } from 'pages';
+
+<Meta title="MDX/HomePage" component={HomePage} />
+
+# HomePage
+
+`홈페이지`의 디자인 시안은 다음과 같습니다. 
+<img align="center" src="https://user-images.githubusercontent.com/42370712/115321050-02564b00-a1be-11eb-9cf1-3aaaf855c183.png" height="50%"/>
+
+export const Template = (args) => <HomePage {...args} />
+
+이제까지 만들어 놓은 컴포넌트들을 사용하여 홈페이지를 조립할 수 있습니다.
+`Logo`, `Button`, `Heading` 총 세가지 컴포넌트들을 사용하여 만듭니다.
+
+
+<Canvas>
+  <Story name="HomePage">
+    {Template.bind({})}
+  </Story>
+</Canvas>
