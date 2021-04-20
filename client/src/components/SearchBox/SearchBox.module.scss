@@ -1,0 +1,19 @@
+@import 'styles';
+
+.container {
+  position: relative;
+  width: 85vw;
+}
+
+.input {
+  width: 85vw;
+  padding-right: 3em;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+  right: 0.5em;
+  transform: translateY(-50%);
+  padding: 0.5em;
+}

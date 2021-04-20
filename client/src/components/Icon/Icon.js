@@ -16,6 +16,7 @@ import { ReactComponent as Level2 } from './assets/mountain-level2.svg';
 import { ReactComponent as Level3 } from './assets/mountain-level3.svg';
 import { ReactComponent as SelectClose } from './assets/select-close.svg';
 import { ReactComponent as SelectOpen } from './assets/select-open.svg';
+import { ReactComponent as Search } from './assets/search.svg';
 
 const Icon = ({ shape, ...restProps }) => {
   let RenderIcon = '';
@@ -72,6 +73,9 @@ const Icon = ({ shape, ...restProps }) => {
     case 'selectOpen':
       RenderIcon = SelectOpen;
       break;
+    case 'search':
+      RenderIcon = Search;
+      break;
   }
 
   return <RenderIcon {...restProps} />;
@@ -96,6 +100,7 @@ Icon.propTypes = {
     'level3',
     'selectClose',
     'selectOpen',
+    'search',
   ]),
 };
 
