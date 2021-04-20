@@ -65,6 +65,7 @@ router.post('/newpost', async (req, res) => {
     description: req.body.description,
     recruiterID: req.body.recruiterID,
     recruitDate: req.body.recruitDate,
+    title: req.body.title,
   });
 
   try {

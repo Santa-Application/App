@@ -1,0 +1,44 @@
+@import 'styles/';
+
+.homePage {
+  padding: 2rem;
+  height: 66.7rem;
+}
+
+.headMessage {
+  font-family: 'Roboto';
+  font-size: 4.8rem;
+  font-weight: 800;
+  line-height: 1.4;
+  margin-top: 8.4rem;
+  color: $white;
+}
+
+.subMessage {
+  font-family: 'Roboto';
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 8rem;
+  color: $white;
+}
+
+.logo {
+  svg {
+    width: .5rem;
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12rem;
+  button {
+    margin: 1rem;
+    padding: 1.2rem 2rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.4rem;
+    border: none;
+  }
+}
