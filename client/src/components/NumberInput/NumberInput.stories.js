@@ -22,7 +22,7 @@ export default {
     },
     content: {
       type: 'string',
-      description: 'input 옆에 표시되는 단위를 입력합니다.',
+      description: 'input 옆에 표시되는 단위를 전달받습니다.',
     },
   },
 };

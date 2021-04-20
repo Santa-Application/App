@@ -14,15 +14,20 @@ export default {
         disable: true,
       },
     },
+    value: {
+      table: {
+        disable: true,
+      },
+    },
     type: {
       type: { name: '라디오 버튼 타입', required: true },
       description: '라디오 버튼의 타입을 지정합니다.',
       table: {
         type: { summary: 'string' },
       },
+      options: ['female', 'male', 'genderBoth'],
       control: {
         type: 'radio',
-        options: ['female', 'male', 'genderBoth'],
       },
     },
     iconSize: {

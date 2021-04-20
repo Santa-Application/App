@@ -1,10 +1,17 @@
 @import 'styles';
 
 .container {
-  width: 160px;
-  border-radius: $borderRadiusSmall;
+  width: 39vw;
+
+  @include rounded-box-shadow($border-radius-small);
+
   overflow: hidden;
-  box-shadow: $boxShadow;
+}
+
+.imageContainer {
+  height: 25vw;
+
+  overflow: hidden;
 }
 
 .image {
@@ -12,25 +19,21 @@
 }
 
 .textContainer {
-  background-color: $white;
   padding: 1rem 1rem;
+
+  background-color: $white;
 }
 
 .title {
   width: 100%;
   margin-bottom: 0.5rem;
 
-  color: $darkGray;
-  font-size: 1.4rem;
-  font-weight: 700;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  @include font-dark-14-700;
+  @include ellipsis;
 }
 
 .time {
   margin-right: 6%;
-  color: $lightGray;
-  font-size: 1.2rem;
+
+  @include font-gray-12;
 }

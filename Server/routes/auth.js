@@ -6,10 +6,11 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const User = require('../models/User');
 const { registerValidation, loginValidation } = require('../utils/validation');
-const { uploadFile, downloadFile } = require('../utils/s3');
+const { uploadFile } = require('../utils/s3');
 
 const upload = multer({ dest: 'uploads/' });
 
+// REGISTER
 router.post('/register', upload.single('image'), async (req, res) => {
   // Validation
   const { error } = registerValidation(req.body);
@@ -25,6 +26,7 @@ router.post('/register', upload.single('image'), async (req, res) => {
 
   // generate imageURL(or just image Key)
   const { file } = req;
+  console.log(file);
   const { Key } = await uploadFile(file);
 
   // Create a new User
@@ -66,12 +68,6 @@ router.post('/login', async (req, res) => {
   // Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
   res.header('auth-token', token).send(token);
-
-  // try {
-  //   res.send('Logged IN!');
-  // } catch (err) {
-  //   res.status(400).send('something went wrong please try again');
-  // }
 });
 
 module.exports = router;

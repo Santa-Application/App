@@ -9,6 +9,11 @@ export default {
         disable: true,
       },
     },
+    value: {
+      table: {
+        disable: true,
+      },
+    },
     checked: {
       type: { name: '체크 상태', required: true },
       description: '체크 상태를 전달받습니다.',
@@ -27,6 +32,11 @@ export default {
         type: { summary: 'function' },
       },
       control: {
+        disable: true,
+      },
+    },
+    className: {
+      table: {
         disable: true,
       },
     },
