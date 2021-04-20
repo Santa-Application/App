@@ -1,0 +1,15 @@
+@import 'styles/';
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background-image: url("https://images.unsplash.com/photo-1524416117929-2dd85b124635?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1230&q=80");
+  background-size:cover;
+  background-position-x: 50%;
+  background-repeat: no-repeat;
+  font: 1rem/1.5 'Roboto', sans-serif;
+  color: $white;
+}
