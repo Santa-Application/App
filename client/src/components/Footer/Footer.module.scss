@@ -1,0 +1,24 @@
+@import 'styles';
+
+.footerContainer {
+  width: 100vw;
+  padding: 3em 4.5em;
+
+  background-color: $very-light-gray;
+}
+
+.menuContainer {
+  margin-top: 3em;
+
+  @include font-dark-12-700;
+
+  li {
+    margin-top: 1.2em;
+
+    text-indent: 0.4rem;
+
+    a {
+      @include font-dark-12-400;
+    }
+  }
+}
