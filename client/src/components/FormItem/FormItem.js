@@ -13,37 +13,6 @@ import Textarea from 'components/Textarea/Textarea';
 import { formItem } from './FormItem.module.scss';
 import { object } from 'prop-types';
 
-/* --------------------------
-
-
-상위 컴포넌트에서 사용할 때의 예시
-
-const App = () => {
-  return (<FormItem
-    headingProps={{
-      level: 3,
-      content: '등산 메이트 나이대',
-    }}
-    descProps={{
-      content: '같이 등산할 메이트의 나이대를 정해주세요',
-    }}
-    inputProps={{
-      formType: 'rangeSlider',
-      name: 'rangeSlider',
-      currentValue: currentValue,
-      onChange: {
-        slider: handleChangeSlider,
-        minInput: handleChangeMinInput,
-        maxInput: handleChangeMaxInput,
-      },
-      onClick: handleSelectInput,
-      content: valueUnit,
-    }}
-  />)
-}
-
--------------------------- */
-
 const renderFormInput = formType => {
   const FormInput = props => {
     let Comp = '';
@@ -113,5 +82,5 @@ FormItem.defaultProps = {
 FormItem.propTypes = {
   headingProps: object.isRequired,
   descProps: object.isRequired,
-  // inputProps: object.isRequired,
+  inputProps: object.isRequired,
 };
