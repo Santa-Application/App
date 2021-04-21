@@ -1,3 +1,4 @@
 export * as postDate from './postDate';
-export * as propTypeInterface from './propTypeInterface';
+export * as propTypeSchema from './propTypeSchema';
 export * as reduxUtils from './reduxUtils';
+export * as validationSchema from './validationSchema';

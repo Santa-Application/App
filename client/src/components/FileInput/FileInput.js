@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import PropTypes, { string } from 'prop-types';
 import { fileInput } from './FileInput.module.scss';
 
-const FileInput = ({ id, label, className, fileRoute, onChange }) => {
+const FileInput = ({ field, ...inputProps }) => {
+  const { id, label, className, fileRoute, onChange } = inputProps;
   const FileInputClasses = classNames(className, fileInput);
-
   /* ----------------------------------- 
     전달될 상태와 핸들러.
     상위 컴포넌트에서 작성해주세요.
@@ -21,7 +21,7 @@ const FileInput = ({ id, label, className, fileRoute, onChange }) => {
   return (
     <div className={FileInputClasses}>
       <label htmlFor={id}>
-        {label /* 파일 선택 */}
+        {label /* '파일 선택'*/}
         <input
           id={id}
           type="file"
