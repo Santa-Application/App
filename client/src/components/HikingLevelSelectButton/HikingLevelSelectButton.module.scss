@@ -1,0 +1,12 @@
+@import 'styles';
+
+.container {
+  @include flex-row(space-between);
+
+  width: 50vw;
+
+  svg {
+    width: 1.2em;
+    height: 1.2em;
+  }
+}
