@@ -20,3 +20,7 @@ export { default as Logo } from 'components/Logo/Logo';
 export { default as Header } from 'components/Header/Header';
 export { default as Footer } from 'components/Footer/Footer';
 export { default as GenderSelectButton } from 'components/GenderSelectButton/GenderSelectButton';
+export { default as RecruitPostList } from 'components/RecruitPostList/RecruitPostList';
+export { default as RegularPostList } from 'components/RegularPostList/RegularPostList';
+export { default as RecruitPostDetail } from 'components/RecruitPostDetail/RecruitPostDetail';
+export { default as RegularPostDetail } from 'components/RegularPostDetail/RegularPostDetail';

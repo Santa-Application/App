@@ -7,12 +7,12 @@ import {
   imageContainer,
   image,
   textContainer,
-  title,
+  title as titleStyle,
   time,
 } from './RegularPostCard.module.scss';
 
 const RegularPostCard = ({ postData, className, ...restProps }) => {
-  const { postTitle, postingDate, imageUrl, mountainName } = postData;
+  const { title, postingDate, imageUrl, mountainName } = postData;
 
   const containerClasses = classNames(className.container, container);
 
@@ -22,7 +22,7 @@ const RegularPostCard = ({ postData, className, ...restProps }) => {
         <img src={imageUrl} alt="" className={image} />
       </div>
       <div className={textContainer}>
-        <Heading level={3} className={title} content={postTitle}></Heading>
+        <Heading level={3} className={titleStyle} content={title}></Heading>
         <time dateTime={postDate.getPostDate(postingDate)} className={time}>
           {postDate.getPostDateInKorean(postingDate)}
         </time>
@@ -34,7 +34,7 @@ const RegularPostCard = ({ postData, className, ...restProps }) => {
 
 RegularPostCard.defaultProps = {
   postData: {
-    postTitle: '',
+    title: '',
     imageUrl: '',
     mountainName: '',
     postingDate: {},

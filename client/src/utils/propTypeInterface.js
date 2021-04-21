@@ -46,17 +46,16 @@ export const userData = {
 };
 
 export const recruitPostCardData = {
-  publisherImageUrl: PropTypes.string,
-  postTitle: PropTypes.string,
+  imageURL: PropTypes.string,
+  title: PropTypes.string,
   mountainName: PropTypes.string,
-  recruitingDate: PropTypes.string,
+  recruitDate: PropTypes.string,
   recruitingNumber: PropTypes.number,
-  recruitingGender: PropTypes.oneOf(['female', 'male', 'genderBoth']),
-  recruitingGenderText: PropTypes.oneOf(['여성', '남성', '상관없음']),
+  recruitingSex: PropTypes.oneOf(['female', 'male', 'genderBoth']),
 };
 
 export const regularPostCardData = {
-  postTitle: PropTypes.string,
+  title: PropTypes.string,
   imageUrl: PropTypes.string,
   mountainName: PropTypes.string,
   postingDate: PropTypes.object, // Date 객체

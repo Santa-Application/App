@@ -6,19 +6,7 @@ import {
   reviewPostCard,
 } from './RegularPostList.module.scss';
 
-// mock data
-import { regularPostData } from '../../mock';
-const regularPostListData = regularPostData.map(
-  ({ imageUrl, postTitle, postingDate, mountainName }) => ({
-    postTitle,
-    imageUrl,
-    postingDate,
-    mountainName,
-  })
-);
-
-// component
-const RegularPostList = ({ className, ...restProps }) => {
+const RegularPostList = ({ postsData, className, ...restProps }) => {
   const regularPostListContainerClasses = classNames(
     className.container,
     reviewPostListContainer
@@ -26,11 +14,11 @@ const RegularPostList = ({ className, ...restProps }) => {
 
   return (
     <ul className={regularPostListContainerClasses}>
-      {regularPostListData.map((postData, index) => (
-        <li key={index}>
+      {postsData.map(post => (
+        <li key={post._id}>
           <a href="/">
             <RegularPostCard
-              postData={postData}
+              postData={post}
               className={{ container: reviewPostCard }}
             />
           </a>
