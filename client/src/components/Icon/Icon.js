@@ -17,6 +17,12 @@ import { ReactComponent as Level3 } from './assets/mountain-level3.svg';
 import { ReactComponent as SelectClose } from './assets/select-close.svg';
 import { ReactComponent as SelectOpen } from './assets/select-open.svg';
 import { ReactComponent as Search } from './assets/search.svg';
+import { ReactComponent as Seoul } from './assets/seoul.svg';
+import { ReactComponent as Gyeongsang } from './assets/gyeongsang.svg';
+import { ReactComponent as Chungcheong } from './assets/chungcheong.svg';
+import { ReactComponent as Jeju } from './assets/jeju.svg';
+import { ReactComponent as Jeolla } from './assets/jeolla.svg';
+import { ReactComponent as Gangwon } from './assets/gangwon.svg';
 
 const Icon = ({ shape, ...restProps }) => {
   let RenderIcon = '';
@@ -76,6 +82,24 @@ const Icon = ({ shape, ...restProps }) => {
     case 'search':
       RenderIcon = Search;
       break;
+    case 'seoul':
+      RenderIcon = Seoul;
+      break;
+    case 'gangwon':
+      RenderIcon = Gangwon;
+      break;
+    case 'jeolla':
+      RenderIcon = Jeolla;
+      break;
+    case 'jeju':
+      RenderIcon = Jeju;
+      break;
+    case 'chungcheong':
+      RenderIcon = Chungcheong;
+      break;
+    case 'gyeongsang':
+      RenderIcon = Gyeongsang;
+      break;
   }
 
   return <RenderIcon {...restProps} />;
@@ -101,6 +125,12 @@ Icon.propTypes = {
     'selectClose',
     'selectOpen',
     'search',
+    'seoul',
+    'gangwon',
+    'chungcheong',
+    'jeolla',
+    'gyeongsang',
+    'jeju',
   ]),
 };
 
