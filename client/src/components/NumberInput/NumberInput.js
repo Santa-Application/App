@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { string, number } from 'prop-types';
+import { string } from 'prop-types';
 import React from 'react';
 import { numberInput } from './NumberInput.module.scss';
 
-const NumberInput = ({ id, className, name, content, value, ...restProps }) => {
+const NumberInput = ({ id, className, name, unit, value, ...restProps }) => {
   const numberInputClasses = classNames(className, numberInput);
   return (
     <>
@@ -16,24 +16,21 @@ const NumberInput = ({ id, className, name, content, value, ...restProps }) => {
         value={value}
         {...restProps}
       />{' '}
-      <span>{content}</span>
+      <span>{unit}</span>
     </>
   );
 };
 
 NumberInput.defaultProps = {
   id: '',
+  unit: '',
   className: '',
-  name: '',
-  content: '',
 };
 
 NumberInput.propTypes = {
   id: string.isRequired,
+  unit: string,
   className: string,
-  name: string,
-  content: string,
-  value: number,
 };
 
 export default NumberInput;
