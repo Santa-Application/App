@@ -1,3 +1,3 @@
 export * as postDate from './postDate';
 export * as propTypeInterface from './propTypeInterface';
-export * as api from './api';
+export * as reduxUtils from './reduxUtils';

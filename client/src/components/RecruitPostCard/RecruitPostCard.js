@@ -11,27 +11,40 @@ import {
 
 const RecruitPostCard = ({ postData, className, ...restProps }) => {
   const {
-    publisherImageUrl,
-    postTitle,
-    recruitingDate,
+    description,
+    imageURL,
     mountainName: mountain,
+    recruitDate,
     recruitingNumber: person,
-    recruitingGender: gender,
-    recruitingGenderText,
+    recruitingSex: gender,
   } = postData;
+  let genderContent = '';
+  switch (gender) {
+    case 'female':
+      genderContent = '여성';
+      break;
+    case 'male':
+      genderContent = '남성';
+      break;
+    case 'genderBoth':
+      genderContent = '상관없음';
+      break;
+    default:
+      break;
+  }
 
   const containerClasses = classNames(className.container, container);
 
   return (
     <div className={containerClasses}>
-      <ProfileImage src={publisherImageUrl} size="medium" />
+      <ProfileImage src={imageURL} size="medium" />
       <div className={postInfo}>
-        <Heading level={3} className={title} content={postTitle}></Heading>
+        <Heading level={3} className={title} content={description}></Heading>
         <div className={tagList}>
           <Tag type="mountain" content={mountain} />
-          <Tag type="date" content={recruitingDate} />
+          <Tag type="date" content={recruitDate} />
           <Tag type="person" content={`${person}명`} />
-          <Tag type={gender} content={recruitingGenderText} />
+          <Tag type={gender} content={genderContent} />
         </div>
       </div>
     </div>
@@ -40,13 +53,12 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
 
 RecruitPostCard.defaultProps = {
   postData: {
-    publisherImageUrl: '',
-    postTitle: '',
+    title: '',
+    imageURL: '',
     mountainName: '',
-    recruitingDate: '',
+    recruitDate: '',
     recruitingNumber: 0,
-    recruitingGender: 'genderBoth',
-    recruitingGenderText: '상관없음',
+    recruitingSex: 'genderBoth',
   },
   className: {},
 };
