@@ -7,10 +7,9 @@ import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
 
-const SelectDate = ({ className, ...inputProps }) => {
+const SelectDate = ({ field, ...inputProps }) => {
+  const { id, onFocus, className, selectedDate, onSelect } = inputProps;
   const selectDateClasses = classNames(className, selectDateBox);
-
-  const { selectedDate, onSelect } = inputProps;
 
   /* ------------------
   전달될 상태와 핸들러.
@@ -32,7 +31,7 @@ const SelectDate = ({ className, ...inputProps }) => {
   ----------------------------- */
 
   const handleMinDate = () => {
-    switch (inputProps.name) {
+    switch (field.name) {
       case 'dateOfBirth':
         return null;
       case 'recruitDate':
@@ -45,7 +44,7 @@ const SelectDate = ({ className, ...inputProps }) => {
   return (
     <div className={selectDateClasses}>
       <DatePicker
-        id="datePicker"
+        id={id}
         locale={ko}
         selected={selectedDate}
         selectsStart
@@ -53,7 +52,7 @@ const SelectDate = ({ className, ...inputProps }) => {
         dateFormat="yyyy-MM-dd"
         placeholderText="YYYY-MM-DD"
         onSelect={onSelect}
-        onFocus={inputProps.onFocus}
+        onFocus={onFocus}
         popperModifiers={{ preventOverflow: { enabled: true } }}
       />
       <label htmlFor="datePicker">
@@ -64,18 +63,19 @@ const SelectDate = ({ className, ...inputProps }) => {
 };
 
 SelectDate.defaultProps = {
-  className: '',
+  id: '',
   selectedDate: null,
-  handleDateSelect: null,
+  onFocus: null,
+  onSelect: null,
+  className: '',
 };
 
 SelectDate.propTypes = {
-  className: string,
+  id: string.isRequired,
   selectedDate: object,
-  handleDateSelect: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.oneOf([null]),
-  ]),
+  onFocus: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  onSelect: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  className: string,
 };
 
 export default SelectDate;

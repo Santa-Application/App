@@ -6,17 +6,11 @@ import {
   selectBoxInput,
   selectBoxList,
 } from './SelectBox.module.scss';
-import PropTypes, {
-  string,
-  bool,
-  func,
-  array,
-  arrayOf,
-  object,
-} from 'prop-types';
+import PropTypes, { string, bool, arrayOf, object } from 'prop-types';
 import classNames from 'classnames';
 
-const SelectBox = ({ isOpened, inputValue, datas, handler }) => {
+const SelectBox = ({ field, ...inputProps }) => {
+  const { id, isOpened, inputValue, datas, handler } = inputProps;
   const selectBoxClasses = {
     container: selectBoxContainer,
     input: selectBoxInput,
@@ -29,7 +23,7 @@ const SelectBox = ({ isOpened, inputValue, datas, handler }) => {
 
   const { onFocus, onClick, onChange } = handler;
 
-  /* --------------------------------------------
+  /* 상위 컴포넌트에서 사용할 이벤트와 상태 값 --------------------------------------------
   // mock datas
   const datas = [
     { id: 1, content: '가리산' },
@@ -170,6 +164,7 @@ const SelectBox = ({ isOpened, inputValue, datas, handler }) => {
     <div className={selectBoxClasses.container} tabIndex="-1">
       <div className={selectBoxClasses.input}>
         <input
+          id={id}
           type="text"
           onFocus={onFocus}
           onChange={onChange}
