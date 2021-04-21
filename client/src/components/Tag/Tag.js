@@ -2,7 +2,6 @@ import { Icon } from 'components';
 import { string, oneOf } from 'prop-types';
 import { tag } from './Tag.module.scss';
 
-
 const Tag = ({ type, content }) => {
   let shape = '';
   let displayContent = content;
@@ -14,7 +13,7 @@ const Tag = ({ type, content }) => {
       break;
     case 'date':
       shape = 'calendar';
-      break; 
+      break;
     case 'person':
       shape = 'member';
       break;
@@ -26,6 +25,24 @@ const Tag = ({ type, content }) => {
       break;
     case 'genderBoth':
       shape = 'genderBoth';
+      break;
+    case 'seoul':
+      shape = 'seoul';
+      break;
+    case 'gangwon':
+      shape = 'gangwon';
+      break;
+    case 'chungcheong':
+      shape = 'chungcheong';
+      break;
+    case 'jeolla':
+      shape = 'jeolla';
+      break;
+    case 'gyeongsang':
+      shape = 'gyeongsang';
+      break;
+    case 'jeju':
+      shape = 'jeju';
       break;
   }
 
@@ -41,10 +58,23 @@ export default Tag;
 
 Tag.defaultProps = {
   type: 'mountain',
-  content: '한라산'
+  content: '한라산',
 };
 
 Tag.propTypes = {
-  type: oneOf(['mountain', 'date', 'person', 'female', 'male', 'genderBoth']).isRequired,
+  type: oneOf([
+    'mountain',
+    'date',
+    'person',
+    'female',
+    'male',
+    'genderBoth',
+    'seoul',
+    'gangwon',
+    'chungcheong',
+    'jeolla',
+    'gyeongsang',
+    'jeju',
+  ]).isRequired,
   content: string.isRequired,
 };

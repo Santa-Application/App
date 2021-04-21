@@ -7,6 +7,7 @@
 
   padding: 0.8em 1em;
 
+  background: $white;
   @include rounded-box-shadow($border-radius-medium);
 
   @include font-dark-12-400;
