@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { selectDateBox, selectDateIcon } from './SelectDate.module.scss';
 import classNames from 'classnames';
 import PropTypes, { object, string } from 'prop-types';
@@ -11,6 +11,25 @@ const SelectDate = ({ className, ...inputProps }) => {
   const selectDateClasses = classNames(className, selectDateBox);
 
   const { selectedDate, onSelect } = inputProps;
+
+  /* ------------------
+  전달될 상태와 핸들러.
+  상위 컴포넌트에서 작성해주세요.
+  
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  console.log('state date: ', selectedDate, typeof selectedDate);
+  
+  * onSelect
+  const handleDateSelect = date => {
+    console.log('select date: ', date, typeof date);
+    setSelectedDate(date);
+  }; 
+
+  * onFocus
+    const handleFocusInput = e => {
+    e.target.select();
+  };
+  ----------------------------- */
 
   const handleMinDate = () => {
     switch (inputProps.name) {
