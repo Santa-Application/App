@@ -1,5 +1,5 @@
 import { Heading, ProfileImage, Tag } from 'components';
-import { propTypeInterface } from 'utils';
+import { propTypeSchema } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -64,7 +64,7 @@ RecruitPostCard.defaultProps = {
 };
 
 RecruitPostCard.propTypes = {
-  postData: PropTypes.exact(propTypeInterface.recruitPostCardData).isRequired,
+  postData: PropTypes.exact(propTypeSchema.recruitPostCard).isRequired,
   className: PropTypes.objectOf(PropTypes.string),
 };
 

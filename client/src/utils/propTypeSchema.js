@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const recruitPostData = {
+export const recruitPost = {
   publisherId: PropTypes.string,
   publisherName: PropTypes.string,
   postingDate: PropTypes.object, // Date 객체
@@ -12,13 +12,13 @@ export const recruitPostData = {
     PropTypes.oneOf(['level1', 'level2', 'level3'])
   ),
   recruitingGender: PropTypes.oneOf(['female', 'male', 'genderBoth']),
-  recruitingAge: PropTypes.objectOf(PropTypes.number), // { min: 28, max: 35 }
+  recruitingAge: PropTypes.arrayOf(PropTypes.number), // [28, 33]
   recruitingNumber: PropTypes.number,
   description: PropTypes.string,
   recruitees: PropTypes.arrayOf(PropTypes.string),
 };
 
-export const regularPostData = {
+export const regularPost = {
   publisherId: PropTypes.string,
   publisherName: PropTypes.string,
   postingDate: PropTypes.object,
@@ -30,7 +30,7 @@ export const regularPostData = {
   content: PropTypes.string,
 };
 
-export const userData = {
+export const user = {
   name: PropTypes.string,
   email: PropTypes.string,
   password: PropTypes.string,
@@ -45,7 +45,7 @@ export const userData = {
   following: PropTypes.arrayOf(PropTypes.string), // user.name를 요소로 갖는 배열
 };
 
-export const recruitPostCardData = {
+export const recruitPostCard = {
   imageURL: PropTypes.string,
   title: PropTypes.string,
   mountainName: PropTypes.string,
@@ -54,14 +54,14 @@ export const recruitPostCardData = {
   recruitingSex: PropTypes.oneOf(['female', 'male', 'genderBoth']),
 };
 
-export const regularPostCardData = {
+export const regularPostCard = {
   title: PropTypes.string,
   imageUrl: PropTypes.string,
   mountainName: PropTypes.string,
   postingDate: PropTypes.object, // Date 객체
 };
 
-export const postHeadingData = {
+export const postHeading = {
   postTitle: PropTypes.string,
   postingDate: PropTypes.object, // Date 객체
   views: PropTypes.number,
