@@ -1,0 +1,16 @@
+@import 'styles';
+
+.tag {
+  @include flex-row(start);
+
+  span {
+    @include font-dark-14-700;
+  }
+
+  svg {
+    width: 3em;
+    height: 3em;
+
+    margin-right: 0.5em;
+  }
+}

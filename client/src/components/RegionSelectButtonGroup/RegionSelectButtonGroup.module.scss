@@ -8,20 +8,3 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 2em 3em;
 }
-
-.button {
-  div {
-    @include flex-row(start);
-
-    span {
-      @include font-dark-14-700;
-    }
-  }
-
-  svg {
-    width: 3em;
-    height: 3em;
-
-    margin-right: 0.5em;
-  }
-}
