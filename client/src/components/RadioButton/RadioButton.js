@@ -22,8 +22,17 @@ const RadioButton = ({
       labelText = '남성';
       break;
     case 'genderBoth':
-    default:
       labelText = '상관없음';
+      break;
+    case 'level1':
+      labelText = '초급자';
+      break;
+    case 'level2':
+      labelText = '중급자';
+      break;
+    case 'level3':
+    default:
+      labelText = '고급자';
   }
 
   const iconSizeWithUnit = `${iconSize}rem`;

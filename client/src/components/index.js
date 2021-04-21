@@ -25,3 +25,4 @@ export { default as RegularPostList } from 'components/RegularPostList/RegularPo
 export { default as RecruitPostDetail } from 'components/RecruitPostDetail/RecruitPostDetail';
 export { default as RegularPostDetail } from 'components/RegularPostDetail/RegularPostDetail';
 export { default as RegionSelectButton } from 'components/RegionSelectButton/RegionSelectButton';
+export { default as HikingLevelSelectButton } from 'components/HikingLevelSelectButton/HikingLevelSelectButton';
