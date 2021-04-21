@@ -41,7 +41,7 @@ export default {
         type: { summary: 'string' },
       },
     },
-    handleGetFileRoute: {
+    onChange: {
       action: 'change value',
       description:
         '폼 컨트롤의 값이 변경될 때 실행될 이벤트(함수)를 전달받습니다. (fileRoute의 상태를 업데이트합니다.)',
