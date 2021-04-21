@@ -33,9 +33,9 @@ const SelectDate = ({ className, ...inputProps }) => {
 
   const handleMinDate = () => {
     switch (inputProps.name) {
-      case 'age':
+      case 'dateOfBirth':
         return null;
-      case 'hikingDate':
+      case 'recruitDate':
         return new Date();
       default:
         return null;
