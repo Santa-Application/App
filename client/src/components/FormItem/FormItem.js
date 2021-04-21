@@ -12,6 +12,7 @@ import Textarea from 'components/Textarea/Textarea';
 
 import { formItem } from './FormItem.module.scss';
 import { object } from 'prop-types';
+import GenderSelectButton from 'components/GenderSelectButton/GenderSelectButton';
 
 const renderFormInput = formType => {
   const FormInput = props => {
@@ -26,9 +27,6 @@ const renderFormInput = formType => {
         break;
       case 'number':
         Comp = NumberInput;
-        break;
-      case 'radio':
-        Comp = RadioButton;
         break;
       case 'rangeSlider':
         Comp = RangeSlider;
@@ -65,7 +63,14 @@ const FormItem = ({ headingProps, descProps, inputProps, ...restProps }) => {
         aria-labelledby={inputProps.id}
       />
       <p aria-describedby={inputProps.id}>{descProps.content}</p>
-      <Field component={renderFormInput(inputProps.formType)} {...inputProps} />
+      {inputProps.formType === 'radio' ? (
+        <GenderSelectButton {...inputProps} />
+      ) : (
+        <Field
+          component={renderFormInput(inputProps.formType)}
+          {...inputProps}
+        />
+      )}
       {/* <ErrorMessage /> */}
     </div>
   );
