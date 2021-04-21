@@ -3,19 +3,12 @@ import { string } from 'prop-types';
 import React from 'react';
 import { numberInput } from './NumberInput.module.scss';
 
-const NumberInput = ({ id, className, name, unit, value, ...restProps }) => {
+const NumberInput = ({ field, ...inputProps }) => {
+  const { id, className, unit } = inputProps;
   const numberInputClasses = classNames(className, numberInput);
   return (
     <>
-      <input
-        id={id}
-        type="number"
-        min="1"
-        className={numberInputClasses}
-        name={name}
-        value={value}
-        {...restProps}
-      />{' '}
+      <input id={id} type="number" min="1" className={numberInputClasses} />{' '}
       <span>{unit}</span>
     </>
   );
