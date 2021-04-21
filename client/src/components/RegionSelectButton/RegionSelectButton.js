@@ -2,9 +2,9 @@ import { RoundedBox, Tag } from 'components';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const RegionSelectButton = ({ type, content, ...restProps }) => {
+const RegionSelectButton = ({ type, content, className, ...restProps }) => {
   return (
-    <RoundedBox>
+    <RoundedBox className={className}>
       <Tag type={type} content={content} />
     </RoundedBox>
   );

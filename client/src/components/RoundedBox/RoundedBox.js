@@ -4,7 +4,7 @@ import { container } from './RoundedBox.module.scss';
 
 const RoundedTextBox = ({ children, className, ...restProps }) => {
   const containerClasses = classNames(className, container);
-  return <span className={containerClasses}>{children}</span>;
+  return <div className={containerClasses}>{children}</div>;
 };
 
 RoundedTextBox.defaultProps = {
