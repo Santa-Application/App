@@ -3,33 +3,31 @@ import classNames from 'classnames';
 import PropTypes, { string } from 'prop-types';
 import { fileInput } from './FileInput.module.scss';
 
-const FileInput = ({
-  id,
-  label,
-  className,
-  name,
-  fileRoute,
-  handleGetFileRoute,
-}) => {
+const FileInput = ({ id, label, className, fileRoute, onChange }) => {
   const FileInputClasses = classNames(className, fileInput);
 
-  // const [fileRoute, setFileRoute] = React.useState('');
+  /* ----------------------------------- 
+    전달될 상태와 핸들러.
+    상위 컴포넌트에서 작성해주세요.
 
-  // const handleGetFileRoute = e => {
-  //   setFileRoute(e.target.value);
-  // };
+  const [fileRoute, setFileRoute] = React.useState('');
+
+  * onChange
+  const handleGetFileRoute = e => {
+    setFileRoute(e.target.value);
+  };
+  --------------------------------------- */
 
   return (
     <div className={FileInputClasses}>
       <label htmlFor={id}>
-        {label}
+        {label /* 파일 선택 */}
         <input
           id={id}
           type="file"
           min="1"
           accept=".gif, .jpg, .png"
-          name={name}
-          onChange={handleGetFileRoute}
+          onChange={onChange}
         />
       </label>
       <span children={fileRoute}></span>
@@ -40,22 +38,17 @@ const FileInput = ({
 FileInput.defaultProps = {
   id: '',
   label: '',
-  className: '',
-  name: '',
   fileRoute: '',
-  handleGetFileRoute: null,
+  onChange: null,
+  className: '',
 };
 
 FileInput.propTypes = {
   id: string.isRequired,
   label: string.isRequired,
   className: string,
-  name: string,
   fileRoute: string,
-  handleGetFileRoute: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.oneOf([null]),
-  ]),
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
 };
 
 export default FileInput;
