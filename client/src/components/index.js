@@ -10,7 +10,7 @@ export { default as ProfileImage } from 'components/ProfileImage/ProfileImage';
 export { default as RadioButton } from 'components/RadioButton/RadioButton';
 export { default as RecruitPostCard } from 'components/RecruitPostCard/RecruitPostCard';
 export { default as RegularPostCard } from 'components/RegularPostCard/RegularPostCard';
-export { default as RoundedTextBox } from 'components/RoundedTextBox/RoundedTextBox';
+export { default as RoundedBox } from 'components/RoundedBox/RoundedBox';
 export { default as SelectBox } from 'components/SelectBox/SelectBox';
 export { default as StatusOfApplicationBox } from 'components/StatusOfApplicationBox/StatusOfApplicationBox';
 export { default as Textarea } from 'components/Textarea/Textarea';
@@ -24,3 +24,4 @@ export { default as RecruitPostList } from 'components/RecruitPostList/RecruitPo
 export { default as RegularPostList } from 'components/RegularPostList/RegularPostList';
 export { default as RecruitPostDetail } from 'components/RecruitPostDetail/RecruitPostDetail';
 export { default as RegularPostDetail } from 'components/RegularPostDetail/RegularPostDetail';
+export { default as RegionSelectButton } from 'components/RegionSelectButton/RegionSelectButton';

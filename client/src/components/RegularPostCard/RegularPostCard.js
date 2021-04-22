@@ -1,5 +1,5 @@
 import { Heading, Tag } from 'components';
-import { postDate, propTypeInterface } from 'utils';
+import { postDate, propTypeSchema } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -43,7 +43,7 @@ RegularPostCard.defaultProps = {
 };
 
 RegularPostCard.propTypes = {
-  postData: PropTypes.exact(propTypeInterface.regularPostCardData).isRequired,
+  postData: PropTypes.exact(propTypeSchema.regularPostCard).isRequired,
   className: PropTypes.object,
 };
 

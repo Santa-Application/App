@@ -1,5 +1,5 @@
 import { Heading } from 'components';
-import { postDate, propTypeInterface } from 'utils';
+import { postDate, propTypeSchema } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -39,7 +39,7 @@ PostHeading.defaultProps = {
 };
 
 PostHeading.propTypes = {
-  postData: PropTypes.exact(propTypeInterface.postHeadingData).isRequired,
+  postData: PropTypes.exact(propTypeSchema.postHeadingData).isRequired,
   className: PropTypes.object,
 };
 
