@@ -70,9 +70,9 @@ const FormItem = ({
       />
       <p aria-describedby={inputProps.id}>{descProps.content}</p>
       {formType === 'gender' ? (
-        <GenderSelectButton {...inputProps} />
+        <GenderSelectButton inputProps={inputProps} />
       ) : formType === 'hikingLevel' ? (
-        <HikingLevelSelectButton {...inputProps} />
+        <HikingLevelSelectButton inputProps={inputProps} />
       ) : (
         <Field
           component={renderFormInput(formType)}
