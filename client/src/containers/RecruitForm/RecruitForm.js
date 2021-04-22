@@ -138,7 +138,6 @@ const RecruitForm = () => {
               }}
               inputProps={{
                 formType: 'gender',
-                id: 'recruitingSex',
                 name: 'recruitingSex',
               }}
             />
@@ -152,7 +151,6 @@ const RecruitForm = () => {
               }}
               inputProps={{
                 formType: 'hikingLevel',
-                id: 'recruitingLevels',
                 name: 'recruitingLevels',
               }}
             />
