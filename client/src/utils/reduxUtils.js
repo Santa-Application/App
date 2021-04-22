@@ -4,6 +4,15 @@ export const initialState = () => ({
   data: null,
   error: null,
 });
+
+export const authInitialState = () => ({
+  isLoading: false,
+  userInfo: null,
+  error: null, 
+  signedIn: false,
+  token: null
+});
+
 export const loadingState = previousState => ({
   isLoading: true,
   data: previousState,
@@ -13,6 +22,18 @@ export const errorState = error => ({
   isLoading: false,
   data: null,
   error,
+});
+export const authLoadingState = previousState => ({
+  isLoading: false,
+  userInfo: previousState,
+  error: null, 
+  signedIn: false,
+});
+export const authErrorState = error => ({
+  isLoading: false,
+  userInfo: null,
+  error,
+  signedIn: false
 });
 
 // create thunk action creator
