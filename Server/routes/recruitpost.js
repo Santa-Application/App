@@ -61,7 +61,7 @@ router.post('/newpost', async (req, res) => {
   const recruitpost = new RecruitPost({
     mountainName: req.body.mountainName,
     recruitingNumber: req.body.recruitingNumber,
-    recruitingLevels: req.body.recruitingLevels,
+    hikingLevels: req.body.hikingLevels,
     recruitingSex: req.body.recruitingSex,
     recruitingAge: req.body.recruitingAge,
     postdate: req.body.postdate,
