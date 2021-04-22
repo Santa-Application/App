@@ -1,13 +1,15 @@
+/* eslint-disable no-underscore-dangle */
 const router = require('express').Router();
-const { isError } = require('joi');
-const jwt = require('jsonwebtoken');
 const { Mountain, RegularPost, RecruitPost } = require('../models/index');
 const { downloadFile } = require('../utils/s3');
 
+// const jwt = require('jsonwebtoken');
+
 // get all the Mountain Information
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   try {
     const all = await Mountain.find();
+
     return res.send(all);
   } catch (err) {
     return res.status(404).send(err);
@@ -20,7 +22,7 @@ router.get('/:mountainName', async (req, res) => {
     // find the mountain
     const result = await Mountain.findOne({ name: req.params.mountainName });
     const imageURL = await downloadFile(result.imageURL);
-    console.log(result);
+
     return res.send({ ...result._doc, imageURL });
   } catch (err) {
     return res.status(404).send(err);
@@ -34,12 +36,13 @@ router.get('/:mountainName/reviews', async (req, res) => {
     const allPosts = await RegularPost.find({ mountain: req.params.mountainName });
     // for all regularPosts, get a limited URL that is accessible
     // and put it in the payload and send
-    const datas = allPosts.map(async (post) => {
-      // get URL
-      const imageURL = await downloadFile(post.imageURL);
+    const datas = await Promise.all(
 
-      return { post, imageURL };
-    });
+      allPosts.map(async (post) => {
+        const imageURL = await downloadFile(post.imageURL);
+        return { post, imageURL };
+      }),
+    );
 
     res.status(200).send(datas);
   } catch (err) {
@@ -52,12 +55,13 @@ router.get('/:mountainName/recruits', async (req, res) => {
   try {
     const allPosts = await RecruitPost.find({ mountainName: req.params.mountainName });
 
-    const datas = allPosts.map(async (post) => {
-      // recruit post publisher imageURL
-      const recruiterProfileImageURL = await downloadFile(post.recruiterID);
-
-      return { post, recruiterProfileImageURL };
-    });
+    const datas = await Promise.all(
+      allPosts.map(async (post) => {
+        // recruit post publisher imageURL
+        const recruiterProfileImageURL = await downloadFile(post.recruiterID);
+        return { post, recruiterProfileImageURL };
+      }),
+    );
 
     res.status(200).send(datas);
   } catch (err) {
