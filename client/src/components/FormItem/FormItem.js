@@ -57,8 +57,10 @@ const FormItem = ({
   className,
   ...restProps
 }) => {
+  // console.log(inputProps);
+
   const containerClasses = classNames(formItem, className);
-  const { name, id, type, formType } = inputProps;
+  const { name, formType } = inputProps;
   return (
     <div className={containerClasses} {...restProps}>
       <Heading
@@ -74,7 +76,7 @@ const FormItem = ({
       ) : (
         <Field
           component={renderFormInput(formType)}
-          inputProps={{ id, type }}
+          inputProps={inputProps}
           name={name}
         />
       )}

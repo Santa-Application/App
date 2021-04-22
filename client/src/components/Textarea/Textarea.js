@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { textarea } from './Textarea.module.scss';
 
-const Textarea = ({ field, ...inputProps }) => {
+const Textarea = ({ field, inputProps }) => {
   const { name } = inputProps;
 
   const textareaClasses = classNames(textarea);

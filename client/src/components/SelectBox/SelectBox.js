@@ -9,16 +9,19 @@ import {
 import PropTypes, { string, bool, arrayOf, object } from 'prop-types';
 import classNames from 'classnames';
 
-const SelectBox = ({ field, ...inputProps }) => {
+const SelectBox = ({ field, inputProps }) => {
   const {
     id,
     isOpened,
-    inputValue,
+    setIsOpened,
+    touched,
+    placeholder,
     datas,
     onFocus,
+    handleBlur,
     onClickInputButton,
     onClickListButton,
-    onChange,
+    // onChange,
   } = inputProps;
 
   const selectBoxClasses = {
@@ -69,7 +72,7 @@ const SelectBox = ({ field, ...inputProps }) => {
   
  -------------------------------------- */
 
-  console.log(field);
+  // console.log(field);
 
   return (
     <div className={selectBoxClasses.container} tabIndex="-1">
@@ -78,11 +81,13 @@ const SelectBox = ({ field, ...inputProps }) => {
           id={id}
           type="text"
           onFocus={onFocus}
-          onChange={onChange}
+          // onChange={onChange}
           autoComplete="off"
-          // value={field.value}
-          // value={}
+          placeholder={placeholder}
           {...field}
+          // onBlur={handleBlur}
+          // name={field.name}
+          // value={field.value}
         />
         <button type="button" onClick={onClickInputButton}>
           <Icon shape={isOpened ? 'selectClose' : 'selectOpen'} />

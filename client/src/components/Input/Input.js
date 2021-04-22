@@ -8,7 +8,15 @@ const Input = ({ field, inputProps }) => {
 
   const inputClasses = classNames(input, className);
 
-  return <input type={type} id={id} className={inputClasses} {...field} />;
+  return (
+    <input
+      id={id}
+      type={type}
+      className={inputClasses}
+      autoComplete="off"
+      {...field}
+    />
+  );
 };
 
 // Input.defaultTypes = {
