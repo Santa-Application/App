@@ -2,16 +2,22 @@
 
 .selectBoxInput {
   @include flex(space-between, center, row, nowrap);
-  padding: 0.8rem 1.5rem;
   border-radius: 10px;
   box-shadow: $box-shadow;
   width: 30vw;
 
   input {
     border: none;
+    border-radius: 10px 0 0 10px;
     width: 100%;
+    padding: 1em 1.4em;
     color: $dark-gray;
     font-size: 1.2rem;
+  }
+
+  button {
+    padding: 0.8em;
+    margin-right: 0.5em;
   }
 }
 

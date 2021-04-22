@@ -42,7 +42,7 @@ const RecruitForm = () => {
         console.log(values);
       }}
     >
-      {({ setFieldValue }) => {
+      {({ setFieldValue, handleBlur, handleChange }) => {
         return (
           <Form>
             <FormItem
@@ -61,6 +61,23 @@ const RecruitForm = () => {
               }}
             />
             <FormItem
+              inputProps={{
+                id: 'mountain',
+                name: 'mountain',
+                formType: 'select',
+                placeholder: '등산한 산을 지정해주세요',
+                setFieldValue,
+                handleBlur,
+                handleChange,
+                datas: top100Mountains,
+              }}
+              descProps={{
+                content: '등산한 산을 지정해주세요',
+              }}
+              headingProps={{ level: 3, content: '등산한 산' }}
+              // className={formItem}
+            />
+            {/* <FormItem
               headingProps={{
                 level: 3,
                 content: '등산할 산',
@@ -93,7 +110,7 @@ const RecruitForm = () => {
                     setIsSelectBoxOpened
                   ),
               }}
-            />
+            /> */}
             <FormItem
               headingProps={{
                 level: 3,
