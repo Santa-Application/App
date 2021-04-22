@@ -44,6 +44,9 @@ const Template = args => <RadioButton {...args} />;
 export const Female = Template.bind({});
 export const Male = Template.bind({});
 export const Both = Template.bind({});
+export const Level1 = Template.bind({});
+export const Level2 = Template.bind({});
+export const Level3 = Template.bind({});
 
 Female.args = {
   id: 'female',
@@ -54,3 +57,12 @@ Male.args = {
 Both.args = {
   id: 'genderBoth',
 };
+Level1.args = {
+  type: 'level1',
+};
+Level2.args = {
+  type: 'level2',
+};
+Level3.args = {
+  type: 'level3',
+}
