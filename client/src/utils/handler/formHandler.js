@@ -4,9 +4,14 @@ export const handleFocusAllInput = e => {
 };
 
 // select date
-export const handleSelectDate = (date, setSelectedDate) => {
-  // console.log('select date: ', date, typeof date);
+export const handleSelectDate = (
+  date,
+  fieldName,
+  setSelectedDate,
+  setFieldValue
+) => {
   setSelectedDate(date);
+  setFieldValue(fieldName, date);
 };
 
 // select box
@@ -21,16 +26,21 @@ export const handleClickSelectBoxInputButton = (e, setIsOpened, isOpened) => {
 
 export const handleClickSelectBoxListItemButton = (
   e,
-  setInputValue,
+  fieldName,
+  setFieldValue,
   setIsOpened
 ) => {
-  setInputValue(e.target.textContent);
+  setFieldValue(fieldName, e.target.textContent);
   setIsOpened(false);
 };
 
-export const handleChangeSelectBoxInput = (e, setInputValue, setIsOpened) => {
-  console.log('e.target.value: ', e.target.value);
-  console.log('setInputValue: ', setInputValue);
-  setInputValue(e.target.value);
-  setIsOpened(true);
+export const handleBlurSelectBoxInput = setIsOpened => {
+  setIsOpened(false);
+};
+
+// file input
+export const handleChangeFileInput = (e, setFieldValue) => {
+  // const imageUrlData = new FormData();
+  // imageUrlData.append(e.target.name, e.target.files[0]);
+  setFieldValue('imageURL', e.target.files[0]);
 };
