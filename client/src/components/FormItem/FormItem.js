@@ -11,6 +11,7 @@ import Textarea from 'components/Textarea/Textarea';
 
 import { formItem } from './FormItem.module.scss';
 import { object } from 'prop-types';
+import classNames from 'classnames';
 import GenderSelectButton from 'components/GenderSelectButton/GenderSelectButton';
 
 const renderFormInput = formType => {
@@ -53,9 +54,16 @@ const renderFormInput = formType => {
   return FormInput;
 };
 
-const FormItem = ({ headingProps, descProps, inputProps, ...restProps }) => {
+const FormItem = ({
+  headingProps,
+  descProps,
+  inputProps,
+  className,
+  ...restProps
+}) => {
+  const containerClasses = classNames(formItem, className);
   return (
-    <div className={formItem} {...restProps}>
+    <div className={containerClasses} {...restProps}>
       <Heading
         level={headingProps.level}
         content={headingProps.content}

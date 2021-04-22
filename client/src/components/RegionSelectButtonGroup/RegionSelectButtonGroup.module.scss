@@ -1,0 +1,10 @@
+@import 'styles';
+
+.container {
+  display: grid;
+  width: 80vw;
+  margin: 0 auto;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em 3em;
+}
