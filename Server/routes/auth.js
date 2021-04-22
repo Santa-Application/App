@@ -42,17 +42,16 @@ router.post('/register', upload.single('image'), async (req, res) => {
 
   try {
     const savedUser = await user.save();
-    console.log(`savedUser: ${savedUser}`);
     // generate a token(for immediate login)
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send({ user: user._id });
+    res.header('auth-token', token).send(savedUser);
   } catch (err) {
     res.status(400).send(err);
   }
 });
 
 // LOGIN
-router.post('/login', async (req, res) => {
+router.post('/signin', async (req, res) => {
   // Validation
   const { error } = loginValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -67,7 +66,16 @@ router.post('/login', async (req, res) => {
 
   // Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send(token);
+  res.header('auth-token', token).send(user);
+});
+
+// SIGN OUT
+router.post('/signout', async (req, res) => {
+  try {
+    res.send('signed out!');
+  } catch (err) {
+    res.send(err);
+  }
 });
 
 module.exports = router;
