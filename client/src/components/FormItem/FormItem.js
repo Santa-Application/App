@@ -13,45 +13,41 @@ import { formItem } from './FormItem.module.scss';
 import { object } from 'prop-types';
 import classNames from 'classnames';
 import GenderSelectButton from 'components/GenderSelectButton/GenderSelectButton';
+import { HikingLevelSelectButton } from 'components';
 
 const renderFormInput = formType => {
-  const FormInput = props => {
-    let Comp = '';
+  let Comp = '';
 
-    switch (formType) {
-      case 'date':
-        Comp = SelectDate;
-        break;
-      case 'file':
-        Comp = FileInput;
-        break;
-      case 'number':
-        Comp = NumberInput;
-        break;
-      case 'rangeSlider':
-        Comp = RangeSlider;
-        break;
-      case 'select':
-        Comp = SelectBox;
-        break;
-      case 'textarea':
-        Comp = Textarea;
-        break;
-      case 'text':
-        Comp = Input;
-        break;
+  switch (formType) {
+    case 'date':
+      Comp = SelectDate;
+      break;
+    case 'file':
+      Comp = FileInput;
+      break;
+    case 'number':
+      Comp = NumberInput;
+      break;
+    case 'rangeSlider':
+      Comp = RangeSlider;
+      break;
+    case 'select':
+      Comp = SelectBox;
+      break;
+    case 'textarea':
+      Comp = Textarea;
+      break;
+    case 'text':
+      Comp = Input;
+      break;
+    default:
+      throw new Error('해당하는 input 타입이 존재하지 않습니다.');
+  }
 
-      default:
-        throw new Error('해당하는 input 타입이 존재하지 않습니다.');
-    }
-
-    return <Comp {...props} />;
-  };
+  return Comp;
 
   // 디버깅 목적
-  FormInput.displayName = 'FormInput';
-
-  return FormInput;
+  // FormInput.displayName = 'FormInput';
 };
 
 const FormItem = ({
@@ -62,6 +58,7 @@ const FormItem = ({
   ...restProps
 }) => {
   const containerClasses = classNames(formItem, className);
+  const { name, id, type, formType } = inputProps;
   return (
     <div className={containerClasses} {...restProps}>
       <Heading
@@ -70,12 +67,15 @@ const FormItem = ({
         aria-labelledby={inputProps.id}
       />
       <p aria-describedby={inputProps.id}>{descProps.content}</p>
-      {inputProps.formType === 'radio' ? (
+      {formType === 'gender' ? (
         <GenderSelectButton {...inputProps} />
+      ) : formType === 'hikingLevel' ? (
+        <HikingLevelSelectButton {...inputProps} />
       ) : (
         <Field
-          component={renderFormInput(inputProps.formType)}
-          {...inputProps}
+          component={renderFormInput(formType)}
+          inputProps={{ id, type }}
+          name={name}
         />
       )}
     </div>
@@ -84,14 +84,14 @@ const FormItem = ({
 
 export default FormItem;
 
-FormItem.defaultProps = {
-  descProps: {
-    content: '',
-  },
-};
+// FormItem.defaultProps = {
+//   descProps: {
+//     content: '',
+//   },
+// };
 
-FormItem.propTypes = {
-  headingProps: object.isRequired,
-  descProps: object.isRequired,
-  inputProps: object.isRequired,
-};
+// FormItem.propTypes = {
+//   headingProps: object.isRequired,
+//   descProps: object.isRequired,
+//   inputProps: object.isRequired,
+// };
