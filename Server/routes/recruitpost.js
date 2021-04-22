@@ -1,13 +1,12 @@
+/* eslint-disable no-underscore-dangle */
 const router = require('express').Router();
-const jwt = require('jsonwebtoken');
-const multer = require('multer');
+// const jwt = require('jsonwebtoken');
 
-const upload = multer({ dest: 'uploads/' });
 const { RecruitPost, User } = require('../models/index');
 const { downloadFile } = require('../utils/s3');
 
 // get all recruit posts.
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   try {
     const all = await RecruitPost.find();
 
@@ -16,7 +15,6 @@ router.get('/', async (req, res) => {
         const { name } = await User.findById(item.recruiterID);
         const imageURL = await downloadFile(item.recruiterID);
 
-        console.log(imageURL);
         return { ...item._doc, name, imageURL };
       }),
     );
@@ -37,15 +35,20 @@ router.get('/:id', async (req, res) => {
     const imageURL = await downloadFile(result.recruiterID);
     // get all the applicant imageURLs
     let recruitees = [];
+
     if (result.recruitees) {
-      recruitees = result.recruitees.map(async (recruitee) => {
-        const recruiteeImageURL = await downloadFile(recruitee);
-        return { recruitee, recruiteeImageURL };
-      });
+      recruitees = await Promise.all(
+        result.recruitees.map(async (recruitee) => {
+          const recruiteeImageURL = await downloadFile(recruitee);
+          return { recruitee, recruiteeImageURL };
+        }),
+      );
     }
+
     const response = {
       ...result._doc, recruiterName: name, imageURL, recruitees,
     };
+
     res.status(200).send(response);
   } catch (err) {
     res.status(400).send(err);
@@ -58,7 +61,7 @@ router.post('/newpost', async (req, res) => {
   const recruitpost = new RecruitPost({
     mountainName: req.body.mountainName,
     recruitingNumber: req.body.recruitingNumber,
-    recruitingLevels: req.body.recruitingLevels,
+    hikingLevels: req.body.hikingLevels,
     recruitingSex: req.body.recruitingSex,
     recruitingAge: req.body.recruitingAge,
     postdate: req.body.postdate,
@@ -70,8 +73,8 @@ router.post('/newpost', async (req, res) => {
 
   try {
     const newpost = await recruitpost.save();
-    console.log(`created new post: ${newpost}`);
-    res.send('post was success');
+
+    res.status(200).send(newpost);
   } catch (err) {
     res.send(err);
   }

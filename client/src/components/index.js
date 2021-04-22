@@ -26,3 +26,4 @@ export { default as RecruitPostDetail } from 'components/RecruitPostDetail/Recru
 export { default as RegularPostDetail } from 'components/RegularPostDetail/RegularPostDetail';
 export { default as RegionSelectButton } from 'components/RegionSelectButton/RegionSelectButton';
 export { default as HikingLevelSelectButton } from 'components/HikingLevelSelectButton/HikingLevelSelectButton';
+export { default as FormItem } from 'components/FormItem/FormItem';

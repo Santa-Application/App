@@ -1,8 +1,10 @@
 import { Icon } from 'components';
 import { string, oneOf } from 'prop-types';
+import classNames from 'classnames';
 import { tag } from './Tag.module.scss';
 
-const Tag = ({ type, content }) => {
+const Tag = ({ type, content, className }) => {
+  const tagClasses = classNames(tag, className);
   let shape = '';
   let displayContent = content;
 
@@ -47,7 +49,7 @@ const Tag = ({ type, content }) => {
   }
 
   return (
-    <div className={tag}>
+    <div className={tagClasses}>
       <Icon shape={shape} />
       <span>{displayContent}</span>
     </div>

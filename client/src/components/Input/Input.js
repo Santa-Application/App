@@ -3,24 +3,32 @@ import { string } from 'prop-types';
 import { input } from './Input.module.scss';
 import classNames from 'classnames';
 
-const Input = ({ field, ...inputProps }) => {
+const Input = ({ field, inputProps }) => {
   const { type, id, className } = inputProps;
 
   const inputClasses = classNames(input, className);
 
-  return <input type={type} id={id} className={inputClasses} {...field} />;
+  return (
+    <input
+      id={id}
+      type={type}
+      className={inputClasses}
+      autoComplete="off"
+      {...field}
+    />
+  );
 };
 
-Input.defaultTypes = {
-  type: 'text',
-  id: '',
-  className: '',
-};
+// Input.defaultTypes = {
+//   type: 'text',
+//   id: '',
+//   className: '',
+// };
 
-Input.propTypes = {
-  type: string.isRequired,
-  id: string.isRequired,
-  className: string,
-};
+// Input.propTypes = {
+//   type: string.isRequired,
+//   id: string.isRequired,
+//   className: string,
+// };
 
 export default Input;

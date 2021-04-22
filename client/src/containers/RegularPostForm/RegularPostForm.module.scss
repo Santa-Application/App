@@ -1,0 +1,19 @@
+@import 'styles';
+
+.heading {
+  margin-bottom: 2em;
+
+  @include font-dark-20-700;
+}
+
+.formItem {
+  margin-bottom: 5em;
+}
+
+.buttonContainer {
+  @include flex-row(center);
+}
+
+.cancelButton {
+  margin-right: 2em;
+}

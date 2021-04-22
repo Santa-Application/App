@@ -5,16 +5,18 @@
 }
 
 .radioButton {
-  // @include default-position;
-
   opacity: 0;
 }
 
 .label {
-  // @include default-position;
   @include flex(flex-start, center, row, wrap);
 
   @include font-dark-12-400;
+
+  svg {
+    width: 1.2em;
+    height: 1.2em;
+  }
 }
 
 .icon {
