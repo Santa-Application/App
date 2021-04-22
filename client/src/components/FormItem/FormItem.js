@@ -1,10 +1,9 @@
 import React from 'react';
-import { Field, ErrorMessage, Form } from 'formik';
+import { Field } from 'formik';
 import Heading from 'components/Heading/Heading';
 import Input from 'components/Input/Input';
 import FileInput from 'components/FileInput/FileInput';
 import NumberInput from 'components/NumberInput/NumberInput';
-import RadioButton from 'components/RadioButton/RadioButton';
 import RangeSlider from 'components/RangeSlider/RangeSlider';
 import SelectBox from 'components/SelectBox/SelectBox';
 import SelectDate from 'components/SelectDate/SelectDate';
@@ -58,8 +57,10 @@ const FormItem = ({
   className,
   ...restProps
 }) => {
+  // console.log(inputProps);
+
   const containerClasses = classNames(formItem, className);
-  const { name, id, type, formType } = inputProps;
+  const { name, formType } = inputProps;
   return (
     <div className={containerClasses} {...restProps}>
       <Heading
@@ -75,11 +76,10 @@ const FormItem = ({
       ) : (
         <Field
           component={renderFormInput(formType)}
-          inputProps={{ id, type }}
+          inputProps={inputProps}
           name={name}
         />
       )}
-      {/* <ErrorMessage /> */}
     </div>
   );
 };
