@@ -1,20 +1,20 @@
 const router = require('express').Router();
-const jwt = require('jsonwebtoken');
 const multer = require('multer');
-const { restart } = require('nodemon');
 const { RegularPost, User } = require('../models/index');
 const { uploadFile, downloadFile } = require('../utils/s3');
+// const jwt = require('jsonwebtoken');
+// const { restart } = require('nodemon');
 
 const upload = multer({ dest: 'uploads/ ' });
 
 // GET ALL REGULAR POSTS
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   // get all existing things from the db
   try {
     const all = await RegularPost.find();
     return res.status(200).send(all);
   } catch (err) {
-    res.status(400).send(err);
+    return res.status(400).send(err);
   }
 });
 
@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
 
     return res.send(response);
   } catch (err) {
-    res.status(404).send(err);
+    return res.status(404).send(err);
   }
 });
 
@@ -65,8 +65,7 @@ router.post('/newpost', upload.single('image'), async (req, res) => {
     });
 
     const savedPost = await newPost.save();
-    console.log(savedPost);
-    res.status(200).send('Successfully posted');
+    res.status(200).send(savedPost);
   } catch (err) {
     res.send(err);
   }
@@ -88,14 +87,14 @@ router.patch('/:id', async (req, res) => {
 
     return res.status(200).send(result);
   } catch (err) {
-    res.send(err);
+    return res.send(err);
   }
 });
 
 // DELETE REGULAR POST
 router.delete('/:id', async (req, res) => {
   try {
-    const result = await Regular.findByIdAndDelete(req.params.id);
+    const result = await RegularPost.findByIdAndDelete(req.params.id);
     if (!result) res.status(404).send('Post does not exist');
 
     res.status(200).send('Post was successfully deleted!');
@@ -153,3 +152,5 @@ router.patch('/:id/like', async (req, res) => {
     res.status(400).send(err);
   }
 });
+
+module.exports = router;
