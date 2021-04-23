@@ -12,7 +12,7 @@ import {
   cancelButton,
 } from './RecruitForm.module.scss';
 
-const RecruitForm = () => {
+const RecruitForm = ({ formType, ...restProps }) => {
   const {
     handleSelectDate,
     handleFocusAllInput,
@@ -197,7 +197,9 @@ const RecruitForm = () => {
                   children="취소하기"
                   className={cancelButton}
                 />
-                <Button type="submit" children="등록하기" />
+                <Button>
+                  {formType === 'create' ? '등록하기' : '수정하기'}
+                </Button>
               </div>
             </Form>
           );
