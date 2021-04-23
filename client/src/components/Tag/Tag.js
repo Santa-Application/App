@@ -46,6 +46,9 @@ const Tag = ({ type, content, className }) => {
     case 'jeju':
       shape = 'jeju';
       break;
+    case 'signout':
+      shape = 'logout';
+      break;
   }
 
   return (
@@ -77,6 +80,7 @@ Tag.propTypes = {
     'jeolla',
     'gyeongsang',
     'jeju',
+    'signout'
   ]).isRequired,
   content: string.isRequired,
 };

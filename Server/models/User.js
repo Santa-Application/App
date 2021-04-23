@@ -20,7 +20,7 @@ const userSchema = Schema({
     required: true,
     trim: true,
   },
-  imageUrl: String,
+  imageURL: String,
   gender: {
     type: String,
     required: true,
