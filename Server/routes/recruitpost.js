@@ -11,11 +11,23 @@ router.get('/', async (_, res) => {
     const all = await RecruitPost.find();
 
     const response = await Promise.all(
-      all.map(async (item) => {
-        const { name } = await User.findById(item.recruiterID);
-        const imageURL = await downloadFile(item.recruiterID);
+      all.map(async (recruitPost) => {
+        const publisherInfo = await User.findById(recruitPost.publisherID);
+        const imageURL = await downloadFile(publisherInfo.imageURL);
+        let recruitees = [];
 
-        return { ...item._doc, name, imageURL };
+        if (recruitPost.recruitees) {
+          recruitees = await Promise.all(
+            recruitPost.recruitees.map(async (recruitee) => {
+              const recruiteeImageURL = await downloadFile(recruitee);
+              return { recruitee, recruiteeImageURL };
+            }),
+          );
+        }
+
+        return {
+          recruitPost, publisherInfo, imageURL, recruitees,
+        };
       }),
     );
 
@@ -28,17 +40,17 @@ router.get('/', async (_, res) => {
 // get a individual recruit post.
 router.get('/:id', async (req, res) => {
   try {
-    const result = await RecruitPost.findById(req.params.id);
+    const recruitPost = await RecruitPost.findById(req.params.id);
     // get recruiterName
-    const { name } = await User.findById(result.recruiterID);
+    const publisherInfo = await User.findById(recruitPost.publisherID);
     // get recruiter profile ImageURL
-    const imageURL = await downloadFile(result.recruiterID);
+    const imageURL = await downloadFile(publisherInfo.imageURL);
     // get all the applicant imageURLs
     let recruitees = [];
 
-    if (result.recruitees) {
+    if (recruitPost.recruitees) {
       recruitees = await Promise.all(
-        result.recruitees.map(async (recruitee) => {
+        recruitPost.recruitees.map(async (recruitee) => {
           const recruiteeImageURL = await downloadFile(recruitee);
           return { recruitee, recruiteeImageURL };
         }),
@@ -46,7 +58,7 @@ router.get('/:id', async (req, res) => {
     }
 
     const response = {
-      ...result._doc, recruiterName: name, imageURL, recruitees,
+      recruitPost, publisherInfo, imageURL, recruitees,
     };
 
     res.status(200).send(response);
@@ -61,20 +73,30 @@ router.post('/newpost', async (req, res) => {
   const recruitpost = new RecruitPost({
     mountainName: req.body.mountainName,
     recruitingNumber: req.body.recruitingNumber,
-    hikingLevels: req.body.hikingLevels,
-    recruitingSex: req.body.recruitingSex,
+    hikingLevel: req.body.hikingLevel,
+    recruitingGender: req.body.recruitingGender,
     recruitingAge: req.body.recruitingAge,
-    postdate: req.body.postdate,
+    postDate: req.body.postdate,
     description: req.body.description,
-    recruiterID: req.body.recruiterID,
+    publisherID: req.body.publisherID,
     recruitDate: req.body.recruitDate,
     title: req.body.title,
   });
 
   try {
-    const newpost = await recruitpost.save();
+    const recruitPost = await recruitpost.save();
+    const publisherInfo = await User.findById(recruitPost.publisherID);
+    const imageURL = await downloadFile(publisherInfo.imageURL);
+    const recruitees = [];
 
-    res.status(200).send(newpost);
+    const response = {
+      recruitPost,
+      publisherInfo,
+      imageURL,
+      recruitees,
+    };
+
+    res.status(200).send(response);
   } catch (err) {
     res.send(err);
   }
@@ -90,8 +112,26 @@ router.patch('/:id', async (req, res) => {
       update,
       { new: true },
     );
+    const publisherInfo = await User.findById(updatedPost.publisherID);
+    const imageURL = await downloadFile(publisherInfo.imageURL);
+    let recruitees = [];
+    if (updatedPost.recruitees) {
+      recruitees = Promise.all(
+        updatedPost.recruitees.map(async (recruitee) => {
+          const recruiteeImageURL = await downloadFile(recruitee);
+          return { recruitee, recruiteeImageURL };
+        }),
+      );
+    }
 
-    res.status(200).send(updatedPost);
+    const response = {
+      recruitPost: updatedPost,
+      publisherInfo,
+      imageURL,
+      recruitees,
+    };
+
+    res.status(200).send(response);
   } catch (err) {
     res.send(err);
   }
@@ -103,7 +143,7 @@ router.delete('/:id', async (req, res) => {
     const existance = await RecruitPost.findByIdAndDelete(req.params.id);
     if (!existance) res.status(404).send('Post does not exist');
 
-    res.status(200).send('Post was successfully deleted!');
+    res.status(200).send(req.params.id);
   } catch (err) {
     res.status(400).send(err);
   }
@@ -130,11 +170,15 @@ router.post('/:id/:applicantID', async (req, res) => {
       { new: true },
     );
 
-    const message = {
-      result,
-      message: 'successfully done',
-    };
-    res.status(200).send(message);
+    let recruitees = [];
+    recruitees = Promise.all(
+      result.recruitees.map(async (recruitee) => {
+        const recruiteeImageURL = await downloadFile(recruitee);
+        return { recruitee, recruiteeImageURL };
+      }),
+    );
+
+    res.status(200).send(recruitees);
   } catch (err) {
     res.status(400).send(err);
   }

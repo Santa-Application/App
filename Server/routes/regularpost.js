@@ -9,10 +9,21 @@ const upload = multer({ dest: 'uploads/ ' });
 
 // GET ALL REGULAR POSTS
 router.get('/', async (_, res) => {
-  // get all existing things from the db
   try {
     const all = await RegularPost.find();
-    return res.status(200).send(all);
+    const responseData = await Promise.all(
+      all.map(async (regularPost) => {
+        const publisherInfo = await User.findById(regularPost.publisherID);
+        const publisherImageURL = await downloadFile(publisherInfo.imageURL);
+
+        return {
+          regularPost,
+          publisherInfo,
+          publisherImageURL,
+        };
+      }),
+    );
+    return res.status(200).send(responseData);
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -21,17 +32,16 @@ router.get('/', async (_, res) => {
 // GET SINGLE REGULAR POST
 router.get('/:id', async (req, res) => {
   try {
-    const post = await RegularPost.findById(req.params.id);
-
+    const regularPost = await RegularPost.findById(req.params.id);
     // get publisher name and userImage
-    const { name, imageURL } = await User.findById(post.publisher);
+    const publisherInfo = await User.findById(regularPost.publisher);
     // conver imageURL to real use imageURL
-    const accessibleURL = await downloadFile(imageURL);
+    const publisherImageURL = await downloadFile(publisherInfo.imageURL);
 
     const response = {
-      ...post,
-      name,
-      accessibleURL,
+      regularPost,
+      publisherInfo,
+      publisherImageURL,
     };
 
     return res.send(response);
@@ -49,23 +59,29 @@ router.post('/newpost', upload.single('image'), async (req, res) => {
   // Create a new post
   try {
     const {
-      publisher,
-      date,
+      publisherID,
+      postDate,
       content,
-      mountain,
+      mountainName,
       title,
     } = req.body;
+
     const newPost = new RegularPost({
-      publisher,
+      publisherID,
       imageURL: Key,
-      date,
+      postDate,
       content,
-      mountain,
+      mountainName,
       title,
     });
 
-    const savedPost = await newPost.save();
-    res.status(200).send(savedPost);
+    const publisherInfo = await User.findById(publisherID);
+    const publisherImageURL = await downloadFile(publisherInfo.imageURL);
+
+    const regularPost = await newPost.save();
+    const response = { regularPost, publisherInfo, publisherImageURL };
+
+    res.status(200).send(response);
   } catch (err) {
     res.send(err);
   }
@@ -75,7 +91,7 @@ router.post('/newpost', upload.single('image'), async (req, res) => {
 router.patch('/:id', async (req, res) => {
   // find the existing document
   try {
-    const result = await RegularPost.findByIdAndUpdate(
+    const regularPost = await RegularPost.findByIdAndUpdate(
       req.params.id,
       {
         ...req.body,
@@ -85,7 +101,16 @@ router.patch('/:id', async (req, res) => {
       },
     );
 
-    return res.status(200).send(result);
+    const publisherInfo = await User.findById(regularPost.publisherID);
+    const publisherImageURL = await downloadFile(publisherInfo.imageURL);
+
+    const response = {
+      regularPost,
+      publisherInfo,
+      publisherImageURL,
+    };
+
+    return res.status(200).send(response);
   } catch (err) {
     return res.send(err);
   }
@@ -95,7 +120,7 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const result = await RegularPost.findByIdAndDelete(req.params.id);
-    if (!result) res.status(404).send('Post does not exist');
+    if (!result) res.status(404).send(result);
 
     res.status(200).send('Post was successfully deleted!');
   } catch (err) {
@@ -103,7 +128,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// HIT LIKE TO A REGULAR POST
+// HIT LIKE TO A REGULAR POST(NOT YET)
 router.patch('/:id/like', async (req, res) => {
   try {
     // GET the user's ID and Update User table
