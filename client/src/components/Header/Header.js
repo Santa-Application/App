@@ -35,9 +35,13 @@ const Header = ({ mode, style, title, href, userData }) => {
     navBgRef.current.classList.toggle(activeBg);
     navRef.current.classList.toggle(activeNav);
 
-    !navBgRef.current.classList.contains(activeBg) ?
-      navBgRef.current.setAttribute('aria-hidden', 'true') :
+    if (!navBgRef.current.classList.contains(activeBg)) {
+      navBgRef.current.setAttribute('aria-hidden', 'true');
+      navBgRef.current.setAttribute('tabindex', '-1');
+    } else {
       navBgRef.current.setAttribute('aria-hidden', 'false');
+      navBgRef.current.setAttribute('tabindex', '0');
+    }
   };
 
 
@@ -46,6 +50,8 @@ const Header = ({ mode, style, title, href, userData }) => {
       <Button 
         {...commonProps}
         value={'Go back button'}
+        aria-label={'Go back button'}
+        children={'되돌아가기'}
       >
         <Icon shape={'back'}/> 
       </Button>
@@ -59,6 +65,8 @@ const Header = ({ mode, style, title, href, userData }) => {
         {...commonProps}
         value={'Menu button'}
         onClick={handleNavMenu}
+        aria-label={'Menu button open and close'}
+        children={'메뉴 열기'}
       >
         <Icon shape={'menu'} />
       </Button>
@@ -74,6 +82,8 @@ const Header = ({ mode, style, title, href, userData }) => {
             {...commonProps}
             value={'logout button'}
             className={signoutButton}
+            aria-label={'logout button'}
+            children={'로그아웃'}
           >
             <Tag type={'signout'} content={'sign out'} />
           </Button>
@@ -82,6 +92,8 @@ const Header = ({ mode, style, title, href, userData }) => {
             value={'side menu bar close'}
             onClick={handleNavMenu}
             className={navCloseButton}
+            aria-label={'Side menu close button'}
+            children={'메뉴 닫기'}
           >
             <Icon shape={'close'}/>
           </Button>
