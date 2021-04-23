@@ -23,6 +23,10 @@ import { ReactComponent as Chungcheong } from './assets/chungcheong.svg';
 import { ReactComponent as Jeju } from './assets/jeju.svg';
 import { ReactComponent as Jeolla } from './assets/jeolla.svg';
 import { ReactComponent as Gangwon } from './assets/gangwon.svg';
+import { ReactComponent as NavMountains } from './assets/mountains_nav.svg';
+import { ReactComponent as NavProfile } from './assets/profile_nav.svg';
+import { ReactComponent as NavRecruits } from './assets/recruitposts_nav.svg';
+import { ReactComponent as NavReviews } from './assets/reviewposts_nav.svg';
 
 const Icon = ({ shape, ...restProps }) => {
   let RenderIcon = '';
@@ -100,6 +104,18 @@ const Icon = ({ shape, ...restProps }) => {
     case 'gyeongsang':
       RenderIcon = Gyeongsang;
       break;
+    case 'navMountains':
+      RenderIcon = NavMountains;
+      break;
+    case 'navProfile':
+      RenderIcon = NavProfile;
+      break;
+    case 'navRecruits':
+      RenderIcon = NavRecruits;
+      break;
+    case 'navReviews':
+      RenderIcon = NavReviews;
+      break;
   }
 
   return <RenderIcon {...restProps} />;
@@ -131,6 +147,10 @@ Icon.propTypes = {
     'jeolla',
     'gyeongsang',
     'jeju',
+    'navMountains',
+    'navProfile',
+    'navRecruits',
+    'navReviews'
   ]),
 };
 
