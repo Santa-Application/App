@@ -31,6 +31,7 @@ const RadioButton = ({
       break;
     case 'level3':
       labelText = '고급자';
+      break;
   }
 
   const checked = field.checked;
