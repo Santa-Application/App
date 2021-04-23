@@ -1,8 +1,18 @@
 @import 'styles/';
 
 .numberInput {
-  padding: 0.8rem 1.5rem;
-  font-size: 1.2rem;
-  border: none;
-  box-shadow: $box-shadow;
+  input {
+    font-size: 1.2rem;
+    color: $dark-gray;
+    padding: 0.8rem 1.5rem;
+    margin-right: 1rem;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: $box-shadow;
+  }
+
+  span {
+    font-size: 1rem;
+    color: $dark-gray;
+  }
 }

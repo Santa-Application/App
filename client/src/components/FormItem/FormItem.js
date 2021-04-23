@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field } from 'formik';
+import { ErrorMessage, Field } from 'formik';
 import Heading from 'components/Heading/Heading';
 import Input from 'components/Input/Input';
 import FileInput from 'components/FileInput/FileInput';
@@ -9,7 +9,7 @@ import SelectBox from 'components/SelectBox/SelectBox';
 import SelectDate from 'components/SelectDate/SelectDate';
 import Textarea from 'components/Textarea/Textarea';
 
-import { formItem } from './FormItem.module.scss';
+import { formItem, errorMessage } from './FormItem.module.scss';
 import { object } from 'prop-types';
 import classNames from 'classnames';
 import GenderSelectButton from 'components/GenderSelectButton/GenderSelectButton';
@@ -80,6 +80,11 @@ const FormItem = ({
           name={name}
         />
       )}
+      <ErrorMessage
+        className={errorMessage}
+        component="div"
+        name={inputProps.name}
+      />
     </div>
   );
 };
