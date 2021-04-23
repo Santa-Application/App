@@ -44,3 +44,15 @@ export const handleChangeFileInput = (e, setFieldValue) => {
   // imageUrlData.append(e.target.name, e.target.files[0]);
   setFieldValue('imageURL', e.target.files[0]);
 };
+
+// range slider
+export const handleChangeSlider = (
+  _,
+  newValue,
+  fieldName,
+  setCurrentAge,
+  setFieldValue
+) => {
+  setCurrentAge(newValue);
+  setFieldValue(fieldName, newValue);
+};
