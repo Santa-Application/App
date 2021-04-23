@@ -22,11 +22,9 @@ const RecruitForm = () => {
       initialValues={{
         mountainName: '',
         recruitingNumber: 1,
-        recruitingLevels: [],
-        recruitingSex: '',
+        hikingLevel: [],
+        recruitingGender: '',
         recruitingAge: [],
-        numberMin: 20,
-        numberMax: 45,
         // description: '',
         // views: 0,
         // recruiterID: '',
@@ -35,11 +33,12 @@ const RecruitForm = () => {
         title: '',
         // imageURL: {},
       }}
+      validationSchema={validationSchema.recruitPost}
       onSubmit={values => {
         console.log(values);
       }}
     >
-      {({ setFieldValue, handleBlur, handleChange, touched, errors }) => {
+      {({ setFieldValue, handleBlur, handleChange }) => {
         return (
           <Form>
             <FormItem
@@ -63,8 +62,8 @@ const RecruitForm = () => {
                 content: '등산한 산을 지정해주세요',
               }}
               inputProps={{
-                id: 'mountain',
-                name: 'mountain',
+                id: 'mountainName',
+                name: 'mountainName',
                 formType: 'select',
                 placeholder: '등산한 산을 지정해주세요',
                 setFieldValue,
@@ -102,7 +101,7 @@ const RecruitForm = () => {
               }}
               inputProps={{
                 formType: 'hikingLevel',
-                name: 'recruitingLevels',
+                name: 'hikingLevel',
               }}
             />
             <FormItem
@@ -140,7 +139,7 @@ const RecruitForm = () => {
               }}
               inputProps={{
                 formType: 'gender',
-                name: 'recruitingSex',
+                name: 'recruitingGender',
               }}
             />
             <FormItem
