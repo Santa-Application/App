@@ -1,5 +1,5 @@
 import FormItem from 'components/FormItem/FormItem';
-import { Form, Formik } from 'formik';
+import { ErrorMessage, Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { formHandler, validationSchema } from 'utils/';
 import top100Mountains from 'data/top100Mountains';
@@ -9,16 +9,13 @@ const RecruitForm = () => {
   const {
     handleSelectDate,
     handleFocusAllInput,
-    handleFocusSelectBoxInput,
-    handleClickSelectBoxInputButton,
-    handleClickSelectBoxListItemButton,
-    // handleChangeSelectBoxInput,
-    handleBlurSelectBoxInput,
-    handleChangeFileInput,
+    handleChangeMinInput,
+    handleChangeMaxInput,
+    handleChangeSlider,
   } = formHandler;
 
-  const [isSelectBoxOpened, setIsSelectBoxOpened] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [currentAge, setCurrentAge] = useState([20, 45]);
 
   return (
     <Formik
@@ -28,8 +25,8 @@ const RecruitForm = () => {
         recruitingLevels: [],
         recruitingSex: '',
         recruitingAge: [],
-        // numberMin: 20,
-        // numberMax: 45,
+        numberMin: 20,
+        numberMax: 45,
         // description: '',
         // views: 0,
         // recruiterID: '',
@@ -42,7 +39,7 @@ const RecruitForm = () => {
         console.log(values);
       }}
     >
-      {({ setFieldValue, handleBlur, handleChange }) => {
+      {({ setFieldValue, handleBlur, handleChange, touched, errors }) => {
         return (
           <Form>
             <FormItem
@@ -61,6 +58,10 @@ const RecruitForm = () => {
               }}
             />
             <FormItem
+              headingProps={{ level: 3, content: '등산한 산' }}
+              descProps={{
+                content: '등산한 산을 지정해주세요',
+              }}
               inputProps={{
                 id: 'mountain',
                 name: 'mountain',
@@ -71,46 +72,7 @@ const RecruitForm = () => {
                 handleChange,
                 datas: top100Mountains,
               }}
-              descProps={{
-                content: '등산한 산을 지정해주세요',
-              }}
-              headingProps={{ level: 3, content: '등산한 산' }}
-              // className={formItem}
             />
-            {/* <FormItem
-              headingProps={{
-                level: 3,
-                content: '등산할 산',
-              }}
-              descProps={{
-                content: '등산할 산을 지정해주세요',
-              }}
-              inputProps={{
-                formType: 'select',
-                id: 'mountainName',
-                name: 'mountainName',
-                isOpened: isSelectBoxOpened,
-                setIsOpened: setIsSelectBoxOpened,
-                placeholder: '등산할 산',
-                datas: top100Mountains,
-                onFocus: e =>
-                  handleFocusSelectBoxInput(e, setIsSelectBoxOpened),
-                // onBlur: handleBlur,
-                onClickInputButton: e =>
-                  handleClickSelectBoxInputButton(
-                    e,
-                    setIsSelectBoxOpened,
-                    isSelectBoxOpened
-                  ),
-                onClickListButton: e =>
-                  handleClickSelectBoxListItemButton(
-                    e,
-                    'mountainName',
-                    setFieldValue,
-                    setIsSelectBoxOpened
-                  ),
-              }}
-            /> */}
             <FormItem
               headingProps={{
                 level: 3,
@@ -133,16 +95,39 @@ const RecruitForm = () => {
             <FormItem
               headingProps={{
                 level: 3,
-                content: '등산 메이트 모집 인원',
+                content: '등반 레벨',
               }}
               descProps={{
-                content: '같이 등산하고 싶은 메이트의 인원을 지정해주세요',
+                content: '등반 레벨',
               }}
               inputProps={{
-                formType: 'number',
-                id: 'recruitingNumber',
-                name: 'recruitingNumber',
-                unit: '명',
+                formType: 'hikingLevel',
+                name: 'recruitingLevels',
+              }}
+            />
+            <FormItem
+              headingProps={{
+                level: 3,
+                content: '등산 메이트 나이대',
+              }}
+              descProps={{
+                content: '같이 등산할 메이트의 나이대를 정해주세요',
+              }}
+              inputProps={{
+                formType: 'rangeSlider',
+                id: 'recruitingAge',
+                name: 'recruitingAge',
+                minInputName: 'numberMin',
+                maxInputName: 'numberMax',
+                unit: '세',
+                setFieldValue,
+                currentAge,
+                setCurrentAge,
+                handleChange,
+                onChangeMinInput: handleChangeMinInput,
+                onChangeMaxInput: handleChangeMaxInput,
+                onChangeSlider: handleChangeSlider,
+                onFocus: handleFocusAllInput,
               }}
             />
             <FormItem
@@ -161,53 +146,26 @@ const RecruitForm = () => {
             <FormItem
               headingProps={{
                 level: 3,
-                content: '등반 레벨',
+                content: '등산 메이트 모집 인원',
               }}
               descProps={{
-                content: '등반 레벨',
+                content: '같이 등산하고 싶은 메이트의 인원을 지정해주세요',
               }}
               inputProps={{
-                formType: 'hikingLevel',
-                name: 'recruitingLevels',
+                formType: 'number',
+                id: 'recruitingNumber',
+                name: 'recruitingNumber',
+                unit: '명',
               }}
             />
             <FormItem
               headingProps={{
                 level: 3,
-                content: '이메일',
+                content: '등산 일정 및 기타 사항',
               }}
               descProps={{
-                content: '이메일 입력해주세요',
-              }}
-              inputProps={{
-                formType: 'text',
-                type: 'email',
-                id: 'email',
-                name: 'email',
-              }}
-            />
-            <FormItem
-              headingProps={{
-                level: 3,
-                content: '비밀번호',
-              }}
-              descProps={{
-                content: '비밀번호',
-              }}
-              inputProps={{
-                formType: 'text',
-                type: 'password',
-                id: 'password',
-                name: 'password',
-              }}
-            />
-            <FormItem
-              headingProps={{
-                level: 3,
-                content: 'textarea',
-              }}
-              descProps={{
-                content: 'textarea',
+                content:
+                  '자세한 등산 일정 및 준비물 등 세부사항을 작성해주세요',
               }}
               inputProps={{
                 formType: 'textarea',
