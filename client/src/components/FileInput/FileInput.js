@@ -4,8 +4,15 @@ import classNames from 'classnames';
 import PropTypes, { string } from 'prop-types';
 import { fileInput } from './FileInput.module.scss';
 
-const FileInput = ({ field, ...inputProps }) => {
-  const { id, label, className, fileRoute, setFieldValue } = inputProps;
+const FileInput = ({ field, inputProps }) => {
+  const {
+    id,
+    label,
+    className,
+    fileRoute,
+    setFieldValue,
+    onChange,
+  } = inputProps;
   const FileInputClasses = classNames(className, fileInput);
   /* ----------------------------------- 
     전달될 상태와 핸들러.
@@ -50,7 +57,9 @@ const FileInput = ({ field, ...inputProps }) => {
           min="1"
           accept=".gif, .jpg, .png"
           {...field}
-          // onChange={handleChangeFileInput}
+          onChange={e => {
+            onChange(e, setFieldValue);
+          }}
         />
       </label>
       <span children={fileRoute}></span>
@@ -58,20 +67,20 @@ const FileInput = ({ field, ...inputProps }) => {
   );
 };
 
-FileInput.defaultProps = {
-  id: '',
-  label: '',
-  fileRoute: '',
-  onChange: null,
-  className: '',
-};
+// FileInput.defaultProps = {
+//   id: '',
+//   label: '',
+//   fileRoute: '',
+//   onChange: null,
+//   className: '',
+// };
 
-FileInput.propTypes = {
-  id: string.isRequired,
-  label: string.isRequired,
-  className: string,
-  fileRoute: string,
-  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
-};
+// FileInput.propTypes = {
+//   id: string.isRequired,
+//   label: string.isRequired,
+//   className: string,
+//   fileRoute: string,
+//   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+// };
 
 export default FileInput;

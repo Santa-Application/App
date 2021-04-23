@@ -7,8 +7,16 @@ import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/src/stylesheets/datepicker.scss';
 
-const SelectDate = ({ field, ...inputProps }) => {
-  const { id, onFocus, className, selectedDate, onSelect } = inputProps;
+const SelectDate = ({ field, inputProps }) => {
+  const {
+    id,
+    onFocus,
+    className,
+    selectedDate,
+    setSelectedDate,
+    onSelect,
+    setFieldValue,
+  } = inputProps;
   const selectDateClasses = classNames(className, selectDateBox);
 
   /* ------------------
@@ -51,8 +59,11 @@ const SelectDate = ({ field, ...inputProps }) => {
         minDate={handleMinDate()}
         dateFormat="yyyy-MM-dd"
         placeholderText="YYYY-MM-DD"
-        onSelect={onSelect}
+        onSelect={date => {
+          onSelect(date, field.name, setSelectedDate, setFieldValue);
+        }}
         onFocus={onFocus}
+        autoComplete="off"
         popperModifiers={{ preventOverflow: { enabled: true } }}
       />
       <label htmlFor="datePicker">

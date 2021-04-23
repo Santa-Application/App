@@ -3,26 +3,28 @@ import classNames from 'classnames';
 import { Field } from 'formik';
 import { container } from './GenderSelectButton.module.scss';
 
-const GenderSelectButton = ({ ...restProps }) => {
+const GenderSelectButton = ({ inputProps }) => {
+  const { name } = inputProps;
+
   return (
     <div className={container}>
       <Field
         id="female"
-        name="gender"
+        name={name}
         type="radio"
         value="female"
         component={RadioButton}
       />
       <Field
         id="male"
-        name="gender"
+        name={name}
         type="radio"
         value="male"
         component={RadioButton}
       />
       <Field
         id="genderBoth"
-        name="gender"
+        name={name}
         type="radio"
         value="genderBoth"
         component={RadioButton}

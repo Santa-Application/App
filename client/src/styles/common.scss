@@ -7,7 +7,7 @@ html {
 
 main {
   width: 85vw;
-  margin: 0 auto;
+  margin: 5em auto;
 }
 
 .a11yHidden {
@@ -53,4 +53,10 @@ input,
 textarea,
 select {
   outline: none;
+}
+
+h2 {
+  @include font-page-heading;
+
+  margin-bottom: 1em;
 }
