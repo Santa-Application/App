@@ -1,6 +1,5 @@
-import { reduxUtils } from "utils";
+import { reduxUtils } from 'utils';
 import { authAPI } from 'api';
-
 
 // action type
 const LOADING_REGISTER_USER = 'register/LOADING';
@@ -15,41 +14,39 @@ const LOADING_SIGNOUT_USER = 'signout/LOADING';
 const ERROR_SIGNOUT_USER = 'signout/ERROR';
 const SIGNOUT_USER = 'signout/SUCCESS';
 
+// thunk action creator
+export const registerNewUserAsync = () =>
+  reduxUtils.createThunkActionCreator(
+    {
+      loading: LOADING_REGISTER_USER,
+      type: CREATE_USER,
+      error: ERROR_REGISTER_USER,
+    },
+    authAPI.register
+  );
 
-// thunk action creator 
-export const registerNewUserAsync = () => reduxUtils.createThunkActionCreator(
-  {
-    loading: LOADING_REGISTER_USER,
-    type: CREATE_USER,
-    error: ERROR_REGISTER_USER
-  },
-  authAPI.register
-);
+export const signinUserAsync = () =>
+  reduxUtils.createThunkActionCreator(
+    {
+      loading: LOADING_SIGNIN_USER,
+      type: SIGNIN_USER,
+      error: ERROR_SIGNIN_USER,
+    },
+    authAPI.signin
+  );
 
-export const signinUserAsync = () => reduxUtils.createThunkActionCreator(
-  {
-    loading: LOADING_SIGNIN_USER,
-    type: SIGNIN_USER,
-    error: ERROR_SIGNIN_USER
-  },
-  authAPI.signin
-);
-
-export const signoutUserAsync = () => reduxUtils.createThunkActionCreator(
-  {
-    loading: LOADING_SIGNOUT_USER,
-    type: SIGNOUT_USER,
-    error: ERROR_SIGNOUT_USER
-  },
-  authAPI.signout
-);
-
+export const signoutUserAsync = () =>
+  reduxUtils.createThunkActionCreator(
+    {
+      loading: LOADING_SIGNOUT_USER,
+      type: SIGNOUT_USER,
+      error: ERROR_SIGNOUT_USER,
+    },
+    authAPI.signout
+  );
 
 // Reducer
-export const authReducer = (
-  state = reduxUtils.authInitialState(), 
-  action
-) => {
+const authReducer = (state = reduxUtils.authInitialState(), action) => {
   const { type, payload } = action;
   const { data } = state;
 
@@ -69,18 +66,19 @@ export const authReducer = (
         token: payload.header.token,
         userInfo: payload.data,
         signedIn: true,
-        error: null
+        error: null,
       };
     case SIGNOUT_USER:
       return {
         isLoading: false,
         token: null,
-        userInfo: null, 
-        signedIn: false, 
-        error: null
+        userInfo: null,
+        signedIn: false,
+        error: null,
       };
     default:
       return state;
   }
 };
 
+export default authReducer;

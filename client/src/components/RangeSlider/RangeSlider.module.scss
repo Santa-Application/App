@@ -1,13 +1,12 @@
 @import 'styles/';
 
 .rangeSliderContainer {
-  @include flex(center, center, row, nowrap);
-  margin-top: 5rem;
-  margin-left: auto;
-  margin-right: auto;
-  width: 80vw;
+  @include flex(flex-start, center, row, nowrap);
+  margin-top: 2rem;
+  width: 50vw;
 }
 
+/*
 .numberInputContainer {
   @include flex(center, center, row, nowrap);
   // margin-top: 3rem;
@@ -36,3 +35,4 @@
     outline: none;
   }
 }
+*/
