@@ -4,20 +4,7 @@ import axios from 'axios';
 response data of posts
 [
   {
-    mountainName: { type: String, required: true },
-    recruitingNumber: { type: Number, required: true },
-    recruitingLevels: [{ type: String, required: true }],
-    recruitingSex: { type: String, required: true },
-    recruitingAge: { type: Array },
-    postdate: { type: Date, default: Date.now, required: true },
-    description: String,
-    views: { type: Number, default: 0 },
-    recruiterID: { type: String, required: true },
-    recruitees: [{ type: String }],
-    recruitDate: { type: String, required: true },
-    title: { type: String, required: true },
-    name: { type: String },
-    accessibleURL: { type: String } // publisher image URL
+    
   }
 ]
 */
@@ -90,7 +77,7 @@ response data of toggle to join recruiting
   }
 ]
 */
-export const toggleToJoinRecruiting = async (postId, userId) => {
+export const toggleApplyRecruiting = async (postId, userId) => {
   try {
     const response = await axios.post(
       `http://3.36.114.117:8001/api/recruitpost/${postId}/${userId}`
