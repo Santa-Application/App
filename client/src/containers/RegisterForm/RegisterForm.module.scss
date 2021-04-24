@@ -1,0 +1,27 @@
+@import 'styles';
+
+.formItemAlign {
+  form {
+    display: flex;
+    flex-direction: column;
+
+    div[class^="FormItem"] {
+      margin-top: 3rem;
+    }
+  }
+}
+
+.heading {
+  border-bottom: .1rem solid rgba(0, 0, 0, .08);
+  padding-bottom: 1.5rem;
+}
+
+.buttonAlign {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+
+  button {
+    margin: 2rem;
+  }
+}

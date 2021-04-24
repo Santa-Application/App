@@ -1,24 +1,34 @@
-import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import classNames from 'classnames';
+import { formHandler, validationSchema } from 'utils/';
 import { Formik, Form } from 'formik';
 import { FormItem, Button, Heading } from 'components';
-import { formHandler } from 'utils/';
-import { handleFocusAllInput } from 'utils/handler/formHandler';
-import { authAPI } from 'api';
+import { useDispatch } from 'react-redux';
 import { registerNewUserAsync } from 'redux/modules/auth';
+import { handleFocusAllInput } from 'utils/handler/formHandler';
+import {
+  formItemAlign,
+  buttonAlign,
+  heading
+} from './RegisterForm.module.scss';
 
-const RegisterForm = ({ formType, className }) => {
+const RegisterForm = ({ className }) => {
 
   const { handleSelectDate, handleFocusAllInput } = formHandler;
-
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
 
+  const classes = classNames(className, formItemAlign);
+
+  const formItemValidationCheck = error => {
+    console.log(error);
+  };
+
+
   return (
-    <div>
-      <Heading content='sign up'  />
+    <div className={classes}>
+      <Heading content='sign up' className={heading}/>
       <Formik
         initialValues={{
           name: '',
@@ -31,16 +41,18 @@ const RegisterForm = ({ formType, className }) => {
           hikingLevel: '',
           introduction: '',
         }}
-
+        validationSchema={validationSchema.registerSchema}
         onSubmit={values => {
-          // const response = await authAPI.register(values);
-          console.log('clientside values: ',values);
-          console.log(auth.payload);
           dispatch(registerNewUserAsync(values));
         }}
       >
         {
-          ({ setFieldValue, handleBlue, handleChange }) =>{
+          ({ 
+            setFieldValue, 
+            handleBlur, 
+            handleChange,
+            errors
+          }) =>{
             return (
               <Form>
                 <FormItem
@@ -155,8 +167,10 @@ const RegisterForm = ({ formType, className }) => {
                     content: '자기 소개'
                   }}
                 />
-                <Button type="button" secondary children="취소하기" />
-                <Button type="submit" children="등록하기" />
+                <div className={buttonAlign}>
+                  <Button type="button" secondary children="취소하기" />
+                  <Button type="submit" children="등록하기" onClick={() => formItemValidationCheck(errors)}/>
+                </div>
               </Form>
             );
           }

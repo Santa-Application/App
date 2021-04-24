@@ -26,14 +26,15 @@ export const registerNewUserAsync = newUser =>
     [newUser]
   );
 
-export const signinUserAsync = () =>
+export const signinUserAsync = User =>
   reduxUtils.createThunkActionCreator(
     {
       loading: LOADING_SIGNIN_USER,
       type: SIGNIN_USER,
       error: ERROR_SIGNIN_USER,
     },
-    authAPI.signin
+    authAPI.signin,
+    [User]
   );
 
 export const signoutUserAsync = () =>

@@ -2,8 +2,13 @@ import React from 'react';
 import { Form, Formik } from 'formik';
 import FormItem from 'components/FormItem/FormItem';
 import { Button } from 'components';
+import { useDispatch } from 'react-redux';
+import { signinUserAsync } from 'redux/modules/auth';
 
 const SignInForm = () => {
+
+  const dispatch = useDispatch();
+
   return (
     <Formik
       initialValues={{
@@ -12,6 +17,7 @@ const SignInForm = () => {
       }}
       onSubmit={values => {
         console.log(values);
+        dispatch(signinUserAsync(values));
       }}
     >
       <Form>

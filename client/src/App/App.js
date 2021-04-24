@@ -1,8 +1,12 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import {
-  HomePage
+  HomePage,
+  Register
 } from 'pages';
+import {
+  Header
+} from 'components'; 
 
 function App() {
   return (
@@ -10,6 +14,7 @@ function App() {
       <HelmetProvider>
         <Switch>
           <Route path="/" exact component={HomePage} />
+          <Route path="/register" exact component={Register} />
         </Switch>
       </HelmetProvider>
     </div>
