@@ -1,89 +1,101 @@
-import { 
-  Button, 
+import {
+  Button,
   Logo,
   Tag,
-  Icon, 
-  Navigation, 
-  PublisherInformation 
+  Icon,
+  Navigation,
+  PublisherInformation,
 } from 'components';
-import { 
-  header, 
-  navBackground, 
+import {
+  header,
+  navBackground,
   nav,
   signoutButton,
   menu,
   navMenu,
   navCloseButton,
   activeBg,
-  activeNav
+  activeNav,
 } from './Header.module.scss';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signoutUserAsync } from 'redux/modules/auth';
 import { checkPropTypes } from 'prop-types';
 
 const Header = ({ mode, style, title, href, userData }) => {
-
   const navBgRef = useRef();
   const navRef = useRef();
+  const dispatch = useDispatch();
 
-  const commonProps = { 
-    secondary: false, 
-    type: 'button', 
-    disabled: false
+  const commonProps = {
+    secondary: false,
+    type: 'button',
+    disabled: false,
   };
 
   const handleNavMenu = () => {
     navBgRef.current.classList.toggle(activeBg);
     navRef.current.classList.toggle(activeNav);
 
-    !navBgRef.current.classList.contains(activeBg) ?
-      navBgRef.current.setAttribute('aria-hidden', 'true') :
-      navBgRef.current.setAttribute('aria-hidden', 'false');
+    !navBgRef.current.classList.contains(activeBg)
+      ? navBgRef.current.setAttribute('aria-hidden', 'true')
+      : navBgRef.current.setAttribute('aria-hidden', 'false');
   };
+  const handleClickAnyButtons = e => {
+    if (e.target.tagName !== 'A') return;
+    navBgRef.current.classList.toggle(activeBg);
+    navRef.current.classList.toggle(activeNav);
 
+    !navBgRef.current.classList.contains(activeBg)
+      ? navBgRef.current.setAttribute('aria-hidden', 'true')
+      : navBgRef.current.setAttribute('aria-hidden', 'false');
+  };
+  const handleClickSignout = () => {
+    dispatch(signoutUserAsync());
+  };
 
   return (
     <div className={header}>
-      <Button 
-        {...commonProps}
-        value={'Go back button'}
-      >
-        <Icon shape={'back'}/> 
+      <Button {...commonProps} value={'Go back button'}>
+        <Icon shape={'back'} />
       </Button>
-      <Button
-        {...commonProps}
-        value={'Logo button, goes to HomePage'}
-      >
-        <Logo style={style} title ={title} href={href}/>
+      <Button {...commonProps} value={'Logo button, goes to HomePage'}>
+        <Logo style={style} title={title} href={href} />
       </Button>
-      <Button
-        {...commonProps}
-        value={'Menu button'}
-        onClick={handleNavMenu}
-      >
+      <Button {...commonProps} value={'Menu button'} onClick={handleNavMenu}>
         <Icon shape={'menu'} />
       </Button>
       <div className={navBackground} ref={navBgRef}>
         <section className={nav} ref={navRef}>
           <div className={menu}>
-            <PublisherInformation 
-              publisherData={userData}
+            <PublisherInformation publisherData={userData} />
+            <Navigation
+              label={'메뉴 바'}
+              className={navMenu}
+              onClick={handleClickAnyButtons}
             />
-            <Navigation label={'메뉴 바'} className={navMenu} />
           </div>
+          <Link
+            to="/"
+            component={() => (
+              <Button
+                {...commonProps}
+                value={'logout button'}
+                className={signoutButton}
+                onClick={handleClickSignout}
+              >
+                <Tag type={'signout'} content={'sign out'} />
+              </Button>
+            )}
+          />
           <Button
             {...commonProps}
-            value={'logout button'}
-            className={signoutButton}
-          >
-            <Tag type={'signout'} content={'sign out'} />
-          </Button>
-          <Button 
-            {...commonProps} 
             value={'side menu bar close'}
             onClick={handleNavMenu}
             className={navCloseButton}
           >
-            <Icon shape={'close'}/>
+            <Icon shape={'close'} />
           </Button>
         </section>
       </div>
