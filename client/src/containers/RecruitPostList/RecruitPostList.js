@@ -57,8 +57,6 @@ const RecruitPostList = ({ className, ...restProps }) => {
       </div>
     );
 
-  const postsData = state.data;
-
   return (
     <>
       <Link
@@ -74,7 +72,7 @@ const RecruitPostList = ({ className, ...restProps }) => {
         작성하기
       </Link>
       <ul className={listContainer}>
-        {postsData.map(post => {
+        {data.map(post => {
           return (
             <li key={post.recruitPost._id}>
               <Link to={`/recruit/${post.recruitPost._id}`}>
