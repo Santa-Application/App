@@ -1,6 +1,6 @@
 import FormItem from 'components/FormItem/FormItem';
 import { ErrorMessage, Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useSelector, useDispatch } from 'react';
 import { formHandler, validationSchema } from 'utils/';
 import top100Mountains from 'data/top100Mountains';
 import { Button, Heading } from 'components';
@@ -11,6 +11,7 @@ import {
   buttonContainer,
   cancelButton,
 } from './RecruitForm.module.scss';
+import { createRecruitPostAsync } from 'redux/modules/recruitPost';
 
 const RecruitForm = ({ formType, ...restProps }) => {
   const {
@@ -20,6 +21,10 @@ const RecruitForm = ({ formType, ...restProps }) => {
     handleChangeMaxInput,
     handleChangeSlider,
   } = formHandler;
+
+  const state = useSelector(state => state);
+  const { isLoading, data, error } = state.recruitPost;
+  const dispatch = useDispatch();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentAge, setCurrentAge] = useState([20, 45]);
@@ -34,7 +39,7 @@ const RecruitForm = ({ formType, ...restProps }) => {
           hikingLevel: '',
           recruitingGender: '',
           recruitingAge: [20, 45],
-          // description: '',
+          description: '',
           // views: 0,
           // recruiterID: '',
           // recruitees: '',
@@ -45,6 +50,51 @@ const RecruitForm = ({ formType, ...restProps }) => {
         validationSchema={validationSchema.recruitPost}
         onSubmit={values => {
           console.log(values);
+          const newRecruit = {
+            ...values,
+          };
+          // dispatch()
+          dispatch(createRecruitPostAsync(newRecruit));
+
+          if (isLoading)
+            return (
+              <div
+                style={{
+                  color: '#666',
+                  fontSize: '2rem',
+                  margin: '5rem',
+                  marginBottom: '25rem',
+                }}
+              >
+                로딩중임돠
+              </div>
+            );
+          if (error)
+            return (
+              <div
+                style={{
+                  color: '#666',
+                  fontSize: '2rem',
+                  margin: '5rem',
+                  marginBottom: '25rem',
+                }}
+              >
+                에러났음돠
+              </div>
+            );
+          if (!data)
+            return (
+              <div
+                style={{
+                  color: '#666',
+                  fontSize: '2rem',
+                  margin: '5rem',
+                  marginBottom: '25rem',
+                }}
+              >
+                데이터가 없음돠
+              </div>
+            );
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => {
