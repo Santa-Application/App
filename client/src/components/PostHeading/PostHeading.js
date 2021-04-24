@@ -11,17 +11,17 @@ import {
 } from './PostHeading.module.scss';
 
 const PostHeading = ({ postData, className, ...restProps }) => {
-  const { postTitle, postingDate, views: postingViews } = postData;
+  const { title: postTitle, postDate, views: postingViews } = postData;
 
   const containerClasses = classNames(className.headingContainer, container);
   const titleClasses = classNames(className.title, title);
 
   return (
     <div className={containerClasses}>
-      <Heading level={2} className={titleClasses} content={postTitle}></Heading>
+      <Heading level={3} className={titleClasses} content={postTitle}></Heading>
       <div className={infoContainer}>
-        <time dateTime={postDate.getPostDate(postingDate)} className={date}>
-          {postDate.getPostDateInKorean(postingDate)}
+        <time dateTime={postDate} className={date}>
+          {postDate}
         </time>
         <p className={views}>조회수 {postingViews}</p>
       </div>
@@ -29,18 +29,18 @@ const PostHeading = ({ postData, className, ...restProps }) => {
   );
 };
 
-PostHeading.defaultProps = {
-  postData: {
-    postTitle: '',
-    postingDate: {},
-    views: 0,
-  },
-  className: {},
-};
+// PostHeading.defaultProps = {
+//   postData: {
+//     title: '',
+//     postDate: {},
+//     views: 0,
+//   },
+//   className: {},
+// };
 
-PostHeading.propTypes = {
-  postData: PropTypes.exact(propTypeSchema.postHeadingData).isRequired,
-  className: PropTypes.object,
-};
+// PostHeading.propTypes = {
+//   postData: PropTypes.exact(propTypeSchema.postHeadingData).isRequired,
+//   className: PropTypes.object,
+// };
 
 export default PostHeading;
