@@ -1,7 +1,6 @@
 @import 'styles';
 
-.heading {
+.pageHeading {
   @include font-page-heading;
-
-  margin-bottom: 1em;
+  margin: 1em 0;
 }

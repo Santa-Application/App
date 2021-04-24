@@ -5,16 +5,7 @@ import axios from 'axios';
 getAllRegularPosts : 포스트 정보 + 작성자 이름(name), 작성자 프로필 이미지(accessibleURL)의 객체들이 담긴 배열
 [
   {
-    publisher: { type: String, required: true },
-    imageURL: { type: String, required: true },
-    date: { type: Date, default: Date.now, required: true },
-    content: { type: String, required: true },
-    mountain: { type: String, required: true },
-    views: { type: Number, default: 0 },
-    likes: { types: Number, default: 0 },
-    title: { type: String },
-    name: { type: String },
-    accessibleURL: { type: String } // publisher image URL
+    
   }
 ]
 */
