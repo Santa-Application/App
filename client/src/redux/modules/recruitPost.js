@@ -8,6 +8,7 @@ const GET_RECRUIT_POSTS = 'recruit/GET_POSTS';
 const CREATE_RECRUIT_POST = 'recruit/CREATE_POST';
 const UPDATE_RECRUIT_POST = 'recruit/UPDATE_POST';
 const REMOVE_RECRUIT_POST = 'recruit/REMOVE_POST';
+const TOGGLE_APPLY_RECRUITING = 'recruit/TOGGLE_APPLY_RECRUITING';
 
 // thunk action creator
 export const getRecruitPostsAsync = () =>
@@ -29,7 +30,7 @@ export const createRecruitPostAsync = newPost =>
     recruitPostAPI.createRecruitPost,
     [newPost]
   );
-export const updateRecruitPostAsync = (id, updatePost) =>
+export const updateRecruitPostAsync = (postId, updatePost) =>
   reduxUtils.createThunkActionCreator(
     {
       loading: LOADING_RECRUIT_POST,
@@ -37,9 +38,9 @@ export const updateRecruitPostAsync = (id, updatePost) =>
       error: ERROR_RECRUIT_POST,
     },
     recruitPostAPI.updateRecruitPost,
-    [id, updatePost]
+    [postId, updatePost]
   );
-export const removeRecruitPostAsync = id =>
+export const removeRecruitPostAsync = postId =>
   reduxUtils.createThunkActionCreator(
     {
       loading: LOADING_RECRUIT_POST,
@@ -47,8 +48,19 @@ export const removeRecruitPostAsync = id =>
       error: ERROR_RECRUIT_POST,
     },
     recruitPostAPI.removeRecruitPost,
-    [id]
+    [postId]
   );
+export const toggleApplyRecruiting = (postId, applicantId) => {
+  reduxUtils.createThunkActionCreator(
+    {
+      loading: LOADING_RECRUIT_POST,
+      type: TOGGLE_APPLY_RECRUITING,
+      error: ERROR_RECRUIT_POST,
+    },
+    recruitPostAPI.toggleApplyRecruiting,
+    [postId, applicantId]
+  );
+};
 /*
 export const getRecruitPostsAsync = () => async dispatch => {
   dispatch({ type: LOADING_RECRUIT_POST });
@@ -119,15 +131,18 @@ const regularPostReducer = (state = reduxUtils.initialState(), action) => {
         error: null,
       };
     case UPDATE_RECRUIT_POST:
+    case TOGGLE_APPLY_RECRUITING:
       return {
         isLoading: false,
-        data: data.map(post => (post.id === payload.id ? payload : post)),
+        data: data.map(post =>
+          post.recruitPost._id === payload.recruitPost._id ? payload : post
+        ),
         error: null,
       };
     case REMOVE_RECRUIT_POST:
       return {
         isLoading: false,
-        data: data.filter(post => post.id !== payload),
+        data: data.filter(post => post.recruitPost._id !== payload),
         error: null,
       };
     default:

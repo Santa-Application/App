@@ -14,10 +14,16 @@ import {
 } from './RegularPostForm.module.scss';
 import { handleChangeFileInput } from 'utils/handler/formHandler';
 
+<<<<<<< Updated upstream
 import top100Mountains from 'data/top100Mountains';
 
 const RegularPostForm = ({ formType, className, ...restProps }) => {
   const dispatch = useDispatch();
+=======
+const RegularPostForm = ({ className, ...restProps }) => {
+  const [formType, setFormType] = useState('create');
+  // const dispatch = useDispatch();
+>>>>>>> Stashed changes
 
   return (
     <div className={container}>
