@@ -7,8 +7,15 @@
   padding: 1em 2em;
   background-color: $white;
 
-  h1 svg {
-    height: 3rem;
+  h1 {
+    position: absolute;
+    top: 0.5em;
+    left: 50%;
+    transform: translateX(-50%);
+
+    svg {
+      height: 3rem;
+    }
   }
 
   button {
