@@ -69,7 +69,7 @@ const Navigation = ({ label, onClick, className }) => {
             </NavLink>
           </li>
           <li role={'none'}>
-            <NavLink role={'menuitem'} exact to={'/review'}>
+            <NavLink role={'menuitem'} exact to={'/reviews'}>
               <NavigationItem shape={'navReviews'} title={'reviews'} />
             </NavLink>
           </li>

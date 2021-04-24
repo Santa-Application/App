@@ -1,5 +1,5 @@
 import { Heading, Tag } from 'components';
-import { postDate, propTypeSchema } from 'utils';
+import { postDate as changePostDate, propTypeSchema } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -12,19 +12,19 @@ import {
 } from './RegularPostCard.module.scss';
 
 const RegularPostCard = ({ postData, className, ...restProps }) => {
-  const { title, postingDate, imageUrl, mountainName } = postData;
+  const { title, postDate, imageURL, mountainName } = postData;
 
   const containerClasses = classNames(className.container, container);
 
   return (
     <div className={containerClasses}>
       <div className={imageContainer}>
-        <img src={imageUrl} alt="" className={image} />
+        <img src={imageURL} alt="" className={image} />
       </div>
       <div className={textContainer}>
         <Heading level={3} className={titleStyle} content={title}></Heading>
-        <time dateTime={postDate.getPostDate(postingDate)} className={time}>
-          {postDate.getPostDateInKorean(postingDate)}
+        <time dateTime={changePostDate.dateTime(postDate)} className={time}>
+          {changePostDate.dateInKorean(postDate)}
         </time>
         <Tag type="mountain" content={mountainName}></Tag>
       </div>
@@ -32,19 +32,19 @@ const RegularPostCard = ({ postData, className, ...restProps }) => {
   );
 };
 
-RegularPostCard.defaultProps = {
-  postData: {
-    title: '',
-    imageUrl: '',
-    mountainName: '',
-    postingDate: {},
-  },
-  className: {},
-};
+// RegularPostCard.defaultProps = {
+//   postData: {
+//     title: '',
+//     imageURL: '',
+//     mountainName: '',
+//     postDate: {},
+//   },
+//   className: {},
+// };
 
-RegularPostCard.propTypes = {
-  postData: PropTypes.exact(propTypeSchema.regularPostCard).isRequired,
-  className: PropTypes.object,
-};
+// RegularPostCard.propTypes = {
+//   postData: PropTypes.exact(propTypeSchema.regularPostCard).isRequired,
+//   className: PropTypes.object,
+// };
 
 export default RegularPostCard;

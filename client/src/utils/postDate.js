@@ -25,3 +25,15 @@ export const getPostDateObject = postDate => {
     date,
   };
 };
+
+export const dateTime = postDate => {
+  const dateArray = postDate.split('-');
+  const date = dateArray[2].slice(0, 2);
+  return `${dateArray[0]}-${dateArray[1]}-${date}`;
+};
+
+export const dateInKorean = postDate => {
+  const dateArray = postDate.split('-');
+  const date = dateArray[2].slice(0, 2);
+  return `${dateArray[0]}년 ${dateArray[1]}월 ${date}일`;
+};
