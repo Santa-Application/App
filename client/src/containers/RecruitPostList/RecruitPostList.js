@@ -6,7 +6,7 @@ import { RecruitPostCard } from 'components';
 import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 
 import PropTypes from 'prop-types';
-import { recruitPostCard } from './RecruitPostList.module.scss';
+import { listContainer, recruitPostCard } from './RecruitPostList.module.scss';
 
 const RecruitPostList = ({ className, ...restProps }) => {
   const state = useSelector(state => state.recruitPost);
@@ -64,17 +64,16 @@ const RecruitPostList = ({ className, ...restProps }) => {
       <Link
         to="/recruit/create"
         style={{
-          color: '#666',
           fontSize: '1.4rem',
-          display: 'flex',
-          justifyContent: 'flex-end',
+          fontWeight: 700,
+          float: 'right',
           marginBottom: '1.5em',
           marginRight: '1em',
         }}
       >
         작성하기
       </Link>
-      <ul>
+      <ul className={listContainer}>
         {postsData.map(post => {
           return (
             <li key={post.recruitPost._id}>

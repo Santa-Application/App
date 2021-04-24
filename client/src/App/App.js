@@ -1,13 +1,8 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { HomePage, Login } from 'pages';
-import {
-  Footer,
-  Header,
-  Heading,
-  RecruitPostDetail,
-  RecruitPostList,
-} from 'components';
+import { Footer, Header, Heading } from 'components';
+import { RecruitPostList, RecruitPostDetail } from 'containers';
 import { pageHeading } from './App.module.scss';
 
 function App() {
