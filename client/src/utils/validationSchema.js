@@ -45,7 +45,7 @@ export const regularPost = Yup.object().shape({
   title: Yup.string()
     .max(80, '제목은 80자 이내로 작성해주세요')
     .required('제목은 필수항목입니다.'),
-  mountain: Yup.string().matches().required('산은 필수항목입니다.'),
+  mountainName: Yup.string().matches().required('산은 필수항목입니다.'),
   content: Yup.string()
     .max(300, '리뷰는 300자 이내로 작성해주세요.')
     .required('리뷰는 필수항목입니다.'),
@@ -58,8 +58,8 @@ export const recruitPost = Yup.object().shape({
     .required('제목은 필수항목입니다.'),
   mountainName: Yup.string().matches().required('산은 필수항목입니다.'),
   recruitDate: Yup.date().required('날짜는 필수항목입니다.'),
-  recruitingLevels: Yup.string().required('등산 레벨은 필수항목입니다.'),
-  recruitingSex: Yup.string().required('성별은 필수항목입니다.'),
+  hikingLevel: Yup.string().required('등산 레벨은 필수항목입니다.'),
+  recruitingGender: Yup.string().required('성별은 필수항목입니다.'),
   recruitingAge: Yup.array().required('나이대는 필수항목입니다.'),
   recruitingNumber: Yup.number()
     .max(3, '코로나가 풀릴때까지 4인체제 유지합시다!')
