@@ -8,7 +8,11 @@ import {
   recruitees,
 } from './StatusOfApplicationBox.module.scss';
 
-const StatusOfApplicationBox = ({ images, className, ...restProps }) => {
+const StatusOfApplicationBox = ({
+  recruiteesData,
+  className,
+  ...restProps
+}) => {
   const containerClasses = classNames(className.container, container);
   const titleClasses = classNames(className.title, title);
 
@@ -16,10 +20,10 @@ const StatusOfApplicationBox = ({ images, className, ...restProps }) => {
     <div className={containerClasses}>
       <p className={titleClasses}>신청 현황</p>
       <div className={recruiteesContainer}>
-        {images.map((image, index) => (
+        {recruiteesData.map((data, index) => (
           <ProfileImage
-            key={index}
-            src={image}
+            key={data.id}
+            src={data.imageURL}
             size="small"
             className={{ container: recruitees }}
           />

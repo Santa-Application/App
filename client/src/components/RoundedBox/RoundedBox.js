@@ -7,14 +7,14 @@ const RoundedTextBox = ({ children, className, ...restProps }) => {
   return <div className={containerClasses}>{children}</div>;
 };
 
-RoundedTextBox.defaultProps = {
-  content: '',
-  className: '',
-};
+// RoundedTextBox.defaultProps = {
+//   content: '',
+//   className: '',
+// };
 
-RoundedTextBox.propTypes = {
-  content: PropTypes.string,
-  className: PropTypes.string,
-};
+// RoundedTextBox.propTypes = {
+//   content: PropTypes.string,
+//   className: PropTypes.string,
+// };
 
 export default RoundedTextBox;
