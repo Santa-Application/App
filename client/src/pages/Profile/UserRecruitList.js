@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RecruitPostList } from 'container';
+import { RecruitPostList } from 'containers';
 import { ProfileInfoCard, MenuTab } from 'components';
 
 const UserRecruitList = ({ history, match, ...restProps }) => {
