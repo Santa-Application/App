@@ -5,7 +5,7 @@ const RecruitCreate = ({ history, match }) => {
   return (
     <main>
       <Heading content="RECRUIT" />
-      <RecruitForm history={history} match={match} />
+      <RecruitForm history={history} match={match} formType="create" />
     </main>
   );
 };

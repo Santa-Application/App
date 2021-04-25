@@ -179,7 +179,7 @@ const RangeSlider = ({ field, inputProps }) => {
         valueLabelDisplay="on"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        marks={marks}
+        // marks={marks}
         // {...field}
       />
     </div>

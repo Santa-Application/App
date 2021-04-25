@@ -23,19 +23,23 @@ form {
   > div {
     margin-bottom: 5rem;
   }
+}
 
-  .buttonContainer {
-    @include flex-row(center);
-    padding-top: 2rem;
+.buttonContainer {
+  @include flex-row(center);
+  padding-top: 2rem;
 
-    button:first-child {
-      margin-right: 2rem;
-    }
+  button:first-child {
+    margin-right: 2rem;
   }
 }
 
 a {
   color: $dark-gray;
+}
+
+img {
+  display: block;
 }
 
 .a11yHidden {

@@ -11,3 +11,7 @@ export { default as RegularList } from 'pages/Regular/RegularList';
 export { default as RegularDetail } from 'pages/Regular/RegularDetail';
 export { default as RegularEdit } from 'pages/Regular/RegularEdit';
 export { default as RegularCreate } from 'pages/Regular/RegularCreate';
+
+export { default as UserRecruitList } from 'pages/Profile/UserRecruitList';
+
+export { default as PageNotFound } from 'pages/PageNotFound/PageNotFound';

@@ -2,6 +2,7 @@ import { regularPostAPI } from 'api';
 import { reduxUtils } from 'utils';
 
 // action type
+export const INITIALIZE_REGULAR_POST = 'regular/INITIALIZE_POST';
 const LOADING_REGULAR_POST = 'regular/LOADING_POST';
 const ERROR_REGULAR_POST = 'regular/ERROR_POST';
 const GET_REGULAR_POSTS = 'regular/GET_POSTS';
@@ -49,52 +50,6 @@ export const removeRegularPostAsync = id =>
     regularPostAPI.removeRegularPost,
     [id]
   );
-/*
-export const getRegularPostsAsync = () => async dispatch => {
-  dispatch({ type: LOADING_REGULAR_POST });
-
-  try {
-    const payload = await regularPostAPI.getAllRegularPosts();
-
-    dispatch({ type: GET_REGULAR_POSTS, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_REGULAR_POST, payload: e });
-  }
-};
-export const createRegularPostAsync = newPost => async dispatch => {
-  dispatch({ type: LOADING_REGULAR_POST });
-
-  try {
-    const payload = await regularPostAPI.createRegularPost(newPost);
-
-    dispatch({ type: CREATE_REGULAR_POST, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_REGULAR_POST, payload: e });
-  }
-};
-export const updateRegularPostAsync = (id, updatePost) => async dispatch => {
-  dispatch({ type: LOADING_REGULAR_POST });
-
-  try {
-    const payload = await regularPostAPI.updateRegularPost(id, updatePost);
-
-    dispatch({ type: UPDATE_REGULAR_POST, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_REGULAR_POST, payload: e });
-  }
-};
-export const removeRegularPostAsync = id => async dispatch => {
-  dispatch({ type: LOADING_REGULAR_POST });
-
-  try {
-    const payload = await regularPostAPI.removeRegularPost(id);
-
-    dispatch({ type: REMOVE_REGULAR_POST, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_REGULAR_POST, payload: e });
-  }
-};
-*/
 
 // reducer
 const regularPostReducer = (state = reduxUtils.initialState(), action) => {
@@ -102,6 +57,8 @@ const regularPostReducer = (state = reduxUtils.initialState(), action) => {
   const { data } = state;
 
   switch (type) {
+    case INITIALIZE_REGULAR_POST:
+      return reduxUtils.initialState();
     case LOADING_REGULAR_POST:
       return reduxUtils.loadingState(data);
     case ERROR_REGULAR_POST:
@@ -113,6 +70,7 @@ const regularPostReducer = (state = reduxUtils.initialState(), action) => {
         error: null,
       };
     case CREATE_REGULAR_POST:
+      console.log(data);
       return {
         isLoading: false,
         data: [...data, payload],

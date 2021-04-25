@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {
   Button,
   Logo,
@@ -16,18 +17,21 @@ import {
   navCloseButton,
   activeBg,
   activeNav,
+  closeButton,
+  menuButton,
 } from './Header.module.scss';
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { signoutUserAsync } from 'redux/modules/auth';
+import { INITIALIZE_RECRUIT_POST } from 'redux/modules/recruitPost';
+import { INITIALIZE_REGULAR_POST } from 'redux/modules/regularPost';
 import { checkPropTypes } from 'prop-types';
 
-const Header = ({ history, mode, style, title, href, userData }) => {
+const Header = ({ history, match, mode, style, title, href, userData }) => {
   const navBgRef = useRef();
   const navRef = useRef();
+  const signedIn = useSelector(state => state.auth.signedIn);
   const dispatch = useDispatch();
-  const signedIn = sessionStorage.getItem('userInfo');
-  // const signedIn = true;
 
   const commonProps = {
     secondary: false,
@@ -50,6 +54,8 @@ const Header = ({ history, mode, style, title, href, userData }) => {
   };
   const handleClickSignout = () => {
     dispatch(signoutUserAsync());
+    dispatch({ type: INITIALIZE_RECRUIT_POST });
+    dispatch({ type: INITIALIZE_REGULAR_POST });
 
     navBgRef.current.classList.remove(activeBg);
     navRef.current.classList.remove(activeNav);
@@ -65,13 +71,16 @@ const Header = ({ history, mode, style, title, href, userData }) => {
 
   return (
     <div className={header}>
-      <Button
-        {...commonProps}
-        value={'Go back button'}
-        onClick={hadleClickGoBackButton}
-      >
-        <Icon shape={'back'} />
-      </Button>
+      {history.location.pathname !== '/' && (
+        <Button
+          {...commonProps}
+          value={'Go back button'}
+          onClick={hadleClickGoBackButton}
+          className={closeButton}
+        >
+          <Icon shape={'back'} />
+        </Button>
+      )}
       <Button
         {...commonProps}
         value={'Logo button, goes to HomePage'}
@@ -80,7 +89,12 @@ const Header = ({ history, mode, style, title, href, userData }) => {
         <Logo style={style} title={title} href={href} />
       </Button>
       {signedIn && (
-        <Button {...commonProps} value={'Menu button'} onClick={handleNavMenu}>
+        <Button
+          {...commonProps}
+          value={'Menu button'}
+          onClick={handleNavMenu}
+          className={menuButton}
+        >
           <Icon shape={'menu'} />
         </Button>
       )}
