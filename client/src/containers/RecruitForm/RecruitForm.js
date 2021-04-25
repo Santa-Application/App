@@ -1,6 +1,7 @@
 import FormItem from 'components/FormItem/FormItem';
 import { ErrorMessage, Form, Formik } from 'formik';
-import React, { useEffect, useState, useSelector, useDispatch } from 'react';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { formHandler, validationSchema } from 'utils/';
 import top100Mountains from 'data/top100Mountains';
 import { Button, Heading } from 'components';
@@ -22,16 +23,56 @@ const RecruitForm = ({ formType, ...restProps }) => {
     handleChangeSlider,
   } = formHandler;
 
-  const state = useSelector(state => state);
-  const { isLoading, data, error } = state.recruitPost;
+  // const state = useSelector(state => state);
+  // const { isLoading, data, error } = state.recruitPost;
   const dispatch = useDispatch();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentAge, setCurrentAge] = useState([20, 45]);
 
+  // if (isLoading)
+  //   return (
+  //     <div
+  //       style={{
+  //         color: '#666',
+  //         fontSize: '2rem',
+  //         margin: '5rem',
+  //         marginBottom: '25rem',
+  //       }}
+  //     >
+  //       로딩중임돠
+  //     </div>
+  //   );
+  // if (error)
+  //   return (
+  //     <div
+  //       style={{
+  //         color: '#666',
+  //         fontSize: '2rem',
+  //         margin: '5rem',
+  //         marginBottom: '25rem',
+  //       }}
+  //     >
+  //       에러났음돠
+  //     </div>
+  //   );
+  // if (!data)
+  //   return (
+  //     <div
+  //       style={{
+  //         color: '#666',
+  //         fontSize: '2rem',
+  //         margin: '5rem',
+  //         marginBottom: '25rem',
+  //       }}
+  //     >
+  //       데이터가 없음돠
+  //     </div>
+  //   );
+
   return (
     <div className={container}>
-      <Heading content="메이트를 모집하세요~" className={heading} />
+      <p className={heading}>메이트를 모집하세요~</p>
       <Formik
         initialValues={{
           mountainName: '',
@@ -50,51 +91,11 @@ const RecruitForm = ({ formType, ...restProps }) => {
         validationSchema={validationSchema.recruitPost}
         onSubmit={values => {
           console.log(values);
-          const newRecruit = {
-            ...values,
-          };
+          // const newRecruit = {
+          //   ...values,
+          // };
           // dispatch()
-          dispatch(createRecruitPostAsync(newRecruit));
-
-          if (isLoading)
-            return (
-              <div
-                style={{
-                  color: '#666',
-                  fontSize: '2rem',
-                  margin: '5rem',
-                  marginBottom: '25rem',
-                }}
-              >
-                로딩중임돠
-              </div>
-            );
-          if (error)
-            return (
-              <div
-                style={{
-                  color: '#666',
-                  fontSize: '2rem',
-                  margin: '5rem',
-                  marginBottom: '25rem',
-                }}
-              >
-                에러났음돠
-              </div>
-            );
-          if (!data)
-            return (
-              <div
-                style={{
-                  color: '#666',
-                  fontSize: '2rem',
-                  margin: '5rem',
-                  marginBottom: '25rem',
-                }}
-              >
-                데이터가 없음돠
-              </div>
-            );
+          // dispatch(createRecruitPostAsync(newRecruit));
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => {
