@@ -27,24 +27,22 @@ import {
 } from './RecruitPostDetail.module.scss';
 
 const RecruitPost = ({ match, history, ...restProps }) => {
-  const auth = useSelector(state => state.auth);
   const recruitPostsData = useSelector(state => state.recruitPost);
   const { isLoading, data, error } = recruitPostsData;
   const dispatch = useDispatch();
 
   const [isApplied, setIsApplied] = useState(false);
 
-  // const signedIn = auth.signedIn;
-  // const userId = auth.userInfo._id;
+  const userId = sessionStorage.getItem('userInfo')._id;
   const postId = match.params.postId;
 
-  // const handleClickRemovePost = () => {
-  //   dispatch(removeRecruitPostAsync(postId));
-  //   history.push('/recruit');
-  // };
-  // const handleClickEditPost = () => {
-  //   history.push(`/recruit/edit/${postId}`)
-  // }
+  const handleClickRemovePost = () => {
+    // dispatch(removeRecruitPostAsync(postId));
+    history.push('/recruit');
+  };
+  const handleClickEditPost = () => {
+    history.push(`/recruit/edit/${postId}`);
+  };
   const handleChangeApplyRecruitingButton = () => {
     // dispatch(toggleApplyRecruiting(postId, userId));
     setIsApplied(!isApplied);
@@ -96,6 +94,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
 
   const postData = data.find(_data => _data.recruitPost._id === postId);
   const { recruitPost } = postData;
+  const publisherId = postData.publisherInfo._id;
 
   return (
     <div className={container}>
@@ -120,7 +119,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
         className={{ container: statusOfRecruitees }}
       />
       <div className={buttonContainer}>
-        {/* {signedIn ? (
+        {publisherId === userId ? (
           <>
             <Button secondary onClick={handleClickRemovePost}>
               삭제하기
@@ -135,14 +134,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
           >
             {isApplied ? '메이트 취소' : '메이트 신청'}
           </Button>
-        )} */}
-        <Button
-          type="button"
-          secondary={isApplied}
-          onClick={handleChangeApplyRecruitingButton}
-        >
-          {isApplied ? '메이트 취소' : '메이트 신청'}
-        </Button>
+        )}
       </div>
     </div>
   );
