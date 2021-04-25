@@ -1,13 +1,10 @@
 @import 'styles/';
 
 .header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  height: 4.4rem;
   padding: 1em 2em;
   background-color: $white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-  // border-bottom: .1rem solid black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   h1 {
     position: absolute;
@@ -25,6 +22,15 @@
     padding: 0;
     box-shadow: none;
   }
+}
+
+.closeButton {
+  float: left;
+}
+
+.menuButton {
+  float: right;
+  margin-top: 0.3rem;
 }
 
 .navBackground {
