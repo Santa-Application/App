@@ -108,6 +108,8 @@ const Header = ({ history, mode, style, title, href, userData }) => {
             value={'side menu bar close'}
             onClick={handleNavMenu}
             className={navCloseButton}
+            aria-label={'Side menu close button'}
+            children={'메뉴 닫기'}
           >
             <Icon shape={'close'} />
           </Button>

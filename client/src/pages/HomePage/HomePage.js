@@ -8,6 +8,7 @@ import {
   subMessage,
   button,
 } from './HomePage.module.scss';
+import { waitForDomChange } from '@testing-library/dom';
 
 const HomePage = ({ history }) => {
   const handleClickLoginButton = () => {
