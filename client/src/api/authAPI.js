@@ -25,9 +25,17 @@ export const register = async newUser => {
 
 export const signin = async user => {
   try {
+    const formdata = new FormData();
+    for ( let key in user) formdata.append(key, user[key]);
+
     const response = await axios.post(
       `${URI}signin`,
-      user
+      formdata,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data' 
+        }
+      }
     );
 
     return response;
