@@ -76,7 +76,7 @@ router.post('/newpost', async (req, res) => {
     hikingLevel: req.body.hikingLevel,
     recruitingGender: req.body.recruitingGender,
     recruitingAge: req.body.recruitingAge,
-    postDate: req.body.postdate,
+    postDate: req.body.postDate,
     description: req.body.description,
     publisherID: req.body.publisherID,
     recruitDate: req.body.recruitDate,
