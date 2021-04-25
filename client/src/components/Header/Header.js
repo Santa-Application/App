@@ -18,9 +18,9 @@ import {
   activeNav
 } from './Header.module.scss';
 import { useRef } from 'react';
-import { checkPropTypes } from 'prop-types';
+import classNames from 'classnames';
 
-const Header = ({ mode, style, title, href, userData }) => {
+const Header = ({ style, title, href, userData, className }) => {
 
   const navBgRef = useRef();
   const navRef = useRef();
@@ -28,7 +28,7 @@ const Header = ({ mode, style, title, href, userData }) => {
   const commonProps = { 
     secondary: false, 
     type: 'button', 
-    disabled: false
+    disabled: false,
   };
 
   const handleNavMenu = () => {
@@ -44,9 +44,10 @@ const Header = ({ mode, style, title, href, userData }) => {
     }
   };
 
+  const componentClass = classNames(header, className);
 
   return (
-    <div className={header}>
+    <div className={componentClass}>
       <Button 
         {...commonProps}
         value={'Go back button'}

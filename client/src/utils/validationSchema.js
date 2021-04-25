@@ -14,7 +14,7 @@ export const signInSchema = Yup.object().shape({
   ),
 });
 
-export const signUpSchema = Yup.object().shape({
+export const registerSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, '닉네임은 2자 이상 작성해주세요.')
     .max(10, '닉네임은 15자 이내로 작성해주세요')

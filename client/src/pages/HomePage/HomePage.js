@@ -11,15 +11,25 @@ import {
   subMessage,
   button
 } from './HomePage.module.scss';
+import { waitForDomChange } from '@testing-library/dom';
 
 const HomePage = () => {
+
+  const handleClickRegister = e => {
+    window.location.href = '/register';
+  };
+
+  const handleClickLogin = e => {
+    window.location.href = '/login';
+  };
+
   return (
     <div className={homePage}>
       <Logo 
         className={logo}
         mode={'white'} 
         title={'산타 앱 로고'} 
-        href={'/Homepage'}
+        href={'/'}
       />
       <div className={headMessage}>
         <Heading level={2} content={'오늘 기분타?'} />
@@ -32,6 +42,7 @@ const HomePage = () => {
           type={'button'} 
           disabled={false} 
           value={'로그인 버튼'}
+          onClick={handleClickLogin}
         >
         로그인
         </Button>
@@ -40,6 +51,7 @@ const HomePage = () => {
           type={'button'}
           disabled={false}
           value={'회원가입 버튼'}
+          onClick={handleClickRegister}
         >
         회원가입
         </Button>
