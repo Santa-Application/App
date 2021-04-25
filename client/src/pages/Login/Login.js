@@ -1,28 +1,12 @@
-import {
-  SignInForm
-} from 'containers';
-import {
-  Heading
-} from 'components';
-import {
-  heading,
-  signInForm,
-  buttons
-} from './Login.module.scss';
-import classNames from 'classnames';
+import { SignInForm } from 'containers';
+import { Heading } from 'components';
 
-const Login = () => {
-
-  const classes = classNames(heading, signInForm, buttons);
-
+const Login = ({ history }) => {
   return (
-    <div className={classes}>
-      <Heading
-        level={2}
-        content={'sign in'}
-      />
-      <SignInForm />
-    </div>
+    <main>
+      <Heading content="log in" />
+      <SignInForm history={history} />
+    </main>
   );
 };
 

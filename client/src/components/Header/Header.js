@@ -18,8 +18,7 @@ import {
   activeNav,
 } from './Header.module.scss';
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { signoutUserAsync } from 'redux/modules/auth';
 import { checkPropTypes } from 'prop-types';
 
@@ -27,8 +26,8 @@ const Header = ({ history, mode, style, title, href, userData }) => {
   const navBgRef = useRef();
   const navRef = useRef();
   const dispatch = useDispatch();
-  // const signedIn = useSelector(state => state.auth.signedIn);
-  const signedIn = true;
+  const signedIn = sessionStorage.getItem('userInfo');
+  // const signedIn = true;
 
   const commonProps = {
     secondary: false,

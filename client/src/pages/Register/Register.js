@@ -1,20 +1,12 @@
-import {
-  RegisterForm
-} from 'containers';
-import {
-  Header
-} from 'components';
-import {
-  head,
-  registerPage
-} from './Register.module.scss';
+import { RegisterForm } from 'containers';
+import { Heading } from 'components';
 
-const Register = () => {
+const Register = ({ history }) => {
   return (
-    <div className={registerPage}>
-      <Header />
-      <RegisterForm className={head}/>
-    </div>
+    <main>
+      <Heading content="sign up" />
+      <RegisterForm history={history} />
+    </main>
   );
 };
 

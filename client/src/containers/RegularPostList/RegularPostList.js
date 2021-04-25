@@ -70,7 +70,7 @@ const RegularPostList = ({ className, ...restProps }) => {
   return (
     <>
       <Link
-        to="/review/create"
+        to="/reviews/create"
         style={{
           fontSize: '1.4rem',
           fontWeight: 700,
