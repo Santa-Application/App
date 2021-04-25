@@ -5,6 +5,7 @@ import { Footer, Header, Heading } from 'components';
 import { RecruitPostList, RecruitPostDetail } from 'containers';
 import { pageHeading } from './App.module.scss';
 
+
 function App() {
   return (
     <div className="App">

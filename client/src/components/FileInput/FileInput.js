@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import PropTypes, { string } from 'prop-types';
 import { fileInput } from './FileInput.module.scss';
 
-const FileInput = ({ field, inputProps }) => {
+const FileInput = ({ field, inputProps, form }) => {
   const {
     id,
     label,
@@ -46,6 +46,16 @@ const FileInput = ({ field, inputProps }) => {
   //   const imagePath = await uploadImage(e.target.file[0]);
   //   setFieldValue(imagePath);
   // };
+  // console.log(form);
+  const handleChange = e => {
+    const file  =  e.currentTarget.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      form.setFieldValue(field.name, file, false);
+    };
+  };
 
   return (
     <div className={FileInputClasses}>
@@ -56,10 +66,8 @@ const FileInput = ({ field, inputProps }) => {
           type="file"
           min="1"
           accept=".gif, .jpg, .png"
-          {...field}
-          onChange={e => {
-            onChange(e, setFieldValue);
-          }}
+          // {...field}
+          onChange={e => handleChange(e)}
         />
       </label>
       <span children={fileRoute}></span>

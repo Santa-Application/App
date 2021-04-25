@@ -2,8 +2,21 @@ import React from 'react';
 import { Form, Formik } from 'formik';
 import FormItem from 'components/FormItem/FormItem';
 import { Button } from 'components';
+import { useDispatch } from 'react-redux';
+import { signinUserAsync } from 'redux/modules/auth';
+
+import { 
+  buttons
+} from './SignInForm.module.scss';
 
 const SignInForm = () => {
+
+  const dispatch = useDispatch();
+  
+  const handleRegisterButtonClick = () => {
+    window.location.href = '/register';
+  };
+
   return (
     <Formik
       initialValues={{
@@ -11,7 +24,7 @@ const SignInForm = () => {
         password: '',
       }}
       onSubmit={values => {
-        console.log(values);
+        dispatch(signinUserAsync(values));
       }}
     >
       <Form>
@@ -45,8 +58,10 @@ const SignInForm = () => {
             name: 'password',
           }}
         />
-        <Button type="button" secondary="true" children="회원가입" />
-        <Button type="submit" children="로그인" />
+        <div className={buttons}>
+          <Button type="button" secondary={true} children="회원가입" onClick={handleRegisterButtonClick}/>
+          <Button type="submit" children="로그인" />
+        </div>
       </Form>
     </Formik>
   );

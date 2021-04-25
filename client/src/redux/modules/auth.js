@@ -15,24 +15,26 @@ const ERROR_SIGNOUT_USER = 'signout/ERROR';
 const SIGNOUT_USER = 'signout/SUCCESS';
 
 // thunk action creator
-export const registerNewUserAsync = () =>
+export const registerNewUserAsync = newUser =>
   reduxUtils.createThunkActionCreator(
     {
       loading: LOADING_REGISTER_USER,
       type: CREATE_USER,
       error: ERROR_REGISTER_USER,
     },
-    authAPI.register
+    authAPI.register,
+    [newUser]
   );
 
-export const signinUserAsync = () =>
+export const signinUserAsync = User =>
   reduxUtils.createThunkActionCreator(
     {
       loading: LOADING_SIGNIN_USER,
       type: SIGNIN_USER,
       error: ERROR_SIGNIN_USER,
     },
-    authAPI.signin
+    authAPI.signin,
+    [User]
   );
 
 export const signoutUserAsync = () =>
@@ -63,7 +65,7 @@ const authReducer = (state = reduxUtils.authInitialState(), action) => {
     case SIGNIN_USER:
       return {
         isLoading: false,
-        token: payload.header.token,
+        token: payload.headers['auth-token'],
         userInfo: payload.data,
         signedIn: true,
         error: null,

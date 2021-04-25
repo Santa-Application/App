@@ -13,7 +13,7 @@ router.get('/', async (_, res) => {
     const response = await Promise.all(
       all.map(async (recruitPost) => {
         const publisherInfo = await User.findById(recruitPost.publisherID);
-        const imageURL = await downloadFile(publisherInfo.imageURL);
+        const publisherImageURL = await downloadFile(publisherInfo.imageURL);
         let recruitees = [];
 
         if (recruitPost.recruitees) {
@@ -26,7 +26,7 @@ router.get('/', async (_, res) => {
         }
 
         return {
-          recruitPost, publisherInfo, imageURL, recruitees,
+          recruitPost, publisherInfo, publisherImageURL, recruitees,
         };
       }),
     );
@@ -44,7 +44,7 @@ router.get('/:id', async (req, res) => {
     // get recruiterName
     const publisherInfo = await User.findById(recruitPost.publisherID);
     // get recruiter profile ImageURL
-    const imageURL = await downloadFile(publisherInfo.imageURL);
+    const publisherImageURL = await downloadFile(publisherInfo.imageURL);
     // get all the applicant imageURLs
     let recruitees = [];
 
@@ -58,7 +58,7 @@ router.get('/:id', async (req, res) => {
     }
 
     const response = {
-      recruitPost, publisherInfo, imageURL, recruitees,
+      recruitPost, publisherInfo, publisherImageURL, recruitees,
     };
 
     res.status(200).send(response);
@@ -86,13 +86,13 @@ router.post('/newpost', async (req, res) => {
   try {
     const recruitPost = await recruitpost.save();
     const publisherInfo = await User.findById(recruitPost.publisherID);
-    const imageURL = await downloadFile(publisherInfo.imageURL);
+    const publisherImageURL = await downloadFile(publisherInfo.imageURL);
     const recruitees = [];
 
     const response = {
       recruitPost,
       publisherInfo,
-      imageURL,
+      publisherImageURL,
       recruitees,
     };
 
@@ -113,7 +113,7 @@ router.patch('/:id', async (req, res) => {
       { new: true },
     );
     const publisherInfo = await User.findById(updatedPost.publisherID);
-    const imageURL = await downloadFile(publisherInfo.imageURL);
+    const publisherImageURL = await downloadFile(publisherInfo.imageURL);
     let recruitees = [];
     if (updatedPost.recruitees) {
       recruitees = Promise.all(
@@ -127,7 +127,7 @@ router.patch('/:id', async (req, res) => {
     const response = {
       recruitPost: updatedPost,
       publisherInfo,
-      imageURL,
+      publisherImageURL,
       recruitees,
     };
 
@@ -177,6 +177,17 @@ router.post('/:id/:applicantID', async (req, res) => {
         return { recruitee, recruiteeImageURL };
       }),
     );
+
+    // add to applicant appliedRecruitPosts
+    const updatedUserInfo = await User.findByIdAndUpdate(
+      applicantID,
+      {
+        appliedRecruitsPosts: id,
+      },
+      { new: true },
+    );
+
+    if (!updatedUserInfo) res.status(400).send('Could not save to update the user appliedRecruitsposts');
 
     res.status(200).send(recruitees);
   } catch (err) {
