@@ -26,22 +26,27 @@ import {
   buttonContainer,
 } from './RecruitPostDetail.module.scss';
 
-const RecruitPost = ({ match, ...restProps }) => {
-  const state = useSelector(state => state);
-  const { isLoading, data, error } = state.recruitPost;
+const RecruitPost = ({ match, history, ...restProps }) => {
+  const auth = useSelector(state => state.auth);
+  const recruitPostsData = useSelector(state => state.recruitPost);
+  const { isLoading, data, error } = recruitPostsData;
   const dispatch = useDispatch();
 
   const [isApplied, setIsApplied] = useState(false);
 
-  // const signedIn = state.auth.signedIn;
-  // const applicantId = state.auth.userInfo._id;
+  // const signedIn = auth.signedIn;
+  // const userId = auth.userInfo._id;
   const postId = match.params.postId;
 
-  const handleClickRemovePost = () => {
-    dispatch(removeRecruitPostAsync(postId));
-  };
+  // const handleClickRemovePost = () => {
+  //   dispatch(removeRecruitPostAsync(postId));
+  //   history.push('/recruit');
+  // };
+  // const handleClickEditPost = () => {
+  //   history.push(`/recruit/edit/${postId}`)
+  // }
   const handleChangeApplyRecruitingButton = () => {
-    // dispatch(toggleApplyRecruiting(postId, applicantId));
+    // dispatch(toggleApplyRecruiting(postId, userId));
     setIsApplied(!isApplied);
   };
 
@@ -120,7 +125,7 @@ const RecruitPost = ({ match, ...restProps }) => {
             <Button secondary onClick={handleClickRemovePost}>
               삭제하기
             </Button>
-            <Link to={`/recruit/edit/${applicantId}`}>수정하기</Link>
+            <Button onClick={handleClickEditPost}>수정하기</Button>
           </>
         ) : (
           <Button

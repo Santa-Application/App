@@ -2,7 +2,12 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { HomePage, Login } from 'pages';
 import { Footer, Header, Heading } from 'components';
-import { RecruitPostList, RecruitPostDetail } from 'containers';
+import {
+  RecruitPostList,
+  RecruitPostDetail,
+  RegularPostList,
+  RegularPostDetail,
+} from 'containers';
 import { pageHeading } from './App.module.scss';
 
 
@@ -20,13 +25,17 @@ function App() {
           />
           <Route path="/recruit" exact component={RecruitPostList} />
           <Route path="/recruit/:postId" exact component={RecruitPostDetail} />
+
           <Route
-            path="/review"
+            path="/reviews"
             component={() => (
-              <Heading content="REVIEW" className={pageHeading} />
+              <Heading content="REVIEWS" className={pageHeading} />
             )}
           />
+          <Route path="/reviews" exact component={RegularPostList} />
+          <Route path="/reviews/:postId" exact component={RegularPostDetail} />
           <Route path="/login" exact component={Login} />
+          {/* <Route path="/signup" exact component={} /> */}
           <Switch></Switch>
         </main>
         <Route path="/" exact component={HomePage} />
