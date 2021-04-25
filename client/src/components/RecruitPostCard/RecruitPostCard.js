@@ -1,5 +1,5 @@
 import { Heading, ProfileImage, Tag } from 'components';
-import { propTypeSchema } from 'utils';
+// import { propTypeSchema } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -10,16 +10,10 @@ import {
 } from './RecruitPostCard.module.scss';
 
 const RecruitPostCard = ({ postData, className, ...restProps }) => {
-  const {
-    description,
-    imageURL,
-    mountainName: mountain,
-    recruitDate,
-    recruitingNumber: person,
-    recruitingSex: gender,
-  } = postData;
+  const { recruitPost, imageURL } = postData;
+
   let genderContent = '';
-  switch (gender) {
+  switch (recruitPost.recruitingGender) {
     case 'female':
       genderContent = '여성';
       break;
@@ -39,12 +33,17 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
     <div className={containerClasses}>
       <ProfileImage src={imageURL} size="medium" />
       <div className={postInfo}>
-        <Heading level={3} className={title} content={description}></Heading>
+        <Heading
+          level={3}
+          className={title}
+          content={recruitPost.title}
+        ></Heading>
         <div className={tagList}>
-          <Tag type="mountain" content={mountain} />
-          <Tag type="date" content={recruitDate} />
-          <Tag type="person" content={`${person}명`} />
-          <Tag type={gender} content={genderContent} />
+          <Tag type="mountain" content={recruitPost.mountainName} />
+          {/* <Tag type="date" content={getPostDateInKorean(recruitDate)} /> */}
+          <Tag type="date" content={recruitPost.recruitDate} />
+          <Tag type="person" content={`${recruitPost.recruitingNumber}명`} />
+          <Tag type={recruitPost.recruitingGender} content={genderContent} />
         </div>
       </div>
     </div>
@@ -52,19 +51,19 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
 };
 
 RecruitPostCard.defaultProps = {
-  postData: {
-    title: '',
-    imageURL: '',
-    mountainName: '',
-    recruitDate: '',
-    recruitingNumber: 0,
-    recruitingSex: 'genderBoth',
-  },
+  // postData: {
+  //   title: '',
+  //   imageURL: '',
+  //   mountainName: '',
+  //   recruitDate: '',
+  //   recruitingNumber: 0,
+  //   recruitingSex: 'genderBoth',
+  // },
   className: {},
 };
 
 RecruitPostCard.propTypes = {
-  postData: PropTypes.exact(propTypeSchema.recruitPostCard).isRequired,
+  // postData: PropTypes.exact(propTypeSchema.recruitPostCard).isRequired,
   className: PropTypes.objectOf(PropTypes.string),
 };
 

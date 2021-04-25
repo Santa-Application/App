@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { FormItem, Button, Heading } from 'components';
-// import { validationSchema } from 'utils';
+import { validationSchema } from 'utils';
 // import { createRegularPostAsync } from 'redux/modules/regularPost';
 // import PropTypes from 'prop-types';
 // import classNames from 'classnames';
@@ -29,7 +29,7 @@ const RegularPostForm = ({ formType, className, ...restProps }) => {
           imageURL: '',
           content: '',
         }}
-        // validationSchema={validationSchema.regularPost}
+        validationSchema={validationSchema.regularPost}
         onSubmit={values => {
           console.log(values);
           // dispatch(createRegularPostAsync(newPost));
@@ -51,9 +51,13 @@ const RegularPostForm = ({ formType, className, ...restProps }) => {
               className={formItem}
             />
             <FormItem
+              headingProps={{ level: 3, content: '등산한 산' }}
+              descProps={{
+                content: '등산한 산을 지정해주세요',
+              }}
               inputProps={{
-                id: 'mountain',
-                name: 'mountain',
+                id: 'mountainName',
+                name: 'mountainName',
                 formType: 'select',
                 placeholder: '등산한 산을 지정해주세요',
                 setFieldValue,
@@ -61,10 +65,6 @@ const RegularPostForm = ({ formType, className, ...restProps }) => {
                 handleChange,
                 datas: top100Mountains,
               }}
-              descProps={{
-                content: '등산한 산을 지정해주세요',
-              }}
-              headingProps={{ level: 3, content: '등산한 산' }}
               className={formItem}
             />
             <FormItem

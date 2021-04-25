@@ -3,11 +3,16 @@
 
 html {
   font-size: 10px;
+  color: $dark-gray;
 }
 
 main {
   width: 85vw;
-  margin: 5em auto;
+  margin: 0 auto;
+}
+
+a {
+  color: $dark-gray;
 }
 
 .a11yHidden {
@@ -53,10 +58,4 @@ input,
 textarea,
 select {
   outline: none;
-}
-
-h2 {
-  @include font-page-heading;
-
-  margin-bottom: 1em;
 }
