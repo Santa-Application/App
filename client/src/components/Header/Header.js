@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {
   Button,
   Logo,
@@ -63,10 +64,11 @@ const Header = ({ history, match, mode, style, title, href, userData }) => {
   const handleClickLogo = () => {
     signedIn ? history.push('/main') : history.push('/');
   };
-
   return (
     <div className={header}>
-      {history.location.pathName === '/' || (
+      {(history.location.pathname !== '/' ||
+        history.location.pathname !== '/signup' ||
+        history.location.pathname !== '/login') && (
         <Button
           {...commonProps}
           value={'Go back button'}

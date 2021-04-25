@@ -125,6 +125,7 @@ const regularPostReducer = (state = reduxUtils.initialState(), action) => {
         error: null,
       };
     case CREATE_RECRUIT_POST:
+      console.log(data);
       return {
         isLoading: false,
         data: [...data, payload],

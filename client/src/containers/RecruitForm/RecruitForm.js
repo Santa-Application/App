@@ -1,10 +1,10 @@
 import FormItem from 'components/FormItem/FormItem';
-import { ErrorMessage, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { formHandler, validationSchema } from 'utils/';
 import top100Mountains from 'data/top100Mountains';
-import { Button, Heading } from 'components';
+import { Button } from 'components';
 import {
   container,
   heading,
@@ -90,12 +90,15 @@ const RecruitForm = ({ formType, ...restProps }) => {
         }}
         validationSchema={validationSchema.recruitPost}
         onSubmit={values => {
-          console.log(values);
-          // const newRecruit = {
-          //   ...values,
-          // };
-          // dispatch()
-          // dispatch(createRecruitPostAsync(newRecruit));
+          const userId = JSON.parse(sessionStorage.getItem('userInfo'))._id;
+          console.log(userId);
+          const newRecruit = {
+            ...values,
+            publisherId: userId,
+            postDate: new Date(),
+          };
+          console.log(newRecruit);
+          dispatch(createRecruitPostAsync(newRecruit));
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => {

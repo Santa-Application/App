@@ -33,8 +33,13 @@ export const getRecruitPostById = async id => {
 export const createRecruitPost = async newPost => {
   try {
     const response = await axios.post(
-      'http://3.36.114.117:8001/api/recruitpost',
-      newPost
+      'http://3.36.114.117:8001/api/recruitpost/newpost',
+      newPost,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
     );
 
     return response.data;
@@ -47,7 +52,12 @@ export const updateRecruitPost = async (id, updatePost) => {
   try {
     const response = await axios.patch(
       `http://3.36.114.117:8001/api/recruitpost/${id}`,
-      updatePost
+      updatePost,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
     );
 
     return response.data;
