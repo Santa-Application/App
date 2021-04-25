@@ -24,13 +24,14 @@ import {
 import { filterData } from 'utils';
 
 const RegularPost = ({ match, history, ...restProps }) => {
-  const auth = useSelector(state => state.auth);
   const regularPostsData = useSelector(state => state.regularPost);
+  const publisherId = useSelector(
+    state => state.regularPost.data.publisherInfo_id
+  );
   const { isLoading, data, error } = regularPostsData;
   const dispatch = useDispatch();
 
-  // const signedIn = auth.signedIn;
-  // const userId = auth.userInfo._id;
+  const userId = sessionStorage.getItem('userInfo')._id;
   const postId = match.params.postId;
 
   const handleClickRemovePost = () => {
@@ -86,11 +87,11 @@ const RegularPost = ({ match, history, ...restProps }) => {
     );
 
   const postData = data.find(_data => _data.regularPost_id === postId);
-  // const { regularPost } = postData;
+  const { regularPost } = postData;
 
   return (
     <div className={container}>
-      {/* <div className={imageContainer}>
+      <div className={imageContainer}>
         <img src={regularPost.imageURL} alt="" />
       </div>
       <div className={publisherInformationContainer}>
@@ -103,8 +104,8 @@ const RegularPost = ({ match, history, ...restProps }) => {
         postData={filterData.postHeading(regularPost)}
         className={{ headingContainer }}
       />
-      <p className={text}>{regularPost.content}</p> */}
-      {/* {signedIn && (
+      <p className={text}>{regularPost.content}</p>
+      {publisherId === userId && (
         <div className={buttonContainer}>
           <Button
             type="button"
@@ -117,7 +118,7 @@ const RegularPost = ({ match, history, ...restProps }) => {
             수정하기
           </Button>
         </div>
-      )} */}
+      )}
       <div className={buttonContainer}>
         <Button type="button" secondary={true} onClick={handleClickRemovePost}>
           삭제하기

@@ -21,7 +21,7 @@ const RegularPostForm = ({ formType, className, ...restProps }) => {
 
   return (
     <div className={container}>
-      <Heading content="멋진 리뷰를 작성해주세요~" className={heading} />
+      <p className={heading}>멋진 리뷰를 작성해주세요~</p>
       <Formik
         initialValues={{
           title: '',
