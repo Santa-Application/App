@@ -1,20 +1,15 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
-import FormItem from 'components/FormItem/FormItem';
-import { Button } from 'components';
+import { Button, FormItem } from 'components';
 import { useDispatch } from 'react-redux';
 import { signinUserAsync } from 'redux/modules/auth';
+import { validationSchema } from 'utils';
 
-import { 
-  buttons
-} from './SignInForm.module.scss';
-
-const SignInForm = () => {
-
+const SignInForm = ({ history }) => {
   const dispatch = useDispatch();
-  
-  const handleRegisterButtonClick = () => {
-    window.location.href = '/register';
+
+  const handleClickRegisterButton = () => {
+    history.push('/signup');
   };
 
   return (
@@ -23,8 +18,10 @@ const SignInForm = () => {
         email: '',
         password: '',
       }}
+      validationSchema={validationSchema.signInSchema}
       onSubmit={values => {
         dispatch(signinUserAsync(values));
+        history.push('/main');
       }}
     >
       <Form>
@@ -58,8 +55,13 @@ const SignInForm = () => {
             name: 'password',
           }}
         />
-        <div className={buttons}>
-          <Button type="button" secondary={true} children="회원가입" onClick={handleRegisterButtonClick}/>
+        <div className="buttonContainer">
+          <Button
+            type="button"
+            secondary={true}
+            children="회원가입"
+            onClick={handleClickRegisterButton}
+          />
           <Button type="submit" children="로그인" />
         </div>
       </Form>
