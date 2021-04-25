@@ -1,7 +1,6 @@
 /* eslint-disable indent */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import {
   PublisherInformation,
@@ -11,7 +10,6 @@ import {
   Button,
 } from 'components';
 import {
-  getRecruitPostsAsync,
   removeRecruitPostAsync,
   toggleApplyRecruiting,
 } from 'redux/modules/recruitPost';
@@ -25,15 +23,16 @@ import {
   statusOfRecruitees,
   buttonContainer,
 } from './RecruitPostDetail.module.scss';
+import { PageNotFound } from 'pages';
 
 const RecruitPost = ({ match, history, ...restProps }) => {
+  const userId = useSelector(state => state.auth.userInfo._id);
   const recruitPostsData = useSelector(state => state.recruitPost);
   const { isLoading, data, error } = recruitPostsData;
   const dispatch = useDispatch();
 
   const [isApplied, setIsApplied] = useState(false);
 
-  const userId = sessionStorage.getItem('userInfo')._id;
   const postId = match.params.postId;
 
   const handleClickRemovePost = () => {
@@ -47,10 +46,6 @@ const RecruitPost = ({ match, history, ...restProps }) => {
     // dispatch(toggleApplyRecruiting(postId, userId));
     setIsApplied(!isApplied);
   };
-
-  useEffect(() => {
-    dispatch(getRecruitPostsAsync());
-  }, []);
 
   if (isLoading)
     return (

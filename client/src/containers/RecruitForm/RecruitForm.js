@@ -1,6 +1,6 @@
 import FormItem from 'components/FormItem/FormItem';
 import { Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { formHandler, validationSchema } from 'utils/';
 import top100Mountains from 'data/top100Mountains';
@@ -14,7 +14,7 @@ import {
 } from './RecruitForm.module.scss';
 import { createRecruitPostAsync } from 'redux/modules/recruitPost';
 
-const RecruitForm = ({ formType, ...restProps }) => {
+const RecruitForm = ({ history, formType, ...restProps }) => {
   const {
     handleSelectDate,
     handleFocusAllInput,
@@ -23,52 +23,19 @@ const RecruitForm = ({ formType, ...restProps }) => {
     handleChangeSlider,
   } = formHandler;
 
-  // const state = useSelector(state => state);
-  // const { isLoading, data, error } = state.recruitPost;
+  const userId = useSelector(state => state.auth.userInfo._id);
+  // const postsData = useSelector(state => state.recruitPost.data);
+  // const postsLength = postsData.length;
+  // const postId = postsData[postsLength - 1];
+  // console.log(postId);
   const dispatch = useDispatch();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentAge, setCurrentAge] = useState([20, 45]);
 
-  // if (isLoading)
-  //   return (
-  //     <div
-  //       style={{
-  //         color: '#666',
-  //         fontSize: '2rem',
-  //         margin: '5rem',
-  //         marginBottom: '25rem',
-  //       }}
-  //     >
-  //       로딩중임돠
-  //     </div>
-  //   );
-  // if (error)
-  //   return (
-  //     <div
-  //       style={{
-  //         color: '#666',
-  //         fontSize: '2rem',
-  //         margin: '5rem',
-  //         marginBottom: '25rem',
-  //       }}
-  //     >
-  //       에러났음돠
-  //     </div>
-  //   );
-  // if (!data)
-  //   return (
-  //     <div
-  //       style={{
-  //         color: '#666',
-  //         fontSize: '2rem',
-  //         margin: '5rem',
-  //         marginBottom: '25rem',
-  //       }}
-  //     >
-  //       데이터가 없음돠
-  //     </div>
-  //   );
+  const handleClickCancel = () => {
+    history.push('/recruit');
+  };
 
   return (
     <div className={container}>
@@ -90,15 +57,20 @@ const RecruitForm = ({ formType, ...restProps }) => {
         }}
         validationSchema={validationSchema.recruitPost}
         onSubmit={values => {
-          const userId = JSON.parse(sessionStorage.getItem('userInfo'))._id;
-          console.log(userId);
-          const newRecruit = {
+          const formData = new FormData();
+          const newPostObj = {
             ...values,
-            publisherId: userId,
-            postDate: new Date(),
+            publisherID: userId,
+            postdate: new Date(),
           };
-          console.log(newRecruit);
-          dispatch(createRecruitPostAsync(newRecruit));
+          console.log(newPostObj);
+
+          Object.keys(newPostObj).forEach(key =>
+            formData.append(key, newPostObj[key])
+          );
+          dispatch(createRecruitPostAsync(formData));
+          // formType === 'create' && history.push(`/reviews/${newPostId}`);
+          // formType === 'edit' && history.push(`/reviews/${match.params.postId}`);
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => {
@@ -121,15 +93,15 @@ const RecruitForm = ({ formType, ...restProps }) => {
                 className={formItem}
               />
               <FormItem
-                headingProps={{ level: 3, content: '등산한 산' }}
+                headingProps={{ level: 3, content: '등산할 산' }}
                 descProps={{
-                  content: '등산한 산을 지정해주세요',
+                  content: '등산할 산을 지정해주세요',
                 }}
                 inputProps={{
                   id: 'mountainName',
                   name: 'mountainName',
                   formType: 'select',
-                  placeholder: '등산한 산을 지정해주세요',
+                  placeholder: '등산할 산을 지정해주세요',
                   setFieldValue,
                   handleBlur,
                   handleChange,
@@ -160,10 +132,11 @@ const RecruitForm = ({ formType, ...restProps }) => {
               <FormItem
                 headingProps={{
                   level: 3,
-                  content: '등반 레벨',
+                  content: '등산 레벨',
                 }}
                 descProps={{
-                  content: '등반 레벨',
+                  content:
+                    '같이 등산하고 싶은 메이트의 등산 레벨을 지정해주세요',
                 }}
                 inputProps={{
                   formType: 'hikingLevel',
@@ -250,6 +223,7 @@ const RecruitForm = ({ formType, ...restProps }) => {
                   secondary
                   children="취소하기"
                   className={cancelButton}
+                  onClick={handleClickCancel}
                 />
                 <Button>
                   {formType === 'create' ? '등록하기' : '수정하기'}

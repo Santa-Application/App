@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -10,29 +9,20 @@ import {
 import PropTypes from 'prop-types';
 // import classNames from 'classnames';
 import {
-  container,
   imageContainer,
   publisherInformationContainer,
   headingContainer,
   text,
-  buttonContainer,
 } from './RegularPostDetail.module.scss';
-import {
-  getRegularPostsAsync,
-  removeRegularPostAsync,
-} from 'redux/modules/regularPost';
+import { removeRegularPostAsync } from 'redux/modules/regularPost';
 import { filterData } from 'utils';
 
 const RegularPost = ({ match, history, ...restProps }) => {
+  const userId = useSelector(state => state.auth.userInfo._id);
   const regularPostsData = useSelector(state => state.regularPost);
-  const publisherId = useSelector(
-    state => state.regularPost.data.publisherInfo_id
-  );
   const { isLoading, data, error } = regularPostsData;
-  const dispatch = useDispatch();
-
-  const userId = sessionStorage.getItem('userInfo')._id;
   const postId = match.params.postId;
+  const dispatch = useDispatch();
 
   const handleClickRemovePost = () => {
     dispatch(removeRegularPostAsync(postId));
@@ -41,10 +31,6 @@ const RegularPost = ({ match, history, ...restProps }) => {
   const handleClickEditPost = () => {
     history.push(`/reviews/edit/${postId}`);
   };
-
-  useEffect(() => {
-    dispatch(getRegularPostsAsync());
-  }, []);
 
   if (isLoading)
     return (
@@ -86,11 +72,14 @@ const RegularPost = ({ match, history, ...restProps }) => {
       </div>
     );
 
-  const postData = data.find(_data => _data.regularPost_id === postId);
+  const postData = regularPostsData.data.find(_data => {
+    return _data.regularPost._id === postId;
+  });
   const { regularPost } = postData;
+  const publisherId = postData.publisherInfo._id;
 
   return (
-    <div className={container}>
+    <div>
       <div className={imageContainer}>
         <img src={regularPost.imageURL} alt="" />
       </div>
@@ -106,7 +95,7 @@ const RegularPost = ({ match, history, ...restProps }) => {
       />
       <p className={text}>{regularPost.content}</p>
       {publisherId === userId && (
-        <div className={buttonContainer}>
+        <div className="buttonContainer">
           <Button
             type="button"
             secondary={true}
@@ -119,14 +108,6 @@ const RegularPost = ({ match, history, ...restProps }) => {
           </Button>
         </div>
       )}
-      <div className={buttonContainer}>
-        <Button type="button" secondary={true} onClick={handleClickRemovePost}>
-          삭제하기
-        </Button>
-        <Button type="button" onClick={handleClickEditPost}>
-          수정하기
-        </Button>
-      </div>
     </div>
   );
 };

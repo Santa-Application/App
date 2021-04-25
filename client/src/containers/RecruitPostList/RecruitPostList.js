@@ -15,7 +15,7 @@ const RecruitPostList = ({ className, ...restProps }) => {
 
   useEffect(() => {
     dispatch(getRecruitPostsAsync());
-  }, []);
+  }, [dispatch]);
 
   if (isLoading)
     return (
@@ -73,6 +73,7 @@ const RecruitPostList = ({ className, ...restProps }) => {
       </Link>
       <ul className={listContainer}>
         {data.map(post => {
+          // console.log(post.recruitPost._id);
           return (
             <li key={post.recruitPost._id}>
               <Link to={`/recruit/${post.recruitPost._id}`}>
