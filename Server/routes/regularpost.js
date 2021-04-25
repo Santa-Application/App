@@ -51,7 +51,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST A REGULAR POST
-router.post('/newpost', upload.single('image'), async (req, res) => {
+router.post('/newpost', upload.single('imageURL'), async (req, res) => {
   // generate imageURL(or just image Key)
   const { file } = req;
   const { Key } = await uploadFile(file);
