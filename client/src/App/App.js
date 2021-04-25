@@ -13,6 +13,7 @@ import {
   RegularCreate,
   RegularEdit,
   UserRecruitList,
+  PageNotFound,
 } from 'pages';
 import { Footer, Header } from 'components';
 
@@ -33,7 +34,10 @@ function App() {
           <Route path="/reviews/edit/:postId" exact component={RegularEdit} />
           <Route path="/reviews/:postId" exact component={RegularDetail} />
 
-          <Route path="/:userId" exact component={UserRecruitList} />
+          {/* todo: 에러 해결 */}
+          {/* <Route path="/:userId" exact component={UserRecruitList} /> */}
+          <Route path="/page-not-found" component={PageNotFound} />
+          <Redirect to="/page-not-found" />
         </Switch>
 
         <Route path="/login" exact component={Login} />
