@@ -1,6 +1,6 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { HomePage, Login } from 'pages';
+import { HomePage, Login, Register } from 'pages';
 import { Footer, Header, Heading } from 'components';
 import {
   RecruitPostList,
@@ -35,7 +35,7 @@ function App() {
           <Route path="/reviews" exact component={RegularPostList} />
           <Route path="/reviews/:postId" exact component={RegularPostDetail} />
           <Route path="/login" exact component={Login} />
-          {/* <Route path="/signup" exact component={} /> */}
+          <Route path="/signup" exact component={Register} />
           <Switch></Switch>
         </main>
         <Route path="/" exact component={HomePage} />
