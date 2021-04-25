@@ -1,11 +1,5 @@
 @import 'styles';
 
-.container {
-  width: 85vw;
-
-  margin: 0 auto 10em;
-}
-
 .imageContainer {
   margin-bottom: 5em;
 
@@ -32,12 +26,4 @@
 
   @include font-gray-12-400;
   line-height: 1.8rem;
-}
-
-.buttonContainer {
-  @include flex-row(center);
-
-  button:first-child {
-    margin-right: 1em;
-  }
 }
