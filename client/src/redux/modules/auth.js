@@ -63,6 +63,7 @@ const authReducer = (state = reduxUtils.authInitialState(), action) => {
       return reduxUtils.authErrorState(payload);
     case CREATE_USER:
     case SIGNIN_USER:
+      sessionStorage.setItem('userInfo', payload.data);
       return {
         isLoading: false,
         token: payload.headers['auth-token'],
@@ -71,6 +72,7 @@ const authReducer = (state = reduxUtils.authInitialState(), action) => {
         error: null,
       };
     case SIGNOUT_USER:
+      sessionStorage.removeItem('userInfo');
       return {
         isLoading: false,
         token: null,

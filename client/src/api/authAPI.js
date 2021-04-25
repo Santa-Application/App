@@ -8,7 +8,7 @@ export const register = async newUser => {
     for ( let key in newUser) formdata.append(key, newUser[key]);
     
     const response = await axios.post(
-      'http://localhost:8001/api/user/register',
+      'http://3.36.114.117:8001/api/user/register',
       formdata,
       {
         headers: {
