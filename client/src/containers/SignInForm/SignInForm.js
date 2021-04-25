@@ -1,16 +1,21 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form, Formik } from 'formik';
 import { Button, FormItem } from 'components';
-import { useDispatch } from 'react-redux';
 import { signinUserAsync } from 'redux/modules/auth';
 import { validationSchema } from 'utils';
 
 const SignInForm = ({ history }) => {
+  const signedIn = useSelector(state => state.auth.signedIn);
   const dispatch = useDispatch();
 
   const handleClickRegisterButton = () => {
     history.push('/signup');
   };
+
+  useEffect(() => {
+    signedIn && history.push('/main');
+  }, [signedIn]);
 
   return (
     <Formik
@@ -21,7 +26,6 @@ const SignInForm = ({ history }) => {
       validationSchema={validationSchema.signInSchema}
       onSubmit={values => {
         dispatch(signinUserAsync(values));
-        history.push('/main');
       }}
     >
       <Form>
@@ -55,6 +59,19 @@ const SignInForm = ({ history }) => {
             name: 'password',
           }}
         />
+        {signedIn || (
+          <p
+            style={{
+              fontSize: '1.2rem',
+              color: 'red',
+              textIndent: '0.5rem',
+              marginTop: '-3.5rem',
+              marginBottom: '2rem',
+            }}
+          >
+            이메일과 비밀번호가 일치하는지 확인해주세요!!
+          </p>
+        )}
         <div className="buttonContainer">
           <Button
             type="button"

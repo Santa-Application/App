@@ -21,15 +21,17 @@ import {
   menuButton,
 } from './Header.module.scss';
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { signoutUserAsync } from 'redux/modules/auth';
+import { INITIALIZE_RECRUIT_POST } from 'redux/modules/recruitPost';
+import { INITIALIZE_REGULAR_POST } from 'redux/modules/regularPost';
 import { checkPropTypes } from 'prop-types';
 
 const Header = ({ history, match, mode, style, title, href, userData }) => {
   const navBgRef = useRef();
   const navRef = useRef();
+  const signedIn = useSelector(state => state.auth.signedIn);
   const dispatch = useDispatch();
-  const signedIn = sessionStorage.getItem('userInfo');
 
   const commonProps = {
     secondary: false,
@@ -52,6 +54,8 @@ const Header = ({ history, match, mode, style, title, href, userData }) => {
   };
   const handleClickSignout = () => {
     dispatch(signoutUserAsync());
+    dispatch({ type: INITIALIZE_RECRUIT_POST });
+    dispatch({ type: INITIALIZE_REGULAR_POST });
 
     navBgRef.current.classList.remove(activeBg);
     navRef.current.classList.remove(activeNav);
@@ -64,11 +68,10 @@ const Header = ({ history, match, mode, style, title, href, userData }) => {
   const handleClickLogo = () => {
     signedIn ? history.push('/main') : history.push('/');
   };
+
   return (
     <div className={header}>
-      {(history.location.pathname !== '/' ||
-        history.location.pathname !== '/signup' ||
-        history.location.pathname !== '/login') && (
+      {history.location.pathname !== '/' && (
         <Button
           {...commonProps}
           value={'Go back button'}
