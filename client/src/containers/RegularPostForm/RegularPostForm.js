@@ -1,8 +1,8 @@
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
-import { FormItem, Button, Heading } from 'components';
+import { FormItem, Button } from 'components';
 import { validationSchema } from 'utils';
-// import { createRegularPostAsync } from 'redux/modules/regularPost';
+import { createRegularPostAsync } from 'redux/modules/regularPost';
 // import PropTypes from 'prop-types';
 // import classNames from 'classnames';
 import {
@@ -16,8 +16,23 @@ import { handleChangeFileInput } from 'utils/handler/formHandler';
 
 import top100Mountains from 'data/top100Mountains';
 
-const RegularPostForm = ({ formType, className, ...restProps }) => {
+const RegularPostForm = ({
+  history,
+  match,
+  formType,
+  className,
+  ...restProps
+}) => {
+  const userId = useSelector(state => state.auth.userInfo._id);
+  // const newPostId = useSelector(state => {
+  //   const postsData = state.regularPost.data;
+  //   return postsData[postsData.length - 1]._id;
+  // });
   const dispatch = useDispatch();
+
+  const handleClickCancelButton = () => {
+    history.push('/reviews');
+  };
 
   return (
     <div className={container}>
@@ -25,14 +40,27 @@ const RegularPostForm = ({ formType, className, ...restProps }) => {
       <Formik
         initialValues={{
           title: '',
-          // mountain: '',
+          mountainName: '',
           imageURL: '',
           content: '',
         }}
         validationSchema={validationSchema.regularPost}
         onSubmit={values => {
-          console.log(values);
-          // dispatch(createRegularPostAsync(newPost));
+          const formData = new FormData();
+          const newPostObj = {
+            ...values,
+            publisherID: userId,
+            postdate: new Date(),
+          };
+
+          Object.keys(newPostObj).forEach(key => {
+            formData.append(key, newPostObj[key]);
+          });
+
+          dispatch(createRegularPostAsync(formData));
+          // formType === 'create' && history.push(`/reviews/${newPostId}`);
+          // formType === 'edit' && history.push(`/reviews/${match.params.postId}`);
+          history.push('/reviews');
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => (
@@ -96,7 +124,12 @@ const RegularPostForm = ({ formType, className, ...restProps }) => {
               className={formItem}
             />
             <div className={buttonContainer}>
-              <Button secondary type="button" className={cancelButton}>
+              <Button
+                secondary
+                type="button"
+                className={cancelButton}
+                onClick={handleClickCancelButton}
+              >
                 취소하기
               </Button>
               <Button>{formType === 'create' ? '등록하기' : '수정하기'}</Button>

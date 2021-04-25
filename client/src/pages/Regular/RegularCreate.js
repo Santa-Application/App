@@ -5,7 +5,7 @@ const RegularCreate = ({ history, match }) => {
   return (
     <main>
       <Heading content="REVIEWS" />
-      <RegularPostForm history={history} match={match} />
+      <RegularPostForm history={history} match={match} formType="create" />
     </main>
   );
 };

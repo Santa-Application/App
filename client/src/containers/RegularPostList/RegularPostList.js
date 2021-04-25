@@ -15,7 +15,6 @@ import {
 const RegularPostList = ({ className, ...restProps }) => {
   const state = useSelector(state => state.regularPost);
   const { isLoading, data, error } = state;
-
   const dispatch = useDispatch();
 
   useEffect(() => {
