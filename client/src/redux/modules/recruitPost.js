@@ -2,6 +2,7 @@ import { recruitPostAPI } from 'api';
 import { reduxUtils } from 'utils';
 
 // action type
+export const INITIALIZE_RECRUIT_POST = 'recruit/INITIALIZE_POST';
 const LOADING_RECRUIT_POST = 'recruit/LOADING_POST';
 const ERROR_RECRUIT_POST = 'recruit/ERROR_POST';
 const GET_RECRUIT_POSTS = 'recruit/GET_POSTS';
@@ -109,11 +110,13 @@ export const removeRecruitPost = id => async dispatch => {
 */
 
 // reducer
-const regularPostReducer = (state = reduxUtils.initialState(), action) => {
+const recruitPostReducer = (state = reduxUtils.initialState(), action) => {
   const { type, payload } = action;
   const { data } = state;
 
   switch (type) {
+    case INITIALIZE_RECRUIT_POST:
+      return reduxUtils.initialState();
     case LOADING_RECRUIT_POST:
       return reduxUtils.loadingState(data);
     case ERROR_RECRUIT_POST:
@@ -151,4 +154,4 @@ const regularPostReducer = (state = reduxUtils.initialState(), action) => {
   }
 };
 
-export default regularPostReducer;
+export default recruitPostReducer;

@@ -63,7 +63,6 @@ const authReducer = (state = reduxUtils.authInitialState(), action) => {
       return reduxUtils.authErrorState(payload);
     case CREATE_USER:
     case SIGNIN_USER:
-      sessionStorage.setItem('userInfo', JSON.stringify(payload.data));
       return {
         isLoading: false,
         token: payload.headers['auth-token'],
