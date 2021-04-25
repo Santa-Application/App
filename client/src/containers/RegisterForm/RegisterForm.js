@@ -21,10 +21,6 @@ const RegisterForm = ({ className }) => {
 
   const classes = classNames(className, formItemAlign);
 
-  const formItemValidationCheck = error => {
-    console.log(error);
-  };
-
 
   return (
     <div className={classes}>
@@ -169,7 +165,7 @@ const RegisterForm = ({ className }) => {
                 />
                 <div className={buttonAlign}>
                   <Button type="button" secondary children="취소하기" />
-                  <Button type="submit" children="등록하기" onClick={() => formItemValidationCheck(errors)}/>
+                  <Button type="submit" children="등록하기" />
                 </div>
               </Form>
             );

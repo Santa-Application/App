@@ -11,11 +11,16 @@ import {
   subMessage,
   button
 } from './HomePage.module.scss';
+import { waitForDomChange } from '@testing-library/dom';
 
 const HomePage = () => {
 
   const handleClickRegister = e => {
     window.location.href = '/register';
+  };
+
+  const handleClickLogin = e => {
+    window.location.href = '/login';
   };
 
   return (
@@ -37,6 +42,7 @@ const HomePage = () => {
           type={'button'} 
           disabled={false} 
           value={'로그인 버튼'}
+          onClick={handleClickLogin}
         >
         로그인
         </Button>
