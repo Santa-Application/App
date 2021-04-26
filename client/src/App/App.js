@@ -13,7 +13,7 @@ import {
   RegularDetail,
   RegularCreate,
   RegularEdit,
-  UserRecruitList,
+  Profile,
   PageNotFound,
   Mountain,
   Main,
@@ -45,15 +45,14 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Register} />
 
-          <Route path="/:userId" exact component={UserRecruitList} />
+          <Route path="/:userName" component={Profile} />
 
-          {signedIn && <Redirect from="/" to="/main" />}
+          {/* {signedIn && <Redirect from="/" to="/main" />} */}
           <Route path="/" exact component={HomePage} />
 
-          {/* <Route path="/main" exact component={PageNotFound} /> */}
           {/* <Redirect to="/page-not-found" /> */}
           {/* todo: 에러 해결 */}
-          {/* <Route path="/:blahblah" component={PageNotFound}>
+          {/* <Route path="/page-not-found" component={PageNotFound}>
             <Redirect to="/page-not-found" />
           </Route> */}
         </Switch>

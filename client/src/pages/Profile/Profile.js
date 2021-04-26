@@ -14,22 +14,12 @@ import { ProfileInfoCard, MenuTab } from 'components';
 
 const UserRecruitList = ({ history, match, ...restProps }) => {
   const userInfo = useSelector(state => state.auth.userInfo);
+  if (!userInfo) return <div>없는 유져임돠</div>;
   const userName = userInfo.name;
-  // const LoggedInUserName = useSelector(state => state.auth.userInfo);
-  // const userName = match.params.userName;
-  // const userInfo = ?????
 
-  console.log(history.location);
-  const [selected, setSelected] = useState(0);
-
-  const handleClickMenuTab = () => {
-    setSelected(history.location.pathname === `/${userName}/recruit` ? 0 : 1);
-  };
   const handleClickUserImage = () => {
     history.push(`/${userName}`);
   };
-
-  if (!userInfo) return <div>없는 유져임돠</div>;
 
   // const isLoggedInUser = userName === LoggedInUserName;
   const isLoggedInUser = true;
@@ -51,8 +41,6 @@ const UserRecruitList = ({ history, match, ...restProps }) => {
           { name: 'Reviews', path: `/${userName}/reviews` },
         ]}
         label="profile tab list"
-        selected={selected}
-        onClick={handleClickMenuTab}
       />
       <Switch>
         <Route
@@ -61,26 +49,19 @@ const UserRecruitList = ({ history, match, ...restProps }) => {
           component={() => (
             <RecruitPostList
               pageInfo={{ type: 'profile', userName, isLoggedInUser }}
-              history={history}
-              match={match}
             />
           )}
         />
         <Route
           path="/:userName/recruit/create"
           exact
-          component={() => (
-            <RecruitForm formType="create" history={history} match={match} />
-          )}
+          component={() => <RecruitForm formType="create" />}
         />
-        <Redirect from="/:userName" to={`/${userName}/recruit`} />
 
         <Route
           path="/:userName/recruit/:postId"
           exact
-          component={() => (
-            <RecruitPostDetail history={history} match={match} />
-          )}
+          component={RecruitPostDetail}
         />
         {/* <Route
             path="/:userName/recruit/edit/:postId"
@@ -88,24 +69,30 @@ const UserRecruitList = ({ history, match, ...restProps }) => {
             component={RecruitForm}
             /> */}
         <Route
-          path="/:userName/reviews"
+          path="/:userName/reviews/create"
           exact
           component={() => (
-            <RegularPostList
-              pageInfo={{ type: 'profile', userName, isLoggedInUser }}
+            <RegularPostForm
+              formType="create"
               history={history}
               match={match}
             />
           )}
         />
-        {/* <Route
-          path={`/:userName/reviews/create`}
-          component={RegularPostForm}
+        <Route
+          path="/:userName/reviews"
+          exact
+          component={() => (
+            <RegularPostList
+              pageInfo={{ type: 'profile', userName, isLoggedInUser }}
+            />
+          )}
         />
         <Route
           path={`/:userName/reviews/:postId`}
           component={RegularPostDetail}
-        /> */}
+        />
+        <Redirect from="/:userName" to={`/${userName}/recruit`} />
       </Switch>
     </main>
   );
