@@ -34,12 +34,7 @@ export const createRecruitPost = async newPost => {
   try {
     const response = await axios.post(
       'http://3.36.114.117:8001/api/recruitpost/newpost',
-      newPost,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
+      newPost
     );
 
     return response.data;

@@ -34,16 +34,27 @@ const RecruitPost = ({ match, history, ...restProps }) => {
 
   const postId = match.params.postId;
   const userName = match.params.userName;
+  const mountainName = match.params.mountainName;
 
   const handleClickRemovePost = () => {
-    // dispatch(removeRecruitPostAsync(postId));
-    history.push(userName ? `${userName}/reruit` : '/recruit');
+    dispatch(removeRecruitPostAsync(postId));
     dispatch(getRecruitPostsAsync());
+
+    const path = userName
+      ? `/${userName}/recruit`
+      : mountainName
+      ? `/${mountainName}/recruit`
+      : '/recruit';
+    history.push(path);
   };
   const handleClickEditPost = () => {
-    history.push(
-      userName ? `${userName}/reruit/edit/${postId}` : `/recruit/edit/${postId}`
-    );
+    const path = userName
+      ? `/${userName}/recruit/edit/${postId}`
+      : mountainName
+      ? `/${mountainName}/recruit/edit/${postId}`
+      : `/recruit/edit/${postId}`;
+
+    history.push(path);
   };
   const handleChangeApplyRecruitingButton = () => {
     // dispatch(toggleApplyRecruiting(postId, userId));
@@ -56,6 +67,8 @@ const RecruitPost = ({ match, history, ...restProps }) => {
   const postData = recruitPostsData.data.find(
     _data => _data.recruitPost._id === postId
   );
+
+  console.log(match.params);
   const { recruitPost } = postData;
   const publisherId = postData.publisherInfo._id;
 

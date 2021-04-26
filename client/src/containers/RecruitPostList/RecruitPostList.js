@@ -91,15 +91,16 @@ const RecruitPostList = ({ pageInfo, className, ...restProps }) => {
       {/* )} */}
       <ul className={listContainer}>
         {postsData.map(post => {
+          const postId = post.recruitPost._id;
           const path =
             pageInfo.type === 'profile'
-              ? `/${pageInfo.userName}/recruit/${post.recruitPost._id}`
+              ? `/${pageInfo.userName}/recruit/${postId}`
               : pageInfo.type === 'mountain'
-              ? `/${pageInfo.mountainName}/recruit/${post.recruitPost._id}`
-              : `/recruit/${post.recruitPost._id}`;
+              ? `/${pageInfo.mountainName}/recruit/${postId}`
+              : `/recruit/${postId}`;
 
           return (
-            <li key={post.recruitPost._id}>
+            <li key={postId}>
               <Link to={path}>
                 <RecruitPostCard
                   postData={post}
