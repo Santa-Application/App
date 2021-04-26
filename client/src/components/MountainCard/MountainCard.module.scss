@@ -1,0 +1,16 @@
+@import 'styles';
+
+.card {
+  background-color: $primary;
+  border-radius: 1.4rem;
+  box-shadow: .1rem .1rem .1rem rgba(0, 0, 0, .1);
+  width: 32rem;
+  height: 16.7rem;
+  color: $white;
+  font-size: 2.4rem;
+  font-weight: 700;
+  font-family: 'Roboto';
+  padding: 2.75rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -19,7 +19,7 @@ const SearchBox = ({ ...restProps }) => {
       <Input
         id="search"
         type="text"
-        label="칮고 싶은 산을 검색해주세요"
+        label="찾고 싶은 산을 검색해주세요"
         labelVisible={false}
         name="search"
         value={searchText}
