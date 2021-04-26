@@ -2,7 +2,7 @@ import { Heading } from 'components';
 import MountainOverview from 'containers/MountainOverview/MountainOverview';
 import React from 'react';
 
-const MountainDetail = ({ history, match }) => {
+const Mountain = ({ history, match }) => {
   return (
     <main>
       <MountainOverview history={history} match={match} />
@@ -10,4 +10,4 @@ const MountainDetail = ({ history, match }) => {
   );
 };
 
-export default MountainDetail;
+export default Mountain;
