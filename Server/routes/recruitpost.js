@@ -25,9 +25,18 @@ router.get('/', async (_, res) => {
           );
         }
 
-        return {
-          recruitPost, publisherInfo, publisherImageURL, recruitees,
+        const data = {
+          recruitPost: {
+            ...recruitPost._doc,
+            recruitees,
+          },
+          publisherInfo: {
+            ...publisherInfo._doc,
+            imageURL: publisherImageURL,
+          },
         };
+
+        return data;
       }),
     );
 
@@ -58,7 +67,14 @@ router.get('/:id', async (req, res) => {
     }
 
     const response = {
-      recruitPost, publisherInfo, publisherImageURL, recruitees,
+      recruitPost: {
+        ...recruitPost._doc,
+        recruitees,
+      },
+      publisherInfo: {
+        ...publisherInfo._doc,
+        imageURL: publisherImageURL,
+      },
     };
 
     res.status(200).send(response);
@@ -95,9 +111,10 @@ router.post('/newpost', async (req, res) => {
 
     const response = {
       recruitPost,
-      publisherInfo,
-      publisherImageURL,
-      recruitees,
+      publisherInfo: {
+        ...publisherInfo._doc,
+        imageURL: publisherImageURL,
+      },
     };
 
     res.status(200).send(response);
