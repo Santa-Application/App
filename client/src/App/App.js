@@ -12,8 +12,10 @@ import {
   RegularDetail,
   RegularCreate,
   RegularEdit,
-  UserRecruitList,
+  // UserRecruitList,
   PageNotFound,
+  Mountain,
+  Main,
 } from 'pages';
 import { Footer, Header } from 'components';
 
@@ -24,6 +26,9 @@ function App() {
         <Route path="/" component={Header} />
 
         <Switch>
+          <Route path="/main" exact component={Main} />
+          <Route path="/mountain/:name" exact component={Mountain} />
+
           <Route path="/recruit" exact component={RecruitList} />
           <Route path="/recruit/create" exact component={RecruitCreate} />
           <Route path="/recruit/edit/:postId" exact component={RecruitEdit} />

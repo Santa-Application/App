@@ -17,16 +17,6 @@ export const getMountainAsync = () =>
     mountainAPI.getAllMountains
   );
 
-export const getMountainByNameAsync = name =>
-  reduxUtils.createThunkActionCreator(
-    {
-      loading: LOADING_MOUNTAIN,
-      type: GET_MOUNTAINS,
-      error: ERROR_MOUNTAIN,
-    },
-    mountainAPI.getMountainByName(name)
-  );
-
 // reducer
 const mountainReducer = (state = reduxUtils.initialState(), action) => {
   const { type, payload } = action;
