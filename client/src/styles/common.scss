@@ -43,23 +43,28 @@ img {
   display: block;
 }
 
-.selected {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.tab {
+  @include font-light-16-700;
 
-  color: $primary;
-  // font-size: 1.6rem;
-  // font-weight: 700;
+  &.tabSelected {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  &::after {
-    margin-top: 0.5rem;
-    height: 0.4rem;
-    width: 0.4rem;
-    background-color: $primary;
-    border-radius: 50%;
-    display: inline-block;
-    content: '';
+    color: $primary;
+
+    &::after {
+      content: '';
+
+      display: inline-block;
+
+      width: 0.4rem;
+      height: 0.4rem;
+      margin-top: 0.5rem;
+
+      background-color: $primary;
+      border-radius: 50%;
+    }
   }
 }
 
