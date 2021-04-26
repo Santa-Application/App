@@ -63,23 +63,10 @@ const SearchBox = ({ datas, ...restProps }) => {
 
   return (
     <div className={container}>
-<<<<<<< HEAD
-      <Input
-        id="search"
-        type="text"
-        label="찾고 싶은 산을 검색해주세요"
-        labelVisible={false}
-        name="search"
-        value={searchText}
-        onChange={handleSearchValue}
-        placeholder="찾고 싶은 산을 검색해주세요"
-        className={input}
-=======
       <Heading
         className="a11yHidden"
         aria-labelledby="search"
         content="산 검색창"
->>>>>>> 7c007ba5ffd06b908be69b548f1cbdf06adb0ee1
       />
       <p className="a11yHidden" aria-describedby="search">
         찾고 싶은 산을 검색해주세요.

@@ -2,7 +2,7 @@ import SearchBox from 'components/SearchBox/SearchBox';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getMountainAsync } from 'redux/modules/mountain';
-import { searchBoxContainer } from './SearchMoutain.module.scss';
+// import { searchBoxContainer } from './SearchMoutain.module.scss';
 
 const SearchMountain = ({ history, match }) => {
   const mountain = useSelector(state => state.mountain);
