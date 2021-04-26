@@ -42,18 +42,21 @@ function App() {
           <Route path="/reviews/edit/:postId" exact component={RegularEdit} />
           <Route path="/reviews/:postId" exact component={RegularDetail} />
 
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Register} />
+
           <Route path="/:userId" exact component={UserRecruitList} />
 
-          {/* todo: 에러 해결 */}
-          <Route path="/page-not-found" component={PageNotFound} />
-          <Redirect to="/page-not-found" />
-        </Switch>
+          {signedIn && <Redirect from="/" to="/main" />}
+          <Route path="/" exact component={HomePage} />
 
-        <Route path="/login" exact component={Login} />
-        <Route path="/signup" exact component={Register} />
-        <Route path="/" exact component={HomePage}>
-          {signedIn ? <Redirect to="/main" /> : <HomePage />}
-        </Route>
+          {/* <Route path="/main" exact component={PageNotFound} /> */}
+          {/* <Redirect to="/page-not-found" /> */}
+          {/* todo: 에러 해결 */}
+          {/* <Route path="/:blahblah" component={PageNotFound}>
+            <Redirect to="/page-not-found" />
+          </Route> */}
+        </Switch>
 
         <Footer />
       </HelmetProvider>
