@@ -26,3 +26,4 @@ export { default as FormItem } from 'components/FormItem/FormItem';
 export { default as NavigationItem } from 'components/NavigationItem/NavigationItem';
 export { default as Navigation } from 'components/Navigation/Navigation';
 export { default as ProfileInfoCard } from 'components/ProfileInfoCard/ProfileInfoCard';
+export { default as MountainCard } from 'components/MountainCard/MountainCard';

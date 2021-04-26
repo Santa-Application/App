@@ -10,7 +10,7 @@ router.get('/', async (_, res) => {
   try {
     const all = await Mountain.find();
 
-    const response = Promise.all(
+    const response = await Promise.all(
       all.map(async (data) => {
         const imageURL = await downloadFile(data.imageURL);
 
