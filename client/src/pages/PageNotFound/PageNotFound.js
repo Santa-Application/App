@@ -8,7 +8,7 @@ export const PageNotFound = () => {
   return (
     <div className={container}>
       <Helmet>
-        <title>santa: 존재하지 않는 페이지</title>
+        <title>SANTA: 존재하지 않는 페이지</title>
       </Helmet>
       <div className={background}></div>
       <Heading content="요청하신 페이지가 존재하지 않습니다." />
