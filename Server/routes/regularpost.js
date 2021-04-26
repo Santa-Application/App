@@ -14,12 +14,16 @@ router.get('/', async (_, res) => {
     const responseData = await Promise.all(
       all.map(async (regularPost) => {
         const publisherInfo = await User.findById(regularPost.publisherID);
+        console.log(publisherInfo);
+        console.log(regularPost);
+        const postImageURL = await downloadFile(regularPost.imageURL);
         const publisherImageURL = await downloadFile(publisherInfo.imageURL);
 
         return {
           regularPost,
           publisherInfo,
           publisherImageURL,
+          postImageURL,
         };
       }),
     );
@@ -37,11 +41,13 @@ router.get('/:id', async (req, res) => {
     const publisherInfo = await User.findById(regularPost.publisher);
     // conver imageURL to real use imageURL
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
+    const postImageURL = await downloadFile(regularPost.imageURL);
 
     const response = {
       regularPost,
       publisherInfo,
       publisherImageURL,
+      postImageURL,
     };
 
     return res.send(response);
