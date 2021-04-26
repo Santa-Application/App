@@ -71,7 +71,6 @@ const authReducer = (state = reduxUtils.authInitialState(), action) => {
         error: null,
       };
     case SIGNOUT_USER:
-      sessionStorage.removeItem('userInfo');
       return {
         isLoading: false,
         token: null,

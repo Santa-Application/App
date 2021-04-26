@@ -59,6 +59,7 @@ const SelectDate = ({ field, inputProps }) => {
         minDate={handleMinDate()}
         dateFormat="yyyy-MM-dd"
         placeholderText="YYYY-MM-DD"
+        autoComplete="off"
         onSelect={date => {
           onSelect(date, field.name, setSelectedDate, setFieldValue);
         }}
