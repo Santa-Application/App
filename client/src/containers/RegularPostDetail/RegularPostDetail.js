@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -23,60 +24,40 @@ import { filterData } from 'utils';
 const RegularPost = ({ match, history, ...restProps }) => {
   const userId = useSelector(state => state.auth.userInfo._id);
   const regularPostsData = useSelector(state => state.regularPost);
-  const { isLoading, data, error } = regularPostsData;
+
   const postId = match.params.postId;
+  const userName = match.params.userName;
+  const mountainName = match.params.mountainName;
+
   const dispatch = useDispatch();
 
   const handleClickRemovePost = () => {
     dispatch(removeRegularPostAsync(postId));
     dispatch(getRegularPostsAsync());
-    history.push('/reviews');
+
+    const path = userName
+      ? `/${userName}/reviews`
+      : mountainName
+      ? `/${mountainName}/reviews`
+      : `/reviews`;
+    history.push(path);
   };
   const handleClickEditPost = () => {
-    history.push(`/reviews/edit/${postId}`);
+    const path = userName
+      ? `/${userName}/reviews/edit/${postId}`
+      : mountainName
+      ? `/${mountainName}/reviews/edit/${postId}`
+      : `/reviews/edit/${postId}`;
+
+    history.push(path);
   };
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        로딩중임돠
-      </div>
-    );
-  if (error)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        에러났음돠
-      </div>
-    );
-  if (!data)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        데이터가 없음돠
-      </div>
-    );
-
   const postData = regularPostsData.data.find(_data => {
+    console.log(
+      _data.regularPost._id,
+      postId,
+      _data.regularPost._id === postId
+    );
     return _data.regularPost._id === postId;
   });
   const { regularPost } = postData;

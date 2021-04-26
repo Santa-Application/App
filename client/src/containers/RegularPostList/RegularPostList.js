@@ -71,9 +71,9 @@ const RegularPostList = ({ pageInfo, className, ...restProps }) => {
       : data;
   const createPagePath =
     pageInfo.type === 'profile'
-      ? `/${pageInfo.userName}/reveiws/create`
+      ? `/${pageInfo.userName}/reviews/create`
       : pageInfo.type === 'mountain'
-      ? `/${pageInfo.mountainName}/reveiws/create`
+      ? `/${pageInfo.mountainName}/reviews/create`
       : '/reviews/create';
 
   return (
@@ -94,15 +94,16 @@ const RegularPostList = ({ pageInfo, className, ...restProps }) => {
       {/* )} */}
       <ul className={listContainerClasses}>
         {postsData.map(post => {
+          const postId = post.regularPost._id;
           const path =
             pageInfo.type === 'profile'
-              ? `/${pageInfo.userName}/reviews/${post.regularPost._id}`
+              ? `/${pageInfo.userName}/reviews/${postId}`
               : pageInfo.type === 'mountain'
-              ? `/${pageInfo.mountainName}/reviews/${post.regularPost._id}`
-              : `/reviews/${post.regularPost._id}`;
+              ? `/${pageInfo.mountainName}/reviews/${postId}`
+              : `/reviews/${postId}`;
 
           return (
-            <li key={post.regularPost._id}>
+            <li key={postId}>
               <Link to={path}>
                 <RegularPostCard
                   postData={post.regularPost}
