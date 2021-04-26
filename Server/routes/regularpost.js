@@ -14,17 +14,20 @@ router.get('/', async (_, res) => {
     const responseData = await Promise.all(
       all.map(async (regularPost) => {
         const publisherInfo = await User.findById(regularPost.publisherID);
-        console.log(publisherInfo);
-        console.log(regularPost);
         const postImageURL = await downloadFile(regularPost.imageURL);
         const publisherImageURL = await downloadFile(publisherInfo.imageURL);
 
-        return {
-          regularPost,
-          publisherInfo,
-          publisherImageURL,
-          postImageURL,
+        const data = {
+          regularPost: {
+            ...regularPost._doc,
+            imageURL: postImageURL,
+          },
+          publisherInfo: {
+            ...publisherInfo._doc,
+            imageURL: publisherImageURL,
+          },
         };
+        return data;
       }),
     );
     return res.status(200).send(responseData);
@@ -43,14 +46,20 @@ router.get('/:id', async (req, res) => {
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
     const postImageURL = await downloadFile(regularPost.imageURL);
 
-    const response = {
-      regularPost,
-      publisherInfo,
-      publisherImageURL,
-      postImageURL,
+    const data = {
+      regularPost: {
+        ...regularPost._doc,
+        imageURL: postImageURL,
+      },
+      publisherInfo: {
+        ...publisherInfo._doc,
+        imageURL: publisherImageURL,
+      },
     };
 
-    return res.send(response);
+    delete data.publisherInfo.password;
+
+    return res.send(data);
   } catch (err) {
     return res.status(404).send(err);
   }
@@ -85,12 +94,25 @@ router.post('/newpost', upload.single('imageURL'), async (req, res) => {
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
 
     const regularPost = await newPost.save();
-    const { _id } = regularPost;
+    const { _id, imageURL } = regularPost;
+
+    const postImageURL = await downloadFile(imageURL);
     await User.findByIdAndUpdate(publisherID, { regularPosts: _id });
 
-    const response = { regularPost, publisherInfo, publisherImageURL };
+    const data = {
+      regularPost: {
+        ...regularPost._doc,
+        imageURL: postImageURL,
+      },
+      publisherInfo: {
+        ...publisherInfo._doc,
+        imageURL: publisherImageURL,
+      },
+    };
 
-    res.status(200).send(response);
+    delete data.publisherInfo.password;
+
+    res.status(200).send(data);
   } catch (err) {
     res.send(err);
   }
@@ -113,13 +135,22 @@ router.patch('/:id', async (req, res) => {
     const publisherInfo = await User.findById(regularPost.publisherID);
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
 
-    const response = {
-      regularPost,
-      publisherInfo,
-      publisherImageURL,
+    const postImageURL = await downloadFile(regularPost.imageURL);
+
+    const data = {
+      regularPost: {
+        ...regularPost._doc,
+        imageURL: postImageURL,
+      },
+      publisherInfo: {
+        ...publisherInfo._doc,
+        imageURL: publisherImageURL,
+      },
     };
 
-    return res.status(200).send(response);
+    delete data.publisherInfo.password;
+
+    return res.status(200).send(data);
   } catch (err) {
     return res.send(err);
   }
