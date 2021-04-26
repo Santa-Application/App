@@ -76,7 +76,7 @@ router.post('/newpost', async (req, res) => {
     hikingLevel: req.body.hikingLevel,
     recruitingGender: req.body.recruitingGender,
     recruitingAge: req.body.recruitingAge,
-    postDate: req.body.postdate,
+    postDate: req.body.postDate,
     description: req.body.description,
     publisherID: req.body.publisherID,
     recruitDate: req.body.recruitDate,
@@ -85,6 +85,10 @@ router.post('/newpost', async (req, res) => {
 
   try {
     const recruitPost = await recruitpost.save();
+
+    const { _id } = recruitPost;
+    await User.findByIdAndUpdate(req.body.publisherID, { recruitPosts: _id });
+
     const publisherInfo = await User.findById(recruitPost.publisherID);
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
     const recruitees = [];
