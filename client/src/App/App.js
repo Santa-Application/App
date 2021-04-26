@@ -14,6 +14,9 @@ import {
   RegularCreate,
   RegularEdit,
   UserRecruitList,
+  PageNotFound,
+  Mountain,
+  Main,
 } from 'pages';
 import { Footer, Header } from 'components';
 
@@ -26,11 +29,8 @@ function App() {
         <Route path="/" component={Header} />
 
         <Switch>
-          <Route
-            path="/main"
-            exact
-            component={() => <div>메인페이지 와야함돠</div>}
-          />
+          <Route path="/main" exact component={Main} />
+          <Route path="/mountain/:name" exact component={Mountain} />
 
           <Route path="/recruit" exact component={RecruitList} />
           <Route path="/recruit/create" exact component={RecruitCreate} />
@@ -42,7 +42,11 @@ function App() {
           <Route path="/reviews/edit/:postId" exact component={RegularEdit} />
           <Route path="/reviews/:postId" exact component={RegularDetail} />
 
-          <Route to="/:userName/recruit" component={UserRecruitList} />
+          <Route path="/:userId" exact component={UserRecruitList} />
+
+          {/* todo: 에러 해결 */}
+          <Route path="/page-not-found" component={PageNotFound} />
+          <Redirect to="/page-not-found" />
         </Switch>
 
         <Route path="/login" exact component={Login} />

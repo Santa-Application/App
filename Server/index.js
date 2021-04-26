@@ -8,6 +8,7 @@ const {
   mountainRoute,
   recruitpostRoute,
   regularpostRoute,
+  profileRoute,
 } = require('./routes/index');
 
 const app = express();
@@ -39,6 +40,7 @@ app.use('/api/user', authRoute);
 app.use('/api/mountain', mountainRoute);
 app.use('/api/recruitpost', recruitpostRoute);
 app.use('/api/regularpost', regularpostRoute);
+app.use('/api/profile', profileRoute);
 
 // app listen
 app.listen(8001, () => console.log('Server Up and running at 8001'));
