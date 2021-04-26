@@ -1,7 +1,12 @@
+import SearchMountain from 'containers/SearchMountain/SearchMountain';
 import React from 'react';
 
-const Main = ({ histroy, match }) => {
-  return <main>메인</main>;
+const Main = ({ history, match }) => {
+  return (
+    <main>
+      <SearchMountain history={history} match={match} />
+    </main>
+  );
 };
 
 export default Main;
