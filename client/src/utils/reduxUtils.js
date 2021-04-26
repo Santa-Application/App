@@ -13,28 +13,50 @@ export const authInitialState = () => ({
   token: null,
 });
 
+export const profileInitialState = () => ({
+  isLoading: false, 
+  profile: null, 
+  error: null
+});
+
 export const loadingState = previousState => ({
   isLoading: true,
   data: previousState,
   error: null,
 });
+
 export const errorState = error => ({
   isLoading: false,
   data: [],
   error,
 });
+
 export const authLoadingState = previousState => ({
   isLoading: false,
   userInfo: previousState,
   error: null,
   signedIn: false,
 });
+
 export const authErrorState = error => ({
   isLoading: false,
   userInfo: null,
   error,
   signedIn: false,
 });
+
+export const profileLoadingState = previousState => ({
+  isLoading: true, 
+  profile: previousState, 
+  error: null
+});
+
+export const profileErrorState = error => ({
+  isLoading: false, 
+  profile: null,
+  error
+});
+
 
 // create thunk action creator
 export const createThunkActionCreator = (
@@ -53,3 +75,4 @@ export const createThunkActionCreator = (
     dispatch({ type: error, payload: e });
   }
 };
+

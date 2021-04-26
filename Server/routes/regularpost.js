@@ -79,6 +79,9 @@ router.post('/newpost', upload.single('imageURL'), async (req, res) => {
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
 
     const regularPost = await newPost.save();
+    const { _id } = regularPost;
+    await User.findByIdAndUpdate(publisherID, { regularPosts: _id });
+
     const response = { regularPost, publisherInfo, publisherImageURL };
 
     res.status(200).send(response);
