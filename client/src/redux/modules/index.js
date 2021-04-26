@@ -5,6 +5,7 @@ import storageSession from 'redux-persist/lib/storage/session';
 import regularPost from './regularPost';
 import recruitPost from './recruitPost';
 import auth from './auth';
+import mountain from './mountain';
 
 const persistConfig = {
   key: 'root',
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   regularPost,
   recruitPost,
   auth,
+  mountain,
 });
 
 export default persistReducer(persistConfig, rootReducer);

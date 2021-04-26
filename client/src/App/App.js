@@ -12,7 +12,10 @@ import {
   RegularDetail,
   RegularCreate,
   RegularEdit,
-  UserRecruitList,
+  // UserRecruitList,
+  PageNotFound,
+  Mountain,
+  Main,
 } from 'pages';
 import { Footer, Header } from 'components';
 
@@ -23,6 +26,9 @@ function App() {
         <Route path="/" component={Header} />
 
         <Switch>
+          <Route path="/main" exact component={Main} />
+          <Route path="/mountain/:name" exact component={Mountain} />
+
           <Route path="/recruit" exact component={RecruitList} />
           <Route path="/recruit/create" exact component={RecruitCreate} />
           <Route path="/recruit/edit/:postId" exact component={RecruitEdit} />
@@ -33,7 +39,10 @@ function App() {
           <Route path="/reviews/edit/:postId" exact component={RegularEdit} />
           <Route path="/reviews/:postId" exact component={RegularDetail} />
 
-          <Route path="/:userId" exact component={UserRecruitList} />
+          {/* todo: 에러 해결 */}
+          {/* <Route path="/:userId" exact component={UserRecruitList} /> */}
+          <Route path="/page-not-found" component={PageNotFound} />
+          <Redirect to="/page-not-found" />
         </Switch>
 
         <Route path="/login" exact component={Login} />

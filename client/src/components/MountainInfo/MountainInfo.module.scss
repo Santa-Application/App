@@ -1,0 +1,28 @@
+@import 'styles/';
+
+.containerNowrap {
+  margin-top: 1.6rem;
+
+  em {
+    @include font-dark-12-700;
+  }
+
+  p {
+    display: inline-block;
+    @include font-dark-12-400;
+    margin-left: 0.5rem;
+  }
+}
+.containerWrap {
+  margin-top: 1.6rem;
+
+  em {
+    @include font-dark-12-700;
+  }
+
+  p {
+    @include font-dark-12-400;
+    margin-left: 0.2rem;
+    margin-top: 0.4rem;
+  }
+}
