@@ -85,6 +85,10 @@ router.post('/newpost', async (req, res) => {
 
   try {
     const recruitPost = await recruitpost.save();
+
+    const { _id } = recruitPost;
+    await User.findByIdAndUpdate(req.body.publisherID, { recruitPosts: _id });
+
     const publisherInfo = await User.findById(recruitPost.publisherID);
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
     const recruitees = [];
