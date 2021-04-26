@@ -30,7 +30,9 @@ mongoose.connect(
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  exposedHeaders: ['auth-token'],
+}));
 
 // Route Middlewares
 app.use('/api/user', authRoute);

@@ -1,16 +1,16 @@
 // reducer state
 export const initialState = () => ({
   isLoading: false,
-  data: null,
+  data: [],
   error: null,
 });
 
 export const authInitialState = () => ({
   isLoading: false,
   userInfo: null,
-  error: null, 
+  error: null,
   signedIn: false,
-  token: null
+  token: null,
 });
 
 export const loadingState = previousState => ({
@@ -20,20 +20,20 @@ export const loadingState = previousState => ({
 });
 export const errorState = error => ({
   isLoading: false,
-  data: null,
+  data: [],
   error,
 });
 export const authLoadingState = previousState => ({
   isLoading: false,
   userInfo: previousState,
-  error: null, 
+  error: null,
   signedIn: false,
 });
 export const authErrorState = error => ({
   isLoading: false,
   userInfo: null,
   error,
-  signedIn: false
+  signedIn: false,
 });
 
 // create thunk action creator

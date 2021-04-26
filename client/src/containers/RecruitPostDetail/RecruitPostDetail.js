@@ -1,7 +1,6 @@
 /* eslint-disable indent */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import {
   PublisherInformation,
@@ -11,7 +10,6 @@ import {
   Button,
 } from 'components';
 import {
-  getRecruitPostsAsync,
   removeRecruitPostAsync,
   toggleApplyRecruiting,
 } from 'redux/modules/recruitPost';
@@ -25,29 +23,29 @@ import {
   statusOfRecruitees,
   buttonContainer,
 } from './RecruitPostDetail.module.scss';
+import { PageNotFound } from 'pages';
 
-const RecruitPost = ({ match, ...restProps }) => {
-  const state = useSelector(state => state);
-  const { isLoading, data, error } = state.recruitPost;
+const RecruitPost = ({ match, history, ...restProps }) => {
+  const userId = useSelector(state => state.auth.userInfo._id);
+  const recruitPostsData = useSelector(state => state.recruitPost);
+  const { isLoading, data, error } = recruitPostsData;
   const dispatch = useDispatch();
 
   const [isApplied, setIsApplied] = useState(false);
 
-  // const signedIn = state.auth.signedIn;
-  // const applicantId = state.auth.userInfo._id;
   const postId = match.params.postId;
 
   const handleClickRemovePost = () => {
-    dispatch(removeRecruitPostAsync(postId));
+    // dispatch(removeRecruitPostAsync(postId));
+    history.push('/recruit');
+  };
+  const handleClickEditPost = () => {
+    history.push(`/recruit/edit/${postId}`);
   };
   const handleChangeApplyRecruitingButton = () => {
-    // dispatch(toggleApplyRecruiting(postId, applicantId));
+    // dispatch(toggleApplyRecruiting(postId, userId));
     setIsApplied(!isApplied);
   };
-
-  useEffect(() => {
-    dispatch(getRecruitPostsAsync());
-  }, []);
 
   if (isLoading)
     return (
@@ -91,6 +89,7 @@ const RecruitPost = ({ match, ...restProps }) => {
 
   const postData = data.find(_data => _data.recruitPost._id === postId);
   const { recruitPost } = postData;
+  const publisherId = postData.publisherInfo._id;
 
   return (
     <div className={container}>
@@ -115,12 +114,12 @@ const RecruitPost = ({ match, ...restProps }) => {
         className={{ container: statusOfRecruitees }}
       />
       <div className={buttonContainer}>
-        {/* {signedIn ? (
+        {publisherId === userId ? (
           <>
             <Button secondary onClick={handleClickRemovePost}>
               삭제하기
             </Button>
-            <Link to={`/recruit/edit/${applicantId}`}>수정하기</Link>
+            <Button onClick={handleClickEditPost}>수정하기</Button>
           </>
         ) : (
           <Button
@@ -130,14 +129,7 @@ const RecruitPost = ({ match, ...restProps }) => {
           >
             {isApplied ? '메이트 취소' : '메이트 신청'}
           </Button>
-        )} */}
-        <Button
-          type="button"
-          secondary={isApplied}
-          onClick={handleChangeApplyRecruitingButton}
-        >
-          {isApplied ? '메이트 취소' : '메이트 신청'}
-        </Button>
+        )}
       </div>
     </div>
   );

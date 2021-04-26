@@ -8,13 +8,10 @@ export const signInSchema = Yup.object().shape({
       '이메일 형식에 맞지 않습니다.'
     )
     .required('이메일을 필수항목입니다.'),
-  password: Yup.string().matches(
-    /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/,
-    '비밀번호 형식에 맞지 않습니다.'
-  ),
+  password: Yup.string(),
 });
 
-export const signUpSchema = Yup.object().shape({
+export const registerSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, '닉네임은 2자 이상 작성해주세요.')
     .max(10, '닉네임은 15자 이내로 작성해주세요')

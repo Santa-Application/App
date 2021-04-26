@@ -10,14 +10,14 @@ getAllRegularPosts : 포스트 정보 + 작성자 이름(name), 작성자 프로
 ]
 */
 export const getAllRegularPosts = async () => {
-  const response = await axios.get('http://3.34.192.155:8001/api/regularpost');
+  const response = await axios.get('http://3.36.114.117:8001/api/regularpost');
 
   return response.data;
 };
 
 export const getRegularPostById = async id => {
   const response = await axios.get(
-    `http://3.34.192.155:8001/api/regularpost/${id}`
+    `http://3.36.114.117:8001/api/regularpost/${id}`
   );
 
   return response.data;
@@ -25,8 +25,13 @@ export const getRegularPostById = async id => {
 
 export const createRegularPost = async newPost => {
   const response = await axios.post(
-    'http://3.34.192.155:8001/api/regularpost',
-    newPost
+    'http://3.36.114.117:8001/api/regularpost/newpost',
+    newPost,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
   );
 
   return response.data;
@@ -34,8 +39,13 @@ export const createRegularPost = async newPost => {
 
 export const updateRegularPost = async (id, updatePost) => {
   const response = await axios.patch(
-    `http://3.34.192.155:8001/api/regularpost/${id}`,
-    updatePost
+    `http://3.36.114.117:8001/api/regularpost/${id}`,
+    updatePost,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
   );
 
   return response.data;
@@ -43,7 +53,7 @@ export const updateRegularPost = async (id, updatePost) => {
 
 export const removeRegularPost = async id => {
   const response = await axios.delete(
-    `http://3.34.192.155:8001/api/regularpost/${id}`
+    `http://3.36.114.117:8001/api/regularpost/${id}`
   );
 
   return response.data;
@@ -51,7 +61,7 @@ export const removeRegularPost = async id => {
 
 export const likeRegularPost = async id => {
   const response = await axios.patch(
-    `http://3.34.192.155:8001/api/regularpost/${id}/like`
+    `http://3.36.114.117:8001/api/regularpost/${id}/like`
   );
 
   return response.data;

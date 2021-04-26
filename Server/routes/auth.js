@@ -8,10 +8,10 @@ const User = require('../models/User');
 const { registerValidation, loginValidation } = require('../utils/validation');
 const { uploadFile } = require('../utils/s3');
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'uploads' });
 
 // REGISTER
-router.post('/register', upload.single('image'), async (req, res) => {
+router.post('/register', upload.single('imageURL'), async (req, res) => {
   // Validation
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -26,7 +26,6 @@ router.post('/register', upload.single('image'), async (req, res) => {
 
   // generate imageURL(or just image Key)
   const { file } = req;
-  console.log(file);
   const { Key } = await uploadFile(file);
 
   // Create a new User
@@ -37,16 +36,17 @@ router.post('/register', upload.single('image'), async (req, res) => {
     gender: req.body.gender,
     dateOfBirth: req.body.dateOfBirth,
     hikingLevel: req.body.hikingLevel,
-    imageUrl: Key,
+    imageURL: Key,
+    introduction: req.body.introduction,
   });
 
   try {
     const savedUser = await user.save();
     // generate a token(for immediate login)
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(savedUser);
+    res.set('auth-token', token).send(savedUser);
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send({ err, message: 'error' });
   }
 });
 

@@ -4,7 +4,7 @@
   @include flex(space-between, center, row, nowrap);
   border-radius: 10px;
   box-shadow: $box-shadow;
-  width: 30vw;
+  width: 20rem;
 
   input {
     border: none;
@@ -22,7 +22,7 @@
 }
 
 .selectBoxList {
-  width: 30vw;
+  width: 20rem;
   max-height: 18rem;
   overflow-y: scroll;
   position: absolute;

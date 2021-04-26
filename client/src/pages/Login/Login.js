@@ -1,10 +1,12 @@
+import { SignInForm } from 'containers';
+import { Heading } from 'components';
 
-
-const Login = () => {
+const Login = ({ history }) => {
   return (
-    <div>
-      
-    </div>
+    <main>
+      <Heading content="log in" />
+      <SignInForm history={history} />
+    </main>
   );
 };
 

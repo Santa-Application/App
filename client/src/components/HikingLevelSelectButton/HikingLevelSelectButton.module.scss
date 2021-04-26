@@ -4,4 +4,9 @@
   @include flex-row(space-between);
 
   width: 50vw;
+  margin-top: 1rem;
+
+  input {
+    display: none;
+  }
 }

@@ -1,17 +1,31 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form, Formik } from 'formik';
-import FormItem from 'components/FormItem/FormItem';
-import { Button } from 'components';
+import { Button, FormItem } from 'components';
+import { signinUserAsync } from 'redux/modules/auth';
+import { validationSchema } from 'utils';
 
-const SignInForm = () => {
+const SignInForm = ({ history }) => {
+  const signedIn = useSelector(state => state.auth.signedIn);
+  const dispatch = useDispatch();
+
+  const handleClickRegisterButton = () => {
+    history.push('/signup');
+  };
+
+  useEffect(() => {
+    signedIn && history.push('/main');
+  }, [signedIn]);
+
   return (
     <Formik
       initialValues={{
         email: '',
         password: '',
       }}
+      validationSchema={validationSchema.signInSchema}
       onSubmit={values => {
-        console.log(values);
+        dispatch(signinUserAsync(values));
       }}
     >
       <Form>
@@ -45,8 +59,28 @@ const SignInForm = () => {
             name: 'password',
           }}
         />
-        <Button type="button" secondary="true" children="회원가입" />
-        <Button type="submit" children="로그인" />
+        {signedIn || (
+          <p
+            style={{
+              fontSize: '1.2rem',
+              color: 'red',
+              textIndent: '0.5rem',
+              marginTop: '-3.5rem',
+              marginBottom: '2rem',
+            }}
+          >
+            이메일과 비밀번호가 일치하는지 확인해주세요!!
+          </p>
+        )}
+        <div className="buttonContainer">
+          <Button
+            type="button"
+            secondary={true}
+            children="회원가입"
+            onClick={handleClickRegisterButton}
+          />
+          <Button type="submit" children="로그인" />
+        </div>
       </Form>
     </Formik>
   );

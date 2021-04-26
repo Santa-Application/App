@@ -8,11 +8,38 @@ html {
 
 main {
   width: 85vw;
-  margin: 0 auto;
+  margin: 6rem auto 10rem;
+
+  h2 {
+    text-transform: uppercase;
+    @include font-page-heading;
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid $light-gray;
+  }
+}
+
+form {
+  > div {
+    margin-bottom: 5rem;
+  }
+}
+
+.buttonContainer {
+  @include flex-row(center);
+  padding-top: 2rem;
+
+  button:first-child {
+    margin-right: 2rem;
+  }
 }
 
 a {
   color: $dark-gray;
+}
+
+img {
+  display: block;
 }
 
 .a11yHidden {
