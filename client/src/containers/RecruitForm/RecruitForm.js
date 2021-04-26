@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import FormItem from 'components/FormItem/FormItem';
 import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +15,7 @@ import {
 } from './RecruitForm.module.scss';
 import { createRecruitPostAsync } from 'redux/modules/recruitPost';
 
-const RecruitForm = ({ history, formType, ...restProps }) => {
+const RecruitForm = ({ history, match, formType, ...restProps }) => {
   const {
     handleSelectDate,
     handleFocusAllInput,
@@ -28,13 +29,20 @@ const RecruitForm = ({ history, formType, ...restProps }) => {
   // const postsLength = postsData.length;
   // const postId = postsData[postsLength - 1];
   // console.log(postId);
+  const userName = match.params.mountainName;
+  const mountainName = match.params.mountainName;
   const dispatch = useDispatch();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentAge, setCurrentAge] = useState([20, 45]);
 
   const handleClickCancel = () => {
-    history.push('/recruit');
+    const path = userName
+      ? `${userName}/recruit`
+      : mountainName
+      ? `${mountainName}/recruit`
+      : '/recuit';
+    history.push(path);
   };
 
   return (

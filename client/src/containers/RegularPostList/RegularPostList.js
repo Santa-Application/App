@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,24 +8,18 @@ import { getRegularPostsAsync } from 'redux/modules/regularPost';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  reviewPostListContainer,
-  reviewPostCard,
-} from './RegularPostList.module.scss';
+import { listContainer, postCard } from './RegularPostList.module.scss';
 
-const RegularPostList = ({ className, ...restProps }) => {
+const RegularPostList = ({ pageInfo, className, ...restProps }) => {
   const state = useSelector(state => state.regularPost);
   const { isLoading, data, error } = state;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getRegularPostsAsync());
-  }, []);
+  }, [dispatch]);
 
-  const regularPostListContainerClasses = classNames(
-    className.container,
-    reviewPostListContainer
-  );
+  const listContainerClasses = classNames(className.container, listContainer);
 
   if (isLoading)
     return (
@@ -66,10 +61,26 @@ const RegularPostList = ({ className, ...restProps }) => {
       </div>
     );
 
+  const postsData =
+    pageInfo.type === 'profile'
+      ? data.filter(_data => _data.publisherInfo.name === pageInfo.userName)
+      : pageInfo.type === 'mountain'
+      ? data.filter(
+          _data => _data.regularPost.mountainName === pageInfo.mountainName
+        )
+      : data;
+  const createPagePath =
+    pageInfo.type === 'profile'
+      ? `/${pageInfo.userName}/reveiws/create`
+      : pageInfo.type === 'mountain'
+      ? `/${pageInfo.mountainName}/reveiws/create`
+      : '/reviews/create';
+
   return (
     <>
+      {/* {pageInfo.isLoggedInUser && ( */}
       <Link
-        to="/reviews/create"
+        to={createPagePath}
         style={{
           fontSize: '1.4rem',
           fontWeight: 700,
@@ -80,28 +91,45 @@ const RegularPostList = ({ className, ...restProps }) => {
       >
         작성하기
       </Link>
-      <ul className={regularPostListContainerClasses}>
-        {data.map(post => (
-          <li key={post.regularPost._id}>
-            <Link to={`/reviews/${post.regularPost._id}`}>
-              <RegularPostCard
-                postData={post.regularPost}
-                className={{ container: reviewPostCard }}
-              />
-            </Link>
-          </li>
-        ))}
+      {/* )} */}
+      <ul className={listContainerClasses}>
+        {postsData.map(post => {
+          const path =
+            pageInfo.type === 'profile'
+              ? `/${pageInfo.userName}/reviews/${post.regularPost._id}`
+              : pageInfo.type === 'mountain'
+              ? `/${pageInfo.mountainName}/reviews/${post.regularPost._id}`
+              : `/reviews/${post.regularPost._id}`;
+
+          return (
+            <li key={post.regularPost._id}>
+              <Link to={path}>
+                <RegularPostCard
+                  postData={post.regularPost}
+                  className={{ container: postCard }}
+                />
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </>
   );
 };
 
 RegularPostList.defaultProps = {
+  pageInfo: {
+    type: '',
+    userName: '',
+    mountainName: '',
+    isLoggedInUser: false,
+  },
   className: '',
 };
 
 RegularPostList.propTypes = {
-  className: PropTypes.string,
+  // pageInfo: PropTypes.object,
+  // className: PropTypes.object,
 };
 
 export default RegularPostList;

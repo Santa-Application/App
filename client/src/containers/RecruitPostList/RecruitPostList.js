@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,9 +7,9 @@ import { RecruitPostCard } from 'components';
 import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 
 import PropTypes from 'prop-types';
-import { listContainer, recruitPostCard } from './RecruitPostList.module.scss';
+import { listContainer, postCard } from './RecruitPostList.module.scss';
 
-const RecruitPostList = ({ className, ...restProps }) => {
+const RecruitPostList = ({ pageInfo, className, ...restProps }) => {
   const state = useSelector(state => state.recruitPost);
   const { isLoading, data, error } = state;
   const dispatch = useDispatch();
@@ -57,10 +58,26 @@ const RecruitPostList = ({ className, ...restProps }) => {
       </div>
     );
 
+  const postsData =
+    pageInfo.type === 'profile'
+      ? data.filter(_data => _data.publisherInfo.name === pageInfo.userName)
+      : pageInfo.type === 'mountain'
+      ? data.filter(
+          _data => _data.recruitPost.mountainName === pageInfo.mountainName
+        )
+      : data;
+  const createPagePath =
+    pageInfo.type === 'profile'
+      ? `/${pageInfo.userName}/recruit/create`
+      : pageInfo.type === 'mountain'
+      ? `/${pageInfo.mountainName}/recruit/create`
+      : '/recruit/create';
+
   return (
     <>
+      {/* {pageInfo.isLoggedInUser && ( */}
       <Link
-        to="/recruit/create"
+        to={createPagePath}
         style={{
           fontSize: '1.4rem',
           fontWeight: 700,
@@ -71,15 +88,22 @@ const RecruitPostList = ({ className, ...restProps }) => {
       >
         작성하기
       </Link>
+      {/* )} */}
       <ul className={listContainer}>
-        {data.map(post => {
-          // console.log(post.recruitPost._id);
+        {postsData.map(post => {
+          const path =
+            pageInfo.type === 'profile'
+              ? `/${pageInfo.userName}/recruit/${post.recruitPost._id}`
+              : pageInfo.type === 'mountain'
+              ? `/${pageInfo.mountainName}/recruit/${post.recruitPost._id}`
+              : `/recruit/${post.recruitPost._id}`;
+
           return (
             <li key={post.recruitPost._id}>
-              <Link to={`/recruit/${post.recruitPost._id}`}>
+              <Link to={path}>
                 <RecruitPostCard
                   postData={post}
-                  className={{ container: recruitPostCard }}
+                  className={{ container: postCard }}
                 />
               </Link>
             </li>
@@ -91,11 +115,17 @@ const RecruitPostList = ({ className, ...restProps }) => {
 };
 
 RecruitPostList.defaultProps = {
+  pageInfo: {
+    type: '',
+    userName: '',
+    mountainName: '',
+    isLoggedInUser: false,
+  },
   className: '',
 };
 
-RecruitPostList.propTypes = {
-  className: PropTypes.string,
-};
+// RecruitPostList.propTypes = {
+//   className: PropTypes.string,
+// };
 
 export default RecruitPostList;

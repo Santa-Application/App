@@ -4,28 +4,30 @@
   display: flex;
   justify-content: space-around;
   font-family: 'Roboto';
-  
+  padding: 2em 0;
+  margin-bottom: 3rem;
+
   a {
-    text-decoration: none;
+    // text-decoration: none;
     font-size: 1.6rem;
     font-weight: 700;
     color: $light-gray;
   }
-  
-  li[aria-selected=true] a {
-    color: $primary;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
-    &::after {
-      margin-top: .5rem;
-      height: .4rem;
-      width: .4rem;
-      background-color: $primary;
-      border-radius: 50%;
-      display: inline-block;
-      content: "";
-    }
-  }
+  // li[aria-selected='true'] a {
+  //   color: $primary;
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+
+  //   &::after {
+  //     margin-top: 0.5rem;
+  //     height: 0.4rem;
+  //     width: 0.4rem;
+  //     background-color: $primary;
+  //     border-radius: 50%;
+  //     display: inline-block;
+  //     content: '';
+  //   }
+  // }
 }

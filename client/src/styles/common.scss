@@ -36,10 +36,31 @@ form {
 
 a {
   color: $dark-gray;
+  text-decoration: none;
 }
 
 img {
   display: block;
+}
+
+.selected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: $primary;
+  // font-size: 1.6rem;
+  // font-weight: 700;
+
+  &::after {
+    margin-top: 0.5rem;
+    height: 0.4rem;
+    width: 0.4rem;
+    background-color: $primary;
+    border-radius: 50%;
+    display: inline-block;
+    content: '';
+  }
 }
 
 .a11yHidden {

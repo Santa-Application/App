@@ -14,7 +14,10 @@ import {
   headingContainer,
   text,
 } from './RegularPostDetail.module.scss';
-import { removeRegularPostAsync } from 'redux/modules/regularPost';
+import {
+  getRegularPostsAsync,
+  removeRegularPostAsync,
+} from 'redux/modules/regularPost';
 import { filterData } from 'utils';
 
 const RegularPost = ({ match, history, ...restProps }) => {
@@ -26,6 +29,7 @@ const RegularPost = ({ match, history, ...restProps }) => {
 
   const handleClickRemovePost = () => {
     dispatch(removeRegularPostAsync(postId));
+    dispatch(getRegularPostsAsync());
     history.push('/reviews');
   };
   const handleClickEditPost = () => {

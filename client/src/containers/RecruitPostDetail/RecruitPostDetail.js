@@ -10,6 +10,7 @@ import {
   Button,
 } from 'components';
 import {
+  getRecruitPostsAsync,
   removeRecruitPostAsync,
   toggleApplyRecruiting,
 } from 'redux/modules/recruitPost';
@@ -23,71 +24,38 @@ import {
   statusOfRecruitees,
   buttonContainer,
 } from './RecruitPostDetail.module.scss';
-import { PageNotFound } from 'pages';
 
 const RecruitPost = ({ match, history, ...restProps }) => {
-  const userId = useSelector(state => state.auth.userInfo._id);
+  const userInfo = useSelector(state => state.auth.userInfo);
   const recruitPostsData = useSelector(state => state.recruitPost);
-  const { isLoading, data, error } = recruitPostsData;
   const dispatch = useDispatch();
 
   const [isApplied, setIsApplied] = useState(false);
 
   const postId = match.params.postId;
+  const userName = match.params.userName;
 
   const handleClickRemovePost = () => {
     // dispatch(removeRecruitPostAsync(postId));
-    history.push('/recruit');
+    history.push(userName ? `${userName}/reruit` : '/recruit');
+    dispatch(getRecruitPostsAsync());
   };
   const handleClickEditPost = () => {
-    history.push(`/recruit/edit/${postId}`);
+    history.push(
+      userName ? `${userName}/reruit/edit/${postId}` : `/recruit/edit/${postId}`
+    );
   };
   const handleChangeApplyRecruitingButton = () => {
     // dispatch(toggleApplyRecruiting(postId, userId));
     setIsApplied(!isApplied);
   };
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        로딩중임돠
-      </div>
-    );
-  if (error)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        에러났음돠
-      </div>
-    );
-  if (!data)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        데이터가 없음돠
-      </div>
-    );
+  if (!userInfo) return <div>접근할 수 없슴돠</div>;
 
-  const postData = data.find(_data => _data.recruitPost._id === postId);
+  const userId = userInfo._id;
+  const postData = recruitPostsData.data.find(
+    _data => _data.recruitPost._id === postId
+  );
   const { recruitPost } = postData;
   const publisherId = postData.publisherInfo._id;
 
