@@ -21,7 +21,7 @@ const SearchBox = ({ datas, ...restProps }) => {
   const [hasError, setHasError] = useState(false);
 
   const filtered = datas.filter(data => {
-    return data.name.includes(searchText);
+    return data.data.name.includes(searchText);
   });
 
   const handleFocusInput = e => {

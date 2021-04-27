@@ -89,45 +89,47 @@ const Header = ({ history, match, mode, style, title, href, userData }) => {
         <Logo style={style} title={title} href={href} />
       </Button>
       {signedIn && (
-        <Button
-          {...commonProps}
-          value={'Menu button'}
-          onClick={handleNavMenu}
-          className={menuButton}
-        >
-          <Icon shape={'menu'} />
-        </Button>
-      )}
-      <div className={navBackground} ref={navBgRef}>
-        <section className={nav} ref={navRef}>
-          <div className={menu}>
-            <PublisherInformation publisherData={userData} />
-            <Navigation
-              label={'메뉴 바'}
-              className={navMenu}
-              onClick={handleClickMenuButtons}
-            />
-          </div>
+        <>
           <Button
             {...commonProps}
-            value={'logout button'}
-            className={signoutButton}
-            onClick={handleClickSignout}
-          >
-            <Tag type={'signout'} content={'sign out'} />
-          </Button>
-          <Button
-            {...commonProps}
-            value={'side menu bar close'}
+            value={'Menu button'}
             onClick={handleNavMenu}
-            className={navCloseButton}
-            aria-label={'Side menu close button'}
-            children={'메뉴 닫기'}
+            className={menuButton}
           >
-            <Icon shape={'close'} />
+            <Icon shape={'menu'} />
           </Button>
-        </section>
-      </div>
+          <div className={navBackground} ref={navBgRef}>
+            <section className={nav} ref={navRef}>
+              <div className={menu}>
+                <PublisherInformation publisherData={userData} />
+                <Navigation
+                  label={'메뉴 바'}
+                  className={navMenu}
+                  onClick={handleClickMenuButtons}
+                />
+              </div>
+              <Button
+                {...commonProps}
+                value={'logout button'}
+                className={signoutButton}
+                onClick={handleClickSignout}
+              >
+                <Tag type={'signout'} content={'sign out'} />
+              </Button>
+              <Button
+                {...commonProps}
+                value={'side menu bar close'}
+                onClick={handleNavMenu}
+                className={navCloseButton}
+                aria-label={'Side menu close button'}
+                children={'메뉴 닫기'}
+              >
+                <Icon shape={'close'} />
+              </Button>
+            </section>
+          </div>
+        </>
+      )}
     </div>
   );
 };

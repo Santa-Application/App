@@ -1,11 +1,11 @@
 @import 'styles';
 
-.reviewPostListContainer {
+.listContainer {
   @include flex(space-between, normal, row, wrap);
   width: 85vw;
   margin: 0 auto;
 }
 
-.reviewPostCard {
+.postCard {
   margin-bottom: 3em;
 }

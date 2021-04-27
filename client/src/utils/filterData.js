@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 export const postPublisherInfo = data => {
   return {
-    imageURL: data.imageURL,
+    imageURL: data.publisherInfo.imageURL,
     publisherName: data.publisherInfo.name,
   };
 };
