@@ -1,4 +1,4 @@
-import MainRecruit from 'containers/MainRecruit/MainRecruit';
+// import MainRecruit from 'containers/MainRecruit/MainRecruit';
 import SearchMountain from 'containers/SearchMountain/SearchMountain';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,7 +34,7 @@ const Main = ({ history, match }) => {
           <p>그럼 산타!</p>
         </div>
       </div>
-      <MainRecruit />
+      {/* <MainRecruit /> */}
     </main>
   );
 };

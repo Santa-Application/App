@@ -55,21 +55,20 @@ const ProfileInfoCard = ({
 
 export default ProfileInfoCard;
 
-ProfileInfoCard.defaultProps = {
-  name: 'UserID',
-  profileImageURL:
-    'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
-  gender: 'female',
-  age: 32,
-  level: 'level2',
-  introduction: 'User introduction placed in this place',
-};
+// ProfileInfoCard.defaultProps = {
+//   name: '',
+//   profileImageURL: '',
+//   gender: '',
+//   age: 0,
+//   level: '',
+//   introduction: '',
+// };
 
-ProfileInfoCard.propTypes = {
-  name: string.isRequired,
-  profileImageURL: string.isRequired,
-  gender: oneOf(['female', 'male']).isRequired,
-  age: number.isRequired,
-  level: oneOf(['level1', 'level2', 'level3']).isRequired,
-  introduction: string.isRequired,
-};
+// ProfileInfoCard.propTypes = {
+//   name: string.isRequired,
+//   profileImageURL: string.isRequired,
+//   gender: oneOf(['female', 'male']).isRequired,
+//   age: number.isRequired,
+//   level: oneOf(['level1', 'level2', 'level3']).isRequired,
+//   introduction: string.isRequired,
+// };
