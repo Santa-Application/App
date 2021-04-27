@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-// import MainRecruit from 'containers/MainRecruit/MainRecruit';
-=======
 import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 import MainRecruit from 'containers/MainRecruit/MainRecruit';
->>>>>>> f08dda5e3e201748172d9783eb9579ca1ba77eb8
 import SearchMountain from 'containers/SearchMountain/SearchMountain';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,13 +51,8 @@ const Main = ({ history, match }) => {
           <p>오늘 기분타?</p>
           <p>그럼 산타!</p>
         </div>
-<<<<<<< HEAD
-      </div>
-      {/* <MainRecruit /> */}
-=======
       </section>
       <MainRecruit history={history} />
->>>>>>> f08dda5e3e201748172d9783eb9579ca1ba77eb8
     </main>
   );
 };
