@@ -23,24 +23,25 @@
 .mountainImage {
   position: relative;
   img {
-    width: 100vw;
+    width: 100%;
     min-height: 70vh;
   }
 }
 
-main {
-  .mountainHeading {
-    position: absolute;
-    right: 5%;
-    bottom: 5%;
-    font-size: 3.6rem;
-    color: $white;
-    border: none;
-    text-shadow: 0rem 0rem 1.5rem rgba($color: $black, $alpha: 0.8);
-    margin-bottom: 0;
-    padding: 0.2rem 1.5rem;
-  }
+.mountainHeading {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: $white;
+  border: none;
+  text-shadow: 0rem 0rem 1.5rem rgba($color: $black, $alpha: 0.8);
+  margin-bottom: 0;
+  padding: 0.2rem 1.5rem;
 }
 
-.mountainTabContainer {
+.mountainInfoContainer {
+  margin: 0 auto;
+  width: 85vw;
 }

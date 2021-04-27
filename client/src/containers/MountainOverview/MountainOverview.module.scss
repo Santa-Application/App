@@ -1,3 +1,21 @@
+@import 'styles';
+
 .mountainInfoContainer {
-  padding: 3rem;
+  padding: 2rem;
+
+  > div {
+    margin-bottom: 3rem;
+
+    line-height: 1.8em;
+  }
+
+  em {
+    @include font-dark-16-700;
+    // font-size: 1.6rem;
+  }
+
+  p {
+    @include font-dark-14-400;
+    // font-size: 1.4rem;
+  }
 }
