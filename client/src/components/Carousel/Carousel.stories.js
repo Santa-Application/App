@@ -1,4 +1,3 @@
-import StoryRouter from 'storybook-react-router';
 import { storiesOf } from '@storybook/react';
 import Carousel from './Carousel'
 import { MountainCard } from 'components';

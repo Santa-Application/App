@@ -6,3 +6,4 @@ export { default as RecruitPostList } from './RecruitPostList/RecruitPostList';
 export { default as RecruitPostDetail } from './RecruitPostDetail/RecruitPostDetail';
 export { default as RegularPostList } from './RegularPostList/RegularPostList';
 export { default as RegularPostDetail } from './RegularPostDetail/RegularPostDetail';
+export { default as ReviewCarousel } from './ReviewCarousel/ReviewCarousel';
