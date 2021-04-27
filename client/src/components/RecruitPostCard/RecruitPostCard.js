@@ -27,7 +27,9 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
       break;
   }
 
-  const containerClasses = classNames(className.container, container);
+  const containerClasses = className?.container ? 
+    classNames(className.container, container) :
+    container;
 
   return (
     <div className={containerClasses}>
@@ -52,14 +54,16 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
 
 RecruitPostCard.defaultProps = {
   // postData: {
-  //   title: '',
-  //   imageURL: '',
-  //   mountainName: '',
-  //   recruitDate: '',
-  //   recruitingNumber: 0,
-  //   recruitingSex: 'genderBoth',
+  //   recruitPost: {
+  //     title: '',
+  //     imageURL: '',
+  //     mountainName: '',
+  //     recruitDate: '',
+  //     recruitingNumber: 0,
+  //     recruitingGender: 'genderBoth',
+  //   }
   // },
-  className: {},
+  // className: {},
 };
 
 RecruitPostCard.propTypes = {
