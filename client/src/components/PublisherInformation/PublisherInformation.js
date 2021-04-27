@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ProfileImage } from 'components';
 import PropTypes from 'prop-types';
 import { container, name } from './PublisherInformation.module.scss';
@@ -5,10 +6,13 @@ import { container, name } from './PublisherInformation.module.scss';
 const PublisherInformation = ({ publisherData, className, ...restProps }) => {
   if (!publisherData) return null;
 
+  const { imageURL, publisherName } = publisherData;
   return (
     <div className={container}>
-      <ProfileImage src={publisherData.imageURL} size="medium" />
-      <span className={name}>{publisherData.publisherName}</span>
+      <ProfileImage src={imageURL} size="medium" />
+      <Link to={`/${publisherName}`} className={name}>
+        {publisherName}
+      </Link>
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import {
@@ -11,26 +11,41 @@ import {
   RegularPostForm,
 } from 'containers';
 import { ProfileInfoCard, MenuTab } from 'components';
+import { authAPI } from 'api';
+import { postDate } from 'utils';
 
-const UserRecruitList = ({ history, match, ...restProps }) => {
-  const userInfo = useSelector(state => state.auth.userInfo);
-  if (!userInfo) return <div>없는 유져임돠</div>;
-  const userName = userInfo.name;
+const Profile = ({ history, match, ...restProps }) => {
+  const userName = match.params.userName;
+  const loggedInUserInfo = useSelector(state => state.auth.userInfo);
+  const loggedInUserName = loggedInUserInfo.name;
+  const [userInfo, setUserInfo] = useState(null);
+  const isLoggedInUser = userName === loggedInUserName;
+
+  useEffect(() => {
+    const setUserInfoAsync = async () => {
+      if (isLoggedInUser) {
+        setUserInfo(loggedInUserInfo);
+      } else {
+        const userInfoData = await authAPI.getUserInfoData(userName);
+        setUserInfo(userInfoData.data);
+      }
+    };
+    setUserInfoAsync();
+  }, [userName]);
+
+  if (!userInfo) return <div>로딩중임돠</div>;
 
   const handleClickUserImage = () => {
     history.push(`/${userName}`);
   };
 
-  // const isLoggedInUser = userName === LoggedInUserName;
-  const isLoggedInUser = true;
-
   return (
     <main>
       <ProfileInfoCard
         name={userName}
-        imageURL={userInfo.imageURL}
+        profileImageURL={userInfo.imageURL}
         gender={userInfo.gender}
-        age={userInfo.age}
+        age={postDate.getUserAgeWithText(userInfo.dateOfBirth)}
         level={userInfo.hikingLevel}
         introduction={userInfo.introduction}
         onClick={handleClickUserImage}
@@ -49,13 +64,17 @@ const UserRecruitList = ({ history, match, ...restProps }) => {
           component={() => (
             <RecruitPostList
               pageInfo={{ type: 'profile', userName, isLoggedInUser }}
+              history={history}
+              match={match}
             />
           )}
         />
         <Route
           path="/:userName/recruit/create"
           exact
-          component={() => <RecruitForm formType="create" />}
+          component={() => (
+            <RecruitForm formType="create" history={history} match={match} />
+          )}
         />
 
         <Route
@@ -85,6 +104,8 @@ const UserRecruitList = ({ history, match, ...restProps }) => {
           component={() => (
             <RegularPostList
               pageInfo={{ type: 'profile', userName, isLoggedInUser }}
+              history={history}
+              match={match}
             />
           )}
         />
@@ -98,4 +119,4 @@ const UserRecruitList = ({ history, match, ...restProps }) => {
   );
 };
 
-export default UserRecruitList;
+export default Profile;

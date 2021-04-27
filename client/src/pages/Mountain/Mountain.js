@@ -14,11 +14,39 @@ import {
 const Mountain = ({ history, match }) => {
   // mountain data dispatch
   const mountain = useSelector(state => state.mountain);
-  const { data } = mountain;
+  const { isLoading, data, error } = mountain;
 
   const mountainName = match.params.name;
   const mountainData = data.find(_data => _data.data.name === mountainName);
   const { imageURL } = mountainData;
+
+  if (isLoading) return <LoadingIcon />;
+  if (error)
+    return (
+      <div
+        style={{
+          color: '#666',
+          fontSize: '2rem',
+          margin: '5rem',
+          marginBottom: '25rem',
+        }}
+      >
+        에러났음돠
+      </div>
+    );
+  if (!data)
+    return (
+      <div
+        style={{
+          color: '#666',
+          fontSize: '2rem',
+          margin: '5rem',
+          marginBottom: '25rem',
+        }}
+      >
+        데이터가 없음돠
+      </div>
+    );
 
   return (
     <main className={mountainPage}>
