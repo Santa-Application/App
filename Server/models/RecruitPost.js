@@ -11,7 +11,7 @@ const recruitPostSchema = Schema({
   views: { type: Number, default: 0 },
   publisherID: { type: String, required: true },
   recruitees: [{ type: String }],
-  recruitDate: { type: String, required: true },
+  recruitDate: { type: Date, required: true },
   title: { type: String, required: true },
 });
 
