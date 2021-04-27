@@ -73,7 +73,7 @@ const RegularPostList = ({ pageInfo, className, ...restProps }) => {
     pageInfo.type === 'profile'
       ? `/${pageInfo.userName}/reviews/create`
       : pageInfo.type === 'mountain'
-      ? `/${pageInfo.mountainName}/reviews/create`
+      ? `/mountains/${pageInfo.mountainName}/reviews/create`
       : '/reviews/create';
 
   return (
@@ -99,7 +99,7 @@ const RegularPostList = ({ pageInfo, className, ...restProps }) => {
             pageInfo.type === 'profile'
               ? `/${pageInfo.userName}/reviews/${postId}`
               : pageInfo.type === 'mountain'
-              ? `/${pageInfo.mountainName}/reviews/${postId}`
+              ? `/mountains/${pageInfo.mountainName}/reviews/${postId}`
               : `/reviews/${postId}`;
 
           return (

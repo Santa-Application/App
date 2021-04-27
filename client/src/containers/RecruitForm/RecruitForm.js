@@ -39,7 +39,7 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
     const path = userName
       ? `/${userName}/recruit`
       : mountainName
-      ? `/${mountainName}/recruit`
+      ? `/mountains/${mountainName}/recruit`
       : '/recuit';
 
     history.push(path);
@@ -78,7 +78,7 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
           const path = userName
             ? `/${userName}/recruit/${newPostId}`
             : mountainName
-            ? `/${mountainName}/recruit/${newPostId}`
+            ? `/mountains/${mountainName}/recruit/${newPostId}`
             : `/recruit/${newPostId}`;
 
           history.push(path);
