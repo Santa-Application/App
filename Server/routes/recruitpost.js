@@ -25,6 +25,8 @@ router.get('/', async (_, res) => {
           );
         }
 
+        delete publisherInfo.password;
+
         const data = {
           recruitPost: {
             ...recruitPost._doc,
@@ -40,7 +42,8 @@ router.get('/', async (_, res) => {
       }),
     );
 
-    res.status(200).send(response);
+    const sortedResponse = [...response].sort((a, b) => b.recruitPost.postDate - a.recruitPost.postDate);
+    res.status(200).send(sortedResponse);
   } catch (err) {
     res.status(404).send(err);
   }
@@ -65,6 +68,8 @@ router.get('/:id', async (req, res) => {
         }),
       );
     }
+
+    delete publisherInfo.password;
 
     const response = {
       recruitPost: {
@@ -107,7 +112,10 @@ router.post('/newpost', async (req, res) => {
 
     const publisherInfo = await User.findById(recruitPost.publisherID);
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
-    const recruitees = [];
+
+    // const recruitees = [];
+
+    delete publisherInfo.password;
 
     const response = {
       recruitPost,
@@ -124,6 +132,7 @@ router.post('/newpost', async (req, res) => {
 });
 
 // change something in the existing recruiting post.
+// not changed yet.
 router.patch('/:id', async (req, res) => {
   try {
     // find existing document and setting update parts:)
@@ -145,11 +154,15 @@ router.patch('/:id', async (req, res) => {
       );
     }
 
+    delete publisherInfo.password;
+
     const response = {
       recruitPost: updatedPost,
-      publisherInfo,
-      publisherImageURL,
-      recruitees,
+      publisherInfo: {
+        ...publisherInfo._doc,
+        imageURL: publisherImageURL,
+        recruitees,
+      },
     };
 
     res.status(200).send(response);

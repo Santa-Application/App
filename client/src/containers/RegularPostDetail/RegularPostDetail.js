@@ -33,7 +33,7 @@ const RegularPost = ({ match, history, ...restProps }) => {
 
   const handleClickRemovePost = () => {
     dispatch(removeRegularPostAsync(postId));
-    dispatch(getRegularPostsAsync());
+    // dispatch(getRegularPostsAsync());
 
     const path = userName
       ? `/${userName}/reviews`
@@ -52,14 +52,9 @@ const RegularPost = ({ match, history, ...restProps }) => {
     history.push(path);
   };
 
-  const postData = regularPostsData.data.find(_data => {
-    console.log(
-      _data.regularPost._id,
-      postId,
-      _data.regularPost._id === postId
-    );
-    return _data.regularPost._id === postId;
-  });
+  const postData = regularPostsData.data.find(
+    _data => _data.regularPost._id === postId
+  );
   const { regularPost } = postData;
   const publisherId = postData.publisherInfo._id;
 

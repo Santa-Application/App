@@ -27,6 +27,7 @@ import { ReactComponent as NavMountains } from './assets/mountains_nav.svg';
 import { ReactComponent as NavProfile } from './assets/profile_nav.svg';
 import { ReactComponent as NavRecruits } from './assets/recruitposts_nav.svg';
 import { ReactComponent as NavReviews } from './assets/reviewposts_nav.svg';
+import { ReactComponent as More } from './assets/more.svg';
 
 const Icon = ({ shape, ...restProps }) => {
   let RenderIcon = '';
@@ -116,6 +117,8 @@ const Icon = ({ shape, ...restProps }) => {
     case 'navReviews':
       RenderIcon = NavReviews;
       break;
+    case 'more':
+      RenderIcon = More;
   }
 
   return <RenderIcon {...restProps} />;
@@ -150,7 +153,8 @@ Icon.propTypes = {
     'navMountains',
     'navProfile',
     'navRecruits',
-    'navReviews'
+    'navReviews',
+    'more'
   ]),
 };
 

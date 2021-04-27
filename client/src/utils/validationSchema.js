@@ -2,13 +2,13 @@ import * as Yup from 'yup';
 
 export const signInSchema = Yup.object().shape({
   email: Yup.string()
-    .email()
-    .matches(
-      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-      '이메일 형식에 맞지 않습니다.'
-    )
-    .required('이메일을 필수항목입니다.'),
-  password: Yup.string(),
+    .email('이메일 형식에 맞지 않습니다.')
+    // .matches(
+    //   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+    //   '이메일 형식에 맞지 않습니다.'
+    // )
+    .required('이메일을 입력해주세요.'),
+  password: Yup.string().required('비밀번호를 입력해주세요.'),
 });
 
 export const registerSchema = Yup.object().shape({
@@ -17,10 +17,11 @@ export const registerSchema = Yup.object().shape({
     .max(10, '닉네임은 15자 이내로 작성해주세요')
     .required('닉네임은 필수항목입니다.'),
   email: Yup.string()
-    .matches(
-      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-      '이메일 형식에 맞지 않습니다.'
-    )
+    .email('이메일 형식에 맞지 않습니다.')
+    // .matches(
+    //   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+    //   '이메일 형식에 맞지 않습니다.'
+    // )
     .required('이메일은 필수항목입니다.'),
   password: Yup.string()
     .matches(
@@ -29,9 +30,9 @@ export const registerSchema = Yup.object().shape({
     )
     .required('비밀번호는 필수항목입니다.'),
   passwordConfirm: Yup.string()
-    .matches()
+    // .matches()
     .required('비밀번호가 일치하지 않습니다.'),
-  imageUrl: Yup.string(),
+  imageURL: Yup.string(),
   gender: Yup.string().required('성별은 필수항목입니다.'),
   dateOfBirth: Yup.date().required('생일은 필수항목입니다.'),
   hikingLevel: Yup.string().required('등산 레벨은 필수항목입나다..'),
@@ -42,7 +43,7 @@ export const regularPost = Yup.object().shape({
   title: Yup.string()
     .max(80, '제목은 80자 이내로 작성해주세요')
     .required('제목은 필수항목입니다.'),
-  mountainName: Yup.string().matches().required('산은 필수항목입니다.'),
+  mountainName: Yup.string().required('산은 필수항목입니다.'),
   content: Yup.string()
     .max(300, '리뷰는 300자 이내로 작성해주세요.')
     .required('리뷰는 필수항목입니다.'),
@@ -53,7 +54,7 @@ export const recruitPost = Yup.object().shape({
   title: Yup.string()
     .max(80, '제목은 80자 이내로 작성해주세요.')
     .required('제목은 필수항목입니다.'),
-  mountainName: Yup.string().matches().required('산은 필수항목입니다.'),
+  mountainName: Yup.string().required('산은 필수항목입니다.'),
   recruitDate: Yup.date().required('날짜는 필수항목입니다.'),
   hikingLevel: Yup.string().required('등산 레벨은 필수항목입니다.'),
   recruitingGender: Yup.string().required('성별은 필수항목입니다.'),

@@ -38,7 +38,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
 
   const handleClickRemovePost = () => {
     dispatch(removeRecruitPostAsync(postId));
-    dispatch(getRecruitPostsAsync());
+    // dispatch(getRecruitPostsAsync());
 
     const path = userName
       ? `/${userName}/recruit`
@@ -68,7 +68,6 @@ const RecruitPost = ({ match, history, ...restProps }) => {
     _data => _data.recruitPost._id === postId
   );
 
-  console.log(match.params);
   const { recruitPost } = postData;
   const publisherId = postData.publisherInfo._id;
 

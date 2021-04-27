@@ -99,14 +99,14 @@ const Header = ({ history, match, mode, style, title, href, userData }) => {
             <Icon shape={'menu'} />
           </Button>
           <div className={navBackground} ref={navBgRef}>
-            <section className={nav} ref={navRef}>
+            <section
+              className={nav}
+              ref={navRef}
+              onClick={handleClickMenuButtons}
+            >
               <div className={menu}>
                 <PublisherInformation publisherData={userData} />
-                <Navigation
-                  label={'메뉴 바'}
-                  className={navMenu}
-                  onClick={handleClickMenuButtons}
-                />
+                <Navigation label={'메뉴 바'} className={navMenu} />
               </div>
               <Button
                 {...commonProps}
