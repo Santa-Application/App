@@ -1,6 +1,5 @@
 import SearchBox from 'components/SearchBox/SearchBox';
 import React from 'react';
-// import { searchBoxContainer } from './SearchMoutain.module.scss';
 
 const SearchMountain = ({ isLoading, data, error, history, match }) => {
   if (isLoading)
