@@ -3,12 +3,7 @@ import SearchMountain from 'containers/SearchMountain/SearchMountain';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMountainAsync } from 'redux/modules/mountain';
-import {
-  mainPage,
-  searchSection,
-  searchContainer,
-  headMessage,
-} from './Main.module.scss';
+import { mainPage, searchSection, headMessage } from './Main.module.scss';
 
 const Main = ({ history, match }) => {
   const mountain = useSelector(state => state.mountain);
@@ -21,7 +16,7 @@ const Main = ({ history, match }) => {
 
   return (
     <main className={mainPage}>
-      <div className={searchSection}>
+      <section className={searchSection}>
         <SearchMountain
           history={history}
           match={match}
@@ -33,8 +28,8 @@ const Main = ({ history, match }) => {
           <p>오늘 기분타?</p>
           <p>그럼 산타!</p>
         </div>
-      </div>
-      <MainRecruit />
+      </section>
+      <MainRecruit history={history} />
     </main>
   );
 };
