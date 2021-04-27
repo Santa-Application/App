@@ -15,13 +15,13 @@ import Heading from 'components/Heading/Heading';
 import { Link } from 'react-router-dom';
 import top100Mountains from 'data/top100Mountains';
 
-const SearchBox = ({ datas, ...restProps }) => {
+const SearchBox = ({ mountainData, ...restProps }) => {
   const [searchText, setSearchText] = useState('');
   const [isOpened, setIsOpened] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const filtered = datas.filter(data => {
-    return data.name.includes(searchText);
+  const filtered = mountainData.filter(mountain => {
+    return mountain.data.name.includes(searchText);
   });
 
   const handleFocusInput = e => {
@@ -110,17 +110,21 @@ const SearchBox = ({ datas, ...restProps }) => {
       {isOpened && (
         <ul className={searchList} role="listbox" onClick={handleClickItem}>
           {filtered.length === 0
-            ? datas.map(data => {
+            ? mountainData.map(mountain => {
                 return (
-                  <li key={data._id} role="option">
-                    <Link to={`/mountain/${data.name}`}>{data.name}</Link>
+                  <li key={mountain.data._id} role="option">
+                    <Link to={`/mountain/${mountain.data.name}`}>
+                      {mountain.data.name}
+                    </Link>
                   </li>
                 );
               })
-            : filtered.map(item => {
+            : filtered.map(mountain => {
                 return (
-                  <li key={item._id} role="option">
-                    <Link to={`/mountain/${item.name}`}>{item.name}</Link>
+                  <li key={mountain.data._id} role="option">
+                    <Link to={`/mountain/${mountain.data.name}`}>
+                      {mountain.data.name}
+                    </Link>
                   </li>
                 );
               })}
@@ -138,9 +142,9 @@ const SearchBox = ({ datas, ...restProps }) => {
 export default SearchBox;
 
 SearchBox.defaultProps = {
-  datas: top100Mountains,
+  mountainData: top100Mountains,
 };
 
 SearchBox.propTypes = {
-  datas: arrayOf(object),
+  mountainData: arrayOf(object),
 };

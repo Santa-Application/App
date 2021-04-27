@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { FormItem, Button } from 'components';
@@ -15,6 +16,7 @@ import {
 import { handleChangeFileInput } from 'utils/handler/formHandler';
 
 import top100Mountains from 'data/top100Mountains';
+import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 
 const RegularPostForm = ({
   history,
@@ -24,14 +26,18 @@ const RegularPostForm = ({
   ...restProps
 }) => {
   const userId = useSelector(state => state.auth.userInfo._id);
-  // const newPostId = useSelector(state => {
-  //   const postsData = state.regularPost.data;
-  //   return postsData[postsData.length - 1]._id;
-  // });
+  const userName = match.params.userName;
+  const mountainName = match.params.mountainName;
   const dispatch = useDispatch();
 
   const handleClickCancelButton = () => {
-    history.push('/reviews');
+    const path = userName
+      ? `${userName}/reviews`
+      : mountainName
+      ? `${mountainName}/reviews`
+      : '/reviews';
+
+    history.push(path);
   };
 
   return (
@@ -45,7 +51,7 @@ const RegularPostForm = ({
           content: '',
         }}
         validationSchema={validationSchema.regularPost}
-        onSubmit={values => {
+        onSubmit={async values => {
           const formData = new FormData();
           const newPostObj = {
             ...values,
@@ -57,10 +63,19 @@ const RegularPostForm = ({
             formData.append(key, newPostObj[key]);
           });
 
-          dispatch(createRegularPostAsync(formData));
-          // formType === 'create' && history.push(`/reviews/${newPostId}`);
-          // formType === 'edit' && history.push(`/reviews/${match.params.postId}`);
-          history.push('/reviews');
+          const newPostData = await dispatch(createRegularPostAsync(formData));
+          dispatch(getRecruitPostsAsync());
+
+          const newPostId = newPostData.regularPost._id;
+
+          const path = userName
+            ? `${newPostId}`
+            : mountainName
+            ? `${newPostId}`
+            : `${newPostId}`;
+
+          console.log(path);
+          history.push(path);
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => (

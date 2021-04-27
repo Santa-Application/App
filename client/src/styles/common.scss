@@ -36,10 +36,36 @@ form {
 
 a {
   color: $dark-gray;
+  text-decoration: none;
 }
 
 img {
   display: block;
+}
+
+.tab {
+  @include font-light-16-700;
+
+  &.tabSelected {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: $primary;
+
+    &::after {
+      content: '';
+
+      display: inline-block;
+
+      width: 0.4rem;
+      height: 0.4rem;
+      margin-top: 0.5rem;
+
+      background-color: $primary;
+      border-radius: 50%;
+    }
+  }
 }
 
 .a11yHidden {
