@@ -30,7 +30,10 @@ router.get('/', async (_, res) => {
         return data;
       }),
     );
-    return res.status(200).send(responseData);
+
+    const sortedResponse = [...responseData]
+      .sort((a, b) => b.regularPost.postDate - a.regularPost.postDate);
+    return res.status(200).send(sortedResponse);
   } catch (err) {
     return res.status(400).send(err);
   }

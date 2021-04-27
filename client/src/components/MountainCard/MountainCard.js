@@ -11,7 +11,11 @@ const MountainCard = ({ mountainName, to, background }) => {
       <div
         className={card}
         style={{
-          backgroundImage: background,
+          backgroundImage: `url(${background})`,
+          backgroundPositionX: 'center',
+          backgroundPositionY: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         {mountainName}

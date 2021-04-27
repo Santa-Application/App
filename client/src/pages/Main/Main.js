@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMountainAsync } from 'redux/modules/mountain';
 import { mainPage, searchSection, headMessage } from './Main.module.scss';
+import { Information } from 'containers';
 
 const Main = ({ history, match }) => {
   const mountain = useSelector(state => state.mountain);
@@ -53,6 +54,7 @@ const Main = ({ history, match }) => {
         </div>
       </section>
       <MainRecruit history={history} />
+      <Information />
     </main>
   );
 };

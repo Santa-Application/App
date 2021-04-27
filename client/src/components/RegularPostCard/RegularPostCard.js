@@ -12,9 +12,9 @@ import {
 } from './RegularPostCard.module.scss';
 
 const RegularPostCard = ({ postData, className, ...restProps }) => {
+  
   const { title, postDate, imageURL, mountainName } = postData;
-
-  const containerClasses = classNames(className.container, container);
+  const containerClasses = className?.container ? classNames(className.container, container) : container;
 
   return (
     <div className={containerClasses}>
@@ -37,7 +37,7 @@ const RegularPostCard = ({ postData, className, ...restProps }) => {
 //     title: '',
 //     imageURL: '',
 //     mountainName: '',
-//     postDate: {},
+//     postingDate: {},
 //   },
 //   className: {},
 // };
