@@ -19,6 +19,7 @@ import {
   Main,
 } from 'pages';
 import { Footer, Header } from 'components';
+import { RegisterForm } from 'containers';
 
 function App() {
   const signedIn = useSelector(state => state.auth.signedIn);
@@ -30,7 +31,6 @@ function App() {
         <Route path="/" component={Header} />
         <Switch>
           <Route path="/main" exact component={Main} />
-          <Route path="/mountain/:name" exact component={Mountain} />
 
           <Route path="/recruit" exact component={RecruitList} />
           <Route path="/recruit/create" exact component={RecruitCreate} />
@@ -45,6 +45,9 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Register} />
 
+          <Route path="/mountains" exact component={PageNotFound}></Route>
+          <Route path="/mountains/:mountainName" component={Mountain} />
+          {/* <Route path="/:userName/edit" component={RegisterForm} /> */}
           <Route path="/:userName" component={Profile} />
 
           {signedIn && <Redirect from="/" to="/main" />}

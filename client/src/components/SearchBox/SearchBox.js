@@ -113,7 +113,7 @@ const SearchBox = ({ mountainData, ...restProps }) => {
             ? mountainData.map(mountain => {
                 return (
                   <li key={mountain.data._id} role="option">
-                    <Link to={`/mountain/${mountain.data.name}`}>
+                    <Link to={`/mountains/${mountain.data.name}`}>
                       {mountain.data.name}
                     </Link>
                   </li>
@@ -122,7 +122,7 @@ const SearchBox = ({ mountainData, ...restProps }) => {
             : filtered.map(mountain => {
                 return (
                   <li key={mountain.data._id} role="option">
-                    <Link to={`/mountain/${mountain.data.name}`}>
+                    <Link to={`/mountains/${mountain.data.name}`}>
                       {mountain.data.name}
                     </Link>
                   </li>
