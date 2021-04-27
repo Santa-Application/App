@@ -27,3 +27,5 @@ export { default as NavigationItem } from 'components/NavigationItem/NavigationI
 export { default as Navigation } from 'components/Navigation/Navigation';
 export { default as ProfileInfoCard } from 'components/ProfileInfoCard/ProfileInfoCard';
 export { default as MountainCard } from 'components/MountainCard/MountainCard';
+export { default as CarouselSlider } from 'components/CarouselSlider/CarouselSlider';
+export { default as Carousel } from 'components/Carousel/Carousel';

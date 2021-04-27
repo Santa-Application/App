@@ -47,6 +47,7 @@ const downloadFile = async (fileKey) => {
   const downloadParams = {
     Bucket: bucketName,
     Key: fileKey,
+    expires: 6048000,
   };
 
   // Create a presigned URL

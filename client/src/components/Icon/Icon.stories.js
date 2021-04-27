@@ -16,7 +16,7 @@ export default {
       control: { type: 'select' },
       options: ['calendar', 'close', 'edit', 'female', 'genderBoth', 'back',
         'likeFalse', 'likeTrue', 'logout', 'male', 'member', 'menu', 'level1', 'level2', 'level3',
-        'selectClose', 'selectOpen']
+        'selectClose', 'selectOpen', 'more']
     }
   },
 };

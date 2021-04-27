@@ -14,7 +14,7 @@ export default {
   postTitle: 'sting',
   imageUrl: 'string',
   mountainName: 'string',
-  postingDate: 'Date object',
+  postDate: 'Date object',
 }`,
         },
       },
@@ -40,6 +40,6 @@ ReviewCard.args = {
     imageUrl:
       'https://health.chosun.com/site/data/img_dir/2019/04/30/2019043001641_0.jpg',
     mountainName: '인왕산',
-    postingDate: new Date(2021, 3, 24),
+    postDate: new Date(2021, 3, 24),
   },
 };

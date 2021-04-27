@@ -26,8 +26,8 @@ function App() {
   return (
     <div className="App">
       <HelmetProvider>
+        
         <Route path="/" component={Header} />
-
         <Switch>
           <Route path="/main" exact component={Main} />
           <Route path="/mountain/:name" exact component={Mountain} />
@@ -47,14 +47,14 @@ function App() {
 
           <Route path="/:userName" component={Profile} />
 
-          {/* {signedIn && <Redirect from="/" to="/main" />} */}
+          {signedIn && <Redirect from="/" to="/main" />}
           <Route path="/" exact component={HomePage} />
 
-          {/* <Redirect to="/page-not-found" /> */}
-          {/* todo: 에러 해결 */}
-          {/* <Route path="/page-not-found" component={PageNotFound}>
+          <Redirect to="/page-not-found" />
+        todo: 에러 해결
+          <Route path="/page-not-found" component={PageNotFound}>
             <Redirect to="/page-not-found" />
-          </Route> */}
+          </Route>
         </Switch>
 
         <Footer />
