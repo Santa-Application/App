@@ -11,8 +11,11 @@ import {
 } from 'components';
 import {
   heading,
+  topFive as topFiveClass,
   informationContainer,
-  reviewCarouselContainerTop
+  reviewCarouselContainerTop,
+  recruitsContainer,
+  moreButton
 } from './Information.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
@@ -60,7 +63,7 @@ const Information = ({ history, match }) => {
 
   return (
     <div className={informationContainer}>
-      <div>
+      <div className={topFiveClass}>
         <Heading
           level={3}
           content={'좋아요 TOP 5'}
@@ -86,7 +89,7 @@ const Information = ({ history, match }) => {
         centerSlidePercentage={50}
         className={reviewCarouselContainerTop}
       />
-      <div>
+      <div className={recruitsContainer}>
         <Heading
           level={3}
           content={'최신 모집 글'}
@@ -98,10 +101,12 @@ const Information = ({ history, match }) => {
               (<li key={index}>{recruit}</li>))
           }
         </ul>
-        <Link to={'/recruit'}>
+        <div className={moreButton}>
+          <Link to={'/recruit'}>
           더보기
-          <Icon shape={'more'} />
-        </Link>
+            <Icon shape={'more'} />
+          </Link>
+        </div>
       </div>
     </div>
   );
