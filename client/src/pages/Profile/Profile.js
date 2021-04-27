@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
@@ -13,33 +12,40 @@ import {
 } from 'containers';
 import { ProfileInfoCard, MenuTab } from 'components';
 import { authAPI } from 'api';
+import { postDate } from 'utils';
 
 const Profile = ({ history, match, ...restProps }) => {
   const userName = match.params.userName;
   const loggedInUserInfo = useSelector(state => state.auth.userInfo);
   const loggedInUserName = loggedInUserInfo.name;
   const [userInfo, setUserInfo] = useState(null);
+  const isLoggedInUser = userName === loggedInUserName;
 
-  useEffect(async () => {
-    const userInfoData = await authAPI.getUserInfoData(userName);
-    setUserInfo(userInfoData.data);
-  }, []);
+  useEffect(() => {
+    const setUserInfoAsync = async () => {
+      if (isLoggedInUser) {
+        setUserInfo(loggedInUserInfo);
+      } else {
+        const userInfoData = await authAPI.getUserInfoData(userName);
+        setUserInfo(userInfoData.data);
+      }
+    };
+    setUserInfoAsync();
+  }, [userName]);
 
-  if (!userInfo) return <div>없는 유져임돠</div>;
+  if (!userInfo) return <div>로딩중임돠</div>;
 
   const handleClickUserImage = () => {
     history.push(`/${userName}`);
   };
 
-  const isLoggedInUser = userName === loggedInUserName;
-
   return (
     <main>
       <ProfileInfoCard
         name={userName}
-        profileImageURL={userInfo.profileImageURL}
+        profileImageURL={userInfo.imageURL}
         gender={userInfo.gender}
-        age={userInfo.age}
+        age={postDate.getUserAgeWithText(userInfo.dateOfBirth)}
         level={userInfo.hikingLevel}
         introduction={userInfo.introduction}
         onClick={handleClickUserImage}
