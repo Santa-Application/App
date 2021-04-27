@@ -1,0 +1,47 @@
+@import 'styles';
+
+.recruitContainer {
+  width: 85vw;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  min-height: 50vh;
+  border-radius: 2rem;
+  background-image: url('./image/mainRecruit.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center 120%;
+}
+
+.recruitWrapper {
+  width: inherit;
+  min-height: inherit;
+  border-radius: 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba($color: $dark-gray, $alpha: 1) 0%,
+    rgba($color: $dark-gray, $alpha: 1) 50%,
+    rgba($color: $dark-gray, $alpha: 0.2) 70%,
+    rgba($color: $dark-gray, $alpha: 0) 100%
+  );
+  padding: 2.5rem;
+}
+
+.recruitTitle {
+  font-size: 2rem;
+  font-weight: 800;
+  color: $white;
+}
+
+.recruitDesc {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: $white;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.recruitButton {
+  @include flex-center-center;
+}
