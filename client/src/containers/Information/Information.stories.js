@@ -1,4 +1,7 @@
 import Information from './Information';
+import { Provider } from 'react-redux';
+import { action } from '@storybook/addon-actions';
+
 
 export default {
   title: 'containers/Information',

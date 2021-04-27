@@ -75,7 +75,7 @@ router.post('/signin', async (req, res) => {
   // Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
   // get imageURL
-  const userImageURL = await downloadFile(user.imageURL);
+  const userImageURL = user.imageURL ? await downloadFile(user.imageURL) : '유저 이미지가 없습니다.';
   const response = { ...user._doc, imageURL: userImageURL };
 
   delete response.password;

@@ -7,3 +7,4 @@ export { default as RecruitPostDetail } from './RecruitPostDetail/RecruitPostDet
 export { default as RegularPostList } from './RegularPostList/RegularPostList';
 export { default as RegularPostDetail } from './RegularPostDetail/RegularPostDetail';
 export { default as ReviewCarousel } from './ReviewCarousel/ReviewCarousel';
+export { default as Information } from './Information/Information';

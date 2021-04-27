@@ -3,40 +3,60 @@ import {
 } from 'containers';
 import {
   RegularPostCard,
+  RecruitPostCard,
   MountainCard,
   CarouselSlider,
-  Heading
+  Heading, 
+  Icon
 } from 'components';
 import {
   heading,
   informationContainer,
   reviewCarouselContainerTop
 } from './Information.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { getRegularPostsAsync } from 'redux/modules/regularPost';
+import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const Information = () => {
+const Information = ({ history, match }) => {
+
+  /*좋아요 top 5 갖고오기 -------------------------------------------------------------------------- */
+
+  
+  const mountains = useSelector(state => state.mountain);
+  const topFive = mountains.data ? 
+    [...mountains.data.sort((first, second) => first.likes - second.likes).slice(0, 5)] : [];
+    /* // 최신 리뷰글, 모집글들 갖고오기------------------------------------------------------------------------- */
+  const mountainCards = topFive.map(mountain => (<MountainCard 
+    mountainName={mountain.data.name} 
+    to={`/mountain/${mountain.data.name}`} 
+    background={mountain.imageURL}
+  />));
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    const getInformations = () => {
+      dispatch(getRegularPostsAsync());
+      dispatch(getRecruitPostsAsync());
+    };
+    getInformations();
+  }, [dispatch]);
+
+  const reviews = useSelector(state => state.regularPost.data);
+  const recruits = useSelector(state => state.recruitPost.data);
+
+  const newReviewsTen = reviews
+    .slice(0, 10)
+    .map(review => (<RegularPostCard postData={review.regularPost} />)    
+    );
+  const newRecruitsThree = recruits
+    .slice(0, 3)
+    .map(recruit => (<RecruitPostCard postData={recruit} />));
 
   /* -------------------------------------------------------------------------- */
-  const mockPostData = {
-    title: '산 탈꼬아',
-    postDate:  '2021-04-23', 
-    imageURL: 'https://health.chosun.com/site/data/img_dir/2019/04/30/2019043001641_0.jpg',
-    mountainName: '인완산'
-  };  
-
-  const mountainBG = 'https://user-images.githubusercontent.com/42370712/116192755-3e168500-a769-11eb-892e-e42407baad85.jpg';
-
-  const mockMountain = [
-    <MountainCard mountainName={'인왕산'} background={mountainBG}/>,
-    <MountainCard mountainName={'인왕산'} background={mountainBG}/>,
-    <MountainCard mountainName={'인왕산'} background={mountainBG}/>,
-    <MountainCard mountainName={'인왕산'} background={mountainBG}/>,
-  ];
-  const mockReviews = [
-    <RegularPostCard postData={mockPostData}/>,
-    <RegularPostCard postData={mockPostData}/>,
-    <RegularPostCard postData={mockPostData}/>,
-    <RegularPostCard postData={mockPostData}/>,
-  ];
+  // 데이터 넣어주기
 
   return (
     <div className={informationContainer}>
@@ -47,7 +67,7 @@ const Information = () => {
           className={heading}
         />
         <CarouselSlider
-          slides={mockMountain}
+          slides={mountainCards}
           emulateTouch={true}
           autoPlay={false}
           centerMode={true}
@@ -61,11 +81,28 @@ const Information = () => {
       </div>
       <ReviewCarousel
         head={'최신 리뷰'}
-        slides={mockReviews}
+        slides={newReviewsTen}
         slideWidth={'50'}
         centerSlidePercentage={50}
         className={reviewCarouselContainerTop}
       />
+      <div>
+        <Heading
+          level={3}
+          content={'최신 모집 글'}
+          className={heading}
+        />
+        <ul>
+          {
+            newRecruitsThree.map((recruit, index) =>
+              (<li key={index}>{recruit}</li>))
+          }
+        </ul>
+        <Link to={'/recruit'}>
+          더보기
+          <Icon shape={'more'} />
+        </Link>
+      </div>
     </div>
   );
 };
