@@ -71,7 +71,7 @@ const RegularPostList = ({ pageInfo, className, ...restProps }) => {
       : data;
   const createPagePath =
     pageInfo.type === 'profile'
-      ? `/${pageInfo.userName}/reviews/create`
+      ? `/profile/${pageInfo.userName}/reviews/create`
       : pageInfo.type === 'mountain'
       ? `/mountains/${pageInfo.mountainName}/reviews/create`
       : '/reviews/create';
@@ -97,7 +97,7 @@ const RegularPostList = ({ pageInfo, className, ...restProps }) => {
           const postId = post.regularPost._id;
           const path =
             pageInfo.type === 'profile'
-              ? `/${pageInfo.userName}/reviews/${postId}`
+              ? `/profile/${pageInfo.userName}/reviews/${postId}`
               : pageInfo.type === 'mountain'
               ? `/mountains/${pageInfo.mountainName}/reviews/${postId}`
               : `/reviews/${postId}`;
