@@ -1,14 +1,14 @@
 @import 'styles';
 
 .container {
-  width: 60vw;
+  width: 85vw;
 }
 
 .searchInput {
   //   @include outline(1rem);
   @include flex(space-between, center, row, nowrap);
   @include rounded-box-shadow(1rem);
-  margin-top: 1rem;
+  background-color: $white;
   padding: 0.8rem 1.5rem;
 
   input {
