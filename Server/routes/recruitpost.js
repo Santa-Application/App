@@ -107,6 +107,7 @@ router.post('/newpost', async (req, res) => {
 
     const publisherInfo = await User.findById(recruitPost.publisherID);
     const publisherImageURL = await downloadFile(publisherInfo.imageURL);
+
     const recruitees = [];
 
     const response = {
@@ -124,6 +125,7 @@ router.post('/newpost', async (req, res) => {
 });
 
 // change something in the existing recruiting post.
+// not changed yet.
 router.patch('/:id', async (req, res) => {
   try {
     // find existing document and setting update parts:)

@@ -66,11 +66,11 @@ router.post('/signin', async (req, res) => {
 
   // Checking if the email exists
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send('Not a registered user');
+  if (!user) return res.status(400).send('등록된 이메일이 아닙니다.');
 
   // passwrod check
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send('Invalid password');
+  if (!validPassword) return res.status(400).send('비밀번호가 올바르지 않습니다. 다시한번 확인해주세요');
 
   // Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
