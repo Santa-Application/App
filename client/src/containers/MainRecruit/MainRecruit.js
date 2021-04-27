@@ -17,11 +17,8 @@ const MainRecruit = ({ history }) => {
   return (
     <section className={recruitContainer}>
       <div className={recruitWrapper}>
-        <p className={recruitTitle}>
-          등산 메이트를
-          <div className="whiteSpace"></div>
-          직접 모집해보세요
-        </p>
+        <p className={recruitTitle}>등산 메이트를</p>
+        <p className={recruitTitle}>직접 모집해보세요</p>
         <p className={recruitDesc}>
           모집글을 작성하고 함께 등산할 친구를 찾아보세요.
         </p>
