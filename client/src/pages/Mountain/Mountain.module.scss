@@ -1,0 +1,46 @@
+@import 'styles/';
+
+// .mountainNameContainer {
+//   // background-image: url(./assets/seorak.png);
+//   // background-repeat: no-repeat;
+//   // background-size: cover;
+//   // background-position-x: center;
+//   // background-position-y: center;
+//   // width: 100vw;
+//   // min-height: 100vh;
+//   img {
+//     width: 200px;
+//     height: 200px;
+//     // min-height: 100vh;
+//   }
+// }
+
+.mountainPage {
+  margin: 0;
+  width: 100vw;
+}
+
+.mountainImage {
+  position: relative;
+  img {
+    width: 100vw;
+    min-height: 70vh;
+  }
+}
+
+main {
+  .mountainHeading {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    font-size: 3.6rem;
+    color: $white;
+    border: none;
+    text-shadow: 0rem 0rem 1.5rem rgba($color: $black, $alpha: 0.8);
+    margin-bottom: 0;
+    padding: 0.2rem 1.5rem;
+  }
+}
+
+.mountainTabContainer {
+}

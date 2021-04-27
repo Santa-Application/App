@@ -1,0 +1,25 @@
+@import 'styles';
+
+.mainPage {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}
+
+.searchSection {
+  @include flex(space-between, flex-start, column, wrap);
+  padding: 2.5rem;
+  min-height: 70vh;
+  background-image: url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.headMessage {
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: $white;
+}
