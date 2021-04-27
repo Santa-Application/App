@@ -47,12 +47,7 @@ export const updateRecruitPost = async (id, updatePost) => {
   try {
     const response = await axios.patch(
       `http://3.36.114.117:8001/api/recruitpost/${id}`,
-      updatePost,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
+      updatePost
     );
 
     return response.data;
