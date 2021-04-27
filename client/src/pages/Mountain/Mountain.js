@@ -1,4 +1,5 @@
 import { Heading, MenuTab } from 'components';
+import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 import MountainOverview from 'containers/MountainOverview/MountainOverview';
 import { motion, useTransform, useViewportScroll } from 'framer-motion';
 import React, { useLayoutEffect, useRef, useState } from 'react';
@@ -13,11 +14,12 @@ import {
 const Mountain = ({ history, match }) => {
   // mountain data dispatch
   const mountain = useSelector(state => state.mountain);
-  const { isLoading, data, error } = mountain;
+  const { data } = mountain;
 
   const mountainName = match.params.name;
   const mountainData = data.find(_data => _data.data.name === mountainName);
   const { imageURL } = mountainData;
+
   return (
     <main className={mountainPage}>
       <div className={mountainImage}>
@@ -30,9 +32,7 @@ const Mountain = ({ history, match }) => {
           history={history}
           match={match}
           mountainData={mountainData}
-          isLoading={isLoading}
           data={data}
-          error={error}
         />
       </div>
     </main>
