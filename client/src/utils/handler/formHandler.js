@@ -1,6 +1,8 @@
 // select all input
 export const handleFocusAllInput = e => {
-  e.target.select();
+  // e.target.select();
+  // 모바일 시뮬레이터 마우스 우클릭 선택되는 버그 해결용, 웹에서는 문제가 없다.
+  window.setTimeout(() => e.target.select());
 };
 
 // select date
