@@ -1,12 +1,12 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { MountainCard } from 'components';
 import {
   card
 } from './CarouselSlider.module.scss';
 
 
 const CarouselSlider = ({
+  slides,
   emulateTouch,
   autoPlay,
   centerMode,
@@ -14,7 +14,8 @@ const CarouselSlider = ({
   showArrows,
   useKeyboardArrows,
   width,
-  showThumbs
+  showThumbs,
+  ...restProps
 }) => {
   return (
     <Carousel 
@@ -27,12 +28,11 @@ const CarouselSlider = ({
       width={width}
       showThumbs={showThumbs}
       className={card}
+      {...restProps}
     >
-      <MountainCard mountainName={'한라산'} to={'/mountain/hanlasan'}/>
-      <MountainCard mountainName={'관악산'} to={'/mountain/관악산'}/>
-      <MountainCard mountainName={'청계산'} to={'/mountain/청계산'}/>
-      <MountainCard mountainName={'미미산'} to={'/mountain/미미산'}/>
-      <MountainCard mountainName={'할미산'} to={'/mountain/할미산'}/>
+      {
+        slides.map((slide, index) => slide)
+      }
     </Carousel>
 
   );

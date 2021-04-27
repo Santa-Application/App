@@ -1,0 +1,23 @@
+@import 'styles';
+.heading {
+  font-family: 'Roboto';
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $dark-gray; 
+  margin-bottom: 1.2rem;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: unset;
+}
+
+.reviewCarouselContainerTop {
+  margin-top: 1.5rem;
+
+  div[class^="slider-wrapper"] {
+    height: 18rem;
+  }
+}
