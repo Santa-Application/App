@@ -19,7 +19,6 @@ import {
   Main,
 } from 'pages';
 import { Footer, Header } from 'components';
-import { Information } from 'containers';
 
 function App() {
   const signedIn = useSelector(state => state.auth.signedIn);
