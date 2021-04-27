@@ -14,9 +14,9 @@ export const authInitialState = () => ({
 });
 
 export const profileInitialState = () => ({
-  isLoading: false, 
-  profile: null, 
-  error: null
+  isLoading: false,
+  profile: null,
+  error: null,
 });
 
 export const loadingState = previousState => ({
@@ -46,17 +46,16 @@ export const authErrorState = error => ({
 });
 
 export const profileLoadingState = previousState => ({
-  isLoading: true, 
-  profile: previousState, 
-  error: null
+  isLoading: true,
+  profile: previousState,
+  error: null,
 });
 
 export const profileErrorState = error => ({
-  isLoading: false, 
+  isLoading: false,
   profile: null,
-  error
+  error,
 });
-
 
 // create thunk action creator
 export const createThunkActionCreator = (
@@ -71,8 +70,9 @@ export const createThunkActionCreator = (
     const payload = await api(...param);
 
     dispatch({ type, payload });
+
+    return payload;
   } catch (e) {
     dispatch({ type: error, payload: e });
   }
 };
-

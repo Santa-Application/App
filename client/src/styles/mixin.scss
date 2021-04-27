@@ -108,6 +108,12 @@ a:focus {
   font-size: 1.2rem;
 }
 
+@mixin font-light-16-700 {
+  color: $light-gray;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
 @mixin font-white-12-700 {
   color: $dark-gray;
   font-size: 2rem;

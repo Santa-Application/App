@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const User = require('../models/User');
 const { registerValidation, loginValidation } = require('../utils/validation');
-const { uploadFile } = require('../utils/s3');
+const { uploadFile, downloadFile } = require('../utils/s3');
 
 const upload = multer({ dest: 'uploads' });
 
@@ -47,7 +47,12 @@ router.post('/register', upload.single('imageURL'), async (req, res) => {
     const savedUser = await user.save();
     // generate a token(for immediate login)
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.set('auth-token', token).send(savedUser);
+    // get imageURL
+    const userImageURL = await downloadFile(savedUser.imageURL);
+    const response = { ...savedUser._doc, imageURL: userImageURL };
+
+    delete response.password;
+    res.set('auth-token', token).send(response);
   } catch (err) {
     res.status(400).send({ err, message: 'error' });
   }
@@ -69,7 +74,12 @@ router.post('/signin', async (req, res) => {
 
   // Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send(user);
+  // get imageURL
+  const userImageURL = await downloadFile(user.imageURL);
+  const response = { ...user._doc, imageURL: userImageURL };
+
+  delete response.password;
+  res.set('auth-token', token).send(response);
 });
 
 // SIGN OUT
