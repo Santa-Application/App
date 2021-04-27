@@ -59,19 +59,6 @@ const SignInForm = ({ history }) => {
             name: 'password',
           }}
         />
-        {signedIn || (
-          <p
-            style={{
-              fontSize: '1.2rem',
-              color: 'red',
-              textIndent: '0.5rem',
-              marginTop: '-3.5rem',
-              marginBottom: '2rem',
-            }}
-          >
-            이메일과 비밀번호가 일치하는지 확인해주세요!!
-          </p>
-        )}
         <div className="buttonContainer">
           <Button
             type="button"
