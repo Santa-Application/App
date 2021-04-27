@@ -31,24 +31,22 @@ const Profile = ({ history, match, ...restProps }) => {
       }
     };
     setUserInfoAsync();
-  }, [userName]);
+  }, [userName, loggedInUserInfo]);
 
-  if (!userInfo) return <div>로딩중임돠</div>;
-
-  const handleClickUserImage = () => {
-    history.push(`/${userName}`);
+  const handleClickUserInfoEditButton = () => {
+    history.push(`/${userName}/edit`);
   };
 
   return (
     <main>
       <ProfileInfoCard
         name={userName}
-        profileImageURL={userInfo.imageURL}
-        gender={userInfo.gender}
-        age={postDate.getUserAgeWithText(userInfo.dateOfBirth)}
-        level={userInfo.hikingLevel}
-        introduction={userInfo.introduction}
-        onClick={handleClickUserImage}
+        profileImageURL={userInfo?.imageURL}
+        gender={userInfo?.gender}
+        age={userInfo?.dateOfBirth}
+        level={userInfo?.hikingLevel}
+        introduction={userInfo?.introduction}
+        onClick={handleClickUserInfoEditButton}
       />
       <MenuTab
         menus={[
@@ -82,11 +80,11 @@ const Profile = ({ history, match, ...restProps }) => {
           exact
           component={RecruitPostDetail}
         />
-        {/* <Route
-            path="/:userName/recruit/edit/:postId"
-            exact
-            component={RecruitForm}
-            /> */}
+        <Route
+          path="/:userName/recruit/edit/:postId"
+          exact
+          component={RecruitForm}
+        />
         <Route
           path="/:userName/reviews/create"
           exact
