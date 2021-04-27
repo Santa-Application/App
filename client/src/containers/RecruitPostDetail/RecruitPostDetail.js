@@ -41,7 +41,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
     // dispatch(getRecruitPostsAsync());
 
     const path = userName
-      ? `/${userName}/recruit`
+      ? `/profile/${userName}/recruit`
       : mountainName
       ? `/${mountainName}/recruit`
       : '/recruit';
@@ -49,7 +49,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
   };
   const handleClickEditPost = () => {
     const path = userName
-      ? `/${userName}/recruit/edit/${postId}`
+      ? `/profile/${userName}/recruit/edit/${postId}`
       : mountainName
       ? `/${mountainName}/recruit/edit/${postId}`
       : `/recruit/edit/${postId}`;

@@ -19,7 +19,6 @@ import {
   Main,
 } from 'pages';
 import { Footer, Header } from 'components';
-import { RegisterForm } from 'containers';
 
 function App() {
   const signedIn = useSelector(state => state.auth.signedIn);
@@ -27,7 +26,6 @@ function App() {
   return (
     <div className="App">
       <HelmetProvider>
-        
         <Route path="/" component={Header} />
         <Switch>
           <Route path="/main" exact component={Main} />
@@ -48,16 +46,16 @@ function App() {
           <Route path="/mountains" exact component={PageNotFound}></Route>
           <Route path="/mountains/:mountainName" component={Mountain} />
           {/* <Route path="/:userName/edit" component={RegisterForm} /> */}
-          <Route path="/:userName" component={Profile} />
 
+          <Route path="/profile/:userName" component={Profile} />
           {signedIn && <Redirect from="/" to="/main" />}
           <Route path="/" exact component={HomePage} />
+          {/* <Route path="/" component={PageNotFound} /> */}
 
-          <Redirect to="/page-not-found" />
-        todo: 에러 해결
-          <Route path="/page-not-found" component={PageNotFound}>
+          {/* todo: 에러 해결 */}
+          {/* <Route path="/page-not-found" component={PageNotFound}>
             <Redirect to="/page-not-found" />
-          </Route>
+          </Route> */}
         </Switch>
 
         <Footer />
