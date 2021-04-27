@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   ProfileInformation,
   ProfileImage,
@@ -16,7 +17,7 @@ import {
 
 const ProfileInfoCard = ({
   name,
-  imageURL,
+  profileImageURL,
   gender,
   age,
   level,
@@ -25,9 +26,12 @@ const ProfileInfoCard = ({
 }) => {
   return (
     <div className={profileInfoCard}>
-      <ProfileImage src={imageURL} size="large" />
+      <ProfileImage src={profileImageURL} size="large" />
       <div className={header}>
-        <Heading level={3} content={name} />
+        <Link
+          to={`/${name}/recruit`}
+          component={() => <Heading level={3} content={name} />}
+        />
         <Button
           secondary={false}
           type={'button'}
@@ -53,7 +57,7 @@ export default ProfileInfoCard;
 
 ProfileInfoCard.defaultProps = {
   name: 'UserID',
-  imageURL:
+  profileImageURL:
     'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
   gender: 'female',
   age: 32,
@@ -63,7 +67,7 @@ ProfileInfoCard.defaultProps = {
 
 ProfileInfoCard.propTypes = {
   name: string.isRequired,
-  imageURL: string.isRequired,
+  profileImageURL: string.isRequired,
   gender: oneOf(['female', 'male']).isRequired,
   age: number.isRequired,
   level: oneOf(['level1', 'level2', 'level3']).isRequired,
