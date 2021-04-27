@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import FormItem from 'components/FormItem/FormItem';
 import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,9 +13,12 @@ import {
   buttonContainer,
   cancelButton,
 } from './RecruitForm.module.scss';
-import { createRecruitPostAsync } from 'redux/modules/recruitPost';
+import {
+  createRecruitPostAsync,
+  getRecruitPostsAsync,
+} from 'redux/modules/recruitPost';
 
-const RecruitForm = ({ history, formType, ...restProps }) => {
+const RecruitForm = ({ history, match, formType, ...restProps }) => {
   const {
     handleSelectDate,
     handleFocusAllInput,
@@ -24,17 +28,21 @@ const RecruitForm = ({ history, formType, ...restProps }) => {
   } = formHandler;
 
   const userId = useSelector(state => state.auth.userInfo._id);
-  // const postsData = useSelector(state => state.recruitPost.data);
-  // const postsLength = postsData.length;
-  // const postId = postsData[postsLength - 1];
-  // console.log(postId);
+  const userName = match.params.userName;
+  const mountainName = match.params.mountainName;
   const dispatch = useDispatch();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentAge, setCurrentAge] = useState([20, 45]);
 
-  const handleClickCancel = () => {
-    history.push('/recruit');
+  const handleClickCancelButton = () => {
+    const path = userName
+      ? `/${userName}/recruit`
+      : mountainName
+      ? `/${mountainName}/recruit`
+      : '/recuit';
+
+    history.push(path);
   };
 
   return (
@@ -56,21 +64,24 @@ const RecruitForm = ({ history, formType, ...restProps }) => {
           // imageURL: {},
         }}
         validationSchema={validationSchema.recruitPost}
-        onSubmit={values => {
-          const formData = new FormData();
-          const newPostObj = {
+        onSubmit={async values => {
+          const newPost = {
             ...values,
             publisherID: userId,
             postdate: new Date(),
           };
-          console.log(newPostObj);
 
-          Object.keys(newPostObj).forEach(key =>
-            formData.append(key, newPostObj[key])
-          );
-          dispatch(createRecruitPostAsync(formData));
-          // formType === 'create' && history.push(`/reviews/${newPostId}`);
-          // formType === 'edit' && history.push(`/reviews/${match.params.postId}`);
+          const newPostData = await dispatch(createRecruitPostAsync(newPost));
+          dispatch(getRecruitPostsAsync());
+
+          const newPostId = newPostData.recruitPost._id;
+          const path = userName
+            ? `/${userName}/recruit/${newPostId}`
+            : mountainName
+            ? `/${mountainName}/recruit/${newPostId}`
+            : `/recruit/${newPostId}`;
+
+          history.push(path);
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => {
@@ -223,7 +234,7 @@ const RecruitForm = ({ history, formType, ...restProps }) => {
                   secondary
                   children="취소하기"
                   className={cancelButton}
-                  onClick={handleClickCancel}
+                  onClick={handleClickCancelButton}
                 />
                 <Button>
                   {formType === 'create' ? '등록하기' : '수정하기'}

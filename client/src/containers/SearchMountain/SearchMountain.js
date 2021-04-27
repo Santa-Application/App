@@ -1,18 +1,8 @@
 import SearchBox from 'components/SearchBox/SearchBox';
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getMountainAsync } from 'redux/modules/mountain';
-import { searchBoxContainer } from './SearchMoutain.module.scss';
+import React from 'react';
+// import { searchBoxContainer } from './SearchMoutain.module.scss';
 
-const SearchMountain = ({ history, match }) => {
-  const mountain = useSelector(state => state.mountain);
-  const { isLoading, data, error } = mountain;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getMountainAsync());
-  }, [dispatch]);
-
+const SearchMountain = ({ isLoading, data, error, history, match }) => {
   if (isLoading)
     return (
       <div
@@ -55,7 +45,7 @@ const SearchMountain = ({ history, match }) => {
 
   return (
     <>
-      <SearchBox datas={data} />
+      <SearchBox mountainData={data} />
     </>
   );
 };

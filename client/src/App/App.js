@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import {
@@ -12,7 +13,7 @@ import {
   RegularDetail,
   RegularCreate,
   RegularEdit,
-  // UserRecruitList,
+  Profile,
   PageNotFound,
   Mountain,
   Main,
@@ -20,6 +21,8 @@ import {
 import { Footer, Header } from 'components';
 
 function App() {
+  const signedIn = useSelector(state => state.auth.signedIn);
+
   return (
     <div className="App">
       <HelmetProvider>
@@ -39,15 +42,20 @@ function App() {
           <Route path="/reviews/edit/:postId" exact component={RegularEdit} />
           <Route path="/reviews/:postId" exact component={RegularDetail} />
 
-          {/* todo: 에러 해결 */}
-          {/* <Route path="/:userId" exact component={UserRecruitList} /> */}
-          <Route path="/page-not-found" component={PageNotFound} />
-          <Redirect to="/page-not-found" />
-        </Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Register} />
 
-        <Route path="/login" exact component={Login} />
-        <Route path="/signup" exact component={Register} />
-        <Route path="/" exact component={HomePage} />
+          <Route path="/:userName" component={Profile} />
+
+          {/* {signedIn && <Redirect from="/" to="/main" />} */}
+          <Route path="/" exact component={HomePage} />
+
+          {/* <Redirect to="/page-not-found" /> */}
+          {/* todo: 에러 해결 */}
+          {/* <Route path="/page-not-found" component={PageNotFound}>
+            <Redirect to="/page-not-found" />
+          </Route> */}
+        </Switch>
 
         <Footer />
       </HelmetProvider>

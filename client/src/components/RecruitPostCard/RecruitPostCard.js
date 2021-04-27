@@ -10,7 +10,7 @@ import {
 } from './RecruitPostCard.module.scss';
 
 const RecruitPostCard = ({ postData, className, ...restProps }) => {
-  const { recruitPost, imageURL } = postData;
+  const { recruitPost, publisherInfo } = postData;
 
   let genderContent = '';
   switch (recruitPost.recruitingGender) {
@@ -31,7 +31,7 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
 
   return (
     <div className={containerClasses}>
-      <ProfileImage src={imageURL} size="medium" />
+      <ProfileImage src={publisherInfo.imageURL} size="medium" />
       <div className={postInfo}>
         <Heading
           level={3}
