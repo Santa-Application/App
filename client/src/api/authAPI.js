@@ -1,21 +1,17 @@
 import axios from 'axios';
 
-const URI = 'http://3.36.114.117:8001/api/user/';
+const URI = process.env.WEB_SERVER_URI;
 
 export const register = async newUser => {
   try {
     const formdata = new FormData();
     for (let key in newUser) formdata.append(key, newUser[key]);
 
-    const response = await axios.post(
-      'http://3.36.114.117:8001/api/user/register',
-      formdata,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    );
+    const response = await axios.post(`${URI}user/register`, formdata, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
     return response;
   } catch (e) {
@@ -25,7 +21,7 @@ export const register = async newUser => {
 
 export const signin = async user => {
   try {
-    const response = await axios.post(`${URI}signin`, user);
+    const response = await axios.post(`${URI}user/signin`, user);
 
     return response;
   } catch (e) {
@@ -35,7 +31,7 @@ export const signin = async user => {
 
 export const signout = async user => {
   try {
-    const response = await axios.post(`${URI}signout`, user);
+    const response = await axios.post(`${URI}user/signout`, user);
 
     return response;
   } catch (e) {
@@ -45,9 +41,7 @@ export const signout = async user => {
 
 export const getUserInfoData = async userName => {
   try {
-    const response = await axios.get(
-      `http://3.36.114.117:8001/api/profile/name/${userName}`
-    );
+    const response = await axios.get(`${URI}profile/name/${userName}`);
 
     return response;
   } catch (e) {
