@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import { ProfileImage } from 'components';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -19,28 +22,34 @@ const StatusOfApplicationBox = ({
   return (
     <div className={containerClasses}>
       <p className={titleClasses}>신청 현황</p>
-      <div className={recruiteesContainer}>
+      <ul className={recruiteesContainer}>
         {recruiteesData.map((data, index) => (
-          <ProfileImage
-            key={data.id}
-            src={data.imageURL}
-            size="small"
-            className={{ container: recruitees }}
-          />
+          <li key={data.recruiteeId}>
+            <Link
+              to={`/profile/${data.recruiteeName}/recruit`}
+              component={() => (
+                <ProfileImage
+                  src={data.recruiteeImageURL}
+                  size="small"
+                  className={{ container: recruitees }}
+                />
+              )}
+            />
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
 
-StatusOfApplicationBox.defaultProps = {
-  images: [],
-  className: {},
-};
+// StatusOfApplicationBox.defaultProps = {
+//   images: [],
+//   className: {},
+// };
 
-StatusOfApplicationBox.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
-  className: PropTypes.object,
-};
+// StatusOfApplicationBox.propTypes = {
+//   images: PropTypes.arrayOf(PropTypes.string).isRequired,
+//   className: PropTypes.object,
+// };
 
 export default StatusOfApplicationBox;

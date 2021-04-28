@@ -1,10 +1,11 @@
+import { useLocation } from 'react-router-dom';
 import { Heading, Tag } from 'components';
 import { postDate as changePostDate, propTypeSchema } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   container,
-  imageContainer,
+  containerMain,
   image,
   textContainer,
   title as titleStyle,
@@ -12,13 +13,14 @@ import {
 } from './RegularPostCard.module.scss';
 
 const RegularPostCard = ({ postData, className, ...restProps }) => {
-  
   const { title, postDate, imageURL, mountainName } = postData;
-  const containerClasses = className?.container ? classNames(className.container, container) : container;
+  const containerClasses = classNames(
+    useLocation().pathname === '/main' ? containerMain : container
+  );
 
   return (
     <div className={containerClasses}>
-      <div className={imageContainer}>
+      <div>
         <img src={imageURL} alt="" className={image} />
       </div>
       <div className={textContainer}>
