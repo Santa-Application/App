@@ -1,3 +1,5 @@
+import { postDate } from 'utils';
+
 /* eslint-disable indent */
 export const postPublisherInfo = data => {
   return {
@@ -28,7 +30,7 @@ export const recruitPostContents = data => {
   } = data;
   const contentsData = {
     mountainName,
-    recruitDate,
+    recruitDate: postDate.getPostDateInKorean(new Date(recruitDate)),
     recruitingGender:
       recruitingGender === 'female'
         ? '여성'

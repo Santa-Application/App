@@ -2,6 +2,7 @@ import { Icon } from 'components';
 import { string, oneOf } from 'prop-types';
 import classNames from 'classnames';
 import { tag } from './Tag.module.scss';
+import { postDate } from 'utils';
 
 const Tag = ({ type, content, className }) => {
   const tagClasses = classNames(tag, className);
@@ -15,6 +16,7 @@ const Tag = ({ type, content, className }) => {
       break;
     case 'date':
       shape = 'calendar';
+      displayContent = postDate.getPostDateInKorean(new Date(content));
       break;
     case 'person':
       shape = 'member';
@@ -80,7 +82,7 @@ Tag.propTypes = {
     'jeolla',
     'gyeongsang',
     'jeju',
-    'signout'
+    'signout',
   ]).isRequired,
   content: string.isRequired,
 };

@@ -1,5 +1,5 @@
 import { Heading } from 'components';
-import { postDate, propTypeSchema } from 'utils';
+import { postDate as postDateUtil, propTypeSchema } from 'utils';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -20,8 +20,11 @@ const PostHeading = ({ postData, className, ...restProps }) => {
     <div className={containerClasses}>
       <Heading level={3} className={titleClasses} content={postTitle}></Heading>
       <div className={infoContainer}>
-        <time dateTime={postDate} className={date}>
-          {postDate}
+        <time
+          dateTime={postDateUtil.getPostDate(new Date(postDate))}
+          className={date}
+        >
+          {postDateUtil.getPostDateInKorean(new Date(postDate))}
         </time>
         <p className={views}>조회수 {postingViews}</p>
       </div>
