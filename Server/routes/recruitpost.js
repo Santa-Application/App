@@ -205,7 +205,7 @@ router.post('/:id/:applicantID', async (req, res) => {
     );
 
     let recruitees = [];
-    recruitees = Promise.all(
+    recruitees = await Promise.all(
       result.recruitees.map(async (recruitee) => {
         const recruiteeImageURL = await downloadFile(recruitee);
         return { recruitee, recruiteeImageURL };
