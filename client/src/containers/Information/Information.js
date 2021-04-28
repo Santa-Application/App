@@ -80,12 +80,13 @@ const Information = ({ history, match }) => {
           width={'32rem'}
           showThumbs={false}
           centerSlidePercentage={100}
+          transitionTime={0}
         />
       </div>
       <ReviewCarousel
         head={'최신 리뷰'}
         slides={newReviewsTen}
-        slideWidth={'50'}
+        slideWidth={'100'}
         centerSlidePercentage={50}
         className={reviewCarouselContainerTop}
       />
