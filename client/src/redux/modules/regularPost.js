@@ -30,7 +30,7 @@ export const createRegularPostAsync = newPost =>
     regularPostAPI.createRegularPost,
     [newPost]
   );
-export const updateRegularPostAsync = (id, updatePost) =>
+export const updateRegularPostAsync = (postId, updatePost) =>
   reduxUtils.createThunkActionCreator(
     {
       loading: LOADING_REGULAR_POST,
@@ -38,7 +38,7 @@ export const updateRegularPostAsync = (id, updatePost) =>
       error: ERROR_REGULAR_POST,
     },
     regularPostAPI.updateRegularPost,
-    [id, updatePost]
+    [postId, updatePost]
   );
 export const removeRegularPostAsync = id =>
   reduxUtils.createThunkActionCreator(

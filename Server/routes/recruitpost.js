@@ -19,8 +19,10 @@ router.get('/', async (_, res) => {
         if (recruitPost.recruitees) {
           recruitees = await Promise.all(
             recruitPost.recruitees.map(async (recruitee) => {
+              const recruiteeInfo = await User.findById(recruitee);
+              const recruiteeName = recruiteeInfo.name;
               const recruiteeImageURL = await downloadFile(recruitee);
-              return { recruitee, recruiteeImageURL };
+              return { recruiteeId: recruitee, recruiteeImageURL, recruiteeName };
             }),
           );
         }
@@ -63,8 +65,10 @@ router.get('/:id', async (req, res) => {
     if (recruitPost.recruitees) {
       recruitees = await Promise.all(
         recruitPost.recruitees.map(async (recruitee) => {
+          const recruiteeInfo = await User.findById(recruitee);
+          const recruiteeName = recruiteeInfo.name;
           const recruiteeImageURL = await downloadFile(recruitee);
-          return { recruitee, recruiteeImageURL };
+          return { recruiteeId: recruitee, recruiteeImageURL, recruiteeName };
         }),
       );
     }
@@ -148,8 +152,10 @@ router.patch('/:id', async (req, res) => {
     if (updatedPost.recruitees) {
       recruitees = Promise.all(
         updatedPost.recruitees.map(async (recruitee) => {
+          const recruiteeInfo = await User.findById(recruitee);
+          const recruiteeName = recruiteeInfo.name;
           const recruiteeImageURL = await downloadFile(recruitee);
-          return { recruitee, recruiteeImageURL };
+          return { recruiteeId: recruitee, recruiteeImageURL, recruiteeName };
         }),
       );
     }
@@ -157,11 +163,13 @@ router.patch('/:id', async (req, res) => {
     delete publisherInfo.password;
 
     const response = {
-      recruitPost: updatedPost,
+      recruitPost: {
+        ...updatedPost._doc,
+        recruitees,
+      },
       publisherInfo: {
         ...publisherInfo._doc,
         imageURL: publisherImageURL,
-        recruitees,
       },
     };
 
@@ -204,11 +212,16 @@ router.post('/:id/:applicantID', async (req, res) => {
       { new: true },
     );
 
+    const publisherInfo = await User.findById(result.publisherID);
+    const publisherImageURL = await downloadFile(publisherInfo.imageURL);
+
     let recruitees = [];
-    recruitees = Promise.all(
+    recruitees = await Promise.all(
       result.recruitees.map(async (recruitee) => {
+        const recruiteeInfo = await User.findById(recruitee);
+        const recruiteeName = recruiteeInfo.name;
         const recruiteeImageURL = await downloadFile(recruitee);
-        return { recruitee, recruiteeImageURL };
+        return { recruiteeId: recruitee, recruiteeImageURL, recruiteeName };
       }),
     );
 
@@ -223,7 +236,18 @@ router.post('/:id/:applicantID', async (req, res) => {
 
     if (!updatedUserInfo) res.status(400).send('Could not save to update the user appliedRecruitsposts');
 
-    res.status(200).send(recruitees);
+    const response = {
+      recruitPost: {
+        ...result._doc,
+        recruitees,
+      },
+      publisherInfo: {
+        ...publisherInfo._doc,
+        imageURL: publisherImageURL,
+      },
+    };
+
+    res.status(200).send(response);
   } catch (err) {
     res.status(400).send(err);
   }

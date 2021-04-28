@@ -1,18 +1,10 @@
 import axios from 'axios';
 
-/*
-response data of posts
-[
-  {
-    
-  }
-]
-*/
+const URI = process.env.REACT_APP_WEB_SERVER_URI;
+
 export const getAllRecruitPosts = async () => {
   try {
-    const response = await axios.get(
-      'http://3.36.114.117:8001/api/recruitpost'
-    );
+    const response = await axios.get(`${URI}recruitpost`);
     return response.data;
   } catch (e) {
     throw Error(e);
@@ -21,9 +13,7 @@ export const getAllRecruitPosts = async () => {
 
 export const getRecruitPostById = async id => {
   try {
-    const response = await axios.get(
-      `http://3.36.114.117:8001/api/recruitpost/${id}`
-    );
+    const response = await axios.get(`${URI}recruitpost/${id}`);
     return response.data;
   } catch (e) {
     throw Error(e);
@@ -32,10 +22,7 @@ export const getRecruitPostById = async id => {
 
 export const createRecruitPost = async newPost => {
   try {
-    const response = await axios.post(
-      'http://3.36.114.117:8001/api/recruitpost/newpost',
-      newPost
-    );
+    const response = await axios.post(`${URI}recruitpost/newpost`, newPost);
 
     return response.data;
   } catch (e) {
@@ -45,10 +32,7 @@ export const createRecruitPost = async newPost => {
 
 export const updateRecruitPost = async (id, updatePost) => {
   try {
-    const response = await axios.patch(
-      `http://3.36.114.117:8001/api/recruitpost/${id}`,
-      updatePost
-    );
+    const response = await axios.patch(`${URI}recruitpost/${id}`, updatePost);
 
     return response.data;
   } catch (e) {
@@ -58,9 +42,7 @@ export const updateRecruitPost = async (id, updatePost) => {
 
 export const removeRecruitPost = async id => {
   try {
-    const response = await axios.delete(
-      `http://3.36.114.117:8001/api/recruitpost/${id}`
-    );
+    const response = await axios.delete(`${URI}recruitpost/${id}`);
 
     return response.data;
   } catch (e) {
@@ -79,9 +61,7 @@ response data of toggle to join recruiting
 */
 export const toggleApplyRecruiting = async (postId, userId) => {
   try {
-    const response = await axios.post(
-      `http://3.36.114.117:8001/api/recruitpost/${postId}/${userId}`
-    );
+    const response = await axios.post(`${URI}recruitpost/${postId}/${userId}`);
 
     return response.data;
   } catch (e) {

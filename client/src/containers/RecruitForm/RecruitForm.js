@@ -15,6 +15,7 @@ import {
 } from './RecruitForm.module.scss';
 import {
   createRecruitPostAsync,
+  getRecruitPostsAsync,
   updateRecruitPostAsync,
 } from 'redux/modules/recruitPost';
 
@@ -36,7 +37,7 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
   const recruitPost = useSelector(state => state.recruitPost);
   const { data } = recruitPost;
   const postData = data.find(_data => _data.recruitPost._id === postId);
-  const prevPost = postData.recruitPost;
+  const prevPost = postData?.recruitPost;
 
   const selectedDateInitial = postId ? new Date() : new Date();
   const ageInitial = postId ? prevPost.recruitingAge : [20, 45];
@@ -83,6 +84,7 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
           const newPostData = postId
             ? await dispatch(updateRecruitPostAsync(postId, updatePost))
             : await dispatch(createRecruitPostAsync(newPost));
+          dispatch(getRecruitPostsAsync());
 
           const newPostId = newPostData.recruitPost._id;
 
