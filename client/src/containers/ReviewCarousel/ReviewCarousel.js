@@ -11,6 +11,11 @@ const ReviewCarousel = ({ head, slides, slideWidth, ...restProps }) => {
   
   const containerClass = restProps.className;
 
+  // delete interval
+  const handleInterval = ({ target }) => {
+    console.log(target);
+  };
+
   return (
     <div className={containerClass}>
       <Heading
@@ -23,12 +28,17 @@ const ReviewCarousel = ({ head, slides, slideWidth, ...restProps }) => {
         emulateTouch={true}
         autoPlay={false}
         centerMode={true}
-        infiniteLoop={true}
+        infiniteLoop={false}
         showArrows={false}
         useKeyboardArrows={true}
         width={slideWidth}
         showThumbs={false}
         showIndicators={false}
+        centerSlidePercentage={0}
+        dynamicHeight={false}
+        interval={0}
+        showStatus={false}
+        preventMovementUntilSwipeScrollTolerance={true}
         {...restProps}/>
     </div>
   );

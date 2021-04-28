@@ -12,7 +12,7 @@ import {
 import {
   getRecruitPostsAsync,
   removeRecruitPostAsync,
-  toggleApplyRecruiting,
+  toggleApplyRecruitingAsync,
 } from 'redux/modules/recruitPost';
 import { filterData } from 'utils';
 
@@ -41,7 +41,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
     // dispatch(getRecruitPostsAsync());
 
     const path = userName
-      ? `/profile/${userName}/recruit`
+      ? `/${userName}/recruit`
       : mountainName
       ? `/${mountainName}/recruit`
       : '/recruit';
@@ -49,7 +49,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
   };
   const handleClickEditPost = () => {
     const path = userName
-      ? `/profile/${userName}/recruit/edit/${postId}`
+      ? `/${userName}/recruit/edit/${postId}`
       : mountainName
       ? `/${mountainName}/recruit/edit/${postId}`
       : `/recruit/edit/${postId}`;
@@ -57,7 +57,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
     history.push(path);
   };
   const handleChangeApplyRecruitingButton = () => {
-    // dispatch(toggleApplyRecruiting(postId, userId));
+    // dispatch(toggleApplyRecruitingAsync(postId, userId));
     setIsApplied(!isApplied);
   };
 

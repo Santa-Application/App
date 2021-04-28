@@ -9,10 +9,13 @@
 }
 
 .topFive {
+
 }
 
 .recruitsContainer {
   position: relative;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
   ul {
     padding: 0;
     display: flex;
@@ -41,6 +44,11 @@
   margin-top: 1.5rem;
 
   div[class^="slider-wrapper"] {
-    height: 18rem;
+    height: 20rem;
+    width: 85vw;
+    
+    ul {
+      width: 100vw;
+    }
   }
 }
