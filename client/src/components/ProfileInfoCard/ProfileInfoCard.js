@@ -14,6 +14,7 @@ import {
   editButton,
   introduce,
 } from './ProfileInfoCard.module.scss';
+import { postDate } from 'utils';
 
 const ProfileInfoCard = ({
   name,
@@ -46,7 +47,10 @@ const ProfileInfoCard = ({
       <p className={introduce}>{introduction}</p>
       <div className={summary}>
         <ProfileInformation type="성별" options={gender} />
-        <ProfileInformation type="나이" options={age} />
+        <ProfileInformation
+          type="나이"
+          options={postDate.getUserAge(new Date(age))}
+        />
         <ProfileInformation type="레벨" options={level} />
       </div>
     </div>
