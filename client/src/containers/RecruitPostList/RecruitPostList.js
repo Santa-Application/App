@@ -68,9 +68,9 @@ const RecruitPostList = ({ pageInfo, className, ...restProps }) => {
       : data;
   const createPagePath =
     pageInfo.type === 'profile'
-      ? `/${pageInfo.userName}/recruit/create`
+      ? `/profile/${pageInfo.userName}/recruit/create`
       : pageInfo.type === 'mountain'
-      ? `/${pageInfo.mountainName}/recruit/create`
+      ? `/mountains/${pageInfo.mountainName}/recruit/create`
       : '/recruit/create';
 
   return (
@@ -94,9 +94,9 @@ const RecruitPostList = ({ pageInfo, className, ...restProps }) => {
           const postId = post.recruitPost._id;
           const path =
             pageInfo.type === 'profile'
-              ? `/${pageInfo.userName}/recruit/${postId}`
+              ? `/profile/${pageInfo.userName}/recruit/${postId}`
               : pageInfo.type === 'mountain'
-              ? `/${pageInfo.mountainName}/recruit/${postId}`
+              ? `/mountains/${pageInfo.mountainName}/recruit/${postId}`
               : `/recruit/${postId}`;
 
           return (

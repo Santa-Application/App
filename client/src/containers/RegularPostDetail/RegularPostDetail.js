@@ -36,7 +36,7 @@ const RegularPost = ({ match, history, ...restProps }) => {
     // dispatch(getRegularPostsAsync());
 
     const path = userName
-      ? `/${userName}/reviews`
+      ? `/profile/${userName}/reviews`
       : mountainName
       ? `/${mountainName}/reviews`
       : `/reviews`;
@@ -44,7 +44,7 @@ const RegularPost = ({ match, history, ...restProps }) => {
   };
   const handleClickEditPost = () => {
     const path = userName
-      ? `/${userName}/reviews/edit/${postId}`
+      ? `/profile/${userName}/reviews/edit/${postId}`
       : mountainName
       ? `/${mountainName}/reviews/edit/${postId}`
       : `/reviews/edit/${postId}`;

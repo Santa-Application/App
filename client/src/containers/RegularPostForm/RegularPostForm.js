@@ -32,9 +32,9 @@ const RegularPostForm = ({
 
   const handleClickCancelButton = () => {
     const path = userName
-      ? `${userName}/reviews`
+      ? `/profile/${userName}/reviews`
       : mountainName
-      ? `${mountainName}/reviews`
+      ? `/mountains/${mountainName}/reviews`
       : '/reviews';
 
     history.push(path);
@@ -69,12 +69,11 @@ const RegularPostForm = ({
           const newPostId = newPostData.regularPost._id;
 
           const path = userName
-            ? `${newPostId}`
+            ? `/profile/${userName}/reviews/${newPostId}`
             : mountainName
-            ? `${newPostId}`
-            : `${newPostId}`;
+            ? `/mountains/${mountainName}/reviews/${newPostId}`
+            : `/reviews/${newPostId}`;
 
-          console.log(path);
           history.push(path);
         }}
       >
