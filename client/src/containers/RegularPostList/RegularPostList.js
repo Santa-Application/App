@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { RegularPostCard } from 'components';
@@ -13,11 +13,12 @@ import { listContainer, postCard } from './RegularPostList.module.scss';
 const RegularPostList = ({ pageInfo, className, ...restProps }) => {
   const state = useSelector(state => state.regularPost);
   const { isLoading, data, error } = state;
+  const dataData = useSelector(state => state.regularPost.data, shallowEqual);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getRegularPostsAsync());
-  }, [dispatch]);
+  }, [dispatch, dataData]);
 
   const listContainerClasses = classNames(className.container, listContainer);
 

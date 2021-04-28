@@ -12,7 +12,6 @@ import {
 } from 'containers';
 import { ProfileInfoCard, MenuTab } from 'components';
 import { authAPI } from 'api';
-import { postDate } from 'utils';
 
 const Profile = ({ history, match, ...restProps }) => {
   const userName = match.params.userName;
