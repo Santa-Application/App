@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URI = process.env.WEB_SERVER_URI;
+const URI = process.env.REACT_APP_WEB_SERVER_URI;
 
 export const getProfile = async id => {
   try {
