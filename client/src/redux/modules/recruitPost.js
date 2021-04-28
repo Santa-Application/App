@@ -51,7 +51,7 @@ export const removeRecruitPostAsync = postId =>
     recruitPostAPI.removeRecruitPost,
     [postId]
   );
-export const toggleApplyRecruiting = (postId, applicantId) => {
+export const toggleApplyRecruitingAsync = (postId, applicantId) => {
   reduxUtils.createThunkActionCreator(
     {
       loading: LOADING_RECRUIT_POST,
