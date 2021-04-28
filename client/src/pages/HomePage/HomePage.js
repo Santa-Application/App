@@ -24,8 +24,6 @@ const HomePage = ({ history }) => {
       <div className={headMessage}>
         <p>오늘 기분타?</p>
         <p>그럼 산타!</p>
-        {/* <Heading level={2} content={'오늘 기분타?'} />
-        <Heading level={2} content={'그럼 산타!'} /> */}
       </div>
       <Heading
         className={subMessage}

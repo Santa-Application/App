@@ -13,10 +13,10 @@ const Template = (args) => <CarouselSlider {...args} />
 export const Sample = Template.bind({});
 Sample.args = {
   slides: [
-    <MountainCard />,
-    <MountainCard />,
-    <MountainCard />,
-    <MountainCard />,
+    <MountainCard key={'MountainCard-1'} to={'/'}/>,
+    <MountainCard key={'MountainCard-2'} to={'/'}/>,
+    <MountainCard key={'MountainCard-3'} to={'/'}/>,
+    <MountainCard key={'MountainCard-4'} to={'/'}/>,
   ],
   emulateTouch: true,
   autoPlay: false,
