@@ -26,11 +26,9 @@ function App() {
   return (
     <div className="App">
       <HelmetProvider>
-        
         <Route path="/" component={Header} />
         <Switch>
           <Route path="/main" exact component={Main} />
-          <Route path="/mountain/:name" exact component={Mountain} />
 
           <Route path="/recruit" exact component={RecruitList} />
           <Route path="/recruit/create" exact component={RecruitCreate} />
@@ -45,16 +43,19 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Register} />
 
-          <Route path="/:userName" component={Profile} />
+          <Route path="/mountains" exact component={PageNotFound}></Route>
+          <Route path="/mountains/:mountainName" component={Mountain} />
+          {/* <Route path="/:userName/edit" component={RegisterForm} /> */}
 
+          <Route path="/profile/:userName" component={Profile} />
           {signedIn && <Redirect from="/" to="/main" />}
           <Route path="/" exact component={HomePage} />
+          {/* <Route path="/" component={PageNotFound} /> */}
 
-          <Redirect to="/page-not-found" />
-        todo: 에러 해결
-          <Route path="/page-not-found" component={PageNotFound}>
+          {/* todo: 에러 해결 */}
+          {/* <Route path="/page-not-found" component={PageNotFound}>
             <Redirect to="/page-not-found" />
-          </Route>
+          </Route> */}
         </Switch>
 
         <Footer />

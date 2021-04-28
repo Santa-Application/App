@@ -1,22 +1,30 @@
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Heading, MenuTab } from 'components';
 import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 import MountainOverview from 'containers/MountainOverview/MountainOverview';
-import { motion, useTransform, useViewportScroll } from 'framer-motion';
+import {
+  RecruitPostList,
+  RecruitPostDetail,
+  RecruitForm,
+  RegularPostDetail,
+  RegularPostList,
+  RegularPostForm,
+} from 'containers';
+// import { motion, useTransform, useViewportScroll } from 'framer-motion';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   mountainImage,
-  mountainPage,
+  // mountainPage,
   mountainHeading,
-  mountainTabContainer,
+  // mountainInfoContainer,
 } from './Mountain.module.scss';
 
 const Mountain = ({ history, match }) => {
-  // mountain data dispatch
+  const mountainName = match.params.mountainName;
   const mountain = useSelector(state => state.mountain);
   const { isLoading, data, error } = mountain;
 
-  const mountainName = match.params.name;
   const mountainData = data.find(_data => _data.data.name === mountainName);
   const { imageURL } = mountainData;
 
@@ -49,21 +57,104 @@ const Mountain = ({ history, match }) => {
     );
 
   return (
-    <main className={mountainPage}>
+    <>
       <div className={mountainImage}>
         <img src={imageURL} alt="" />
-        <Heading className={mountainHeading} content={match.params.name} />
-      </div>
-      <div className={mountainTabContainer}>
-        {/* <MenuTab /> */}
-        <MountainOverview
-          history={history}
-          match={match}
-          mountainData={mountainData}
-          data={data}
+        <Heading
+          className={mountainHeading}
+          content={match.params.mountainName}
         />
       </div>
-    </main>
+      <main>
+        <div>
+          <MenuTab
+            menus={[
+              { name: 'Overview', path: `/mountains/${mountainName}/overview` },
+              { name: 'Recruit', path: `/mountains/${mountainName}/recruit` },
+              { name: 'Reviews', path: `/mountains/${mountainName}/reviews` },
+            ]}
+            label="profile tab list"
+          />
+          <Switch>
+            <Route
+              path="/mountains/:mountainName/recruit"
+              exact
+              component={() => (
+                <RecruitPostList
+                  pageInfo={{ type: 'mountain', mountainName }}
+                  history={history}
+                  match={match}
+                />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/recruit/create"
+              exact
+              component={() => (
+                <RecruitForm
+                  formType="create"
+                  history={history}
+                  match={match}
+                />
+              )}
+            />
+
+            <Route
+              path="/mountains/:mountainName/recruit/:postId"
+              exact
+              component={RecruitPostDetail}
+            />
+            <Route
+              path="/mountains/:mountainName/recruit/edit/:postId"
+              exact
+              component={RecruitForm}
+            />
+            <Route
+              path="/mountains/:mountainName/reviews/create"
+              exact
+              component={() => (
+                <RegularPostForm
+                  formType="create"
+                  history={history}
+                  match={match}
+                />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/reviews"
+              exact
+              component={() => (
+                <RegularPostList
+                  pageInfo={{ type: 'mountain', mountainName }}
+                  history={history}
+                  match={match}
+                />
+              )}
+            />
+            <Route
+              path={`/mountains/:mountainName/reviews/:postId`}
+              component={RegularPostDetail}
+            />
+            <Route
+              path="/mountains/:mountainName/overview"
+              exact
+              component={() => (
+                <MountainOverview
+                  history={history}
+                  match={match}
+                  mountainData={mountainData}
+                  data={data}
+                />
+              )}
+            />
+            <Redirect
+              from={`/mountains/${mountainName}`}
+              to={`/mountains/${mountainName}/overview`}
+            />
+          </Switch>
+        </div>
+      </main>
+    </>
   );
 };
 

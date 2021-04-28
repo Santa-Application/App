@@ -10,7 +10,7 @@ const PublisherInformation = ({ publisherData, className, ...restProps }) => {
   return (
     <div className={container}>
       <ProfileImage src={imageURL} size="medium" />
-      <Link to={`/${publisherName}`} className={name}>
+      <Link to={`/profile/${publisherName}`} className={name}>
         {publisherName}
       </Link>
     </div>

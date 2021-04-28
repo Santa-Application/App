@@ -46,9 +46,9 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
 
   const handleClickCancelButton = () => {
     const path = userName
-      ? `/${userName}/recruit`
+      ? `/profile/${userName}/recruit`
       : mountainName
-      ? `/${mountainName}/recruit`
+      ? `/mountains/${mountainName}/recruit`
       : '/recuit';
 
     history.push(path);
@@ -87,9 +87,9 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
           const newPostId = newPostData.recruitPost._id;
 
           const path = userName
-            ? `/${userName}/recruit/${newPostId}`
+            ? `/profile/${userName}/recruit/${newPostId}`
             : mountainName
-            ? `/${mountainName}/recruit/${newPostId}`
+            ? `/mountains/${mountainName}/recruit/${newPostId}`
             : `/recruit/${newPostId}`;
 
           history.push(path);
