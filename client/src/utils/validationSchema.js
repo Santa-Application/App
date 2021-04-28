@@ -32,7 +32,7 @@ export const registerSchema = Yup.object().shape({
   passwordConfirm: Yup.string()
     // .matches()
     .required('비밀번호가 일치하지 않습니다.'),
-  imageURL: Yup.string(),
+  // imageURL: Yup.object(),
   gender: Yup.string().required('성별은 필수항목입니다.'),
   dateOfBirth: Yup.date().required('생일은 필수항목입니다.'),
   hikingLevel: Yup.string().required('등산 레벨은 필수항목입나다..'),
