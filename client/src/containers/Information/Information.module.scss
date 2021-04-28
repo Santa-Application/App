@@ -5,6 +5,29 @@
   font-weight: 700;
   color: $dark-gray; 
   margin-bottom: 1.2rem;
+  margin-left: 1.5rem;
+}
+
+.topFive {
+}
+
+.recruitsContainer {
+  position: relative;
+  ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    li {
+      margin-top: .5rem;
+    }
+  }
+}
+
+.moreButton {
+  position: absolute;
+  right: 3.5rem;
+  top: 1.5rem;
 }
 
 .informationContainer {

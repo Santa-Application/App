@@ -1,8 +1,4 @@
 import MountainCard from './MountainCard';
-import { addDecorator } from '@storybook/react';
-
-addDecorator(StoryRouter());
-
 
 export default {
   title: 'Components/MountainCard',
