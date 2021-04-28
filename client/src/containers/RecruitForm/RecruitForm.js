@@ -36,7 +36,7 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
   const recruitPost = useSelector(state => state.recruitPost);
   const { data } = recruitPost;
   const postData = data.find(_data => _data.recruitPost._id === postId);
-  const prevPost = postData.recruitPost;
+  const prevPost = postData?.recruitPost;
 
   const selectedDateInitial = postId ? new Date() : new Date();
   const ageInitial = postId ? prevPost.recruitingAge : [20, 45];
