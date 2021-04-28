@@ -1,8 +1,7 @@
 @import 'styles';
 
 .container {
-  // width: 39vw;
-  width: 45vw;
+  width: 39vw;
   height: 50vw;
 
   @include rounded-box-shadow($border-radius-small);
@@ -11,8 +10,7 @@
 }
 
 .imageContainer {
-  // height: 25vw;
-  height: 31vw;
+  height: 25vw;
   overflow: hidden;
 }
 

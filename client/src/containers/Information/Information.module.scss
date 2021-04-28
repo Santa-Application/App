@@ -3,13 +3,17 @@
   font-family: 'Roboto';
   font-size: 1.6rem;
   font-weight: 700;
-  color: $dark-gray; 
+  color: $dark-gray;
   margin-bottom: 1.2rem;
   margin-left: 1.5rem;
 }
 
 .topFive {
+}
 
+.headingContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .recruitsContainer {
@@ -22,33 +26,49 @@
     flex-direction: column;
     align-items: center;
     li {
-      margin-top: .5rem;
+      margin-top: 0.5rem;
     }
   }
 }
 
-.moreButton {
-  position: absolute;
-  right: 3.5rem;
-  top: 1.5rem;
-}
+// .moreButton {
+//   position: absolute;
+//   right: 3.5rem;
+//   top: 1.5rem;
+// }
 
 .informationContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-grow: unset;
+  margin-bottom: 8rem;
+
+  > div {
+    width: 85vw;
+    margin: 5rem auto 0;
+  }
 }
 
 .reviewCarouselContainerTop {
   margin-top: 1.5rem;
 
-  div[class^="slider-wrapper"] {
-    height: 20rem;
-    width: 85vw;
-    
-    ul {
-      width: 100vw;
+  div[class^='slider-wrapper'] {
+    height: 53vw;
+    width: 100vw;
+
+    li {
+      margin-right: 2rem;
+      @include rounded-box-shadow($border-radius-small);
+
+      a > div {
+        width: 50vw;
+        text-align: left;
+
+        > div:first-child {
+          height: 35vw;
+        }
+      }
     }
   }
 }
