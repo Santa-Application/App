@@ -50,18 +50,11 @@ export const removeRecruitPost = async id => {
   }
 };
 
-/*
-response data of toggle to join recruiting
-[
-  {
-    id: { type: String },
-    accessibleURL: { type: String } // user image URL
-  }
-]
-*/
-export const toggleApplyRecruiting = async (postId, userId) => {
+export const toggleApplyRecruiting = async (postId, applicantId) => {
   try {
-    const response = await axios.post(`${URI}recruitpost/${postId}/${userId}`);
+    const response = await axios.post(
+      `${URI}recruitpost/${postId}/${applicantId}`
+    );
 
     return response.data;
   } catch (e) {
