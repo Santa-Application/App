@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 const router = require('express').Router();
-const { response } = require('express');
 // const jwt = require('jsonwebtoken');
 
 const { RecruitPost, User } = require('../models/index');
@@ -248,7 +247,7 @@ router.post('/:id/:applicantID', async (req, res) => {
       },
     };
 
-    res.status(200).send(recruitees);
+    res.status(200).send(response);
   } catch (err) {
     res.status(400).send(err);
   }
