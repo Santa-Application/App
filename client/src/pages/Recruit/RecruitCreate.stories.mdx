@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { RecruitCreate } from 'pages';
+
+<Meta title="Page/RecruitCreate" component={RecruitCreate} />
+
+# RecruitCreate
+
+모집글 작성 페이지에는 사용자가 모집글을 작성할 수 있는 폼을 제공합니다.
+
+export const Template = args => <RecruitCreate {...args} />;
+
+## 페이지 구성 컴포넌트
+
+```
+├── RecruitCreate
+│   ├── Heading
+│   ├── RecruitForm
+│   │    ├── FormItem
+│   │    │     ├── Heading
+│   │    │     └── 폼 요소 ├── Input
+│   │    │               ├──
+│   │    │
+│   │    └── Button
+```
+
+<Canvas>
+  <Story name="RecruitCreate">{Template.bind({})}</Story>
+</Canvas>
