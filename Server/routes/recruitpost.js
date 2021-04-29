@@ -21,7 +21,7 @@ router.get('/', async (_, res) => {
             recruitPost.recruitees.map(async (recruitee) => {
               const recruiteeInfo = await User.findById(recruitee);
               const recruiteeName = recruiteeInfo.name;
-              const recruiteeImageURL = await downloadFile(recruitee);
+              const recruiteeImageURL = await downloadFile(recruitee.imageURL);
               return { recruiteeId: recruitee, recruiteeImageURL, recruiteeName };
             }),
           );
@@ -67,7 +67,7 @@ router.get('/:id', async (req, res) => {
         recruitPost.recruitees.map(async (recruitee) => {
           const recruiteeInfo = await User.findById(recruitee);
           const recruiteeName = recruiteeInfo.name;
-          const recruiteeImageURL = await downloadFile(recruitee);
+          const recruiteeImageURL = await downloadFile(recruitee.imageURL);
           return { recruiteeId: recruitee, recruiteeImageURL, recruiteeName };
         }),
       );
@@ -154,7 +154,7 @@ router.patch('/:id', async (req, res) => {
         updatedPost.recruitees.map(async (recruitee) => {
           const recruiteeInfo = await User.findById(recruitee);
           const recruiteeName = recruiteeInfo.name;
-          const recruiteeImageURL = await downloadFile(recruitee);
+          const recruiteeImageURL = await downloadFile(recruitee.imageURL);
           return { recruiteeId: recruitee, recruiteeImageURL, recruiteeName };
         }),
       );
@@ -220,7 +220,7 @@ router.post('/:id/:applicantID', async (req, res) => {
       result.recruitees.map(async (recruitee) => {
         const recruiteeInfo = await User.findById(recruitee);
         const recruiteeName = recruiteeInfo.name;
-        const recruiteeImageURL = await downloadFile(recruitee);
+        const recruiteeImageURL = await downloadFile(recruitee.imageURL);
         return { recruiteeId: recruitee, recruiteeImageURL, recruiteeName };
       }),
     );
