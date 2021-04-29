@@ -1,47 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import NumberInput from 'components/NumberInput/NumberInput';
-import {
-  rangeSliderContainer,
-  numberInputContainer,
-  numberInput,
-} from './RangeSlider.module.scss';
+import { rangeSliderContainer } from './RangeSlider.module.scss';
 import PropTypes, { arrayOf, number, string } from 'prop-types';
-import { Field } from 'formik';
 
 const RangeSlider = ({ field, inputProps }) => {
-  const marks = [
-    {
-      value: 0,
-      label: '0',
-    },
-    {
-      value: 20,
-      label: '20',
-    },
-    {
-      value: 30,
-      label: '30',
-    },
-    {
-      value: 40,
-      label: '40',
-    },
-    {
-      value: 50,
-      label: '50',
-    },
-    {
-      value: 60,
-      label: '60',
-    },
-    {
-      value: 100,
-      label: '100',
-    },
-  ];
-
   const useStyles = makeStyles({
     root: {
       color: '#fc7145',
@@ -95,73 +58,18 @@ const RangeSlider = ({ field, inputProps }) => {
   };
 
   const {
-    formType,
     id,
     name,
-    minInputName,
-    maxInputName,
-    unit,
     setFieldValue,
     currentAge,
     setCurrentAge,
-    onChangeMinInput,
-    onChangeMaxInput,
     onChangeSlider,
-    onFocus,
   } = inputProps;
-
-  // console.log(currentAge);
 
   return (
     <div className={rangeSliderContainer}>
-      {/* <div className={numberInputContainer}>
-        <NumberInput
-          component={NumberInput}
-          id={minInputName}
-          // name={minInputName}
-          className={numberInput}
-          min="0"
-          max={currentAge[1]}
-          onChange={e =>
-            onChangeMinInput(
-              e,
-              minInputName,
-              setFieldValue,
-              currentAge,
-              setCurrentAge
-            )
-          }
-          onFocus={onFocus}
-          content={`${unit} ~`}
-          inputProps={inputProps}
-          // {...field}
-        />
-
-        <NumberInput
-          // component={NumberInput}
-          id={maxInputName}
-          // name={maxInputName}
-          className={numberInput}
-          min={currentAge[0]}
-          max="100"
-          onChange={e =>
-            onChangeMinInput(
-              e,
-              minInputName,
-              setFieldValue,
-              currentAge,
-              setCurrentAge
-            )
-          }
-          onFocus={onFocus}
-          content={unit}
-          inputProps={inputProps}
-          // {...field}
-        />
-      </div> */}
       <Slider
-        // id={id}
-        // name={name}
+        id={id}
         classes={{
           root: classes.root,
           thumb: classes.thumb,
@@ -179,63 +87,40 @@ const RangeSlider = ({ field, inputProps }) => {
         valueLabelDisplay="on"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        // marks={marks}
-        // {...field}
       />
     </div>
   );
 };
 
 RangeSlider.defaultProps = {
-  currentValue: [],
-  handleChangeSlider: null,
-  handleChangeMinInput: null,
-  handleChangeMaxInput: null,
-  handleSelectInput: null,
-  unit: '',
+  inputProps: {
+    id: '',
+    name: '',
+    setFieldValue: null,
+    currentAge: [],
+    setCurrentAge: null,
+    onChangeSlider: null,
+  },
 };
 
 RangeSlider.propTypes = {
-  currentValue: arrayOf(number),
-  handleChangeSlider: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.oneOf([null]),
-  ]),
-  handleChangeMinInput: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.oneOf([null]),
-  ]),
-  handleChangeMaxInput: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.oneOf([null]),
-  ]),
-  handleSelectInput: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.oneOf([null]),
-  ]),
-  unit: string,
+  inputProps: PropTypes.shape({
+    id: string,
+    name: string,
+    setFieldValue: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.oneOf([null]),
+    ]),
+    currentAge: arrayOf(number),
+    setCurrentAge: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.oneOf([null]),
+    ]),
+    onChangeSlider: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.oneOf([null]),
+    ]),
+  }),
 };
 
 export default RangeSlider;
-/* ------------------
-  전달될 상태와 핸들러.
-  상위 컴포넌트에서 작성해주세요.
-  
-  const [currentValue, setCurrentValue] = React.useState([20, 45]);
-  
-  const handleChangeSlider = (_, newValue) => {
-    setCurrentValue(newValue);
-  };
-
-  const handleChangeMinInput = e => {
-    setCurrentValue([+e.target.value, currentValue[1]]);
-  };
-  
-  const handleChangeMaxInput = e => {
-    setCurrentValue([currentValue[0], +e.target.value]);
-  };
-  
-  const handleSelectInput = e => {
-    e.target.select();
-  };
-  ----------------------------- */

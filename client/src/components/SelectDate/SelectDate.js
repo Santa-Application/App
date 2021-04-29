@@ -19,25 +19,6 @@ const SelectDate = ({ field, inputProps }) => {
   } = inputProps;
   const selectDateClasses = classNames(className, selectDateBox);
 
-  /* ------------------
-  전달될 상태와 핸들러.
-  상위 컴포넌트에서 작성해주세요.
-  
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  console.log('state date: ', selectedDate, typeof selectedDate);
-  
-  * onSelect
-  const handleDateSelect = date => {
-    console.log('select date: ', date, typeof date);
-    setSelectedDate(date);
-  }; 
-
-  * onFocus
-    const handleFocusInput = e => {
-    e.target.select();
-  };
-  ----------------------------- */
-
   const handleMinDate = () => {
     switch (field.name) {
       case 'dateOfBirth':
@@ -76,17 +57,23 @@ const SelectDate = ({ field, inputProps }) => {
 
 SelectDate.defaultProps = {
   id: '',
-  selectedDate: null,
+  selectedDate: new Date(),
+  setSelectedDate: null,
   onFocus: null,
   onSelect: null,
-  className: '',
+  setFieldValue: null,
 };
 
 SelectDate.propTypes = {
   id: string.isRequired,
   selectedDate: object,
+  setSelectedDate: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.oneOf([null]),
+  ]),
   onFocus: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
   onSelect: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
+  setFieldValue: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([null])]),
   className: string,
 };
 
