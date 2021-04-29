@@ -33,7 +33,7 @@ const RegularPost = ({ match, history, ...restProps }) => {
 
   const handleClickRemovePost = () => {
     dispatch(removeRegularPostAsync(postId));
-    // dispatch(getRegularPostsAsync());
+    dispatch(getRegularPostsAsync());
 
     const path = userName
       ? `/profile/${userName}/reviews`

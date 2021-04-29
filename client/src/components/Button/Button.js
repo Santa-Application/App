@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { string, bool, node, func } from 'prop-types';
+import { string, bool, func } from 'prop-types';
 import {
   button,
   primary,
@@ -13,6 +13,7 @@ const Button = ({
   value,
   className,
   onClick,
+  children,
   ...restProps
 }) => {
   const composeClasses = classNames(
@@ -29,7 +30,7 @@ const Button = ({
       onClick={onClick}
       {...restProps}
     >
-      {restProps.children}
+      {children}
     </button>
   );
 };
@@ -43,6 +44,7 @@ Button.defaultProps = {
   value: 'Default submit button',
   children: 'Button',
   className: '',
+  onClick: () => {}
 };
 
 Button.propTypes = {
@@ -50,7 +52,7 @@ Button.propTypes = {
   type: string,
   disabled: bool,
   value: string,
-  chidren: node,
+  children: string,
   className: string,
   onClick: func,
 };

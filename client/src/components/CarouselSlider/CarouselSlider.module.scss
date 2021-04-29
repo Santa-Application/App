@@ -1,16 +1,16 @@
 .card {
-    display: flex;
-    justify-content: center;
-    height: 102%;
+  display: flex;
+  justify-content: center;
+  height: 102%;
 
-  div[class^="MountainCard"] {
+  div[class^='MountainCard'] {
     text-align: left;
   }
 
-  ul[class="control-dots"] {
+  ul[class='control-dots'] {
     display: flex;
     justify-content: flex-end;
     right: 1rem;
-    bottom: .5rem;
+    bottom: 0.5rem;
   }
 }

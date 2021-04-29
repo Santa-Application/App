@@ -5,7 +5,7 @@ export default {
   title: 'Components/GenderSelectButton',
   component: GenderSelectButton,
   argTypes: {
-    field: {
+    inputProps: {
       table: {
         disable: true,
       },
@@ -27,3 +27,10 @@ export default {
 };
 
 export const Story = args => <GenderSelectButton {...args} />;
+
+Story.args = {
+  inputProps: {
+    formType: 'gender',
+    name: 'gender',
+  },
+};

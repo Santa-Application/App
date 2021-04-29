@@ -11,43 +11,24 @@ export default {
     },
   },
   argTypes: {
-    id: {
-      type: 'string',
-      description: '식별 가능한 id값을 필수로 전달합니다.',
+    inputProps: {
+      type: 'object',
+      description: 'input에 필요한 속성들의 객체 모음을 전달받습니다.',
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'object' },
+        defaultValue: {
+          id: '',
+          label: '',
+          fileRoute: '',
+          onChange: null,
+        },
       },
-    },
-    label: {
-      type: 'string',
-      description:
-        '사용자에게 정보를 제공할 레이블 설정은 필수로 전달합니다. 화면에 표시되지 않더라도 스크린 리더 사용자에게 정보를 제공합니다.',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
-    name: {
-      type: 'string',
-      description:
-        '폼 컨트롤 시, 사용자가 입력한 값과 매칭되는 네임 값을 설정합니다.',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
-    fileRoute: {
-      type: 'string',
-      description: '파일의 경로가 표시되는 문자열 상태를 전달받습니다.',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
-    onChange: {
-      action: 'change value',
-      description:
-        '폼 컨트롤의 값이 변경될 때 실행될 이벤트(함수)를 전달받습니다. (fileRoute의 상태를 업데이트합니다.)',
-      table: {
-        category: 'Events',
-        type: { summary: 'function' },
+      field: {
+        type: 'object',
+        description:
+          'formik 라이브러리의 <Field/> 컴포넌트의 기본속성인 field 객체를 전달받습니다. 객체 내부에는 `name`, `value`, `onChange`, `onBlur` 프로퍼티들이 있습니다. 상위 컴포넌트에서 `name`속성만 전달하면 되고, input 요소의 onChange 이벤트가 발생하면 `value`는 폼에 자동적으로 제출됩니다.',
+
+        table: { summary: 'object' },
       },
     },
   },
@@ -57,8 +38,11 @@ const Template = args => <FileInput {...args} />;
 
 export const fileInput = Template.bind({});
 fileInput.args = {
-  id: 'file',
-  label: '파일 선택',
-  name: 'file',
-  fileRoute: '',
+  inputProps: {
+    id: 'file',
+    label: '파일 선택',
+    name: 'file',
+    fileRoute: '',
+    onChange: null,
+  },
 };

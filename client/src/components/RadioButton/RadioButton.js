@@ -1,6 +1,8 @@
-import Icon from 'components/Icon/Icon';
+import { Icon } from 'components';
+
 import { ReactComponent as Unchecked } from './assets/checked=false.svg';
 import { ReactComponent as Checked } from './assets/checked=true.svg';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { container, radioButton, label, icon } from './RadioButton.module.scss';
@@ -9,7 +11,6 @@ const RadioButton = ({
   name,
   field,
   className: { label: labelClassName },
-  ...restProps
 }) => {
   let labelText = '';
   switch (id) {
@@ -66,4 +67,5 @@ RadioButton.propTypes = {
   field: PropTypes.object.isRequired,
   className: PropTypes.object,
 };
+
 export default RadioButton;

@@ -1,4 +1,5 @@
 import { Icon } from 'components';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { container, checkbox, label } from './Checkbox.module.scss';

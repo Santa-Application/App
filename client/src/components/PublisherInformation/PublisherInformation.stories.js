@@ -11,8 +11,8 @@ export default {
         type: {
           summary: 'object',
           detail: `{
-  name: 'string',
-  imageUrl: 'string'
+  publisherName: 'string',
+  imageURL: 'string'
 }`,
         },
       },
@@ -30,12 +30,12 @@ export default {
 
 const Template = args => <PublisherInformation {...args} />;
 
-export const Review = Template.bind({});
+export const Story = Template.bind({});
 
-Review.args = {
+Story.args = {
   publisherData: {
     publisherName: 'ejinaaa',
-    publisherImageUrl:
+    imageURL:
       'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
   },
 };
