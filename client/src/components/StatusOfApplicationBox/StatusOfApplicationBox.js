@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import { ProfileImage } from 'components';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -8,38 +11,41 @@ import {
   recruitees,
 } from './StatusOfApplicationBox.module.scss';
 
-const StatusOfApplicationBox = ({
-  recruiteesData,
-  className,
-  ...restProps
-}) => {
+const StatusOfApplicationBox = ({ recruiteesData, className }) => {
   const containerClasses = classNames(className.container, container);
   const titleClasses = classNames(className.title, title);
 
   return (
     <div className={containerClasses}>
       <p className={titleClasses}>신청 현황</p>
-      <div className={recruiteesContainer}>
+      <ul className={recruiteesContainer}>
         {recruiteesData.map((data, index) => (
-          <ProfileImage
-            key={data.id}
-            src={data.imageURL}
-            size="small"
-            className={{ container: recruitees }}
-          />
+          <li key={data.recruiteeId}>
+            <Link
+              to={`/profile/${data.recruiteeName}/recruit`}
+              component={() => (
+                <ProfileImage
+                  src={data.recruiteeImageURL}
+                  size="small"
+                  className={{ container: recruitees }}
+                />
+              )}
+            />
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
 
 StatusOfApplicationBox.defaultProps = {
-  images: [],
+  recruiteesData: [],
   className: {},
 };
 
 StatusOfApplicationBox.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  recruiteesData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))
+    .isRequired,
   className: PropTypes.object,
 };
 

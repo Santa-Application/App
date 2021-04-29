@@ -11,10 +11,10 @@ export default {
         type: {
           summary: 'object',
           detail: `{
-  postTitle: 'sting',
-  imageUrl: 'string',
+  title: 'sting',
+  imageURL: 'string',
   mountainName: 'string',
-  postDate: 'Date object',
+  postDate: 'string',
 }`,
         },
       },
@@ -36,10 +36,10 @@ export const ReviewCard = Template.bind({});
 
 ReviewCard.args = {
   postData: {
-    postTitle: '산 탈꼬아',
-    imageUrl:
+    title: '산 탈꼬아',
+    imageURL:
       'https://health.chosun.com/site/data/img_dir/2019/04/30/2019043001641_0.jpg',
     mountainName: '인왕산',
-    postDate: new Date(2021, 3, 24),
+    postDate: '2021-04-28T18:55:48.782Z',
   },
 };

@@ -1,19 +1,28 @@
 @import 'styles';
 
 .container {
-  // width: 39vw;
-  width: 45vw;
-  height: 50vw;
+  width: 39vw;
+  height: 42vw;
+  margin-bottom: 2.5rem;
 
   @include rounded-box-shadow($border-radius-small);
 
   overflow: hidden;
+
+  > div:first-child {
+    height: 25vw;
+    overflow: hidden;
+  }
 }
 
-.imageContainer {
-  // height: 25vw;
-  height: 31vw;
-  overflow: hidden;
+.containerMain {
+  width: 50vw;
+  text-align: left;
+
+  > div:first-child {
+    height: 35vw;
+    overflow: hidden;
+  }
 }
 
 .image {

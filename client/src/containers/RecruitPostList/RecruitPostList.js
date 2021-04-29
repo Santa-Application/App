@@ -9,7 +9,7 @@ import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 import PropTypes from 'prop-types';
 import { listContainer, postCard } from './RecruitPostList.module.scss';
 
-const RecruitPostList = ({ pageInfo, className, ...restProps }) => {
+const RecruitPostList = ({ pageInfo }) => {
   const state = useSelector(state => state.recruitPost);
   const { isLoading, data, error } = state;
   const dispatch = useDispatch();
@@ -125,8 +125,8 @@ RecruitPostList.defaultProps = {
   className: '',
 };
 
-// RecruitPostList.propTypes = {
-//   className: PropTypes.string,
-// };
+RecruitPostList.propTypes = {
+  className: PropTypes.string,
+};
 
 export default RecruitPostList;

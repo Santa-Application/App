@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 export const recruitPost = {
   publisherId: PropTypes.string,
   publisherName: PropTypes.string,
-  postingDate: PropTypes.object, // Date 객체
+  postingDate: PropTypes.object, // 나중에 Date객체로 변경될 것임
   views: PropTypes.number,
   mountainName: PropTypes.string,
   postTitle: PropTypes.string,
-  recruitingDate: PropTypes.object, // Date 객체
+  recruitingDate: PropTypes.object, // 나중에 Date객체로 변경될 것임
   recruitingLevels: PropTypes.arrayOf(
     PropTypes.oneOf(['level1', 'level2', 'level3'])
   ),
@@ -36,7 +36,7 @@ export const user = {
   password: PropTypes.string,
   imageUrl: PropTypes.string,
   gender: PropTypes.oneOf(['female', 'male']),
-  dateOfBirth: PropTypes.object, // Date 객체
+  dateOfBirth: PropTypes.object, // 나중에 Date객체로 변경될 것임
   hikingLevel: PropTypes.oneOf(['level1', 'level2', 'level3']),
   introduction: PropTypes.string,
   regularPosts: PropTypes.arrayOf(PropTypes.string),
@@ -46,23 +46,30 @@ export const user = {
 };
 
 export const recruitPostCard = {
-  imageURL: PropTypes.string,
-  title: PropTypes.string,
-  mountainName: PropTypes.string,
-  recruitDate: PropTypes.string,
-  recruitingNumber: PropTypes.number,
-  recruitingSex: PropTypes.oneOf(['female', 'male', 'genderBoth']),
+  publisherInfo: {
+    name: PropTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
+  },
+  recruitPost: {
+    title: PropTypes.string.isRequired,
+    mountainName: PropTypes.string.isRequired,
+    hikingLevel: PropTypes.oneOf(['level1', 'level2', 'level3']).isRequired,
+    recruitDate: PropTypes.string.isRequired, // 나중에 Date객체로 변경될 것임
+    recruitingGender: PropTypes.oneOf(['female', 'male', 'genderBoth'])
+      .isRequired,
+    recruitingNumber: PropTypes.number.isRequired,
+  },
 };
 
 export const regularPostCard = {
-  title: PropTypes.string,
-  imageUrl: PropTypes.string,
-  mountainName: PropTypes.string,
-  postingDate: PropTypes.object, // Date 객체
+  title: PropTypes.string.isRequired,
+  imageURL: PropTypes.string.isRequired,
+  mountainName: PropTypes.string.isRequired,
+  postDate: PropTypes.string.isRequired, // 나중에 Date객체로 변경될 것임
 };
 
 export const postHeading = {
-  postTitle: PropTypes.string,
-  postingDate: PropTypes.object, // Date 객체
+  title: PropTypes.string.isRequired,
+  postDate: PropTypes.string.isRequired, // 나중에 Date객체로 변경될 것임
   views: PropTypes.number,
 };

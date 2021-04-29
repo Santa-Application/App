@@ -14,18 +14,6 @@ export default {
         disable: true,
       },
     },
-    iconSize: {
-      type: '아이콘 사이즈',
-      description: '아이콘의 사이즈를 지정합니다.',
-      table: {
-        type: { summary: 'number', detail: `단위는 'rem'입니다.` },
-      },
-      control: {
-        type: 'number',
-        min: 1,
-        step: 0.1,
-      },
-    },
     field: {
       table: {
         disable: true,
@@ -58,11 +46,11 @@ Both.args = {
   id: 'genderBoth',
 };
 Level1.args = {
-  type: 'level1',
+  id: 'level1',
 };
 Level2.args = {
-  type: 'level2',
+  id: 'level2',
 };
 Level3.args = {
-  type: 'level3',
-}
+  id: 'level3',
+};

@@ -8,10 +8,11 @@
   margin-bottom: 3rem;
   min-height: 50vh;
   border-radius: 2rem;
-  background-image: url('./image/mainRecruit.png');
-  background-size: contain;
+  background-image: url('./image/mainRecruit2.png');
+  background-size: 150%;
   background-repeat: no-repeat;
-  background-position: center 120%;
+  background-position: 40% 850%;
+  text-align: center;
 }
 
 .recruitWrapper {
@@ -21,8 +22,8 @@
   background: linear-gradient(
     to bottom,
     rgba($color: $dark-gray, $alpha: 1) 0%,
-    rgba($color: $dark-gray, $alpha: 1) 50%,
-    rgba($color: $dark-gray, $alpha: 0.2) 70%,
+    rgba($color: $dark-gray, $alpha: 1) 40%,
+    rgba($color: $dark-gray, $alpha: 0.2) 60%,
     rgba($color: $dark-gray, $alpha: 0) 100%
   );
   padding: 2.5rem;

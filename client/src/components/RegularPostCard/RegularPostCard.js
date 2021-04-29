@@ -1,24 +1,28 @@
+import { useLocation } from 'react-router-dom';
+
 import { Heading, Tag } from 'components';
 import { postDate as changePostDate, propTypeSchema } from 'utils';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   container,
-  imageContainer,
+  containerMain,
   image,
   textContainer,
   title as titleStyle,
   time,
 } from './RegularPostCard.module.scss';
 
-const RegularPostCard = ({ postData, className, ...restProps }) => {
-  
+const RegularPostCard = ({ postData }) => {
   const { title, postDate, imageURL, mountainName } = postData;
-  const containerClasses = className?.container ? classNames(className.container, container) : container;
+  const containerClasses = classNames(
+    useLocation().pathname === '/main' ? containerMain : container
+  );
 
   return (
     <div className={containerClasses}>
-      <div className={imageContainer}>
+      <div>
         <img src={imageURL} alt="" className={image} />
       </div>
       <div className={textContainer}>
@@ -32,19 +36,21 @@ const RegularPostCard = ({ postData, className, ...restProps }) => {
   );
 };
 
-// RegularPostCard.defaultProps = {
-//   postData: {
-//     title: '',
-//     imageURL: '',
-//     mountainName: '',
-//     postingDate: {},
-//   },
-//   className: {},
-// };
+RegularPostCard.defaultProps = {
+  postData: {
+    regularPost: {
+      title: '',
+      imageURL: '',
+      mountainName: '',
+      postDate: '',
+    },
+  },
+  className: {},
+};
 
-// RegularPostCard.propTypes = {
-//   postData: PropTypes.exact(propTypeSchema.regularPostCard).isRequired,
-//   className: PropTypes.object,
-// };
+RegularPostCard.propTypes = {
+  postData: PropTypes.shape(propTypeSchema.regularPostCard).isRequired,
+  className: PropTypes.object,
+};
 
 export default RegularPostCard;

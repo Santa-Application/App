@@ -5,8 +5,13 @@ export default {
   component: RoundedBox,
   argTypes: {
     children: {
+      type: '컨텐츠',
+      description: '컨텐츠를 전달받습니다.',
       table: {
-        disable: true,
+        type: 'node',
+      },
+      control: {
+        type: 'object',
       },
     },
     className: {
@@ -30,7 +35,7 @@ mountain.args = {
   children: '인왕산',
 };
 date.args = {
-  children: '2021/4/23',
+  children: '2021년4월23일',
 };
 level.args = {
   children: '초급자 중급자',

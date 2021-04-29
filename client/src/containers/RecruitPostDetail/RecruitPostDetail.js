@@ -38,7 +38,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
 
   const handleClickRemovePost = () => {
     dispatch(removeRecruitPostAsync(postId));
-    // dispatch(getRecruitPostsAsync());
+    dispatch(getRecruitPostsAsync());
 
     const path = userName
       ? `/${userName}/recruit`
