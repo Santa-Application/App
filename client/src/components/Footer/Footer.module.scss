@@ -5,10 +5,14 @@
   padding: 3em 4.5em;
 
   background-color: $very-light-gray;
+
+  p {
+    font-size: 2rem;
+  }
 }
 
 .menuContainer {
-  margin-top: 3em;
+  margin-top: 2rem;
 
   @include font-dark-12-700;
 

@@ -4,6 +4,7 @@ import {
   card
 } from './CarouselSlider.module.scss';
 import { useEffect } from 'react';
+import { bool, array, oneOfType, number, string } from 'prop-types';
 
 const CarouselSlider = ({
   slides,
@@ -17,8 +18,8 @@ const CarouselSlider = ({
   showThumbs,
   ...restProps
 }) => {
-  // 접근성 관련 코드
-  const handleLoadCarousel = ({ target }) => {
+
+  const handleLoadCarouselEnhanceAccessibility = () => {
     const $lis = document.querySelectorAll('li.dot');
     const $liItems = document.querySelectorAll('li.slide');
     const $aItems = document.querySelectorAll('li.slide > a');
@@ -28,10 +29,10 @@ const CarouselSlider = ({
   };
 
   useEffect(() => {
-    window.addEventListener('load', handleLoadCarousel);
+    window.addEventListener('load', handleLoadCarouselEnhanceAccessibility);
 
     return () => {
-      window.removeEventListener('load', handleLoadCarousel);
+      window.removeEventListener('load', handleLoadCarouselEnhanceAccessibility);
     };
   }, []);
 
@@ -54,7 +55,7 @@ const CarouselSlider = ({
       {...restProps}
     >
       {
-        slides.map((slide, index) => {
+        slides.map(slide => {
           return slide;
         })
       }
@@ -63,3 +64,15 @@ const CarouselSlider = ({
 };
 
 export default CarouselSlider;
+
+CarouselSlider.propTypes = {
+  slides: array,
+  emulateTouch: bool,
+  autoPlay: bool,
+  centerMode: bool,
+  infiniteLoop: bool,
+  showArrows: bool,
+  useKeyboardArrows: bool,
+  width: oneOfType([number, string]),
+  showThumbs: bool,
+};

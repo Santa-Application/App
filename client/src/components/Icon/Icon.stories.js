@@ -21,8 +21,6 @@ export default {
   },
 };
 
-// 컴포넌트 템플릿
-// 함수의 복사본을 만드는 표준 JavaScript 기법
 const Template = (args) => <Icon {...args} />;
 
 export const simpleIcon = Template.bind({});
