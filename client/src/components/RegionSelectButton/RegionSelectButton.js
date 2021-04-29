@@ -1,6 +1,6 @@
 import { RoundedBox, Tag } from 'components';
+
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { tag } from './RegionSelectButton.module.scss';
 
 const RegionSelectButton = ({ type, content, ...restProps }) => {

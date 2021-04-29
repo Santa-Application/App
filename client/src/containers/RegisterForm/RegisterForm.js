@@ -87,7 +87,6 @@ const RegisterForm = ({ history, className }) => {
             />
             <FormItem
               inputProps={{
-                id: 'gender',
                 name: 'gender',
                 formType: 'gender',
               }}

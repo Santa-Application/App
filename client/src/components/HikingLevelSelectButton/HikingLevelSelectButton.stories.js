@@ -5,7 +5,7 @@ export default {
   title: 'Components/HikingLevelSelectButton',
   component: HikingLevelSelectButton,
   argTypes: {
-    field: {
+    inputProps: {
       table: {
         disable: true,
       },
@@ -27,8 +27,10 @@ export default {
 };
 
 export const Story = args => <HikingLevelSelectButton {...args} />;
+
 Story.args = {
   inputProps: {
-    name: 'hikingLevel'
-  }
-}
+    formType: 'hikingLevel',
+    name: 'hikingLevel',
+  },
+};

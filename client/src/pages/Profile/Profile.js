@@ -13,7 +13,7 @@ import {
 import { ProfileInfoCard, MenuTab } from 'components';
 import { authAPI } from 'api';
 
-const Profile = ({ history, match, ...restProps }) => {
+const Profile = ({ history, match }) => {
   const userName = match.params.userName;
   const loggedInUserInfo = useSelector(state => state.auth.userInfo);
   const loggedInUserName = loggedInUserInfo.name;

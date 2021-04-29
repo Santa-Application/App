@@ -11,8 +11,8 @@ export default {
         type: {
           summary: 'object',
           detail: `{
-  postTitle: 'string',
-  postingDate: 'Date object',
+  title: 'string',
+  postDate: '날짜 객체를 string타입으로 전달받습니다.',
   views: 'number'
 }`,
         },
@@ -31,12 +31,12 @@ export default {
 
 const Template = args => <PostHeading {...args} />;
 
-export const Review = Template.bind({});
+export const Story = Template.bind({});
 
-Review.args = {
+Story.args = {
   postData: {
-    postTitle: '드디어 정상~~~',
-    postingDate: new Date(),
+    title: '드디어 정상~~~',
+    postDate: '2021-04-28T18:55:48.782Z',
     views: 16,
   },
 };

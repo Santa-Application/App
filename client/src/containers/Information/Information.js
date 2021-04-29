@@ -1,13 +1,12 @@
-import {
-  ReviewCarousel,
-} from 'containers';
+/* eslint-disable indent */
+import { ReviewCarousel } from 'containers';
 import {
   RegularPostCard,
   RecruitPostCard,
   MountainCard,
   CarouselSlider,
-  Heading, 
-  Icon
+  Heading,
+  Icon,
 } from 'components';
 import {
   heading,
@@ -15,7 +14,8 @@ import {
   informationContainer,
   reviewCarouselContainerTop,
   recruitsContainer,
-  moreButton
+  moreButton,
+  headingContainer,
 } from './Information.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
@@ -24,21 +24,26 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Information = ({ history, match }) => {
-
   /*좋아요 top 5 갖고오기 -------------------------------------------------------------------------- */
 
-  
   const mountains = useSelector(state => state.mountain);
-  const topFive = mountains.data ? 
-    [...mountains.data.sort((first, second) => first.likes - second.likes).slice(0, 5)] : [];
-    /* // 최신 리뷰글, 모집글들 갖고오기------------------------------------------------------------------------- */
-  const mountainCards = topFive.map(mountain => (<MountainCard 
-    mountainName={mountain.data.name} 
-    to={`/mountain/${mountain.data.name}`} 
-    background={mountain.imageURL}
-  />));
+  const topFive = mountains.data
+    ? [
+        ...mountains.data
+          .sort((first, second) => first.likes - second.likes)
+          .slice(0, 5),
+      ]
+    : [];
+  /* // 최신 리뷰글, 모집글들 갖고오기------------------------------------------------------------------------- */
+  const mountainCards = topFive.map(mountain => (
+    <MountainCard
+      mountainName={mountain.data.name}
+      to={`/mountains/${mountain.data.name}`}
+      background={mountain.imageURL}
+    />
+  ));
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const getInformations = () => {
       dispatch(getRegularPostsAsync());
@@ -50,13 +55,16 @@ const Information = ({ history, match }) => {
   const reviews = useSelector(state => state.regularPost.data);
   const recruits = useSelector(state => state.recruitPost.data);
 
-  const newReviewsTen = reviews
-    .slice(0, 10)
-    .map(review => (<RegularPostCard postData={review.regularPost} />)    
-    );
-  const newRecruitsThree = recruits
-    .slice(0, 3)
-    .map(recruit => (<RecruitPostCard postData={recruit} />));
+  const newReviewsTen = reviews.slice(0, 10).map(review => (
+    <Link to={`/reviews/${review.regularPost._id}`}>
+      <RegularPostCard postData={review.regularPost} />
+    </Link>
+  ));
+  const newRecruitsThree = recruits.slice(0, 3).map(recruit => (
+    <Link to={`/recruit/${recruit.recruitPost._id}`}>
+      <RecruitPostCard postData={recruit} />
+    </Link>
+  ));
 
   /* -------------------------------------------------------------------------- */
   // 데이터 넣어주기
@@ -64,11 +72,7 @@ const Information = ({ history, match }) => {
   return (
     <div className={informationContainer}>
       <div className={topFiveClass}>
-        <Heading
-          level={3}
-          content={'좋아요 TOP 5'}
-          className={heading}
-        />
+        <Heading level={3} content={'좋아요 TOP 5'} className={heading} />
         <CarouselSlider
           slides={mountainCards}
           emulateTouch={true}
@@ -77,7 +81,7 @@ const Information = ({ history, match }) => {
           infiniteLoop={true}
           showArrows={false}
           useKeyboardArrows={true}
-          width={'32rem'}
+          width={'85vw'}
           showThumbs={false}
           centerSlidePercentage={100}
           transitionTime={0}
@@ -91,23 +95,20 @@ const Information = ({ history, match }) => {
         className={reviewCarouselContainerTop}
       />
       <div className={recruitsContainer}>
-        <Heading
-          level={3}
-          content={'최신 모집 글'}
-          className={heading}
-        />
-        <ul>
-          {
-            newRecruitsThree.map((recruit, index) =>
-              (<li key={index}>{recruit}</li>))
-          }
-        </ul>
-        <div className={moreButton}>
-          <Link to={'/recruit'}>
-          더보기
-            <Icon shape={'more'} />
-          </Link>
+        <div className={headingContainer}>
+          <Heading level={3} content={'최신 모집 글'} className={heading} />
+          <div className={moreButton}>
+            <Link to={'/recruit'} style={{ fontSize: '1.2rem' }}>
+              더보기
+              <Icon shape={'more'} />
+            </Link>
+          </div>
         </div>
+        <ul>
+          {newRecruitsThree.map((recruit, index) => (
+            <li key={index}>{recruit}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );

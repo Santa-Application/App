@@ -1,10 +1,13 @@
-import { RadioButton } from 'components';
 import { Field } from 'formik';
+
+import { RadioButton } from 'components';
+
+import PropTypes from 'prop-types';
 import { container } from './HikingLevelSelectButton.module.scss';
 
 const HikingLevelSelectButton = ({ inputProps }) => {
   const { name } = inputProps;
-  
+
   return (
     <div className={container}>
       <Field
@@ -30,6 +33,20 @@ const HikingLevelSelectButton = ({ inputProps }) => {
       />
     </div>
   );
+};
+
+HikingLevelSelectButton.defaultProps = {
+  inputProps: {
+    formType: 'hikingLevel',
+    name: 'hikingLevel',
+  },
+};
+
+HikingLevelSelectButton.propTypes = {
+  inputProps: PropTypes.shape({
+    formType: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
 };
 
 export default HikingLevelSelectButton;
