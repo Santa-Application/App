@@ -9,6 +9,7 @@ import { getRegularPostsAsync } from 'redux/modules/regularPost';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { listContainer, postCard } from './RegularPostList.module.scss';
+import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 
 const RegularPostList = ({ pageInfo, className, ...restProps }) => {
   const state = useSelector(state => state.regularPost);
@@ -21,19 +22,7 @@ const RegularPostList = ({ pageInfo, className, ...restProps }) => {
 
   const listContainerClasses = classNames(className.container, listContainer);
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        로딩중임돠
-      </div>
-    );
+  if (isLoading) return <LoadingIcon />;
   if (error)
     return (
       <div
