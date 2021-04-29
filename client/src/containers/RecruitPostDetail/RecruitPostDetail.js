@@ -57,14 +57,14 @@ const RecruitPost = ({ match, history, ...restProps }) => {
     history.push(path);
   };
   const handleChangeApplyRecruitingButton = () => {
-    // dispatch(toggleApplyRecruitingAsync(postId, userId));
+    dispatch(toggleApplyRecruitingAsync(postId, userId));
     setIsApplied(!isApplied);
   };
 
   if (!userInfo) return <div>접근할 수 없슴돠</div>;
 
-  const userId = userInfo._id;
-  const postData = recruitPostsData.data.find(
+  const userId = userInfo?._id;
+  const postData = recruitPostsData?.data.find(
     _data => _data.recruitPost._id === postId
   );
 
