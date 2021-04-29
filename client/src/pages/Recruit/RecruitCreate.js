@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom';
+
 import { RecruitForm } from 'containers';
 import { Heading } from 'components';
 
 const RecruitCreate = ({ history, match }) => {
   return (
     <main>
-      <Heading content="RECRUIT" />
+      <Link to="/recruit">
+        <Heading content="RECRUIT" />
+      </Link>
       <RecruitForm history={history} match={match} formType="create" />
     </main>
   );
