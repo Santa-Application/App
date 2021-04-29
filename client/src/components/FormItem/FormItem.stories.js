@@ -39,7 +39,7 @@ export default {
         required: true,
       },
       description:
-        '폼을 구성하는 아이템의 input에 필요한 속성들의 모음 객체입니다.',
+        '폼을 구성하는 아이템의 input에 필요한 속성들의 객체를 전달받습니다.',
       table: {
         type: { summary: 'object' },
       },

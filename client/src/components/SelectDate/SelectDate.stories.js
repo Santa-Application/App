@@ -7,24 +7,25 @@ export default {
   title: 'Components/Form/SelectDate',
   component: SelectDate,
   argTypes: {
-    selectedDate: {
+    inputProps: {
       type: 'object',
-      description: '선택된 날짜의 상태를 전달 받습니다.',
+      description: 'input에 필요한 속성들의 객체 모음을 전달받습니다.',
       table: {
         type: { summary: 'object' },
-      },
-      contorl: {
-        type: 'object',
+        defaultValue: {
+          id: '',
+          selectedDate: new Date(),
+          setSelectedDate: null,
+          onFocus: null,
+          onSelect: null,
+          setFieldValue: null,
+        },
       },
     },
-    handleDateSelect: {
-      action: 'click item',
+    field: {
+      type: 'object',
       description:
-        '날짜를 클릭하면 실행될 이벤트(함수)를 전달받습니다. (selectedDate의 상태를 업데이트합니다.)',
-      table: {
-        categroy: 'Events',
-        type: { summary: 'function' },
-      },
+        'formik 라이브러리의 <Field/> 컴포넌트의 기본속성인 field 객체를 전달받습니다. 객체 내부에는 `name`, `value`, `onChange`, `onBlur` 프로퍼티들이 있습니다. 상위 컴포넌트에서 `name`속성만 전달하면 되고, input 요소의 onChange 이벤트가 발생하면 `value`는 폼에 자동적으로 제출됩니다.',
     },
   },
 };
@@ -32,7 +33,16 @@ export default {
 const Template = args => <SelectDate {...args} />;
 
 export const selected = Template.bind({});
-selected.storyName = 'selected date';
 selected.args = {
-  selectedDate: new Date(),
+  inputProps: {
+    id: '',
+    selectedDate: new Date(),
+    setSelectedDate: null,
+    onFocus: null,
+    onSelect: null,
+    setFieldValue: null,
+  },
+  field: {
+    name: 'recruitDate',
+  },
 };
