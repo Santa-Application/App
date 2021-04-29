@@ -1,5 +1,6 @@
 import { Heading } from 'components';
 import { postDate as postDateUtil, propTypeSchema } from 'utils';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -32,18 +33,18 @@ const PostHeading = ({ postData, className, ...restProps }) => {
   );
 };
 
-// PostHeading.defaultProps = {
-//   postData: {
-//     title: '',
-//     postDate: {},
-//     views: 0,
-//   },
-//   className: {},
-// };
+PostHeading.defaultProps = {
+  postData: {
+    title: '',
+    postDate: '',
+    views: 0,
+  },
+  className: {},
+};
 
-// PostHeading.propTypes = {
-//   postData: PropTypes.exact(propTypeSchema.postHeadingData).isRequired,
-//   className: PropTypes.object,
-// };
+PostHeading.propTypes = {
+  postData: PropTypes.shape(propTypeSchema.postHeadingData).isRequired,
+  className: PropTypes.object,
+};
 
 export default PostHeading;

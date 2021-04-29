@@ -11,11 +11,7 @@ import {
   recruitees,
 } from './StatusOfApplicationBox.module.scss';
 
-const StatusOfApplicationBox = ({
-  recruiteesData,
-  className,
-  ...restProps
-}) => {
+const StatusOfApplicationBox = ({ recruiteesData, className }) => {
   const containerClasses = classNames(className.container, container);
   const titleClasses = classNames(className.title, title);
 
@@ -42,14 +38,15 @@ const StatusOfApplicationBox = ({
   );
 };
 
-// StatusOfApplicationBox.defaultProps = {
-//   images: [],
-//   className: {},
-// };
+StatusOfApplicationBox.defaultProps = {
+  recruiteesData: [],
+  className: {},
+};
 
-// StatusOfApplicationBox.propTypes = {
-//   images: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   className: PropTypes.object,
-// };
+StatusOfApplicationBox.propTypes = {
+  recruiteesData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))
+    .isRequired,
+  className: PropTypes.object,
+};
 
 export default StatusOfApplicationBox;

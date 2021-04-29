@@ -11,12 +11,19 @@ export default {
         type: {
           summary: 'object',
           detail: `{
-  publisherImageUrl: 'string',
-  postTitle: 'string',
+  publisherInfo: {
+    name: 'string',
+    imageURL: 'string'
+  },
+  recruitPost: {
+
+  }
+  title: 'string',
   mountainName: 'string',
-  recruitingDate: 'string',
+  recruitDate: 'string',
   recruitingNumber: 'number',
-  recruitingGender: 'array',
+  recruitingGender: 'female, male, genderBoth 중 하나 선택',
+  hikingLevel: 'level1, level2, level3 중 하나 선택'
 }`,
         },
       },
@@ -34,21 +41,21 @@ export default {
 
 const Template = args => <RecruitPostCard {...args} />;
 
-export const Mobile = Template.bind({});
+export const Story = Template.bind({});
 
-Mobile.args = {
+Story.args = {
   postData: {
     recruitPost: {
-      imageUrl:
-        'https://spnimage.edaily.co.kr/images/photo/files/NP/S/2020/05/PS20052500028.jpg',
-      postTitle: '재밌는 등산 메이트 구해요오~~',
+      title: '재밌는 등산 메이트 구해요오~~',
       mountainName: '인왕산',
-      recruitingDate: '2021년 4월 23일',
+      recruitDate: '2021-04-28T18:55:48.782Z',
       recruitingNumber: 3,
       recruitingGender: 'male',
     },
     publisherInfo: {
-      imageURL: 'https://user-images.githubusercontent.com/42370712/116226895-7f6d5b80-a78e-11eb-95cd-323c8fe8bfbc.jpg'
-    }
+      imageURL:
+        'https://user-images.githubusercontent.com/42370712/116226895-7f6d5b80-a78e-11eb-95cd-323c8fe8bfbc.jpg',
+      name: '동원참치',
+    },
   },
 };

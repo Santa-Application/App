@@ -104,19 +104,17 @@ const Header = ({ history, match, mode, style, title, href, userData }) => {
           >
             <Icon shape={'menu'} />
           </Button>
-          <div 
-            className={navBackground} 
+          <div
+            className={navBackground}
             ref={navBgRef}
             onClick={handleClickOutsideMenu}
-          >
-          </div>
+          ></div>
           <section
             className={nav}
             ref={navRef}
             onClick={handleClickMenuButtons}
           >
             <div className={menu}>
-              <PublisherInformation publisherData={userData} />
               <Navigation label={'메뉴 바'} className={navMenu} />
             </div>
             <Button

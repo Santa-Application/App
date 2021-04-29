@@ -1,4 +1,5 @@
 import { Checkbox } from 'components';
+
 import PropTypes from 'prop-types';
 
 const LikeButton = ({

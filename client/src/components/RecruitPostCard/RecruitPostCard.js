@@ -1,5 +1,6 @@
 import { Heading, ProfileImage, Tag } from 'components';
-// import { propTypeSchema } from 'utils';
+import { propTypeSchema } from 'utils';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -27,9 +28,9 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
       break;
   }
 
-  const containerClasses = className?.container ? 
-    classNames(className.container, container) :
-    container;
+  const containerClasses = className?.container
+    ? classNames(className.container, container)
+    : container;
 
   return (
     <div className={containerClasses}>
@@ -53,21 +54,25 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
 };
 
 RecruitPostCard.defaultProps = {
-  // postData: {
-  //   recruitPost: {
-  //     title: '',
-  //     imageURL: '',
-  //     mountainName: '',
-  //     recruitDate: '',
-  //     recruitingNumber: 0,
-  //     recruitingGender: 'genderBoth',
-  //   }
-  // },
-  // className: {},
+  postData: {
+    publisherInfo: {
+      imageURL: '',
+      name: '',
+    },
+    recruitPost: {
+      title: '',
+      mountainName: '',
+      hikingLevel: 'level1',
+      recruitDate: '',
+      recruitingNumber: 1,
+      recruitingGender: 'genderBoth',
+    },
+  },
+  className: {},
 };
 
 RecruitPostCard.propTypes = {
-  // postData: PropTypes.exact(propTypeSchema.recruitPostCard).isRequired,
+  postData: PropTypes.object.isRequired,
   className: PropTypes.objectOf(PropTypes.string),
 };
 
