@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import {
   Button,
   Logo,
@@ -27,7 +26,8 @@ import { INITIALIZE_RECRUIT_POST } from 'redux/modules/recruitPost';
 import { INITIALIZE_REGULAR_POST } from 'redux/modules/regularPost';
 import { checkPropTypes } from 'prop-types';
 
-const Header = ({ history, match, mode, style, title, href, userData }) => {
+const Header = ({ history, style, title, href, userData }) => {
+  
   const navBgRef = useRef();
   const navRef = useRef();
   const signedIn = useSelector(state => state.auth.signedIn);
@@ -48,8 +48,8 @@ const Header = ({ history, match, mode, style, title, href, userData }) => {
       : navBgRef.current.setAttribute('aria-hidden', 'false');
   };
 
-  const handleClickMenuButtons = e => {
-    if (e.target.tagName !== 'A') return;
+  const handleClickMenuButtons = ({ target }) => {
+    if (target.tagName !== 'A') return;
     navBgRef.current.classList.remove(activeBg);
     navRef.current.classList.remove(activeNav);
   };

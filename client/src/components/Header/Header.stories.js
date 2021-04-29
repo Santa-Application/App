@@ -6,8 +6,6 @@ import { Header } from 'components'
 export default {
   title: 'Components/Header',
   component: Header,
-  argTypes: {
-  },
 }
 
 const Template = (args) => <Header {...args} />
