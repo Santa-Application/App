@@ -15,6 +15,7 @@ import {
 } from './RecruitForm.module.scss';
 import {
   createRecruitPostAsync,
+  getRecruitPostsAsync,
   updateRecruitPostAsync,
 } from 'redux/modules/recruitPost';
 
@@ -83,6 +84,7 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
           const newPostData = postId
             ? await dispatch(updateRecruitPostAsync(postId, updatePost))
             : await dispatch(createRecruitPostAsync(newPost));
+          dispatch(getRecruitPostsAsync());
 
           const newPostId = newPostData.recruitPost._id;
 
