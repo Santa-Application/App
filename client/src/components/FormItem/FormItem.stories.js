@@ -1,3 +1,4 @@
+import top100Mountains from 'data/top100Mountains';
 import { Form, Formik } from 'formik';
 import FormItem from './FormItem';
 
@@ -65,8 +66,8 @@ export default {
 
 const Template = args => <FormItem {...args} />;
 
-export const text = Template.bind({});
-text.args = {
+export const Text = Template.bind({});
+Text.args = {
   headingProps: {
     level: 3,
     content: '제목',
@@ -78,11 +79,12 @@ text.args = {
     formType: 'text',
     type: 'text',
     id: 'text',
+    name: 'text',
   },
 };
 
-export const email = Template.bind({});
-email.args = {
+export const Email = Template.bind({});
+Email.args = {
   headingProps: {
     level: 3,
     content: '이메일',
@@ -94,6 +96,7 @@ email.args = {
     formType: 'text',
     type: 'email',
     id: 'email',
+    name: 'email',
   },
 };
 
@@ -110,11 +113,12 @@ password.args = {
     formType: 'text',
     type: 'password',
     id: 'password',
+    name: 'password',
   },
 };
 
-export const radio = Template.bind({});
-radio.args = {
+export const gender = Template.bind({});
+gender.args = {
   headingProps: {
     level: 3,
     content: '제목',
@@ -123,7 +127,22 @@ radio.args = {
     content: '설명',
   },
   inputProps: {
-    formType: 'radio',
+    formType: 'gender',
+    name: 'gender',
+  },
+};
+export const hikingLevel = Template.bind({});
+hikingLevel.args = {
+  headingProps: {
+    level: 3,
+    content: '제목',
+  },
+  descProps: {
+    content: '설명',
+  },
+  inputProps: {
+    formType: 'hikingLevel',
+    name: 'hikingLevel',
   },
 };
 
@@ -138,6 +157,7 @@ number.args = {
   },
   inputProps: {
     formType: 'number',
+    name: 'number',
   },
 };
 
@@ -152,6 +172,7 @@ file.args = {
   },
   inputProps: {
     formType: 'file',
+    name: 'file',
   },
 };
 
@@ -166,6 +187,7 @@ date.args = {
   },
   inputProps: {
     formType: 'date',
+    name: 'date',
   },
 };
 
@@ -180,6 +202,7 @@ rangeSlider.args = {
   },
   inputProps: {
     formType: 'rangeSlider',
+    name: 'rangeSlider',
   },
 };
 
@@ -194,6 +217,8 @@ select.args = {
   },
   inputProps: {
     formType: 'select',
+    name: 'select',
+    datas: top100Mountains,
   },
 };
 
@@ -208,5 +233,6 @@ textarea.args = {
   },
   inputProps: {
     formType: 'textarea',
+    name: 'textarea',
   },
 };

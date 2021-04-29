@@ -8,6 +8,7 @@ import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 
 import PropTypes from 'prop-types';
 import { listContainer, postCard } from './RecruitPostList.module.scss';
+import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 
 const RecruitPostList = ({ pageInfo }) => {
   const state = useSelector(state => state.recruitPost);
@@ -18,19 +19,7 @@ const RecruitPostList = ({ pageInfo }) => {
     dispatch(getRecruitPostsAsync());
   }, [dispatch]);
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        로딩중임돠
-      </div>
-    );
+  if (isLoading) return <LoadingIcon />;
   if (error)
     return (
       <div
