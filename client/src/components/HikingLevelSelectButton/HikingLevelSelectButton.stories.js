@@ -27,3 +27,8 @@ export default {
 };
 
 export const Story = args => <HikingLevelSelectButton {...args} />;
+Story.args = {
+  inputProps: {
+    name: 'hikingLevel'
+  }
+}

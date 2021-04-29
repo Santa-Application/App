@@ -1,11 +1,10 @@
 import { RadioButton } from 'components';
-import classNames from 'classnames';
 import { Field } from 'formik';
 import { container } from './HikingLevelSelectButton.module.scss';
 
 const HikingLevelSelectButton = ({ inputProps }) => {
   const { name } = inputProps;
-
+  
   return (
     <div className={container}>
       <Field

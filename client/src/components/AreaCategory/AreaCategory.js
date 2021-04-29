@@ -1,4 +1,3 @@
-import { Button } from 'components';
 import { ReactComponent as SeoulGyeonggi } from './assets/서울경기.svg';
 import { ReactComponent as Gangwon } from './assets/강원도.svg';
 import { ReactComponent as Gyeongsang } from './assets/경상도.svg';
@@ -9,6 +8,8 @@ import { ReactComponent as Jeju } from './assets/제주도.svg';
 import {
   areaComponent
 } from './AreaCategory.module.scss';
+import { Button } from 'components';
+import { object, func } from 'prop-types';
 
 const AreaCategory = ({ district, onClick }) => {
 
@@ -52,3 +53,8 @@ const AreaCategory = ({ district, onClick }) => {
 };
 
 export default AreaCategory;
+
+AreaCategory.propTypes = {
+  district: object,
+  onClick: func
+};
