@@ -70,6 +70,9 @@ Santa는 증가하는 2030 세대의 등산 열풍에 의해 탄생된 아이디
 <img src="https://user-images.githubusercontent.com/42370712/116648520-37318180-a9b8-11eb-8aa8-f92eacf68a3b.gif" />
 </p>
 
+## v1.0 Log
+- Basic한 CRUD 완료 (Create, Read, Update, Delete)
+- Basic authenticaition 구축 완료
 
-<!-- ## 프로젝트 구조도 -->
-
+### 향후 일정
+- v1.1 반응형(웹 뷰 추가) 현재 존재하는 버그 
