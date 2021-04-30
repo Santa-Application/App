@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/42370712/114342717-4b434980-9b97-11eb-8888-3c549a3e8800.png">
 </p>
 <p align="center">
-<img align="center" style="width:30%" src="https://cdn.discordapp.com/attachments/824929055458983976/831000472067506197/1ce1d94989526fca.png">
+<img align="center" style="width:30%" src="https://user-images.githubusercontent.com/42370712/116660207-a5347380-a9cd-11eb-9741-c0a362f758b9.png">
 </p>
 <!-- ## 데모 -->
 
