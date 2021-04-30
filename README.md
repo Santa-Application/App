@@ -63,16 +63,13 @@ Santa는 증가하는 2030 세대의 등산 열풍에 의해 탄생된 아이디
 ### 주요 기능
 
 - ⛰ 함께 등반할 사람들을 모집할 수 있습니다.
-<img src="https://user-images.githubusercontent.com/72931773/114325715-80867200-9b6c-11eb-9adc-46738f48826d.png" width="70%" />
+<img src="https://user-images.githubusercontent.com/42370712/116648111-39471080-a9b7-11eb-8154-6177b21f9914.gif" />
 
 - ⛰ 우리 나라의 산에 대한 간단한 정보를 제공합니다.
-<img src="https://user-images.githubusercontent.com/42370712/114332321-f7c60100-9b80-11eb-9d8c-7a84ed5eabd5.png" height="30%" />
-
-- ⛰ 마음에 드는 산에 `좋아요❤️`를 남길 수 있습니다.
-<img src="" width="80%" />
+<img src="https://user-images.githubusercontent.com/42370712/116648354-c4280b00-a9b7-11eb-836a-c120c7b90a0f.gif" height="30%" />
 
 - ⛰ 내가 등반한 산에 대해 사진과 글로 기록을 남길 수 있습니다.
-<img src="https://user-images.githubusercontent.com/72931773/114325789-d8bd7400-9b6c-11eb-91b1-31b3c0a0b764.png" width="70%" />
+<img src="https://user-images.githubusercontent.com/42370712/116648520-37318180-a9b8-11eb-8aa8-f92eacf68a3b.gif" />
 
 <!-- ## 프로젝트 구조도 -->
-[디자인시안](https://www.figma.com/file/vMttsM3y4KtX8Ubj6Ij7nJ/Santa?node-id=8%3A27)
+
