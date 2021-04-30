@@ -61,15 +61,15 @@ Santa는 증가하는 2030 세대의 등산 열풍에 의해 탄생된 아이디
 이러한 Santa의 가장 기본적인 기능들은 다음과 같습니다.
 
 ### 주요 기능
-
 - ⛰ 함께 등반할 사람들을 모집할 수 있습니다.
-<img src="https://user-images.githubusercontent.com/42370712/116648111-39471080-a9b7-11eb-8154-6177b21f9914.gif" />
-
 - ⛰ 우리 나라의 산에 대한 간단한 정보를 제공합니다.
-<img src="https://user-images.githubusercontent.com/42370712/116648354-c4280b00-a9b7-11eb-836a-c120c7b90a0f.gif" height="30%" />
-
 - ⛰ 내가 등반한 산에 대해 사진과 글로 기록을 남길 수 있습니다.
+<p align="center">
+<img src="https://user-images.githubusercontent.com/42370712/116648111-39471080-a9b7-11eb-8154-6177b21f9914.gif" />
+<img src="https://user-images.githubusercontent.com/42370712/116648354-c4280b00-a9b7-11eb-836a-c120c7b90a0f.gif" />
 <img src="https://user-images.githubusercontent.com/42370712/116648520-37318180-a9b8-11eb-8aa8-f92eacf68a3b.gif" />
+</p>
+
 
 <!-- ## 프로젝트 구조도 -->
 
