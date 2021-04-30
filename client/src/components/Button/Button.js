@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { string, bool, func } from 'prop-types';
+import { string, bool, func, node } from 'prop-types';
 import {
   button,
   primary,
@@ -44,7 +44,7 @@ Button.defaultProps = {
   value: 'Default submit button',
   children: 'Button',
   className: '',
-  onClick: () => {}
+  onClick: () => {},
 };
 
 Button.propTypes = {
@@ -52,7 +52,7 @@ Button.propTypes = {
   type: string,
   disabled: bool,
   value: string,
-  children: string,
+  children: node,
   className: string,
   onClick: func,
 };
