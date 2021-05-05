@@ -4,7 +4,6 @@ import {
   Tag,
   Icon,
   Navigation,
-  PublisherInformation,
 } from 'components';
 import {
   header,
@@ -24,10 +23,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signoutUserAsync } from 'redux/modules/auth';
 import { INITIALIZE_RECRUIT_POST } from 'redux/modules/recruitPost';
 import { INITIALIZE_REGULAR_POST } from 'redux/modules/regularPost';
-import { checkPropTypes } from 'prop-types';
 
-const Header = ({ history, style, title, href, userData }) => {
+import { useHistory } from "react-router-dom";
+
+const Header = ({ style, title, href }) => {
   
+  const history = useHistory(); 
   const navBgRef = useRef();
   const navRef = useRef();
   const signedIn = useSelector(state => state.auth.signedIn);
