@@ -1,10 +1,18 @@
 import ko from 'axe-core/locales/ko.json'
 import { addDecorator } from '@storybook/react'
-import { MemoryRouter } from "react-router";
-import StoreProvider from '../src/redux/store';
+import { MemoryRouter } from 'react-router'
+import StoreProvider from '../src/redux/store'
+
 
 addDecorator(story => <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>);
-addDecorator(story => <StoreProvider>{story()}</StoreProvider>);
+
+export const decorators = [
+  (Story) => (
+    <StoreProvider>
+      <Story />
+    </StoreProvider>
+  ),
+];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
