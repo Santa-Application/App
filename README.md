@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/42370712/114342717-4b434980-9b97-11eb-8888-3c549a3e8800.png">
 </p>
 <p align="center">
-<img align="center" style="width:30%" src="https://cdn.discordapp.com/attachments/824929055458983976/831000472067506197/1ce1d94989526fca.png">
+<img align="center" style="width:30%" src="https://user-images.githubusercontent.com/42370712/116660207-a5347380-a9cd-11eb-9741-c0a362f758b9.png">
 </p>
 <!-- ## 데모 -->
 
@@ -58,18 +58,25 @@
 ## Santa 소개
 Santa는 증가하는 2030 세대의 등산 열풍에 의해 탄생된 아이디어입니다. 2030 등산러들을 연결해주는 교두보 역할을 해주고 Santa를 통해서 함께 등산할 수 있는 **등산메이트 모집** 그리고 **등반을 완료한 산에 대해서 리뷰와 사진**을 남길 수 있는 **소셜미디어 앱**입니다. 
 
+
+[프로젝트 slides ](https://slides.com/wonjun/deck)
+
 이러한 Santa의 가장 기본적인 기능들은 다음과 같습니다.
 
 ### 주요 기능
-
 - ⛰ 함께 등반할 사람들을 모집할 수 있습니다.
-<img src="https://user-images.githubusercontent.com/42370712/116648111-39471080-a9b7-11eb-8154-6177b21f9914.gif" />
-
 - ⛰ 우리 나라의 산에 대한 간단한 정보를 제공합니다.
-<img src="https://user-images.githubusercontent.com/42370712/116648354-c4280b00-a9b7-11eb-836a-c120c7b90a0f.gif" height="30%" />
-
 - ⛰ 내가 등반한 산에 대해 사진과 글로 기록을 남길 수 있습니다.
+<p align="center">
+<img src="https://user-images.githubusercontent.com/42370712/116648111-39471080-a9b7-11eb-8154-6177b21f9914.gif" />
+<img src="https://user-images.githubusercontent.com/42370712/116648354-c4280b00-a9b7-11eb-836a-c120c7b90a0f.gif" />
 <img src="https://user-images.githubusercontent.com/42370712/116648520-37318180-a9b8-11eb-8aa8-f92eacf68a3b.gif" />
+</p>
 
-<!-- ## 프로젝트 구조도 -->
+## v1.0 Log
+- Basic한 CRUD 완료 (Create, Read, Update, Delete)
+- Basic authenticaition 구축 완료
 
+
+### 향후 일정
+- v1.1 반응형(웹 뷰 추가) 현재 존재하는 버그 
