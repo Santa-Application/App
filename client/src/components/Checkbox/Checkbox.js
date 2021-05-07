@@ -13,7 +13,6 @@ const Checkbox = ({
   checkboxIcon,
   children,
   className,
-  ...restProps
 }) => {
   const labelClasses = classNames(className.label, label);
   const checkboxClasses = classNames(className.checkbox, checkbox);

@@ -3,15 +3,14 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { RegularPostCard } from 'components';
+import { RegularPostCard, LoadingIcon } from 'components';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { listContainer, postCard } from './RegularPostList.module.scss';
-import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 
-const RegularPostList = ({ pageInfo, className, ...restProps }) => {
+const RegularPostList = ({ pageInfo, className }) => {
   const state = useSelector(state => state.regularPost);
   const { isLoading, data, error } = state;
   const dispatch = useDispatch();
@@ -118,8 +117,8 @@ RegularPostList.defaultProps = {
 };
 
 RegularPostList.propTypes = {
-  // pageInfo: PropTypes.object,
-  // className: PropTypes.object,
+  pageInfo: PropTypes.object.isRequired,
+  className: PropTypes.object,
 };
 
 export default RegularPostList;

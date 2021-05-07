@@ -2,14 +2,7 @@ import { Checkbox } from 'components';
 
 import PropTypes from 'prop-types';
 
-const LikeButton = ({
-  id,
-  checked,
-  value,
-  onChange,
-  className,
-  ...restProps
-}) => {
+const LikeButton = ({ id, checked, value, onChange, className }) => {
   return (
     <Checkbox
       id={id}

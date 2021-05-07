@@ -3,15 +3,9 @@ import { postDate as postDateUtil, propTypeSchema } from 'utils';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  container,
-  title,
-  infoContainer,
-  date,
-  views,
-} from './PostHeading.module.scss';
+import { container, title, infoContainer } from './PostHeading.module.scss';
 
-const PostHeading = ({ postData, className, ...restProps }) => {
+const PostHeading = ({ postData, className }) => {
   const { title: postTitle, postDate, views: postingViews } = postData;
 
   const containerClasses = classNames(className.headingContainer, container);
@@ -21,13 +15,10 @@ const PostHeading = ({ postData, className, ...restProps }) => {
     <div className={containerClasses}>
       <Heading level={3} className={titleClasses} content={postTitle}></Heading>
       <div className={infoContainer}>
-        <time
-          dateTime={postDateUtil.getPostDate(new Date(postDate))}
-          className={date}
-        >
+        <time dateTime={postDateUtil.getPostDate(new Date(postDate))}>
           {postDateUtil.getPostDateInKorean(new Date(postDate))}
         </time>
-        <p className={views}>조회수 {postingViews}</p>
+        <p>조회수 {postingViews}</p>
       </div>
     </div>
   );
