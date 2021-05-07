@@ -5,8 +5,10 @@ import { FormItem, Button, Heading } from 'components';
 import { useDispatch } from 'react-redux';
 import { registerNewUserAsync } from 'redux/modules/auth';
 import { handleFocusAllInput } from 'utils/handler/formHandler';
+import { useHistory } from 'react-router-dom';
 
-const RegisterForm = ({ history, className }) => {
+const RegisterForm = ({ className }) => {
+  const history = useHistory();
   const { handleSelectDate, handleFocusAllInput } = formHandler;
   const [selectedDate, setSelectedDate] = useState(new Date());
   const dispatch = useDispatch();

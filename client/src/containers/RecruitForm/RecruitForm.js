@@ -3,6 +3,7 @@ import FormItem from 'components/FormItem/FormItem';
 import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { formHandler, postDate, validationSchema } from 'utils/';
 import top100Mountains from 'data/top100Mountains';
 import { Button } from 'components';
@@ -19,7 +20,10 @@ import {
   updateRecruitPostAsync,
 } from 'redux/modules/recruitPost';
 
-const RecruitForm = ({ history, match, formType, ...restProps }) => {
+const RecruitForm = ({ formType, ...restProps }) => {
+  const history = useHistory();
+  const match = useRouteMatch();
+
   const {
     handleSelectDate,
     handleFocusAllInput,

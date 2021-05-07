@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 
 import { RecruitForm } from 'containers';
 import { Heading } from 'components';
 
-const RecruitCreate = ({ history, match }) => {
+const RecruitCreate = () => {
+  const history = useHistory();
+  const match = useRouteMatch();
+
   return (
     <main>
       <Link to="/recruit">

@@ -6,15 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMountainAsync } from 'redux/modules/mountain';
 import { mainPage, searchSection, headMessage } from './Main.module.scss';
 import { Information } from 'containers';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
-const Main = ({ history, match }) => {
+const Main = () => {
+  const history = useHistory();
+  const match = useRouteMatch();
+
   const mountain = useSelector(state => state.mountain);
   const { isLoading, data, error } = mountain;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMountainAsync());
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) return <LoadingIcon />;
   if (error)

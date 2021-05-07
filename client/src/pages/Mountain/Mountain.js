@@ -11,8 +11,9 @@ import {
   RegularPostForm,
 } from 'containers';
 // import { motion, useTransform, useViewportScroll } from 'framer-motion';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import {
   mountainImage,
   // mountainPage,
@@ -20,7 +21,10 @@ import {
   // mountainInfoContainer,
 } from './Mountain.module.scss';
 
-const Mountain = ({ history, match }) => {
+const Mountain = () => {
+  const history = useHistory();
+  const match = useRouteMatch();
+
   const mountainName = match.params.mountainName;
   const mountain = useSelector(state => state.mountain);
   const { isLoading, data, error } = mountain;
