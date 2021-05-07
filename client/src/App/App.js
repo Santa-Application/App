@@ -40,8 +40,10 @@ function App() {
           <Route path="/reviews/edit/:postId" exact component={RegularEdit} />
           <Route path="/reviews/:postId" exact component={RegularDetail} />
 
-          {signedIn || <Route path="/login" exact component={Login} />}
-          {signedIn || <Route path="/signup" exact component={Register} />}
+          {!signedIn ? <Route path="/login" exact component={Login} /> : null}
+          {!signedIn ? (
+            <Route path="/signup" exact component={Register} />
+          ) : null}
 
           <Route path="/mountains" exact component={PageNotFound}></Route>
           <Route path="/mountains/:mountainName" component={Mountain} />
