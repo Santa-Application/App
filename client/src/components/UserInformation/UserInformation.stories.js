@@ -1,7 +1,7 @@
-import PublisherInformation from './PublisherInformation';
+import UserInformation from './UserInformation';
 
 export default {
-  title: 'Components/PublisherInformation',
+  title: 'Components/UserInformation',
   component: PublisherInformation,
   argTypes: {
     publisherData: {
@@ -28,7 +28,7 @@ export default {
   },
 };
 
-const Template = args => <PublisherInformation {...args} />;
+const Template = args => <UserrInformation {...args} />;
 
 export const Story = Template.bind({});
 
