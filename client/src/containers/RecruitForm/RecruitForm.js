@@ -81,13 +81,10 @@ const RecruitForm = ({ history, match, formType, ...restProps }) => {
             ...values,
           };
 
-          // const newPostData = postId
-          //   ? await dispatch(updateRecruitPostAsync(postId, updatePost))
-          //   : await dispatch(createRecruitPostAsync(newPost));
-          // dispatch(getRecruitPostsAsync());
-
-          const newPostData = await dispatch(createRecruitPostAsync(newPost));
-          // dispatch(getRecruitPostsAsync());
+          const newPostData = postId
+            ? await dispatch(updateRecruitPostAsync(postId, updatePost))
+            : await dispatch(createRecruitPostAsync(newPost));
+          dispatch(getRecruitPostsAsync());
 
           const newPostId = newPostData.recruitPost._id;
 
