@@ -30,7 +30,7 @@ const ProfileInfoCard = ({
       <ProfileImage src={profileImageURL} size="large" />
       <div className={header}>
         <Link
-          to={`/${name}/recruit`}
+          to={`/profile/${name}/recruit`}
           component={() => <Heading level={3} content={name} />}
         />
         <Button

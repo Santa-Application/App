@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { ProfileImage } from 'components';
 
 import PropTypes from 'prop-types';
-import { container, name } from './PublisherInformation.module.scss';
+import { container, name } from './UserInformation.module.scss';
 
-const PublisherInformation = ({ publisherData }) => {
-  if (!publisherData) return null;
+const UserInformation = ({ userData }) => {
+  if (!userData) return null;
 
-  const { imageURL, publisherName } = publisherData;
+  const { imageURL, publisherName } = userData;
   return (
     <div className={container}>
       <ProfileImage src={imageURL} size="medium" />
@@ -19,20 +19,20 @@ const PublisherInformation = ({ publisherData }) => {
   );
 };
 
-PublisherInformation.defaultProps = {
-  publisherData: {
+UserInformation.defaultProps = {
+  userData: {
     publisherName: '',
     imageURL: '',
   },
   className: {},
 };
 
-PublisherInformation.propTypes = {
-  publisherData: PropTypes.shape({
+UserInformation.propTypes = {
+  userData: PropTypes.shape({
     publisherName: PropTypes.string,
     imageURL: PropTypes.string.isRequired,
   }).isRequired,
   className: PropTypes.object,
 };
 
-export default PublisherInformation;
+export default UserInformation;

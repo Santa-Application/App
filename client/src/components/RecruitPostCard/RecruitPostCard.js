@@ -1,5 +1,4 @@
 import { Heading, ProfileImage, Tag } from 'components';
-import { propTypeSchema } from 'utils';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -10,23 +9,14 @@ import {
   tagList,
 } from './RecruitPostCard.module.scss';
 
-const RecruitPostCard = ({ postData, className, ...restProps }) => {
+const RecruitPostCard = ({ postData, className }) => {
   const { recruitPost, publisherInfo } = postData;
 
-  let genderContent = '';
-  switch (recruitPost.recruitingGender) {
-    case 'female':
-      genderContent = '여성';
-      break;
-    case 'male':
-      genderContent = '남성';
-      break;
-    case 'genderBoth':
-      genderContent = '상관없음';
-      break;
-    default:
-      break;
-  }
+  const gender = {
+    female: '여성',
+    male: '남성',
+    genderBoth: '상관없음',
+  };
 
   const containerClasses = className?.container
     ? classNames(className.container, container)
@@ -46,7 +36,10 @@ const RecruitPostCard = ({ postData, className, ...restProps }) => {
           {/* <Tag type="date" content={getPostDateInKorean(recruitDate)} /> */}
           <Tag type="date" content={recruitPost.recruitDate} />
           <Tag type="person" content={`${recruitPost.recruitingNumber}명`} />
-          <Tag type={recruitPost.recruitingGender} content={genderContent} />
+          <Tag
+            type={recruitPost.recruitingGender}
+            content={gender[recruitPost.recruitingGender]}
+          />
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ export { default as Icon } from 'components/Icon/Icon';
 export { default as ProfileInformation } from 'components/ProfileInformation/ProfileInformation';
 export { default as Input } from 'components/Input/Input';
 export { default as PostHeading } from 'components/PostHeading/PostHeading';
-export { default as PublisherInformation } from 'components/PublisherInformation/PublisherInformation';
+export { default as UserInformation } from 'components/UserInformation/UserInformation';
 export { default as ProfileImage } from 'components/ProfileImage/ProfileImage';
 export { default as RadioButton } from 'components/RadioButton/RadioButton';
 export { default as RecruitPostCard } from 'components/RecruitPostCard/RecruitPostCard';

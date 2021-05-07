@@ -1,22 +1,21 @@
 /* eslint-disable indent */
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 
 import {
-  PublisherInformation,
+  UserInformation,
   PostHeading,
   RoundedBox,
   StatusOfApplicationBox,
   Button,
 } from 'components';
 import {
-  getRecruitPostsAsync,
   removeRecruitPostAsync,
   toggleApplyRecruitingAsync,
 } from 'redux/modules/recruitPost';
 import { filterData } from 'utils';
 
-import PropTypes from 'prop-types';
 import {
   container,
   headingContainer,
@@ -25,23 +24,25 @@ import {
   buttonContainer,
 } from './RecruitPostDetail.module.scss';
 
-const RecruitPost = ({ match, history, ...restProps }) => {
+const RecruitPost = () => {
+  const history = useHistory();
+  const params = useParams();
+
   const userInfo = useSelector(state => state.auth.userInfo);
   const recruitPostsData = useSelector(state => state.recruitPost);
   const dispatch = useDispatch();
 
   const [isApplied, setIsApplied] = useState(false);
 
-  const postId = match.params.postId;
-  const userName = match.params.userName;
-  const mountainName = match.params.mountainName;
+  const postId = params.postId;
+  const userName = params.userName;
+  const mountainName = params.mountainName;
 
-  const handleClickRemovePost = () => {
-    dispatch(removeRecruitPostAsync(postId));
-    dispatch(getRecruitPostsAsync());
+  const handleClickRemovePost = async () => {
+    await dispatch(removeRecruitPostAsync(postId));
 
     const path = userName
-      ? `/${userName}/recruit`
+      ? `/profile/${userName}/recruit`
       : mountainName
       ? `/${mountainName}/recruit`
       : '/recruit';
@@ -73,9 +74,7 @@ const RecruitPost = ({ match, history, ...restProps }) => {
 
   return (
     <div className={container}>
-      <PublisherInformation
-        publisherData={filterData.postPublisherInfo(postData)}
-      />
+      <UserInformation userData={filterData.postUserInfo(postData)} />
       <PostHeading
         postData={filterData.postHeading(recruitPost)}
         className={{ headingContainer }}
@@ -114,9 +113,5 @@ const RecruitPost = ({ match, history, ...restProps }) => {
     </div>
   );
 };
-
-// RecruitPost.defaultProps = {};
-
-// RecruitPost.propTypes = {};
 
 export default RecruitPost;

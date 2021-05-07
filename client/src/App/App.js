@@ -40,18 +40,20 @@ function App() {
           <Route path="/reviews/edit/:postId" exact component={RegularEdit} />
           <Route path="/reviews/:postId" exact component={RegularDetail} />
 
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={Register} />
+          {!signedIn ? <Route path="/login" exact component={Login} /> : null}
+          {!signedIn ? (
+            <Route path="/signup" exact component={Register} />
+          ) : null}
 
           <Route path="/mountains" exact component={PageNotFound}></Route>
           <Route path="/mountains/:mountainName" component={Mountain} />
-          {/* <Route path="/:userName/edit" component={RegisterForm} /> */}
+          <Route path="/profile/:userName/edit" component={Register} />
 
           <Route path="/profile/:userName" component={Profile} />
           {signedIn && <Redirect from="/" to="/main" />}
           <Route path="/" exact component={HomePage} />
-          {/* <Route path="/" component={PageNotFound} /> */}
-
+          <Route path="/page-not-found" component={PageNotFound} />
+          {/* <Redirect to="/page-not-found" /> */}
           {/* todo: 에러 해결 */}
           {/* <Route path="/page-not-found" component={PageNotFound}>
             <Redirect to="/page-not-found" />

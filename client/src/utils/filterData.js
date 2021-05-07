@@ -1,7 +1,7 @@
 import { postDate } from 'utils';
 
 /* eslint-disable indent */
-export const postPublisherInfo = data => {
+export const postUserInfo = data => {
   return {
     imageURL: data.publisherInfo.imageURL,
     publisherName: data.publisherInfo.name,

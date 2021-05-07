@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { NavigationItem, PublisherInformation } from 'components';
+import { NavigationItem, UserInformation } from 'components';
 import { string } from 'prop-types';
 import { navContainer } from './Navigation.module.scss';
 
@@ -9,7 +9,7 @@ const Navigation = ({ label, onClick, className }) => {
 
   return (
     <>
-      <PublisherInformation
+      <UserInformation
         publisherData={{
           imageURL: auth.userInfo.imageURL,
           publisherName: auth.userInfo.name,
