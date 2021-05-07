@@ -107,7 +107,9 @@ dist
 package-lock.json
 
 # ServerSide gitignores
-
+uploads/
 
 # ClientSide gitignores
 yarn.lock
+build/
+tree.txt

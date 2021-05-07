@@ -9,11 +9,11 @@ import rootReducer from './modules';
 
 const middlewares = [ReduxThunk, logger];
 
-const store = createStore(
+export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(...middlewares))
 );
-const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
 const StoreProvider = props => (
   <Provider store={store}>

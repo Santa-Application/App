@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import {
   ProfileInformation,
   ProfileImage,
@@ -6,7 +5,6 @@ import {
   Button,
   Icon,
 } from 'components';
-import { string, number, oneOf } from 'prop-types';
 import {
   profileInfoCard,
   header,
@@ -14,7 +12,9 @@ import {
   editButton,
   introduce,
 } from './ProfileInfoCard.module.scss';
+import { string, number, oneOf } from 'prop-types';
 import { postDate } from 'utils';
+import { Link } from 'react-router-dom';
 
 const ProfileInfoCard = ({
   name,
@@ -59,20 +59,11 @@ const ProfileInfoCard = ({
 
 export default ProfileInfoCard;
 
-// ProfileInfoCard.defaultProps = {
-//   name: '',
-//   profileImageURL: '',
-//   gender: '',
-//   age: 0,
-//   level: '',
-//   introduction: '',
-// };
-
-// ProfileInfoCard.propTypes = {
-//   name: string.isRequired,
-//   profileImageURL: string.isRequired,
-//   gender: oneOf(['female', 'male']).isRequired,
-//   age: number.isRequired,
-//   level: oneOf(['level1', 'level2', 'level3']).isRequired,
-//   introduction: string.isRequired,
-// };
+ProfileInfoCard.propTypes = {
+  name: string.isRequired,
+  profileImageURL: string.isRequired,
+  gender: oneOf(['female', 'male']).isRequired,
+  age: number.isRequired,
+  level: oneOf(['level1', 'level2', 'level3']).isRequired,
+  introduction: string.isRequired,
+};
