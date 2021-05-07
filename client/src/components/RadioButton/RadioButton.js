@@ -12,32 +12,20 @@ const RadioButton = ({
   field,
   className: { label: labelClassName },
 }) => {
-  let labelText = '';
-  switch (id) {
-    case 'female':
-      labelText = '여성';
-      break;
-    case 'male':
-      labelText = '남성';
-      break;
-    case 'genderBoth':
-    default:
-      labelText = '상관없음';
-      break;
-    case 'level1':
-      labelText = '초급자';
-      break;
-    case 'level2':
-      labelText = '중급자';
-      break;
-    case 'level3':
-      labelText = '고급자';
-      break;
-  }
+  const labelText = {
+    female: '여성',
+    male: '남성',
+    genderBoth: '상관없음',
+    level1: '초급자',
+    level2: '중급자',
+    level3: '고급자',
+  };
 
   const checked = field.checked;
   const CheckIcon = checked ? Checked : Unchecked;
+
   const labelClasses = classNames(labelClassName, label);
+
   return (
     <div className={container}>
       <input
@@ -49,7 +37,7 @@ const RadioButton = ({
       />
       <label htmlFor={id} className={labelClasses}>
         <CheckIcon className={icon} />
-        {labelText}
+        {labelText[id]}
         <Icon shape={id} />
       </label>
     </div>
