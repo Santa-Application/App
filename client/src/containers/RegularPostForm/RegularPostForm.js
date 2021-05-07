@@ -1,11 +1,17 @@
 /* eslint-disable indent */
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
+
 import { FormItem, Button } from 'components';
 import { validationSchema } from 'utils';
-import { createRegularPostAsync } from 'redux/modules/regularPost';
-// import PropTypes from 'prop-types';
-// import classNames from 'classnames';
+import {
+  createRegularPostAsync,
+  getRegularPostsAsync,
+} from 'redux/modules/regularPost';
+import { handleChangeFileInput } from 'utils/handler/formHandler';
+
+import PropTypes from 'prop-types';
 import {
   container,
   heading,
@@ -13,21 +19,16 @@ import {
   buttonContainer,
   cancelButton,
 } from './RegularPostForm.module.scss';
-import { handleChangeFileInput } from 'utils/handler/formHandler';
 
 import top100Mountains from 'data/top100Mountains';
-import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 
-const RegularPostForm = ({
-  history,
-  match,
-  formType,
-  className,
-  ...restProps
-}) => {
+const RegularPostForm = ({ formType }) => {
+  const history = useHistory();
+  const params = useParams();
+
   const userId = useSelector(state => state.auth.userInfo._id);
-  const userName = match.params.userName;
-  const mountainName = match.params.mountainName;
+  const userName = params.userName;
+  const mountainName = params.mountainName;
   const dispatch = useDispatch();
 
   const handleClickCancelButton = () => {
@@ -64,7 +65,7 @@ const RegularPostForm = ({
           });
 
           const newPostData = await dispatch(createRegularPostAsync(formData));
-          dispatch(getRecruitPostsAsync());
+          dispatch(getRegularPostsAsync());
 
           const newPostId = newPostData.regularPost._id;
 
@@ -134,7 +135,7 @@ const RegularPostForm = ({
               descProps={{
                 content: '내가 등반한 산을 자랑해주세요',
               }}
-              headingProps={{ level: 3, content: '등산 일정 및 기타 사항' }}
+              headingProps={{ level: 3, content: '리뷰 상세 글' }}
               className={formItem}
             />
             <div className={buttonContainer}>
@@ -153,6 +154,14 @@ const RegularPostForm = ({
       </Formik>
     </div>
   );
+};
+
+RegularPostForm.defaultProps = {
+  formType: 'create',
+};
+
+RegularPostForm.propTypes = {
+  formType: PropTypes.string,
 };
 
 export default RegularPostForm;
