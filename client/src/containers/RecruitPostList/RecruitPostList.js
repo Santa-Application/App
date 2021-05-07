@@ -111,11 +111,10 @@ RecruitPostList.defaultProps = {
     mountainName: '',
     isLoggedInUser: false,
   },
-  className: '',
 };
 
 RecruitPostList.propTypes = {
-  className: PropTypes.string,
+  pageInfo: PropTypes.object.isRequired,
 };
 
 export default RecruitPostList;

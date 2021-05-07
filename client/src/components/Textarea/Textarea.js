@@ -8,9 +8,7 @@ const Textarea = ({ field, inputProps }) => {
   const textareaClasses = classNames(textarea);
 
   return (
-    <>
-      <textarea name={name} className={textareaClasses} {...field}></textarea>
-    </>
+    <textarea name={name} className={textareaClasses} {...field}></textarea>
   );
 };
 

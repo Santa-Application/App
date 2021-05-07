@@ -2,7 +2,7 @@ import { RegionSelectButton } from 'components';
 
 import { container } from './RegionSelectButtonGroup.module.scss';
 
-const RegionSelectButtonGroup = ({ ...restProps }) => {
+const RegionSelectButtonGroup = () => {
   return (
     <div className={container}>
       <RegionSelectButton type="seoul" content="서울/경기도" />

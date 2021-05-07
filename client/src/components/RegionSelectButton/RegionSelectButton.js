@@ -3,7 +3,7 @@ import { RoundedBox, Tag } from 'components';
 import PropTypes from 'prop-types';
 import { tag } from './RegionSelectButton.module.scss';
 
-const RegionSelectButton = ({ type, content, ...restProps }) => {
+const RegionSelectButton = ({ type, content }) => {
   return (
     <RoundedBox>
       <Tag type={type} content={content} className={tag} />
