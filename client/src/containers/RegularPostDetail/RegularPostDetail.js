@@ -1,39 +1,32 @@
 /* eslint-disable indent */
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 
-import {
-  PublisherInformation,
-  PostHeading,
-  RoundedBox,
-  Button,
-} from 'components';
-import PropTypes from 'prop-types';
-// import classNames from 'classnames';
+import { UserInformation, PostHeading, RoundedBox, Button } from 'components';
+import { removeRegularPostAsync } from 'redux/modules/regularPost';
+import { filterData } from 'utils';
+
 import {
   imageContainer,
   publisherInformationContainer,
   headingContainer,
   text,
 } from './RegularPostDetail.module.scss';
-import {
-  getRegularPostsAsync,
-  removeRegularPostAsync,
-} from 'redux/modules/regularPost';
-import { filterData } from 'utils';
 
-const RegularPost = ({ match, history, ...restProps }) => {
+const RegularPost = () => {
+  const history = useHistory();
+  const params = useParams();
+
   const userId = useSelector(state => state.auth.userInfo._id);
   const regularPostsData = useSelector(state => state.regularPost);
-
-  const postId = match.params.postId;
-  const userName = match.params.userName;
-  const mountainName = match.params.mountainName;
-
   const dispatch = useDispatch();
 
-  const handleClickRemovePost = () => {
-    dispatch(removeRegularPostAsync(postId));
-    dispatch(getRegularPostsAsync());
+  const postId = params.postId;
+  const userName = params.userName;
+  const mountainName = params.mountainName;
+
+  const handleClickRemovePost = async () => {
+    await dispatch(removeRegularPostAsync(postId));
 
     const path = userName
       ? `/profile/${userName}/reviews`
@@ -64,7 +57,7 @@ const RegularPost = ({ match, history, ...restProps }) => {
         <img src={regularPost.imageURL} alt="" />
       </div>
       <div className={publisherInformationContainer}>
-        <PublisherInformation
+        <UserInformation
           publisherData={filterData.postPublisherInfo(postData)}
         />
         <RoundedBox>{regularPost.mountainName}</RoundedBox>
@@ -91,9 +84,5 @@ const RegularPost = ({ match, history, ...restProps }) => {
     </div>
   );
 };
-
-RegularPost.defaultProps = {};
-
-RegularPost.propTypes = {};
 
 export default RegularPost;
