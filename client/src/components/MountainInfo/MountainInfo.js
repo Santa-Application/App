@@ -3,7 +3,6 @@ import React from 'react';
 import {
   containerNowrap,
   containerWrap,
-  // whiteSpace,
 } from './MountainInfo.module.scss';
 
 const MountainInfo = ({ subTitleText, description, lineBreak }) => {

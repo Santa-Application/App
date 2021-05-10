@@ -4,8 +4,11 @@ import { Form, Formik } from 'formik';
 import { Button, FormItem } from 'components';
 import { signinUserAsync } from 'redux/modules/auth';
 import { validationSchema } from 'utils';
+import { useHistory } from 'react-router-dom';
 
-const SignInForm = ({ history }) => {
+const SignInForm = () => {
+  const history = useHistory();
+
   const signedIn = useSelector(state => state.auth.signedIn);
   const dispatch = useDispatch();
 
@@ -15,7 +18,7 @@ const SignInForm = ({ history }) => {
 
   useEffect(() => {
     signedIn && history.push('/main');
-  }, [signedIn]);
+  }, [signedIn, history]);
 
   return (
     <Formik

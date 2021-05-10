@@ -23,7 +23,7 @@ import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Information = ({ history, match }) => {
+const Information = () => {
   /*좋아요 top 5 갖고오기 -------------------------------------------------------------------------- */
 
   const mountains = useSelector(state => state.mountain);
@@ -34,7 +34,7 @@ const Information = ({ history, match }) => {
           .slice(0, 5),
       ]
     : [];
-  /* // 최신 리뷰글, 모집글들 갖고오기------------------------------------------------------------------------- */
+  /* 최신 리뷰글, 모집글들 갖고오기------------------------------------------------------------------------- */
   const mountainCards = topFive.map(mountain => (
     <MountainCard
       mountainName={mountain.data.name}

@@ -1,4 +1,3 @@
-import { Link } from '@material-ui/core';
 import { Button } from 'components';
 import React from 'react';
 import {
@@ -8,8 +7,11 @@ import {
   recruitDesc,
   recruitButton,
 } from './MainRecruit.module.scss';
+import { useHistory } from 'react-router-dom';
 
-const MainRecruit = ({ history }) => {
+const MainRecruit = () => {
+  const history = useHistory();
+
   const handleClickButton = () => {
     history.push('/recruit/create');
   };

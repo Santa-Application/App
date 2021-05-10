@@ -1,14 +1,16 @@
 import MountainInfo from 'components/MountainInfo/MountainInfo';
 import React from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { mountainInfoContainer } from './MountainOverview.module.scss';
 
 const MountainOverview = ({
   mountainData,
   data,
-  match,
-  history,
   ...restProps
 }) => {
+  const history = useHistory();
+  const match = useRouteMatch();
+
   return (
     <div>
       <div className={mountainInfoContainer}>

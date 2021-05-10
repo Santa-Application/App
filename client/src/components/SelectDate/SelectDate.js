@@ -45,7 +45,6 @@ const SelectDate = ({ field, inputProps }) => {
           onSelect(date, field.name, setSelectedDate, setFieldValue);
         }}
         onFocus={onFocus}
-        autoComplete="off"
         popperModifiers={{ preventOverflow: { enabled: true } }}
       />
       <label htmlFor="datePicker">

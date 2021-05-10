@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 
 import { RegularPostForm } from 'containers';
 import { Heading } from 'components';
 
-const RegularCreate = ({ history, match }) => {
+const RegularCreate = () => {
+  const history = useHistory();
+  const match = useRouteMatch();
+  
   return (
     <main>
       <Link to="/reviews">

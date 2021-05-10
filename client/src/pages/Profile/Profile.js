@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory, useRouteMatch } from 'react-router-dom';
 
 import {
   RecruitPostList,
@@ -13,7 +13,10 @@ import {
 import { ProfileInfoCard, MenuTab } from 'components';
 import { authAPI } from 'api';
 
-const Profile = ({ history, match }) => {
+const Profile = () => {
+  const history = useHistory();
+  const match = useRouteMatch();
+
   const userName = match.params.userName;
   const loggedInUserInfo = useSelector(state => state.auth.userInfo);
   const loggedInUserName = loggedInUserInfo.name;
@@ -30,7 +33,7 @@ const Profile = ({ history, match }) => {
       }
     };
     setUserInfoAsync();
-  }, [userName, loggedInUserInfo]);
+  }, [userName, loggedInUserInfo, isLoggedInUser]);
 
   const handleClickUserInfoEditButton = () => {
     history.push(`/profile/${userName}/edit`);
