@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useParams } from 'react-router-dom';
 import { Heading, MenuTab } from 'components';
 import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 import MountainOverview from 'containers/MountainOverview/MountainOverview';
@@ -20,8 +20,9 @@ import {
   // mountainInfoContainer,
 } from './Mountain.module.scss';
 
-const Mountain = ({ history, match }) => {
-  const mountainName = match.params.mountainName;
+const Mountain = () => {
+  const params = useParams();
+  const mountainName = params.mountainName;
   const mountain = useSelector(state => state.mountain);
   const { isLoading, data, error } = mountain;
 
@@ -60,10 +61,7 @@ const Mountain = ({ history, match }) => {
     <>
       <div className={mountainImage}>
         <img src={imageURL} alt="" />
-        <Heading
-          className={mountainHeading}
-          content={match.params.mountainName}
-        />
+        <Heading className={mountainHeading} content={params.mountainName} />
       </div>
       <main>
         <div>
@@ -82,21 +80,13 @@ const Mountain = ({ history, match }) => {
               component={() => (
                 <RecruitPostList
                   pageInfo={{ type: 'mountain', mountainName }}
-                  history={history}
-                  match={match}
                 />
               )}
             />
             <Route
               path="/mountains/:mountainName/recruit/create"
               exact
-              component={() => (
-                <RecruitForm
-                  formType="create"
-                  history={history}
-                  match={match}
-                />
-              )}
+              component={() => <RecruitForm formType="create" />}
             />
 
             <Route
@@ -112,13 +102,7 @@ const Mountain = ({ history, match }) => {
             <Route
               path="/mountains/:mountainName/reviews/create"
               exact
-              component={() => (
-                <RegularPostForm
-                  formType="create"
-                  history={history}
-                  match={match}
-                />
-              )}
+              component={() => <RegularPostForm formType="create" />}
             />
             <Route
               path="/mountains/:mountainName/reviews"
@@ -126,8 +110,6 @@ const Mountain = ({ history, match }) => {
               component={() => (
                 <RegularPostList
                   pageInfo={{ type: 'mountain', mountainName }}
-                  history={history}
-                  match={match}
                 />
               )}
             />
@@ -139,12 +121,7 @@ const Mountain = ({ history, match }) => {
               path="/mountains/:mountainName/overview"
               exact
               component={() => (
-                <MountainOverview
-                  history={history}
-                  match={match}
-                  mountainData={mountainData}
-                  data={data}
-                />
+                <MountainOverview mountainData={mountainData} data={data} />
               )}
             />
             <Redirect

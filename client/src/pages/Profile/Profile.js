@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import {
+  Route,
+  Switch,
+  Redirect,
+  useHistory,
+  useParams,
+} from 'react-router-dom';
 
 import {
   RecruitPostList,
@@ -13,8 +19,11 @@ import {
 import { ProfileInfoCard, MenuTab } from 'components';
 import { authAPI } from 'api';
 
-const Profile = ({ history, match }) => {
-  const userName = match.params.userName;
+const Profile = () => {
+  const history = useHistory();
+  const params = useParams();
+
+  const userName = params.userName;
   const loggedInUserInfo = useSelector(state => state.auth.userInfo);
   const loggedInUserName = loggedInUserInfo.name;
   const [userInfo, setUserInfo] = useState(null);
@@ -61,17 +70,13 @@ const Profile = ({ history, match }) => {
           component={() => (
             <RecruitPostList
               pageInfo={{ type: 'profile', userName, isLoggedInUser }}
-              history={history}
-              match={match}
             />
           )}
         />
         <Route
           path="/profile/:userName/recruit/create"
           exact
-          component={() => (
-            <RecruitForm formType="create" history={history} match={match} />
-          )}
+          component={() => <RecruitForm formType="create" />}
         />
 
         <Route
@@ -87,13 +92,7 @@ const Profile = ({ history, match }) => {
         <Route
           path="/profile/:userName/reviews/create"
           exact
-          component={() => (
-            <RegularPostForm
-              formType="create"
-              history={history}
-              match={match}
-            />
-          )}
+          component={() => <RegularPostForm formType="create" />}
         />
         <Route
           path="/profile/:userName/reviews"
@@ -101,8 +100,6 @@ const Profile = ({ history, match }) => {
           component={() => (
             <RegularPostList
               pageInfo={{ type: 'profile', userName, isLoggedInUser }}
-              history={history}
-              match={match}
             />
           )}
         />
