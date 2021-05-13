@@ -1,7 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import classNames from 'classnames';
-import PropTypes, { object, string } from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { fileInput } from './FileInput.module.scss';
 
 const FileInput = ({ field, inputProps, form }) => {

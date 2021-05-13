@@ -44,7 +44,7 @@ const Profile = () => {
       }
     };
     setUserInfoAsync();
-  }, [userName, loggedInUserInfo]);
+  }, [userName, loggedInUserInfo, isLoggedInUser]);
 
   const handleClickUserInfoEditButton = () => {
     history.push(`/profile/${userName}/edit`);

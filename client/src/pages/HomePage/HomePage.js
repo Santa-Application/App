@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import 'styles/pages/page.scss';
 import { Logo, Button, Heading } from 'components';
 import {
@@ -8,18 +8,15 @@ import {
   subMessage,
   button,
 } from './HomePage.module.scss';
-import { waitForDomChange } from '@testing-library/dom';
 
-const HomePage = ({ history }) => {
-  const handleClickLoginButton = () => {
-    history.push('/login');
-  };
-  const handleClickSigninButton = () => {
-    history.push('/signup');
-  };
+const HomePage = () => {
+  const history = useHistory();
+
+  const handleClickLoginButton = () => history.push('/login');
+  const handleClickSigninButton = () => history.push('/signup');
 
   return (
-    <div className={homePage}>
+    <main className={homePage}>
       <Logo className={logo} mode={'white'} title={'산타 앱 로고'} />
       <div className={headMessage}>
         <p>오늘 기분타?</p>
@@ -50,7 +47,7 @@ const HomePage = ({ history }) => {
           회원가입
         </Button>
       </div>
-    </div>
+    </main>
   );
 };
 
