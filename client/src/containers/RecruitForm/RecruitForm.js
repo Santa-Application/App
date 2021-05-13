@@ -2,9 +2,9 @@
 import FormItem from 'components/FormItem/FormItem';
 import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
-import { formHandler, postDate, validationSchema } from 'utils/';
+import { formHandler, postDate, validationSchema, path } from 'utils/';
 import top100Mountains from 'data/top100Mountains';
 import { Button } from 'components';
 import {
@@ -20,10 +20,7 @@ import {
   updateRecruitPostAsync,
 } from 'redux/modules/recruitPost';
 
-const RecruitForm = ({ formType, ...restProps }) => {
-  const history = useHistory();
-  const match = useRouteMatch();
-
+const RecruitForm = ({ pageInfo, formType }) => {
   const {
     handleSelectDate,
     handleFocusAllInput,
@@ -33,9 +30,9 @@ const RecruitForm = ({ formType, ...restProps }) => {
   } = formHandler;
 
   const userId = useSelector(state => state.auth.userInfo._id);
-  const userName = match.params.userName;
-  const mountainName = match.params.mountainName;
-  const postId = match.params.postId;
+  const history = useHistory();
+  const params = useParams();
+  const postId = params.postId;
   const dispatch = useDispatch();
 
   const recruitPost = useSelector(state => state.recruitPost);
@@ -50,13 +47,7 @@ const RecruitForm = ({ formType, ...restProps }) => {
   const [currentAge, setCurrentAge] = useState(ageInitial);
 
   const handleClickCancelButton = () => {
-    const path = userName
-      ? `/profile/${userName}/recruit`
-      : mountainName
-      ? `/mountains/${mountainName}/recruit`
-      : '/recruit';
-
-    history.push(path);
+    history.push(path.createListPagePath(pageInfo));
   };
   return (
     <div className={container}>
@@ -92,13 +83,7 @@ const RecruitForm = ({ formType, ...restProps }) => {
 
           const newPostId = newPostData.recruitPost._id;
 
-          const path = userName
-            ? `/profile/${userName}/recruit/${newPostId}`
-            : mountainName
-            ? `/mountains/${mountainName}/recruit/${newPostId}`
-            : `/recruit/${newPostId}`;
-
-          history.push(path);
+          history.push(path.createDetailPagePath(pageInfo, newPostId));
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => {

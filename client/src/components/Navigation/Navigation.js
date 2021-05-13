@@ -10,7 +10,7 @@ const Navigation = ({ label, onClick, className }) => {
   return (
     <>
       <UserInformation
-        publisherData={{
+        userData={{
           imageURL: auth.userInfo.imageURL,
           publisherName: auth.userInfo.name,
         }}

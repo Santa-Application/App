@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { RecruitPostCard } from 'components';
 import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
+import { path } from 'utils';
 
 import PropTypes from 'prop-types';
 import { listContainer, postCard } from './RecruitPostList.module.scss';
@@ -19,54 +20,35 @@ const RecruitPostList = ({ pageInfo }) => {
     dispatch(getRecruitPostsAsync());
   }, [dispatch]);
 
-  if (isLoading) return <LoadingIcon />;
-  if (error)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        에러났음돠
-      </div>
-    );
-  if (!data)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        데이터가 없음돠
-      </div>
-    );
+  useEffect(() => {
+    if (isLoading) return <LoadingIcon />;
+    if (error)
+      return (
+        <div
+          style={{
+            color: '#666',
+            fontSize: '2rem',
+            margin: '5rem',
+            marginBottom: '25rem',
+          }}
+        >
+          에러났음돠
+        </div>
+      );
+  }, [isLoading, error]);
 
   const postsData =
     pageInfo.type === 'profile'
-      ? data.filter(_data => _data.publisherInfo.name === pageInfo.userName)
-      : pageInfo.type === 'mountain'
-      ? data.filter(
-          _data => _data.recruitPost.mountainName === pageInfo.mountainName
-        )
+      ? data.filter(_data => _data.publisherInfo.name === pageInfo.params)
+      : pageInfo.type === 'mountains'
+      ? data.filter(_data => _data.recruitPost.mountainName === pageInfo.params)
       : data;
-  const createPagePath =
-    pageInfo.type === 'profile'
-      ? `/profile/${pageInfo.userName}/recruit/create`
-      : pageInfo.type === 'mountain'
-      ? `/mountains/${pageInfo.mountainName}/recruit/create`
-      : '/recruit/create';
 
   return (
     <>
       {/* {pageInfo.isLoggedInUser && ( */}
       <Link
-        to={createPagePath}
+        to={path.createFormPagePath(pageInfo, 'create')}
         style={{
           fontSize: '1.4rem',
           fontWeight: 700,
@@ -81,16 +63,10 @@ const RecruitPostList = ({ pageInfo }) => {
       <ul className={listContainer}>
         {postsData.map(post => {
           const postId = post.recruitPost._id;
-          const path =
-            pageInfo.type === 'profile'
-              ? `/profile/${pageInfo.userName}/recruit/${postId}`
-              : pageInfo.type === 'mountain'
-              ? `/mountains/${pageInfo.mountainName}/recruit/${postId}`
-              : `/recruit/${postId}`;
 
           return (
             <li key={postId}>
-              <Link to={path}>
+              <Link to={path.createDetailPagePath(pageInfo, postId)}>
                 <RecruitPostCard
                   postData={post}
                   className={{ container: postCard }}
@@ -106,15 +82,12 @@ const RecruitPostList = ({ pageInfo }) => {
 
 RecruitPostList.defaultProps = {
   pageInfo: {
-    type: '',
-    userName: '',
-    mountainName: '',
-    isLoggedInUser: false,
+    postType: 'recruit',
   },
 };
 
 RecruitPostList.propTypes = {
-  pageInfo: PropTypes.object.isRequired,
+  pageInfo: PropTypes.object,
 };
 
 export default RecruitPostList;

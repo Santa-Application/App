@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useParams } from 'react-router-dom';
 import { Heading, MenuTab } from 'components';
 import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 import MountainOverview from 'containers/MountainOverview/MountainOverview';
@@ -11,9 +11,8 @@ import {
   RegularPostForm,
 } from 'containers';
 // import { motion, useTransform, useViewportScroll } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useRouteMatch } from 'react-router-dom';
 import {
   mountainImage,
   // mountainPage,
@@ -22,52 +21,41 @@ import {
 } from './Mountain.module.scss';
 
 const Mountain = () => {
-  const history = useHistory();
-  const match = useRouteMatch();
-
-  const mountainName = match.params.mountainName;
+  const params = useParams();
+  const mountainName = params.mountainName;
   const mountain = useSelector(state => state.mountain);
   const { isLoading, data, error } = mountain;
 
   const mountainData = data.find(_data => _data.data.name === mountainName);
   const { imageURL } = mountainData;
 
-  if (isLoading) return <LoadingIcon />;
-  if (error)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        에러났음돠
-      </div>
-    );
-  if (!data)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        데이터가 없음돠
-      </div>
-    );
+  const pageInfo = {
+    recruit: { type: 'profile', params: mountainName, postType: 'recruit' },
+    reviews: { type: 'profile', params: mountainName, postType: 'reviews' },
+  };
+
+  useEffect(() => {
+    if (isLoading) return <LoadingIcon />;
+    if (error)
+      return (
+        <div
+          style={{
+            color: '#666',
+            fontSize: '2rem',
+            margin: '5rem',
+            marginBottom: '25rem',
+          }}
+        >
+          에러났음돠
+        </div>
+      );
+  }, [isLoading, error]);
 
   return (
     <>
       <div className={mountainImage}>
         <img src={imageURL} alt="" />
-        <Heading
-          className={mountainHeading}
-          content={match.params.mountainName}
-        />
+        <Heading className={mountainHeading} content={params.mountainName} />
       </div>
       <main>
         <div>
@@ -81,74 +69,64 @@ const Mountain = () => {
           />
           <Switch>
             <Route
-              path="/mountains/:mountainName/recruit"
+              path="/mountains/:mountainName/overview"
               exact
               component={() => (
-                <RecruitPostList
-                  pageInfo={{ type: 'mountain', mountainName }}
-                  history={history}
-                  match={match}
-                />
+                <MountainOverview mountainData={mountainData} data={data} />
               )}
+            />
+            <Route
+              path="/mountains/:mountainName/recruit"
+              exact
+              component={() => <RecruitPostList pageInfo={pageInfo.recruit} />}
             />
             <Route
               path="/mountains/:mountainName/recruit/create"
               exact
               component={() => (
-                <RecruitForm
-                  formType="create"
-                  history={history}
-                  match={match}
-                />
+                <RecruitForm pageInfo={pageInfo.recruit} formType="create" />
               )}
-            />
-
-            <Route
-              path="/mountains/:mountainName/recruit/:postId"
-              exact
-              component={RecruitPostDetail}
             />
             <Route
               path="/mountains/:mountainName/recruit/edit/:postId"
               exact
-              component={RecruitForm}
+              component={() => (
+                <RecruitForm pageInfo={pageInfo.recruit} formType="edit" />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/recruit/:postId"
+              exact
+              component={() => (
+                <RecruitPostDetail pageInfo={pageInfo.recruit} />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/reviews"
+              exact
+              component={() => <RegularPostList pageInfo={pageInfo.reviews} />}
             />
             <Route
               path="/mountains/:mountainName/reviews/create"
               exact
               component={() => (
                 <RegularPostForm
+                  pageInfo={pageInfo.reviews}
                   formType="create"
-                  history={history}
-                  match={match}
                 />
               )}
             />
             <Route
-              path="/mountains/:mountainName/reviews"
+              path="/mountains/:mountainName/reviews/edit/:postId"
               exact
               component={() => (
-                <RegularPostList
-                  pageInfo={{ type: 'mountain', mountainName }}
-                  history={history}
-                  match={match}
-                />
+                <RegularPostForm pageInfo={pageInfo.reviews} formType="edit" />
               )}
             />
             <Route
               path={`/mountains/:mountainName/reviews/:postId`}
-              component={RegularPostDetail}
-            />
-            <Route
-              path="/mountains/:mountainName/overview"
-              exact
               component={() => (
-                <MountainOverview
-                  history={history}
-                  match={match}
-                  mountainData={mountainData}
-                  data={data}
-                />
+                <RegularPostDetail pageInfo={pageInfo.reviews} />
               )}
             />
             <Redirect

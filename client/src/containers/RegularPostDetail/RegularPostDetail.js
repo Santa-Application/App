@@ -4,8 +4,9 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { UserInformation, PostHeading, RoundedBox, Button } from 'components';
 import { removeRegularPostAsync } from 'redux/modules/regularPost';
-import { filterData } from 'utils';
+import { filterData, path } from 'utils';
 
+import PropTypes from 'prop-types';
 import {
   imageContainer,
   publisherInformationContainer,
@@ -13,7 +14,7 @@ import {
   text,
 } from './RegularPostDetail.module.scss';
 
-const RegularPost = () => {
+const RegularPostDetail = ({ pageInfo }) => {
   const history = useHistory();
   const params = useParams();
 
@@ -22,27 +23,14 @@ const RegularPost = () => {
   const dispatch = useDispatch();
 
   const postId = params.postId;
-  const userName = params.userName;
-  const mountainName = params.mountainName;
 
   const handleClickRemovePost = async () => {
     await dispatch(removeRegularPostAsync(postId));
 
-    const path = userName
-      ? `/profile/${userName}/reviews`
-      : mountainName
-      ? `/${mountainName}/reviews`
-      : `/reviews`;
-    history.push(path);
+    history.push(path.createListPagePath(pageInfo));
   };
   const handleClickEditPost = () => {
-    const path = userName
-      ? `/profile/${userName}/reviews/edit/${postId}`
-      : mountainName
-      ? `/${mountainName}/reviews/edit/${postId}`
-      : `/reviews/edit/${postId}`;
-
-    history.push(path);
+    history.push(path.createFormPagePath(pageInfo, 'edit', postId));
   };
 
   const postData = regularPostsData.data.find(
@@ -57,9 +45,7 @@ const RegularPost = () => {
         <img src={regularPost.imageURL} alt="" />
       </div>
       <div className={publisherInformationContainer}>
-        <UserInformation
-          publisherData={filterData.postPublisherInfo(postData)}
-        />
+        <UserInformation userData={filterData.postUserInfo(postData)} />
         <RoundedBox>{regularPost.mountainName}</RoundedBox>
       </div>
       <PostHeading
@@ -85,4 +71,13 @@ const RegularPost = () => {
   );
 };
 
-export default RegularPost;
+RegularPostDetail.defaultProps = {
+  pageInfo: {
+    postType: 'reviews',
+  },
+};
+RegularPostDetail.propTypes = {
+  pageInfo: PropTypes.object,
+};
+
+export default RegularPostDetail;

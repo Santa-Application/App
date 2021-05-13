@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect, useHistory, useRouteMatch } from 'react-router-dom';
+import {
+  Route,
+  Switch,
+  Redirect,
+  useHistory,
+  useParams,
+} from 'react-router-dom';
 
 import {
   RecruitPostList,
@@ -15,13 +21,18 @@ import { authAPI } from 'api';
 
 const Profile = () => {
   const history = useHistory();
-  const match = useRouteMatch();
+  const params = useParams();
 
-  const userName = match.params.userName;
+  const userName = params.userName;
   const loggedInUserInfo = useSelector(state => state.auth.userInfo);
   const loggedInUserName = loggedInUserInfo.name;
   const [userInfo, setUserInfo] = useState(null);
   const isLoggedInUser = userName === loggedInUserName;
+
+  const pageInfo = {
+    recruit: { type: 'profile', params: userName, postType: 'recruit' },
+    reviews: { type: 'profile', params: userName, postType: 'reviews' },
+  };
 
   useEffect(() => {
     const setUserInfoAsync = async () => {
@@ -63,9 +74,7 @@ const Profile = () => {
           exact
           component={() => (
             <RecruitPostList
-              pageInfo={{ type: 'profile', userName, isLoggedInUser }}
-              history={history}
-              match={match}
+              pageInfo={{ ...pageInfo.recruit, isLoggedInUser }}
             />
           )}
         />
@@ -73,45 +82,47 @@ const Profile = () => {
           path="/profile/:userName/recruit/create"
           exact
           component={() => (
-            <RecruitForm formType="create" history={history} match={match} />
+            <RecruitForm pageInfo={pageInfo.recruit} formType="create" />
           )}
-        />
-
-        <Route
-          path="/profile/:userName/recruit/:postId"
-          exact
-          component={RecruitPostDetail}
         />
         <Route
           path="/profile/:userName/recruit/edit/:postId"
           exact
-          component={RecruitForm}
+          component={() => (
+            <RecruitForm pageInfo={pageInfo.recruit} formType="edit" />
+          )}
         />
         <Route
-          path="/profile/:userName/reviews/create"
+          path="/profile/:userName/recruit/:postId"
           exact
-          component={() => (
-            <RegularPostForm
-              formType="create"
-              history={history}
-              match={match}
-            />
-          )}
+          component={() => <RecruitPostDetail pageInfo={pageInfo.recruit} />}
         />
         <Route
           path="/profile/:userName/reviews"
           exact
           component={() => (
             <RegularPostList
-              pageInfo={{ type: 'profile', userName, isLoggedInUser }}
-              history={history}
-              match={match}
+              pageInfo={{ ...pageInfo.reviews, isLoggedInUser }}
             />
           )}
         />
         <Route
+          path="/profile/:userName/reviews/create"
+          exact
+          component={() => (
+            <RegularPostForm pageInfo={pageInfo.reviews} formType="create" />
+          )}
+        />
+        <Route
+          path="/profile/:userName/reviews/edit/:postId"
+          exact
+          component={() => (
+            <RegularPostForm pageInfo={pageInfo.reviews} formType="edit" />
+          )}
+        />
+        <Route
           path={`/profile/:userName/reviews/:postId`}
-          component={RegularPostDetail}
+          component={() => <RegularPostDetail pageInfo={pageInfo.reviews} />}
         />
         <Redirect
           from="/profile/:userName"

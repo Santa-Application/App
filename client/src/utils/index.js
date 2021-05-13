@@ -4,3 +4,4 @@ export * as reduxUtils from './reduxUtils';
 export * as validationSchema from './validationSchema';
 export * as filterData from './filterData';
 export * as formHandler from './handler/formHandler';
+export * as path from './path';
