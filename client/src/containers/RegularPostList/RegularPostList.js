@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { RegularPostCard, LoadingIcon } from 'components';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
+import { path } from 'utils';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -19,56 +20,37 @@ const RegularPostList = ({ pageInfo, className }) => {
     dispatch(getRegularPostsAsync());
   }, [dispatch]);
 
-  const listContainerClasses = classNames(className.container, listContainer);
+  useEffect(() => {
+    if (isLoading) return <LoadingIcon />;
+    if (error)
+      return (
+        <div
+          style={{
+            color: '#666',
+            fontSize: '2rem',
+            margin: '5rem',
+            marginBottom: '25rem',
+          }}
+        >
+          에러났음돠
+        </div>
+      );
+  }, [isLoading, error]);
 
-  if (isLoading) return <LoadingIcon />;
-  if (error)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        에러났음돠
-      </div>
-    );
-  if (!data)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        데이터가 없음돠
-      </div>
-    );
+  const listContainerClasses = classNames(className.container, listContainer);
 
   const postsData =
     pageInfo.type === 'profile'
-      ? data.filter(_data => _data.publisherInfo.name === pageInfo.userName)
+      ? data.filter(_data => _data.publisherInfo.name === pageInfo.params)
       : pageInfo.type === 'mountain'
-      ? data.filter(
-          _data => _data.regularPost.mountainName === pageInfo.mountainName
-        )
+      ? data.filter(_data => _data.regularPost.mountainName === pageInfo.params)
       : data;
-  const createPagePath =
-    pageInfo.type === 'profile'
-      ? `/profile/${pageInfo.userName}/reviews/create`
-      : pageInfo.type === 'mountain'
-      ? `/mountains/${pageInfo.mountainName}/reviews/create`
-      : '/reviews/create';
 
   return (
     <>
       {/* {pageInfo.isLoggedInUser && ( */}
       <Link
-        to={createPagePath}
+        to={path.createFormPagePath(pageInfo, 'create')}
         style={{
           fontSize: '1.4rem',
           fontWeight: 700,
@@ -83,16 +65,10 @@ const RegularPostList = ({ pageInfo, className }) => {
       <ul className={listContainerClasses}>
         {postsData.map(post => {
           const postId = post.regularPost._id;
-          const path =
-            pageInfo.type === 'profile'
-              ? `/profile/${pageInfo.userName}/reviews/${postId}`
-              : pageInfo.type === 'mountain'
-              ? `/mountains/${pageInfo.mountainName}/reviews/${postId}`
-              : `/reviews/${postId}`;
 
           return (
             <li key={postId}>
-              <Link to={path}>
+              <Link to={path.createDetailPagePath(pageInfo, postId)}>
                 <RegularPostCard
                   postData={post.regularPost}
                   className={{ container: postCard }}
@@ -108,16 +84,13 @@ const RegularPostList = ({ pageInfo, className }) => {
 
 RegularPostList.defaultProps = {
   pageInfo: {
-    type: '',
-    userName: '',
-    mountainName: '',
-    isLoggedInUser: false,
+    postType: 'reviews',
   },
   className: {},
 };
 
 RegularPostList.propTypes = {
-  pageInfo: PropTypes.object.isRequired,
+  pageInfo: PropTypes.object,
   className: PropTypes.object,
 };
 

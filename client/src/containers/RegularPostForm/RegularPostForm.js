@@ -1,10 +1,10 @@
 /* eslint-disable indent */
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 
 import { FormItem, Button } from 'components';
-import { validationSchema } from 'utils';
+import { validationSchema, path } from 'utils';
 import {
   createRegularPostAsync,
   getRegularPostsAsync,
@@ -22,23 +22,14 @@ import {
 
 import top100Mountains from 'data/top100Mountains';
 
-const RegularPostForm = ({ formType }) => {
+const RegularPostForm = ({ pageInfo, formType }) => {
   const history = useHistory();
-  const params = useParams();
 
   const userId = useSelector(state => state.auth.userInfo._id);
-  const userName = params.userName;
-  const mountainName = params.mountainName;
   const dispatch = useDispatch();
 
   const handleClickCancelButton = () => {
-    const path = userName
-      ? `/profile/${userName}/reviews`
-      : mountainName
-      ? `/mountains/${mountainName}/reviews`
-      : '/reviews';
-
-    history.push(path);
+    history.push(path.createListPagePath(pageInfo));
   };
 
   return (
@@ -69,13 +60,7 @@ const RegularPostForm = ({ formType }) => {
 
           const newPostId = newPostData.regularPost._id;
 
-          const path = userName
-            ? `/profile/${userName}/reviews/${newPostId}`
-            : mountainName
-            ? `/mountains/${mountainName}/reviews/${newPostId}`
-            : `/reviews/${newPostId}`;
-
-          history.push(path);
+          history.push(path.createDetailPagePath(pageInfo, newPostId));
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => (
@@ -157,10 +142,14 @@ const RegularPostForm = ({ formType }) => {
 };
 
 RegularPostForm.defaultProps = {
+  pageInfo: {
+    postType: 'reviews',
+  },
   formType: 'create',
 };
 
 RegularPostForm.propTypes = {
+  pageInfo: PropTypes.object,
   formType: PropTypes.string,
 };
 

@@ -14,8 +14,9 @@ import {
   removeRecruitPostAsync,
   toggleApplyRecruitingAsync,
 } from 'redux/modules/recruitPost';
-import { filterData } from 'utils';
+import { filterData, path } from 'utils';
 
+import PropTypes from 'prop-types';
 import {
   container,
   headingContainer,
@@ -24,51 +25,34 @@ import {
   buttonContainer,
 } from './RecruitPostDetail.module.scss';
 
-const RecruitPost = () => {
+const RecruitPostDetail = ({ pageInfo }) => {
   const history = useHistory();
   const params = useParams();
 
-  const userInfo = useSelector(state => state.auth.userInfo);
+  const userId = useSelector(state => state.auth.userInfo._id);
   const recruitPostsData = useSelector(state => state.recruitPost);
   const dispatch = useDispatch();
 
   const [isApplied, setIsApplied] = useState(false);
 
   const postId = params.postId;
-  const userName = params.userName;
-  const mountainName = params.mountainName;
 
   const handleClickRemovePost = async () => {
     await dispatch(removeRecruitPostAsync(postId));
 
-    const path = userName
-      ? `/profile/${userName}/recruit`
-      : mountainName
-      ? `/${mountainName}/recruit`
-      : '/recruit';
-    history.push(path);
+    history.push(path.createListPagePath(pageInfo));
   };
   const handleClickEditPost = () => {
-    const path = userName
-      ? `/${userName}/recruit/edit/${postId}`
-      : mountainName
-      ? `/${mountainName}/recruit/edit/${postId}`
-      : `/recruit/edit/${postId}`;
-
-    history.push(path);
+    history.push(path.createFormPagePath(pageInfo, 'edit', postId));
   };
   const handleChangeApplyRecruitingButton = () => {
     dispatch(toggleApplyRecruitingAsync(postId, userId));
     setIsApplied(!isApplied);
   };
 
-  if (!userInfo) return <div>접근할 수 없슴돠</div>;
-
-  const userId = userInfo?._id;
   const postData = recruitPostsData?.data.find(
     _data => _data.recruitPost._id === postId
   );
-
   const { recruitPost } = postData;
   const publisherId = postData.publisherInfo._id;
 
@@ -114,4 +98,14 @@ const RecruitPost = () => {
   );
 };
 
-export default RecruitPost;
+RecruitPostDetail.defaultProps = {
+  pageInfo: {
+    postType: 'recruit',
+  },
+};
+
+RecruitPostDetail.propTypes = {
+  pageInfo: PropTypes.object,
+};
+
+export default RecruitPostDetail;
