@@ -113,7 +113,7 @@ RegularPostList.defaultProps = {
     mountainName: '',
     isLoggedInUser: false,
   },
-  className: '',
+  className: {},
 };
 
 RegularPostList.propTypes = {
