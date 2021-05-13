@@ -29,6 +29,11 @@ const Profile = () => {
   const [userInfo, setUserInfo] = useState(null);
   const isLoggedInUser = userName === loggedInUserName;
 
+  const pageInfo = {
+    recruit: { type: 'profile', params: userName, postType: 'recruit' },
+    reviews: { type: 'profile', params: userName, postType: 'reviews' },
+  };
+
   useEffect(() => {
     const setUserInfoAsync = async () => {
       if (isLoggedInUser) {
@@ -69,43 +74,55 @@ const Profile = () => {
           exact
           component={() => (
             <RecruitPostList
-              pageInfo={{ type: 'profile', userName, isLoggedInUser }}
+              pageInfo={{ ...pageInfo.recruit, isLoggedInUser }}
             />
           )}
         />
         <Route
           path="/profile/:userName/recruit/create"
           exact
-          component={() => <RecruitForm formType="create" />}
-        />
-
-        <Route
-          path="/profile/:userName/recruit/:postId"
-          exact
-          component={RecruitPostDetail}
+          component={() => (
+            <RecruitForm pageInfo={pageInfo.recruit} formType="create" />
+          )}
         />
         <Route
           path="/profile/:userName/recruit/edit/:postId"
           exact
-          component={RecruitForm}
+          component={() => (
+            <RecruitForm pageInfo={pageInfo.recruit} formType="edit" />
+          )}
         />
         <Route
-          path="/profile/:userName/reviews/create"
+          path="/profile/:userName/recruit/:postId"
           exact
-          component={() => <RegularPostForm formType="create" />}
+          component={() => <RecruitPostDetail pageInfo={pageInfo.recruit} />}
         />
         <Route
           path="/profile/:userName/reviews"
           exact
           component={() => (
             <RegularPostList
-              pageInfo={{ type: 'profile', userName, isLoggedInUser }}
+              pageInfo={{ ...pageInfo.reviews, isLoggedInUser }}
             />
           )}
         />
         <Route
+          path="/profile/:userName/reviews/create"
+          exact
+          component={() => (
+            <RegularPostForm pageInfo={pageInfo.reviews} formType="create" />
+          )}
+        />
+        <Route
+          path="/profile/:userName/reviews/edit/:postId"
+          exact
+          component={() => (
+            <RegularPostForm pageInfo={pageInfo.reviews} formType="edit" />
+          )}
+        />
+        <Route
           path={`/profile/:userName/reviews/:postId`}
-          component={RegularPostDetail}
+          component={() => <RegularPostDetail pageInfo={pageInfo.reviews} />}
         />
         <Redirect
           from="/profile/:userName"
