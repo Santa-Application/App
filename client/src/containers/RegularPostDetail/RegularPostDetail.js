@@ -57,9 +57,7 @@ const RegularPost = () => {
         <img src={regularPost.imageURL} alt="" />
       </div>
       <div className={publisherInformationContainer}>
-        <UserInformation
-          publisherData={filterData.postPublisherInfo(postData)}
-        />
+        <UserInformation userData={filterData.postUserInfo(postData)} />
         <RoundedBox>{regularPost.mountainName}</RoundedBox>
       </div>
       <PostHeading
