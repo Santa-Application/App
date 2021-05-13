@@ -11,7 +11,7 @@ import {
   RegularPostForm,
 } from 'containers';
 // import { motion, useTransform, useViewportScroll } from 'framer-motion';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   mountainImage,
@@ -29,33 +29,27 @@ const Mountain = () => {
   const mountainData = data.find(_data => _data.data.name === mountainName);
   const { imageURL } = mountainData;
 
-  if (isLoading) return <LoadingIcon />;
-  if (error)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        에러났음돠
-      </div>
-    );
-  if (!data)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        데이터가 없음돠
-      </div>
-    );
+  const pageInfo = {
+    recruit: { type: 'profile', params: mountainName, postType: 'recruit' },
+    reviews: { type: 'profile', params: mountainName, postType: 'reviews' },
+  };
+
+  useEffect(() => {
+    if (isLoading) return <LoadingIcon />;
+    if (error)
+      return (
+        <div
+          style={{
+            color: '#666',
+            fontSize: '2rem',
+            margin: '5rem',
+            marginBottom: '25rem',
+          }}
+        >
+          에러났음돠
+        </div>
+      );
+  }, [isLoading, error]);
 
   return (
     <>
@@ -75,53 +69,64 @@ const Mountain = () => {
           />
           <Switch>
             <Route
-              path="/mountains/:mountainName/recruit"
-              exact
-              component={() => (
-                <RecruitPostList
-                  pageInfo={{ type: 'mountain', mountainName }}
-                />
-              )}
-            />
-            <Route
-              path="/mountains/:mountainName/recruit/create"
-              exact
-              component={() => <RecruitForm formType="create" />}
-            />
-
-            <Route
-              path="/mountains/:mountainName/recruit/:postId"
-              exact
-              component={RecruitPostDetail}
-            />
-            <Route
-              path="/mountains/:mountainName/recruit/edit/:postId"
-              exact
-              component={RecruitForm}
-            />
-            <Route
-              path="/mountains/:mountainName/reviews/create"
-              exact
-              component={() => <RegularPostForm formType="create" />}
-            />
-            <Route
-              path="/mountains/:mountainName/reviews"
-              exact
-              component={() => (
-                <RegularPostList
-                  pageInfo={{ type: 'mountain', mountainName }}
-                />
-              )}
-            />
-            <Route
-              path={`/mountains/:mountainName/reviews/:postId`}
-              component={RegularPostDetail}
-            />
-            <Route
               path="/mountains/:mountainName/overview"
               exact
               component={() => (
                 <MountainOverview mountainData={mountainData} data={data} />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/recruit"
+              exact
+              component={() => <RecruitPostList pageInfo={pageInfo.recruit} />}
+            />
+            <Route
+              path="/mountains/:mountainName/recruit/create"
+              exact
+              component={() => (
+                <RecruitForm pageInfo={pageInfo.recruit} formType="create" />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/recruit/edit/:postId"
+              exact
+              component={() => (
+                <RecruitForm pageInfo={pageInfo.recruit} formType="edit" />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/recruit/:postId"
+              exact
+              component={() => (
+                <RecruitPostDetail pageInfo={pageInfo.recruit} />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/reviews"
+              exact
+              component={() => <RegularPostList pageInfo={pageInfo.reviews} />}
+            />
+            <Route
+              path="/mountains/:mountainName/reviews/create"
+              exact
+              component={() => (
+                <RegularPostForm
+                  pageInfo={pageInfo.reviews}
+                  formType="create"
+                />
+              )}
+            />
+            <Route
+              path="/mountains/:mountainName/reviews/edit/:postId"
+              exact
+              component={() => (
+                <RegularPostForm pageInfo={pageInfo.reviews} formType="edit" />
+              )}
+            />
+            <Route
+              path={`/mountains/:mountainName/reviews/:postId`}
+              component={() => (
+                <RegularPostDetail pageInfo={pageInfo.reviews} />
               )}
             />
             <Redirect
