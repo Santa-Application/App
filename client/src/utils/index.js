@@ -5,3 +5,4 @@ export * as validationSchema from './validationSchema';
 export * as filterData from './filterData';
 export * as formHandler from './handler/formHandler';
 export * as path from './path';
+export { default as URI } from './apiUtils';
