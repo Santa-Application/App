@@ -1,28 +1,30 @@
-import { Icon } from 'components';
+import { useMemo } from 'react';
 
 import { ReactComponent as Unchecked } from './assets/checked=false.svg';
 import { ReactComponent as Checked } from './assets/checked=true.svg';
+import { Icon } from 'components';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { container, radioButton, label, icon } from './RadioButton.module.scss';
+
+const labelText = {
+  female: '여성',
+  male: '남성',
+  genderBoth: '상관없음',
+  level1: '초급자',
+  level2: '중급자',
+  level3: '고급자',
+};
+
 const RadioButton = ({
   id,
   name,
   field,
   className: { label: labelClassName },
 }) => {
-  const labelText = {
-    female: '여성',
-    male: '남성',
-    genderBoth: '상관없음',
-    level1: '초급자',
-    level2: '중급자',
-    level3: '고급자',
-  };
-
-  const checked = field.checked;
-  const CheckIcon = checked ? Checked : Unchecked;
+  const { checked } = field;
+  const CheckIcon = useMemo(() => (checked ? Checked : Unchecked), [checked]);
 
   const labelClasses = classNames(labelClassName, label);
 
@@ -43,12 +45,14 @@ const RadioButton = ({
     </div>
   );
 };
+
 RadioButton.defaultProps = {
   id: '',
   name: '',
   field: {},
   className: {},
 };
+
 RadioButton.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
