@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import {
   HomePage,
@@ -20,12 +21,23 @@ import {
 } from 'pages';
 import { Footer, Header } from 'components';
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   const signedIn = useSelector(state => state.auth.signedIn);
 
   return (
     <div className="App">
       <HelmetProvider>
+        <ScrollToTop />
         <Route path="/" component={Header} />
         <Switch>
           <Route path="/main" exact component={Main} />
