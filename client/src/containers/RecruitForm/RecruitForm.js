@@ -249,4 +249,10 @@ const RecruitForm = ({ pageInfo, formType }) => {
   );
 };
 
+RecruitForm.defaultProps = {
+  pageInfo: {
+    postType: 'recruit',
+  },
+};
+
 export default RecruitForm;
