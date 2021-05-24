@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { RegularPostCard, LoadingIcon } from 'components';
+import { RegularPostCard, LoadingIcon, CreatePostButton } from 'components';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
 import { path } from 'utils';
 
@@ -48,20 +48,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 
   return (
     <>
-      {pageInfo.isLoggedInUserPage && (
-        <Link
-          to={path.createFormPagePath(pageInfo, 'create')}
-          style={{
-            fontSize: '1.4rem',
-            fontWeight: 700,
-            float: 'right',
-            marginBottom: '1.5em',
-            marginRight: '1em',
-          }}
-        >
-          작성하기
-        </Link>
-      )}
+      {pageInfo.isLoggedInUserPage && <CreatePostButton pageInfo={pageInfo} />}
       <ul className={listContainerClasses}>
         {postsData.map(post => {
           const postId = post.regularPost._id;

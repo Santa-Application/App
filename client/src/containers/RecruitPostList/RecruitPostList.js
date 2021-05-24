@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { RecruitPostCard } from 'components';
+import { CreatePostButton, RecruitPostCard } from 'components';
 import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 import { path } from 'utils';
 
@@ -46,20 +46,7 @@ const RecruitPostList = ({ pageInfo }) => {
 
   return (
     <>
-      {pageInfo.isLoggedInUserPage && (
-        <Link
-          to={path.createFormPagePath(pageInfo, 'create')}
-          style={{
-            fontSize: '1.4rem',
-            fontWeight: 700,
-            float: 'right',
-            marginBottom: '1.5em',
-            marginRight: '1em',
-          }}
-        >
-          작성하기
-        </Link>
-      )}
+      {pageInfo.isLoggedInUserPage && <CreatePostButton pageInfo={pageInfo} />}
       <ul className={listContainer}>
         {postsData.map(post => {
           const postId = post.recruitPost._id;
