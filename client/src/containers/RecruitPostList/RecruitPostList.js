@@ -46,20 +46,20 @@ const RecruitPostList = ({ pageInfo }) => {
 
   return (
     <>
-      {/* {pageInfo.isLoggedInUser && ( */}
-      <Link
-        to={path.createFormPagePath(pageInfo, 'create')}
-        style={{
-          fontSize: '1.4rem',
-          fontWeight: 700,
-          float: 'right',
-          marginBottom: '1.5em',
-          marginRight: '1em',
-        }}
-      >
-        작성하기
-      </Link>
-      {/* )} */}
+      {pageInfo.isLoggedInUserPage && (
+        <Link
+          to={path.createFormPagePath(pageInfo, 'create')}
+          style={{
+            fontSize: '1.4rem',
+            fontWeight: 700,
+            float: 'right',
+            marginBottom: '1.5em',
+            marginRight: '1em',
+          }}
+        >
+          작성하기
+        </Link>
+      )}
       <ul className={listContainer}>
         {postsData.map(post => {
           const postId = post.recruitPost._id;
@@ -83,6 +83,7 @@ const RecruitPostList = ({ pageInfo }) => {
 RecruitPostList.defaultProps = {
   pageInfo: {
     postType: 'recruit',
+    isLoggedInUserPage: true,
   },
 };
 

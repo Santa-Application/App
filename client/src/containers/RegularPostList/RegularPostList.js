@@ -48,20 +48,20 @@ const RegularPostList = ({ pageInfo, className }) => {
 
   return (
     <>
-      {/* {pageInfo.isLoggedInUser && ( */}
-      <Link
-        to={path.createFormPagePath(pageInfo, 'create')}
-        style={{
-          fontSize: '1.4rem',
-          fontWeight: 700,
-          float: 'right',
-          marginBottom: '1.5em',
-          marginRight: '1em',
-        }}
-      >
-        작성하기
-      </Link>
-      {/* )} */}
+      {pageInfo.isLoggedInUserPage && (
+        <Link
+          to={path.createFormPagePath(pageInfo, 'create')}
+          style={{
+            fontSize: '1.4rem',
+            fontWeight: 700,
+            float: 'right',
+            marginBottom: '1.5em',
+            marginRight: '1em',
+          }}
+        >
+          작성하기
+        </Link>
+      )}
       <ul className={listContainerClasses}>
         {postsData.map(post => {
           const postId = post.regularPost._id;
@@ -85,6 +85,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 RegularPostList.defaultProps = {
   pageInfo: {
     postType: 'reviews',
+    isLoggedInUserPage: true,
   },
   className: {},
 };

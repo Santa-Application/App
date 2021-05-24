@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Route,
@@ -20,23 +20,36 @@ import { ProfileInfoCard, MenuTab } from 'components';
 import { authAPI } from 'api';
 
 const Profile = () => {
+  const [userInfo, setUserInfo] = useState(null);
+
   const history = useHistory();
   const params = useParams();
 
-  const userName = params.userName;
+  const userName = useMemo(() => params.userName, [params]);
   const loggedInUserInfo = useSelector(state => state.auth.userInfo);
-  const loggedInUserName = loggedInUserInfo.name;
-  const [userInfo, setUserInfo] = useState(null);
-  const isLoggedInUser = userName === loggedInUserName;
+  const loggedInUserName = useMemo(() => loggedInUserInfo.name, [
+    loggedInUserInfo,
+  ]);
+  const isLoggedInUserPage = useMemo(() => userName === loggedInUserName, [
+    userName,
+    loggedInUserName,
+  ]);
 
-  const pageInfo = {
-    recruit: { type: 'profile', params: userName, postType: 'recruit' },
-    reviews: { type: 'profile', params: userName, postType: 'reviews' },
-  };
+  const pageInfo = useMemo(
+    () => ({
+      recruit: { type: 'profile', params: userName, postType: 'recruit' },
+      reviews: { type: 'profile', params: userName, postType: 'reviews' },
+    }),
+    [userName]
+  );
+
+  const handleClickUserInfoEditButton = useCallback(() => {
+    history.push(`/profile/${userName}/edit`);
+  }, [history, userName]);
 
   useEffect(() => {
     const setUserInfoAsync = async () => {
-      if (isLoggedInUser) {
+      if (isLoggedInUserPage) {
         setUserInfo(loggedInUserInfo);
       } else {
         const userInfoData = await authAPI.getUserInfoData(userName);
@@ -44,11 +57,7 @@ const Profile = () => {
       }
     };
     setUserInfoAsync();
-  }, [userName, loggedInUserInfo, isLoggedInUser]);
-
-  const handleClickUserInfoEditButton = () => {
-    history.push(`/profile/${userName}/edit`);
-  };
+  }, [userName, loggedInUserInfo, isLoggedInUserPage]);
 
   return (
     <main>
@@ -74,7 +83,7 @@ const Profile = () => {
           exact
           component={() => (
             <RecruitPostList
-              pageInfo={{ ...pageInfo.recruit, isLoggedInUser }}
+              pageInfo={{ ...pageInfo.recruit, isLoggedInUserPage }}
             />
           )}
         />
@@ -102,7 +111,7 @@ const Profile = () => {
           exact
           component={() => (
             <RegularPostList
-              pageInfo={{ ...pageInfo.reviews, isLoggedInUser }}
+              pageInfo={{ ...pageInfo.reviews, isLoggedInUserPage }}
             />
           )}
         />
