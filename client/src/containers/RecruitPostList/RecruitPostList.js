@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { CreatePostButton, Error, RecruitPostCard } from 'components';
 import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
-import { path } from 'utils';
+import { filterData, path } from 'utils';
 
 import PropTypes from 'prop-types';
 import { listContainer, postCard } from './RecruitPostList.module.scss';
@@ -25,12 +25,7 @@ const RecruitPostList = ({ pageInfo }) => {
     if (error) return <Error />;
   }, [isLoading, error]);
 
-  const postsData =
-    pageInfo.type === 'profile'
-      ? data.filter(_data => _data.publisherInfo.name === pageInfo.params)
-      : pageInfo.type === 'mountains'
-      ? data.filter(_data => _data.recruitPost.mountainName === pageInfo.params)
-      : data;
+  const postsData = filterData.postsData(data, pageInfo);
 
   return (
     <>
