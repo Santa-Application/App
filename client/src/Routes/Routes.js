@@ -38,10 +38,10 @@ const Routes = () => (
     <PrivateRoute path="/reviews/:postId" exact component={RegularDetail} />
 
     <PrivateRoute path="/mountains" exact component={PageNotFound} />
-    <PrivateRoute path="/mountains" exact component={Mountain} />
+    <PrivateRoute path="/mountains/:mountainName" component={Mountain} />
 
-    <PrivateRoute path="/profile/:userName/edit" exact component={Register} />
-    <PrivateRoute path="/profile/:userName" exact component={Profile} />
+    <PrivateRoute path="/profile/:userName/edit" component={Register} />
+    <PrivateRoute path="/profile/:userName" component={Profile} />
     <PrivateRoute path="/page-not-found" exact component={PageNotFound} />
   </Switch>
 );
