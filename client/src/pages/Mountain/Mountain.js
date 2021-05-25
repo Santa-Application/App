@@ -1,5 +1,5 @@
 import { Route, Switch, Redirect, useParams } from 'react-router-dom';
-import { Heading, MenuTab } from 'components';
+import { Error, Heading, MenuTab } from 'components';
 import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 import MountainOverview from 'containers/MountainOverview/MountainOverview';
 import {
@@ -36,21 +36,8 @@ const Mountain = () => {
 
   useEffect(() => {
     if (isLoading) return <LoadingIcon />;
-    if (error)
-      return (
-        <div
-          style={{
-            color: '#666',
-            fontSize: '2rem',
-            margin: '5rem',
-            marginBottom: '25rem',
-          }}
-        >
-          에러났음돠
-        </div>
-      );
+    if (error) return <Error />;
   }, [isLoading, error]);
-
   return (
     <>
       <div className={mountainImage}>
