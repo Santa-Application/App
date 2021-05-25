@@ -10,7 +10,8 @@ import {
   Error,
 } from 'components';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
-import { filterData, path } from 'utils';
+import { path } from 'utils';
+import { filterPostsData } from 'utils/dataFilteringUtils';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -32,7 +33,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 
   const listContainerClasses = classNames(className.container, listContainer);
 
-  const postsData = filterData.postsData(data, pageInfo);
+  const postsData = filterPostsData(data, pageInfo);
 
   return (
     <>
