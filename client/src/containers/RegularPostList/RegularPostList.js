@@ -3,7 +3,12 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { RegularPostCard, LoadingIcon, CreatePostButton } from 'components';
+import {
+  RegularPostCard,
+  LoadingIcon,
+  CreatePostButton,
+  Error,
+} from 'components';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
 import { path } from 'utils';
 
@@ -22,19 +27,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 
   useEffect(() => {
     if (isLoading) return <LoadingIcon />;
-    if (error)
-      return (
-        <div
-          style={{
-            color: '#666',
-            fontSize: '2rem',
-            margin: '5rem',
-            marginBottom: '25rem',
-          }}
-        >
-          에러났음돠
-        </div>
-      );
+    if (error) return <Error />;
   }, [isLoading, error]);
 
   const listContainerClasses = classNames(className.container, listContainer);

@@ -7,6 +7,7 @@ import { getMountainAsync } from 'redux/modules/mountain';
 import { mainPage, searchSection, headMessage } from './Main.module.scss';
 import { Information } from 'containers';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { Error } from 'components';
 
 const Main = () => {
   const history = useHistory();
@@ -20,33 +21,10 @@ const Main = () => {
     dispatch(getMountainAsync());
   }, [dispatch]);
 
-  if (isLoading) return <LoadingIcon />;
-  if (error)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        에러났음돠
-      </div>
-    );
-  if (!data)
-    return (
-      <div
-        style={{
-          color: '#666',
-          fontSize: '2rem',
-          margin: '5rem',
-          marginBottom: '25rem',
-        }}
-      >
-        데이터가 없음돠
-      </div>
-    );
+  useEffect(() => {
+    if (isLoading) return <LoadingIcon />;
+    if (error) return <Error />;
+  }, [isLoading, error]);
 
   return (
     <main className={mainPage}>

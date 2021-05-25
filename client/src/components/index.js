@@ -30,3 +30,4 @@ export { default as MountainCard } from 'components/MountainCard/MountainCard';
 export { default as CarouselSlider } from 'components/CarouselSlider/CarouselSlider';
 export { default as LoadingIcon } from 'components/LoadingIcon/LoadingIcon';
 export { default as CreatePostButton } from 'components/CreatePostButton/CreatePostButton';
+export { default as Error } from 'components/Error/Error';
