@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+
 import {
   HomePage,
   Login,
@@ -20,16 +20,7 @@ import {
   Main,
 } from 'pages';
 import { Footer, Header } from 'components';
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-};
+import { ScrollToTop } from 'Routes';
 
 function App() {
   const signedIn = useSelector(state => state.auth.signedIn);
