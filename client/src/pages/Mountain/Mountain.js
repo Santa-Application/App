@@ -30,8 +30,8 @@ const Mountain = () => {
   const { imageURL } = mountainData;
 
   const pageInfo = {
-    recruit: { type: 'profile', params: mountainName, postType: 'recruit' },
-    reviews: { type: 'profile', params: mountainName, postType: 'reviews' },
+    recruit: { type: 'mountains', params: mountainName, postType: 'recruit' },
+    reviews: { type: 'mountains', params: mountainName, postType: 'reviews' },
   };
 
   useEffect(() => {
