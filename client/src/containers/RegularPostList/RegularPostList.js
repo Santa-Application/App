@@ -1,39 +1,17 @@
 /* eslint-disable indent */
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import {
-  RegularPostCard,
-  LoadingIcon,
-  CreatePostButton,
-  Error,
-} from 'components';
-import { getRegularPostsAsync } from 'redux/modules/regularPost';
+import { RegularPostCard, CreatePostButton } from 'components';
 import { path } from 'utils';
-import { filterPostsData } from 'utils/dataFilteringUtils';
+import usePostList from 'Hooks/usePostList';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { listContainer, postCard } from './RegularPostList.module.scss';
 
 const RegularPostList = ({ pageInfo, className }) => {
-  const state = useSelector(state => state.regularPost);
-  const { isLoading, data, error } = state;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getRegularPostsAsync());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (isLoading) return <LoadingIcon />;
-    if (error) return <Error />;
-  }, [isLoading, error]);
-
   const listContainerClasses = classNames(className.container, listContainer);
-
-  const postsData = filterPostsData(data, pageInfo);
+  const postsData = usePostList(pageInfo);
 
   return (
     <>
