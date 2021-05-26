@@ -1,10 +1,5 @@
-import { useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-
 import { UserInformation, PostHeading, RoundedBox, Button } from 'components';
-import { removeRegularPostAsync } from 'redux/modules/regularPost';
-import { dataFilteringUtils, path } from 'utils';
+import { dataFilteringUtils } from 'utils';
 
 import PropTypes from 'prop-types';
 import {
@@ -16,28 +11,9 @@ import {
 import usePostDetail from 'Hooks/usePostDetail';
 
 const RegularPostDetail = ({ pageInfo }) => {
-  // const history = useHistory();
-  // const params = useParams();
-
-  // const userId = useSelector(state => state.auth.userInfo._id);
-  // const regularPostsData = useSelector(state => state.regularPost);
-  // const dispatch = useDispatch();
-
-  // const postId = useMemo(() => params.postId);
-
-  // const postData = regularPostsData.data.find(
-  //   _data => _data.regularPost._id === postId
-  // );
-  // const publisherId = useMemo(() => postData.publisherInfo._id);
-  // const isUserPublisher = useMemo(() => publisherId === userId);
-
   const [postData, isUserPublisher, handlers] = usePostDetail(pageInfo);
   const { regularPost } = postData;
   const { handleClickEditPost, handleClickRemovePost } = handlers;
-
-  // const handleClickEditPost = () => {
-  //   history.push(path.createFormPagePath(pageInfo, 'edit', postId));
-  // };
 
   return (
     <div>

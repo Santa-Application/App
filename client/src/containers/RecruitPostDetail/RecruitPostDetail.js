@@ -1,6 +1,4 @@
-import { useCallback, useMemo, useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 import {
   UserInformation,
@@ -9,10 +7,6 @@ import {
   StatusOfApplicationBox,
   Button,
 } from 'components';
-import {
-  toggleApplyRecruitingAsync,
-  removeRecruitPostAsync,
-} from 'redux/modules/recruitPost';
 import { dataFilteringUtils } from 'utils';
 
 import PropTypes from 'prop-types';
@@ -26,32 +20,20 @@ import {
 import usePostDetail from 'Hooks/usePostDetail';
 
 const RecruitPostDetail = ({ pageInfo }) => {
-  // const history = useHistory();
-  // const params = useParams();
-
-  // const userId = useSelector(state => state.auth.userInfo._id);
-  // const recruitPostsData = useSelector(state => state.recruitPost);
-  // const dispatch = useDispatch();
-
-  // const postId = useMemo(() => params.postId);
-
-  // const postData = recruitPostsData?.data.find(
-  //   _data => _data.recruitPost._id === postId
-  // );
-
-  // const { recruitPost } = postData;
-  // const publisherId = postData.publisherInfo._id;
-  // const isUserPublisher = publisherId === userId;
-
   const [isApplied, setIsApplied] = useState(false);
-  const [postData, isUserPublisher, handlers] = usePostDetail(pageInfo);
-  const { recruitPost } = postData;
-  const { handleClickEditPost, handleClickRemovePost } = handlers;
 
-  // const handleChangeApplyRecruitingButton = useCallback(async () => {
-  //   await dispatch(toggleApplyRecruitingAsync(postId, userId));
-  //   setIsApplied(!isApplied);
-  // }, [dispatch, postId, userId, isApplied]);
+  const [postData, isUserPublisher, handlers] = usePostDetail(
+    pageInfo,
+    isApplied,
+    setIsApplied
+  );
+
+  const { recruitPost } = postData;
+  const {
+    handleClickEditPost,
+    handleClickRemovePost,
+    handleChangeApplyRecruitingButton,
+  } = handlers;
 
   return (
     <div className={container}>
@@ -91,7 +73,7 @@ const RecruitPostDetail = ({ pageInfo }) => {
           <Button
             type="button"
             secondary={isApplied}
-            // onClick={handleChangeApplyRecruitingButton}
+            onClick={handleChangeApplyRecruitingButton}
           >
             {isApplied ? '메이트 취소' : '메이트 신청'}
           </Button>
