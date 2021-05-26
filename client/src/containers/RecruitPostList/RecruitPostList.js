@@ -1,32 +1,15 @@
 /* eslint-disable indent */
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { CreatePostButton, Error, RecruitPostCard } from 'components';
-import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
+import { CreatePostButton, RecruitPostCard } from 'components';
 import { path } from 'utils';
-import { filterPostsData } from 'utils/dataFilteringUtils';
+import usePostList from 'Hooks/usePostList';
 
 import PropTypes from 'prop-types';
 import { listContainer, postCard } from './RecruitPostList.module.scss';
-import LoadingIcon from 'components/LoadingIcon/LoadingIcon';
 
 const RecruitPostList = ({ pageInfo }) => {
-  const state = useSelector(state => state.recruitPost);
-  const { isLoading, data, error } = state;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getRecruitPostsAsync());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (isLoading) return <LoadingIcon />;
-    if (error) return <Error />;
-  }, [isLoading, error]);
-
-  const postsData = filterPostsData(data, pageInfo);
+  const postsData = usePostList(pageInfo);
 
   return (
     <>
