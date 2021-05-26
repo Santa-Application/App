@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { container, large, medium, small } from './ProfileImage.module.scss';
 
-const ProfileImage = ({ size, src, className }) => {
-  const sizeStyle = {
-    large,
-    medium,
-    small,
-  };
+const sizeStyle = {
+  large,
+  medium,
+  small,
+};
 
+const ProfileImage = ({ size, src, className }) => {
   const containerClasses = classNames(
     className?.container,
     container,

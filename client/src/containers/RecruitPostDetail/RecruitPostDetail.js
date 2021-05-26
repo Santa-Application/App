@@ -1,5 +1,4 @@
-/* eslint-disable indent */
-import { useState } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -11,10 +10,10 @@ import {
   Button,
 } from 'components';
 import {
-  removeRecruitPostAsync,
   toggleApplyRecruitingAsync,
+  removeRecruitPostAsync,
 } from 'redux/modules/recruitPost';
-import { filterData, path } from 'utils';
+import { dataFilteringUtils } from 'utils';
 
 import PropTypes from 'prop-types';
 import {
@@ -24,71 +23,75 @@ import {
   statusOfRecruitees,
   buttonContainer,
 } from './RecruitPostDetail.module.scss';
+import usePostDetail from 'Hooks/usePostDetail';
 
 const RecruitPostDetail = ({ pageInfo }) => {
-  const history = useHistory();
-  const params = useParams();
+  // const history = useHistory();
+  // const params = useParams();
 
-  const userId = useSelector(state => state.auth.userInfo._id);
-  const recruitPostsData = useSelector(state => state.recruitPost);
-  const dispatch = useDispatch();
+  // const userId = useSelector(state => state.auth.userInfo._id);
+  // const recruitPostsData = useSelector(state => state.recruitPost);
+  // const dispatch = useDispatch();
+
+  // const postId = useMemo(() => params.postId);
+
+  // const postData = recruitPostsData?.data.find(
+  //   _data => _data.recruitPost._id === postId
+  // );
+
+  // const { recruitPost } = postData;
+  // const publisherId = postData.publisherInfo._id;
+  // const isUserPublisher = publisherId === userId;
 
   const [isApplied, setIsApplied] = useState(false);
-
-  const postId = params.postId;
-
-  const handleClickRemovePost = async () => {
-    await dispatch(removeRecruitPostAsync(postId));
-
-    history.push(path.createListPagePath(pageInfo));
-  };
-  const handleClickEditPost = () => {
-    history.push(path.createFormPagePath(pageInfo, 'edit', postId));
-  };
-  const handleChangeApplyRecruitingButton = () => {
-    dispatch(toggleApplyRecruitingAsync(postId, userId));
-    setIsApplied(!isApplied);
-  };
-
-  const postData = recruitPostsData?.data.find(
-    _data => _data.recruitPost._id === postId
-  );
+  const [postData, isUserPublisher, handlers] = usePostDetail(pageInfo);
   const { recruitPost } = postData;
-  const publisherId = postData.publisherInfo._id;
+  const { handleClickEditPost, handleClickRemovePost } = handlers;
+
+  // const handleChangeApplyRecruitingButton = useCallback(async () => {
+  //   await dispatch(toggleApplyRecruitingAsync(postId, userId));
+  //   setIsApplied(!isApplied);
+  // }, [dispatch, postId, userId, isApplied]);
 
   return (
     <div className={container}>
-      <UserInformation userData={filterData.postUserInfo(postData)} />
+      <UserInformation
+        userData={dataFilteringUtils.filterPostUserInfoData(postData)}
+      />
       <PostHeading
-        postData={filterData.postHeading(recruitPost)}
+        postData={dataFilteringUtils.filterPostHeadingData(recruitPost)}
         className={{ headingContainer }}
       />
       <ul className={contentsContainer}>
-        {filterData.recruitPostContents(recruitPost).map((content, index) => {
-          return (
-            <li key={index}>
-              <RoundedBox>{content[1]}</RoundedBox>
-            </li>
-          );
-        })}
+        {dataFilteringUtils
+          .filterRecruitPostContentsData(recruitPost)
+          .map((content, index) => {
+            return (
+              <li key={index}>
+                <RoundedBox>{content[1]}</RoundedBox>
+              </li>
+            );
+          })}
       </ul>
       <StatusOfApplicationBox
         recruiteesData={recruitPost.recruitees}
         className={{ container: statusOfRecruitees }}
       />
       <div className={buttonContainer}>
-        {publisherId === userId ? (
+        {isUserPublisher ? (
           <>
-            <Button secondary onClick={handleClickRemovePost}>
+            <Button type="button" secondary onClick={handleClickRemovePost}>
               삭제하기
             </Button>
-            <Button onClick={handleClickEditPost}>수정하기</Button>
+            <Button type="button" onClick={handleClickEditPost}>
+              수정하기
+            </Button>
           </>
         ) : (
           <Button
             type="button"
             secondary={isApplied}
-            onClick={handleChangeApplyRecruitingButton}
+            // onClick={handleChangeApplyRecruitingButton}
           >
             {isApplied ? '메이트 취소' : '메이트 신청'}
           </Button>

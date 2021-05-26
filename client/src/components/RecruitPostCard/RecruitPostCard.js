@@ -9,18 +9,16 @@ import {
   tagList,
 } from './RecruitPostCard.module.scss';
 
+const gender = {
+  female: '여성',
+  male: '남성',
+  genderBoth: '상관없음',
+};
+
 const RecruitPostCard = ({ postData, className }) => {
   const { recruitPost, publisherInfo } = postData;
 
-  const gender = {
-    female: '여성',
-    male: '남성',
-    genderBoth: '상관없음',
-  };
-
-  const containerClasses = className?.container
-    ? classNames(className.container, container)
-    : container;
+  const containerClasses = classNames(className?.container, container);
 
   return (
     <div className={containerClasses}>

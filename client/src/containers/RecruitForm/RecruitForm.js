@@ -79,7 +79,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
           const newPostData = postId
             ? await dispatch(updateRecruitPostAsync(postId, updatePost))
             : await dispatch(createRecruitPostAsync(newPost));
-          dispatch(getRecruitPostsAsync());
+          await dispatch(getRecruitPostsAsync());
 
           const newPostId = newPostData.recruitPost._id;
 
@@ -247,6 +247,12 @@ const RecruitForm = ({ pageInfo, formType }) => {
       </Formik>
     </div>
   );
+};
+
+RecruitForm.defaultProps = {
+  pageInfo: {
+    postType: 'recruit',
+  },
 };
 
 export default RecruitForm;

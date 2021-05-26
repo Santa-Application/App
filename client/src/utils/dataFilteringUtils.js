@@ -1,14 +1,31 @@
+/* eslint-disable indent */
 import { postDate } from 'utils';
 
-/* eslint-disable indent */
-export const postUserInfo = data => {
+const postsType = {
+  recruit: 'recruit',
+  reviews: 'regular',
+};
+
+export const filterPostsData = (data, pageInfo) => {
+  const { type, postType, params } = pageInfo;
+
+  return type === 'profile'
+    ? data.filter(_data => _data.publisherInfo.name === params)
+    : type === 'mountain'
+    ? data.filter(
+        _data => _data[`${postsType[postType]}Post`].mountainName === params
+      )
+    : data;
+};
+
+export const filterPostUserInfoData = data => {
   return {
     imageURL: data.publisherInfo.imageURL,
     publisherName: data.publisherInfo.name,
   };
 };
 
-export const postHeading = data => {
+export const filterPostHeadingData = data => {
   const { title, postDate, views } = data;
 
   return {
@@ -18,7 +35,7 @@ export const postHeading = data => {
   };
 };
 
-export const recruitPostContents = data => {
+export const filterRecruitPostContentsData = data => {
   const {
     mountainName,
     recruitDate,

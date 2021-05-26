@@ -67,7 +67,7 @@ export const createThunkActionCreator = (
   dispatch({ type: loading });
 
   try {
-    const payload = await api(...param);
+    const payload = await api(param[0], param[1]);
 
     dispatch({ type, payload });
 

@@ -3,9 +3,15 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { RegularPostCard, LoadingIcon } from 'components';
+import {
+  RegularPostCard,
+  LoadingIcon,
+  CreatePostButton,
+  Error,
+} from 'components';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
 import { path } from 'utils';
+import { filterPostsData } from 'utils/dataFilteringUtils';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -22,46 +28,16 @@ const RegularPostList = ({ pageInfo, className }) => {
 
   useEffect(() => {
     if (isLoading) return <LoadingIcon />;
-    if (error)
-      return (
-        <div
-          style={{
-            color: '#666',
-            fontSize: '2rem',
-            margin: '5rem',
-            marginBottom: '25rem',
-          }}
-        >
-          에러났음돠
-        </div>
-      );
+    if (error) return <Error />;
   }, [isLoading, error]);
 
   const listContainerClasses = classNames(className.container, listContainer);
 
-  const postsData =
-    pageInfo.type === 'profile'
-      ? data.filter(_data => _data.publisherInfo.name === pageInfo.params)
-      : pageInfo.type === 'mountain'
-      ? data.filter(_data => _data.regularPost.mountainName === pageInfo.params)
-      : data;
+  const postsData = filterPostsData(data, pageInfo);
 
   return (
     <>
-      {/* {pageInfo.isLoggedInUser && ( */}
-      <Link
-        to={path.createFormPagePath(pageInfo, 'create')}
-        style={{
-          fontSize: '1.4rem',
-          fontWeight: 700,
-          float: 'right',
-          marginBottom: '1.5em',
-          marginRight: '1em',
-        }}
-      >
-        작성하기
-      </Link>
-      {/* )} */}
+      {pageInfo.isLoggedInUserPage && <CreatePostButton pageInfo={pageInfo} />}
       <ul className={listContainerClasses}>
         {postsData.map(post => {
           const postId = post.regularPost._id;
@@ -85,6 +61,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 RegularPostList.defaultProps = {
   pageInfo: {
     postType: 'reviews',
+    isLoggedInUserPage: true,
   },
   className: {},
 };

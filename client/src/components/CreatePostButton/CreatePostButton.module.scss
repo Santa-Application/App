@@ -1,0 +1,10 @@
+@import 'styles';
+
+.createButton {
+  float: right;
+
+  margin-bottom: 1.5em;
+  margin-right: 1em;
+
+  @include font-dark-14-700;
+}

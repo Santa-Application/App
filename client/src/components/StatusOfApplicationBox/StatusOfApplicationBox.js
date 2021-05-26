@@ -19,7 +19,7 @@ const StatusOfApplicationBox = ({ recruiteesData, className }) => {
     <div className={containerClasses}>
       <p className={titleClasses}>신청 현황</p>
       <ul className={recruiteesContainer}>
-        {recruiteesData.map((data, index) => (
+        {recruiteesData.map(data => (
           <li key={data.recruiteeId}>
             <Link
               to={`/profile/${data.recruiteeName}/recruit`}

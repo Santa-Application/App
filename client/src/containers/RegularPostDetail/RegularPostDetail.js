@@ -1,10 +1,10 @@
-/* eslint-disable indent */
+import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { UserInformation, PostHeading, RoundedBox, Button } from 'components';
 import { removeRegularPostAsync } from 'redux/modules/regularPost';
-import { filterData, path } from 'utils';
+import { dataFilteringUtils, path } from 'utils';
 
 import PropTypes from 'prop-types';
 import {
@@ -13,31 +13,31 @@ import {
   headingContainer,
   text,
 } from './RegularPostDetail.module.scss';
+import usePostDetail from 'Hooks/usePostDetail';
 
 const RegularPostDetail = ({ pageInfo }) => {
-  const history = useHistory();
-  const params = useParams();
+  // const history = useHistory();
+  // const params = useParams();
 
-  const userId = useSelector(state => state.auth.userInfo._id);
-  const regularPostsData = useSelector(state => state.regularPost);
-  const dispatch = useDispatch();
+  // const userId = useSelector(state => state.auth.userInfo._id);
+  // const regularPostsData = useSelector(state => state.regularPost);
+  // const dispatch = useDispatch();
 
-  const postId = params.postId;
+  // const postId = useMemo(() => params.postId);
 
-  const handleClickRemovePost = async () => {
-    await dispatch(removeRegularPostAsync(postId));
+  // const postData = regularPostsData.data.find(
+  //   _data => _data.regularPost._id === postId
+  // );
+  // const publisherId = useMemo(() => postData.publisherInfo._id);
+  // const isUserPublisher = useMemo(() => publisherId === userId);
 
-    history.push(path.createListPagePath(pageInfo));
-  };
-  const handleClickEditPost = () => {
-    history.push(path.createFormPagePath(pageInfo, 'edit', postId));
-  };
-
-  const postData = regularPostsData.data.find(
-    _data => _data.regularPost._id === postId
-  );
+  const [postData, isUserPublisher, handlers] = usePostDetail(pageInfo);
   const { regularPost } = postData;
-  const publisherId = postData.publisherInfo._id;
+  const { handleClickEditPost, handleClickRemovePost } = handlers;
+
+  // const handleClickEditPost = () => {
+  //   history.push(path.createFormPagePath(pageInfo, 'edit', postId));
+  // };
 
   return (
     <div>
@@ -45,21 +45,19 @@ const RegularPostDetail = ({ pageInfo }) => {
         <img src={regularPost.imageURL} alt="" />
       </div>
       <div className={publisherInformationContainer}>
-        <UserInformation userData={filterData.postUserInfo(postData)} />
+        <UserInformation
+          userData={dataFilteringUtils.filterPostUserInfoData(postData)}
+        />
         <RoundedBox>{regularPost.mountainName}</RoundedBox>
       </div>
       <PostHeading
-        postData={filterData.postHeading(regularPost)}
+        postData={dataFilteringUtils.filterPostHeadingData(regularPost)}
         className={{ headingContainer }}
       />
       <p className={text}>{regularPost.content}</p>
-      {publisherId === userId && (
+      {isUserPublisher && (
         <div className="buttonContainer">
-          <Button
-            type="button"
-            secondary={true}
-            onClick={handleClickRemovePost}
-          >
+          <Button type="button" secondary onClick={handleClickRemovePost}>
             삭제하기
           </Button>
           <Button type="button" onClick={handleClickEditPost}>

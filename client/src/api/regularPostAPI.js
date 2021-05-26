@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { URI } from 'utils';
 
-const URI = process.env.REACT_APP_WEB_SERVER_URI;
 /*
 --API return 값들--
 getAllRegularPosts : 포스트 정보 + 작성자 이름(name), 작성자 프로필 이미지(accessibleURL)의 객체들이 담긴 배열
