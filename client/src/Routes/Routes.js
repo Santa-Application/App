@@ -1,4 +1,4 @@
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 
 import { PublicRoute, PrivateRoute } from 'Routes';
 import {
@@ -42,7 +42,8 @@ const Routes = () => (
 
     <PrivateRoute path="/profile/:userName/edit" component={Register} />
     <PrivateRoute path="/profile/:userName" component={Profile} />
-    <PrivateRoute path="/page-not-found" exact component={PageNotFound} />
+    <PrivateRoute path="/page-not-found" component={PageNotFound} />
+    <Redirect to="/page-not-found" />
   </Switch>
 );
 
