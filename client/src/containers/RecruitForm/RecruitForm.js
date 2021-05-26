@@ -4,7 +4,7 @@ import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { formHandler, postDate, validationSchema, path } from 'utils/';
+import { formHandler, validationSchema, path } from 'utils/';
 import top100Mountains from 'data/top100Mountains';
 import { Button } from 'components';
 import {
@@ -27,6 +27,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
     handleChangeMinInput,
     handleChangeMaxInput,
     handleChangeSlider,
+    handleClickCancelButton,
   } = formHandler;
 
   const userId = useSelector(state => state.auth.userInfo._id);
@@ -46,9 +47,6 @@ const RecruitForm = ({ pageInfo, formType }) => {
   const [selectedDate, setSelectedDate] = useState(selectedDateInitial);
   const [currentAge, setCurrentAge] = useState(ageInitial);
 
-  const handleClickCancelButton = () => {
-    history.push(path.createListPagePath(pageInfo));
-  };
   return (
     <div className={container}>
       <p className={heading}>메이트를 모집하세요~</p>
@@ -237,7 +235,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
                   secondary
                   children="취소하기"
                   className={cancelButton}
-                  onClick={handleClickCancelButton}
+                  onClick={() => handleClickCancelButton(history, pageInfo)}
                 />
                 <Button>{postId ? '수정하기' : '등록하기'}</Button>
               </div>

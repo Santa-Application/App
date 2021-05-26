@@ -9,7 +9,10 @@ import {
   createRegularPostAsync,
   getRegularPostsAsync,
 } from 'redux/modules/regularPost';
-import { handleChangeFileInput } from 'utils/handler/formHandler';
+import {
+  handleChangeFileInput,
+  handleClickCancelButton,
+} from 'utils/handler/formHandler';
 
 import PropTypes from 'prop-types';
 import {
@@ -27,10 +30,6 @@ const RegularPostForm = ({ pageInfo, formType }) => {
 
   const userId = useSelector(state => state.auth.userInfo._id);
   const dispatch = useDispatch();
-
-  const handleClickCancelButton = () => {
-    history.push(path.createListPagePath(pageInfo));
-  };
 
   return (
     <div className={container}>
@@ -128,7 +127,7 @@ const RegularPostForm = ({ pageInfo, formType }) => {
                 secondary
                 type="button"
                 className={cancelButton}
-                onClick={handleClickCancelButton}
+                onClick={() => handleClickCancelButton(history, pageInfo)}
               >
                 취소하기
               </Button>
