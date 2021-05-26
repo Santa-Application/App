@@ -1,3 +1,5 @@
+import { createListPagePath } from 'utils/path';
+
 // select all input
 export const handleFocusAllInput = e => {
   // e.target.select();
@@ -57,4 +59,8 @@ export const handleChangeSlider = (
 ) => {
   setCurrentAge(newValue);
   setFieldValue(fieldName, newValue);
+};
+
+export const handleClickCancelButton = (history, pageInfo) => {
+  history.push(createListPagePath(pageInfo));
 };
