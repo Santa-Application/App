@@ -83,7 +83,10 @@ const Profile = () => {
           exact
           component={() => (
             <RecruitPostList
-              pageInfo={{ ...recruitPageInfo, isLoggedInUserPage }}
+              pageInfo={{
+                ...recruitPageInfo,
+                isPossibleToWrite: isLoggedInUserPage,
+              }}
             />
           )}
         />
@@ -111,7 +114,10 @@ const Profile = () => {
           exact
           component={() => (
             <RegularPostList
-              pageInfo={{ ...regularPageInfo, isLoggedInUserPage }}
+              pageInfo={{
+                ...regularPageInfo,
+                isPossibleToWrite: isLoggedInUserPage,
+              }}
             />
           )}
         />

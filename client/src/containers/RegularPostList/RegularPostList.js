@@ -15,7 +15,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 
   return (
     <>
-      {pageInfo.isLoggedInUserPage && <CreatePostButton pageInfo={pageInfo} />}
+      {pageInfo.isPossibleToWrite && <CreatePostButton pageInfo={pageInfo} />}
       <ul className={listContainerClasses}>
         {postsData.map(post => {
           const postId = post.regularPost._id;
@@ -39,7 +39,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 RegularPostList.defaultProps = {
   pageInfo: {
     postType: 'regular',
-    isLoggedInUserPage: true,
+    isPossibleToWrite: true,
   },
   className: {},
 };

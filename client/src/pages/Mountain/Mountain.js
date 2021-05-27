@@ -37,8 +37,18 @@ const Mountain = () => {
   );
   const pageInfo = useMemo(
     () => ({
-      recruit: { type: 'mountains', params: mountainName, postType: 'recruit' },
-      regular: { type: 'mountains', params: mountainName, postType: 'regular' },
+      recruit: {
+        type: 'mountains',
+        params: mountainName,
+        postType: 'recruit',
+        isPossibleToWrite: true,
+      },
+      regular: {
+        type: 'mountains',
+        params: mountainName,
+        postType: 'regular',
+        isPossibleToWrite: true,
+      },
     }),
     [mountainName]
   );
