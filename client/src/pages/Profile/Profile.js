@@ -10,7 +10,7 @@ import {
 
 import {
   RecruitPostList,
-  RecruitForm,
+  RecruitPostForm,
   RecruitPostDetail,
   RegularPostList,
   RegularPostDetail,
@@ -93,15 +93,13 @@ const Profile = () => {
         <Route
           path="/profile/:userName/recruit/create"
           exact
-          component={() => (
-            <RecruitForm pageInfo={recruitPageInfo} formType="create" />
-          )}
+          component={() => <RecruitPostForm pageInfo={recruitPageInfo} />}
         />
         <Route
           path="/profile/:userName/recruit/edit/:postId"
           exact
           component={() => (
-            <RecruitForm pageInfo={recruitPageInfo} formType="edit" />
+            <RecruitPostForm pageInfo={recruitPageInfo} formType="edit" />
           )}
         />
         <Route
@@ -124,9 +122,7 @@ const Profile = () => {
         <Route
           path="/profile/:userName/reviews/create"
           exact
-          component={() => (
-            <RegularPostForm pageInfo={regularPageInfo} formType="create" />
-          )}
+          component={() => <RegularPostForm pageInfo={regularPageInfo} />}
         />
         <Route
           path="/profile/:userName/reviews/edit/:postId"

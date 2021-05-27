@@ -5,7 +5,7 @@ import MountainOverview from 'containers/MountainOverview/MountainOverview';
 import {
   RecruitPostList,
   RecruitPostDetail,
-  RecruitForm,
+  RecruitPostForm,
   RegularPostDetail,
   RegularPostList,
   RegularPostForm,
@@ -85,14 +85,14 @@ const Mountain = () => {
             path="/mountains/:mountainName/recruit/create"
             exact
             component={() => (
-              <RecruitForm pageInfo={recruitPageInfo} formType="create" />
+              <RecruitPostForm pageInfo={recruitPageInfo} formType="create" />
             )}
           />
           <Route
             path="/mountains/:mountainName/recruit/edit/:postId"
             exact
             component={() => (
-              <RecruitForm pageInfo={recruitPageInfo} formType="edit" />
+              <RecruitPostForm pageInfo={recruitPageInfo} formType="edit" />
             )}
           />
           <Route

@@ -1,24 +1,25 @@
 /* eslint-disable indent */
-import FormItem from 'components/FormItem/FormItem';
-import { Form, Formik } from 'formik';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { useState } from 'react';
-import { formHandler, validationSchema, path } from 'utils/';
+import { Form, Formik } from 'formik';
+
+import { FormItem, Button } from 'components';
+import { formHandler, validationSchema, path } from 'utils';
 import top100Mountains from 'data/top100Mountains';
-import { Button } from 'components';
+import {
+  createRecruitPostAsync,
+  getRecruitPostsAsync,
+  updateRecruitPostAsync,
+} from 'redux/modules/recruitPost';
+
 import {
   container,
   heading,
   formItem,
   buttonContainer,
   cancelButton,
-} from './RecruitForm.module.scss';
-import {
-  createRecruitPostAsync,
-  getRecruitPostsAsync,
-  updateRecruitPostAsync,
-} from 'redux/modules/recruitPost';
+} from './RecruitPostForm.module.scss';
 
 const RecruitForm = ({ pageInfo, formType }) => {
   const {
@@ -30,37 +31,44 @@ const RecruitForm = ({ pageInfo, formType }) => {
     handleClickCancelButton,
   } = formHandler;
 
-  const userId = useSelector(state => state.auth.userInfo._id);
-  const history = useHistory();
-  const params = useParams();
-  const postId = params.postId;
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const recruitPost = useSelector(state => state.recruitPost);
-  const { data } = recruitPost;
-  const postData = data.find(_data => _data.recruitPost._id === postId);
+  const userId = useSelector(state => state.auth.userInfo._id);
+
+  // 수정 페이지인 경우 필요한 정보
+  const isEditForm = formType === 'edit';
+  const postId = useParams().postId;
+  const postsData = useSelector(state => state.recruitPost.data);
+  const postData = postsData.find(_data => _data.recruitPost._id === postId);
   const prevPost = postData?.recruitPost;
+  const publisherId = postData?.publisherInfo._id;
+  const isUserPost = publisherId === userId;
 
-  const selectedDateInitial = postId ? new Date() : new Date();
-  const ageInitial = postId ? prevPost.recruitingAge : [20, 45];
+  const ageInitial = isEditForm ? prevPost.recruitingAge : [20, 45];
+  const selectedDateInitial = isEditForm ? new Date() : new Date();
 
   const [selectedDate, setSelectedDate] = useState(selectedDateInitial);
   const [currentAge, setCurrentAge] = useState(ageInitial);
+
+  useEffect(() => {
+    if (isEditForm && !isUserPost) history.push('/page-not-found');
+  });
 
   return (
     <div className={container}>
       <p className={heading}>메이트를 모집하세요~</p>
       <Formik
         initialValues={{
-          mountainName: postId ? prevPost.mountainName : '',
-          recruitingNumber: postId ? prevPost.recruitingNumber : 1,
-          hikingLevel: postId ? prevPost.hikingLevel : '',
-          recruitingGender: postId ? prevPost.recruitingGender : '',
-          recruitingAge: postId ? prevPost.recruitingAge : [20, 45],
-          description: postId ? prevPost.description : '',
-          recruitDate: postId ? prevPost.recruitDate : new Date(),
-          title: postId ? prevPost.title : '',
-          imageURL: postId ? prevPost.imageURL : {},
+          mountainName: isEditForm ? prevPost.mountainName : '',
+          recruitingNumber: isEditForm ? prevPost.recruitingNumber : 1,
+          hikingLevel: isEditForm ? prevPost.hikingLevel : '',
+          recruitingGender: isEditForm ? prevPost.recruitingGender : '',
+          recruitingAge: isEditForm ? prevPost.recruitingAge : [20, 45],
+          description: isEditForm ? prevPost.description : '',
+          recruitDate: isEditForm ? prevPost.recruitDate : new Date(),
+          title: isEditForm ? prevPost.title : '',
+          imageURL: isEditForm ? prevPost.imageURL : {},
         }}
         validationSchema={validationSchema.recruitPost}
         onSubmit={async values => {
@@ -74,7 +82,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
             ...values,
           };
 
-          const newPostData = postId
+          const newPostData = isEditForm
             ? await dispatch(updateRecruitPostAsync(postId, updatePost))
             : await dispatch(createRecruitPostAsync(newPost));
           await dispatch(getRecruitPostsAsync());
@@ -237,7 +245,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
                   className={cancelButton}
                   onClick={() => handleClickCancelButton(history, pageInfo)}
                 />
-                <Button>{postId ? '수정하기' : '등록하기'}</Button>
+                <Button>{isEditForm ? '수정하기' : '등록하기'}</Button>
               </div>
             </Form>
           );
@@ -251,6 +259,7 @@ RecruitForm.defaultProps = {
   pageInfo: {
     postType: 'recruit',
   },
+  formType: 'create',
 };
 
 export default RecruitForm;
