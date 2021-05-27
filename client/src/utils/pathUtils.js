@@ -4,7 +4,7 @@ const pagePath = {
 };
 const postPath = {
   recruit: '/recruit/',
-  reviews: '/reviews/',
+  regular: '/reviews/',
 };
 const formPath = {
   create: 'create/',

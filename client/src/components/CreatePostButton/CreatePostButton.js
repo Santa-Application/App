@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { createFormPagePath } from 'utils/path';
+import { createFormPagePath } from 'utils/pathUtils';
 
 import { createButton } from './CreatePostButton.module.scss';
 

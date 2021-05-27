@@ -26,29 +26,8 @@ export const getPostDateObject = postDate => {
   };
 };
 
-export const dateTime = postDate => {
-  const dateArray = postDate.split('-');
-  const date = dateArray[2].slice(0, 2);
-  return `${dateArray[0]}-${dateArray[1]}-${date}`;
-};
-
-export const dateInKorean = postDate => {
-  const dateArray = postDate.split('-');
-  const date = dateArray[2].slice(0, 2);
-  return `${dateArray[0]}년 ${dateArray[1]}월 ${date}일`;
-};
-
 export const getUserAge = userBirthDate => {
   const birthYear = userBirthDate.getFullYear();
-  const today = new Date();
-  const thisYear = today.getFullYear();
-
-  return thisYear - birthYear;
-};
-
-export const getUserAgeWithText = userBirthDate => {
-  const dateArray = userBirthDate.split('-');
-  const birthYear = dateArray[0];
   const today = new Date();
   const thisYear = today.getFullYear();
 
