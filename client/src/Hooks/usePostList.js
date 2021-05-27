@@ -6,18 +6,14 @@ import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
 import { filterPostsData } from 'utils/dataFilteringUtils';
 
-const post = {
-  recruit: 'recruit',
-  reviews: 'regular',
-};
 const thunkAction = {
   recruit: getRecruitPostsAsync,
-  reviews: getRegularPostsAsync,
+  regular: getRegularPostsAsync,
 };
 
 const usePostList = pageInfo => {
   const postType = pageInfo.postType;
-  const postDataName = `${post[postType]}Post`;
+  const postDataName = `${postType}Post`;
 
   const state = useSelector(state => state[postDataName]);
   const { isLoading, data, error } = state;

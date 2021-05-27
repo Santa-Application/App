@@ -27,8 +27,11 @@ const RegularPostCard = ({ postData }) => {
       </div>
       <div className={textContainer}>
         <Heading level={3} className={titleStyle} content={title}></Heading>
-        <time dateTime={changePostDate.dateTime(postDate)} className={time}>
-          {changePostDate.dateInKorean(postDate)}
+        <time
+          dateTime={changePostDate.getPostDate(new Date(postDate))}
+          className={time}
+        >
+          {changePostDate.getPostDate(new Date(postDate))}
         </time>
         <Tag type="mountain" content={mountainName}></Tag>
       </div>

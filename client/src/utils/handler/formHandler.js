@@ -1,4 +1,4 @@
-import { createListPagePath } from 'utils/path';
+import { createListPagePath } from 'utils/pathUtils';
 
 // select all input
 export const handleFocusAllInput = e => {

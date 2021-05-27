@@ -13,7 +13,7 @@ const RecruitPostList = ({ pageInfo }) => {
 
   return (
     <>
-      {pageInfo.isLoggedInUserPage && <CreatePostButton pageInfo={pageInfo} />}
+      {pageInfo.isPossibleToWrite && <CreatePostButton pageInfo={pageInfo} />}
       <ul className={listContainer}>
         {postsData.map(post => {
           const postId = post.recruitPost._id;
@@ -37,7 +37,7 @@ const RecruitPostList = ({ pageInfo }) => {
 RecruitPostList.defaultProps = {
   pageInfo: {
     postType: 'recruit',
-    isLoggedInUserPage: true,
+    isPossibleToWrite: true,
   },
 };
 
