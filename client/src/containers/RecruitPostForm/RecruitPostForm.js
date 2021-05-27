@@ -1,7 +1,7 @@
 /* eslint-disable indent */
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 
 import { FormItem, Button } from 'components';
@@ -20,6 +20,7 @@ import {
   buttonContainer,
   cancelButton,
 } from './RecruitPostForm.module.scss';
+import usePostForm from 'Hooks/usePostForm';
 
 const RecruitForm = ({ pageInfo, formType }) => {
   const {
@@ -33,48 +34,35 @@ const RecruitForm = ({ pageInfo, formType }) => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const isCreateForm = formType === 'create';
+  const [loggedInUserId, postId, prevPost] = usePostForm(isCreateForm);
 
-  const userId = useSelector(state => state.auth.userInfo._id);
-
-  // 수정 페이지인 경우 필요한 정보
-  const isEditForm = formType === 'edit';
-  const postId = useParams().postId;
-  const postsData = useSelector(state => state.recruitPost.data);
-  const postData = postsData.find(_data => _data.recruitPost._id === postId);
-  const prevPost = postData?.recruitPost;
-  const publisherId = postData?.publisherInfo._id;
-  const isUserPost = publisherId === userId;
-
-  const ageInitial = isEditForm ? prevPost.recruitingAge : [20, 45];
-  const selectedDateInitial = isEditForm ? new Date() : new Date();
+  const ageInitial = isCreateForm ? [20, 45] : prevPost.recruitingAge;
+  const selectedDateInitial = isCreateForm ? new Date() : new Date();
 
   const [selectedDate, setSelectedDate] = useState(selectedDateInitial);
   const [currentAge, setCurrentAge] = useState(ageInitial);
-
-  useEffect(() => {
-    if (isEditForm && !isUserPost) history.push('/page-not-found');
-  });
 
   return (
     <div className={container}>
       <p className={heading}>메이트를 모집하세요~</p>
       <Formik
         initialValues={{
-          mountainName: isEditForm ? prevPost.mountainName : '',
-          recruitingNumber: isEditForm ? prevPost.recruitingNumber : 1,
-          hikingLevel: isEditForm ? prevPost.hikingLevel : '',
-          recruitingGender: isEditForm ? prevPost.recruitingGender : '',
-          recruitingAge: isEditForm ? prevPost.recruitingAge : [20, 45],
-          description: isEditForm ? prevPost.description : '',
-          recruitDate: isEditForm ? prevPost.recruitDate : new Date(),
-          title: isEditForm ? prevPost.title : '',
-          imageURL: isEditForm ? prevPost.imageURL : {},
+          mountainName: isCreateForm ? '' : prevPost.mountainName,
+          recruitingNumber: isCreateForm ? 1 : prevPost.recruitingNumber,
+          hikingLevel: isCreateForm ? '' : prevPost.hikingLevel,
+          recruitingGender: isCreateForm ? '' : prevPost.recruitingGender,
+          recruitingAge: isCreateForm ? [20, 45] : prevPost.recruitingAge,
+          description: isCreateForm ? '' : prevPost.description,
+          recruitDate: isCreateForm ? new Date() : prevPost.recruitDate,
+          title: isCreateForm ? '' : prevPost.title,
+          imageURL: isCreateForm ? {} : prevPost.imageURL,
         }}
         validationSchema={validationSchema.recruitPost}
         onSubmit={async values => {
           const newPost = {
             ...values,
-            publisherID: userId,
+            publisherID: loggedInUserId,
             postdate: new Date(),
           };
 
@@ -82,9 +70,9 @@ const RecruitForm = ({ pageInfo, formType }) => {
             ...values,
           };
 
-          const newPostData = isEditForm
-            ? await dispatch(updateRecruitPostAsync(postId, updatePost))
-            : await dispatch(createRecruitPostAsync(newPost));
+          const newPostData = isCreateForm
+            ? await dispatch(createRecruitPostAsync(newPost))
+            : await dispatch(updateRecruitPostAsync(postId, updatePost));
           await dispatch(getRecruitPostsAsync());
 
           const newPostId = newPostData.recruitPost._id;
@@ -245,7 +233,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
                   className={cancelButton}
                   onClick={() => handleClickCancelButton(history, pageInfo)}
                 />
-                <Button>{isEditForm ? '수정하기' : '등록하기'}</Button>
+                <Button>{isCreateForm ? '등록하기' : '수정하기'}</Button>
               </div>
             </Form>
           );
