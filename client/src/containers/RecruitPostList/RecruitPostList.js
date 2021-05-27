@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 
 import { CreatePostButton, RecruitPostCard } from 'components';
-import { path } from 'utils';
+import { pathUtils } from 'utils';
 import { usePostList } from 'Hooks';
 
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ const RecruitPostList = ({ pageInfo }) => {
 
           return (
             <li key={postId}>
-              <Link to={path.createDetailPagePath(pageInfo, postId)}>
+              <Link to={pathUtils.createDetailPagePath(pageInfo, postId)}>
                 <RecruitPostCard
                   postData={post}
                   className={{ container: postCard }}
