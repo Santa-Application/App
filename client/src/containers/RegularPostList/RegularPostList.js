@@ -38,7 +38,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 
 RegularPostList.defaultProps = {
   pageInfo: {
-    postType: 'reviews',
+    postType: 'regular',
     isLoggedInUserPage: true,
   },
   className: {},

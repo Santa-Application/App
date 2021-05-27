@@ -142,7 +142,7 @@ const RegularPostForm = ({ pageInfo, formType }) => {
 
 RegularPostForm.defaultProps = {
   pageInfo: {
-    postType: 'reviews',
+    postType: 'regular',
   },
   formType: 'create',
 };

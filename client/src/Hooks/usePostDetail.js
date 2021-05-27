@@ -7,20 +7,16 @@ import {
   toggleApplyRecruitingAsync,
 } from 'redux/modules/recruitPost';
 import { removeRegularPostAsync } from 'redux/modules/regularPost';
-import { createFormPagePath, createListPagePath } from 'utils/path';
+import { createFormPagePath, createListPagePath } from 'utils/pathUtils';
 
-const post = {
-  recruit: 'recruit',
-  reviews: 'regular',
-};
 const removeHandler = {
   recruit: removeRecruitPostAsync,
-  reviews: removeRegularPostAsync,
+  regular: removeRegularPostAsync,
 };
 
 const usePostDetail = (pageInfo, isApplied, setIsApplied) => {
   const postType = pageInfo.postType;
-  const postDataName = `${post[postType]}Post`;
+  const postDataName = `${postType}Post`;
 
   const dispatch = useDispatch();
   const history = useHistory();

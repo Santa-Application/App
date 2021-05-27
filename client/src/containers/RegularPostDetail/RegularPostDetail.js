@@ -47,7 +47,7 @@ const RegularPostDetail = ({ pageInfo }) => {
 
 RegularPostDetail.defaultProps = {
   pageInfo: {
-    postType: 'reviews',
+    postType: 'regular',
   },
 };
 RegularPostDetail.propTypes = {
