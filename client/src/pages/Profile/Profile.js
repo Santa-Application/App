@@ -21,10 +21,8 @@ import { authAPI } from 'api';
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(null);
-
   const history = useHistory();
   const params = useParams();
-
   const userName = useMemo(() => params.userName, [params]);
   const loggedInUserInfo = useSelector(state => state.auth.userInfo);
   const loggedInUserName = useMemo(() => loggedInUserInfo.name, [
@@ -35,28 +33,36 @@ const Profile = () => {
     loggedInUserName,
   ]);
 
+  const menuInfo = useMemo(
+    () => [
+      { name: 'Recruit', path: `/profile/${userName}/recruit` },
+      { name: 'Reviews', path: `/profile/${userName}/reviews` },
+    ],
+    [userName]
+  );
   const pageInfo = useMemo(
     () => ({
       recruit: { type: 'profile', params: userName, postType: 'recruit' },
-      reviews: { type: 'profile', params: userName, postType: 'reviews' },
+      regular: { type: 'profile', params: userName, postType: 'regular' },
     }),
     [userName]
   );
+  const recruitPageInfo = pageInfo.recruit;
+  const regularPageInfo = pageInfo.regular;
 
   const handleClickUserInfoEditButton = useCallback(() => {
     history.push(`/profile/${userName}/edit`);
   }, [history, userName]);
 
   useEffect(() => {
-    const setUserInfoAsync = async () => {
+    (async () => {
       if (isLoggedInUserPage) {
         setUserInfo(loggedInUserInfo);
       } else {
         const userInfoData = await authAPI.getUserInfoData(userName);
         setUserInfo(userInfoData.data);
       }
-    };
-    setUserInfoAsync();
+    })();
   }, [userName, loggedInUserInfo, isLoggedInUserPage]);
 
   return (
@@ -70,20 +76,14 @@ const Profile = () => {
         introduction={userInfo?.introduction}
         onClick={handleClickUserInfoEditButton}
       />
-      <MenuTab
-        menus={[
-          { name: 'Recruit', path: `/profile/${userName}/recruit` },
-          { name: 'Reviews', path: `/profile/${userName}/reviews` },
-        ]}
-        label="profile tab list"
-      />
+      <MenuTab menus={menuInfo} label="profile tab list" />
       <Switch>
         <Route
           path="/profile/:userName/recruit"
           exact
           component={() => (
             <RecruitPostList
-              pageInfo={{ ...pageInfo.recruit, isLoggedInUserPage }}
+              pageInfo={{ ...recruitPageInfo, isLoggedInUserPage }}
             />
           )}
         />
@@ -91,27 +91,27 @@ const Profile = () => {
           path="/profile/:userName/recruit/create"
           exact
           component={() => (
-            <RecruitForm pageInfo={pageInfo.recruit} formType="create" />
+            <RecruitForm pageInfo={recruitPageInfo} formType="create" />
           )}
         />
         <Route
           path="/profile/:userName/recruit/edit/:postId"
           exact
           component={() => (
-            <RecruitForm pageInfo={pageInfo.recruit} formType="edit" />
+            <RecruitForm pageInfo={recruitPageInfo} formType="edit" />
           )}
         />
         <Route
           path="/profile/:userName/recruit/:postId"
           exact
-          component={() => <RecruitPostDetail pageInfo={pageInfo.recruit} />}
+          component={() => <RecruitPostDetail pageInfo={recruitPageInfo} />}
         />
         <Route
           path="/profile/:userName/reviews"
           exact
           component={() => (
             <RegularPostList
-              pageInfo={{ ...pageInfo.reviews, isLoggedInUserPage }}
+              pageInfo={{ ...regularPageInfo, isLoggedInUserPage }}
             />
           )}
         />
@@ -119,19 +119,19 @@ const Profile = () => {
           path="/profile/:userName/reviews/create"
           exact
           component={() => (
-            <RegularPostForm pageInfo={pageInfo.reviews} formType="create" />
+            <RegularPostForm pageInfo={regularPageInfo} formType="create" />
           )}
         />
         <Route
           path="/profile/:userName/reviews/edit/:postId"
           exact
           component={() => (
-            <RegularPostForm pageInfo={pageInfo.reviews} formType="edit" />
+            <RegularPostForm pageInfo={regularPageInfo} formType="edit" />
           )}
         />
         <Route
           path={`/profile/:userName/reviews/:postId`}
-          component={() => <RegularPostDetail pageInfo={pageInfo.reviews} />}
+          component={() => <RegularPostDetail pageInfo={regularPageInfo} />}
         />
         <Redirect
           from="/profile/:userName"
