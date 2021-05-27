@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { RegularPostCard, CreatePostButton } from 'components';
 import { path } from 'utils';
-import usePostList from 'Hooks/usePostList';
+import { usePostList } from 'Hooks';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';

@@ -1,5 +1,6 @@
 import { UserInformation, PostHeading, RoundedBox, Button } from 'components';
 import { dataFilteringUtils } from 'utils';
+import { usePostDetail } from 'Hooks';
 
 import PropTypes from 'prop-types';
 import {
@@ -8,7 +9,6 @@ import {
   headingContainer,
   text,
 } from './RegularPostDetail.module.scss';
-import usePostDetail from 'Hooks/usePostDetail';
 
 const RegularPostDetail = ({ pageInfo }) => {
   const [postData, isUserPublisher, handlers] = usePostDetail(pageInfo);
