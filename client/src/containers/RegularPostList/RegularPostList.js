@@ -2,8 +2,8 @@
 import { Link } from 'react-router-dom';
 
 import { RegularPostCard, CreatePostButton } from 'components';
-import { path } from 'utils';
-import usePostList from 'Hooks/usePostList';
+import { pathUtils } from 'utils';
+import { usePostList } from 'Hooks';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -22,7 +22,7 @@ const RegularPostList = ({ pageInfo, className }) => {
 
           return (
             <li key={postId}>
-              <Link to={path.createDetailPagePath(pageInfo, postId)}>
+              <Link to={pathUtils.createDetailPagePath(pageInfo, postId)}>
                 <RegularPostCard
                   postData={post.regularPost}
                   className={{ container: postCard }}

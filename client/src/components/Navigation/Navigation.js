@@ -32,11 +32,6 @@ const Navigation = ({ label, onClick, className }) => {
               <NavigationItem shape={'navReviews'} title={'reviews'} />
             </NavLink>
           </li>
-          {/* <li role={'none'}>
-            <NavLink role={'menuitem'} exact to={`/${auth.userInfo.name}`}>
-              <NavigationItem shape={'navProfile'} title={'profile'} />
-            </NavLink>
-          </li> */}
         </ul>
       </nav>
     </>

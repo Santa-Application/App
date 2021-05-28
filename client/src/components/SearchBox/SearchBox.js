@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 import { useState, useRef } from 'react';
-import { Icon } from 'components';
+import { Link } from 'react-router-dom';
+import { Icon, Heading } from 'components';
 import { arrayOf, object } from 'prop-types';
 import {
   container,
@@ -11,8 +12,6 @@ import {
   searchList,
   errorMessage,
 } from './SearchBox.module.scss';
-import Heading from 'components/Heading/Heading';
-import { Link } from 'react-router-dom';
 import top100Mountains from 'data/top100Mountains';
 
 const SearchBox = ({ mountainData, ...restProps }) => {
@@ -20,6 +19,7 @@ const SearchBox = ({ mountainData, ...restProps }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [hasError, setHasError] = useState(false);
 
+  const searInputRef = useRef();
   const filtered = mountainData.filter(mountain => {
     return mountain.data.name.includes(searchText);
   });
@@ -29,34 +29,28 @@ const SearchBox = ({ mountainData, ...restProps }) => {
     setHasError(false);
     e.target.select();
   };
-
   const handleChangeInput = e => {
     setSearchText(e.target.value);
     if (filtered.length) setHasError(false);
     setIsOpened(true);
   };
-
-  const searInputRef = useRef();
-
   const handleClickClose = () => {
     setSearchText('');
     searInputRef.current.focus();
   };
-
   const handleClickSearch = () => {
     if (!filtered.length) {
       setHasError(true);
       setIsOpened(false);
+    } else {
+      setIsOpened(true);
     }
-    if (filtered.length) setIsOpened(true);
   };
-
   const handleClickItem = e => {
     setSearchText(e.target.textContent);
     setHasError(false);
     setIsOpened(false);
   };
-
   const handleClickSelectClose = () => {
     setIsOpened(false);
   };
@@ -109,19 +103,27 @@ const SearchBox = ({ mountainData, ...restProps }) => {
       </div>
       {isOpened && (
         <ul className={searchList} role="listbox" onClick={handleClickItem}>
-          {filtered.length === 0
-            ? mountainData.map(mountain => {
+          {filtered.length
+            ? filtered.map(mountain => {
                 return (
-                  <li key={mountain.data._id} role="option">
+                  <li
+                    key={mountain.data._id}
+                    role="option"
+                    aria-selected={searchText === mountain.data.name}
+                  >
                     <Link to={`/mountains/${mountain.data.name}`}>
                       {mountain.data.name}
                     </Link>
                   </li>
                 );
               })
-            : filtered.map(mountain => {
+            : mountainData.map(mountain => {
                 return (
-                  <li key={mountain.data._id} role="option">
+                  <li
+                    key={mountain.data._id}
+                    role="option"
+                    aria-selected={searchText === mountain.data.name}
+                  >
                     <Link to={`/mountains/${mountain.data.name}`}>
                       {mountain.data.name}
                     </Link>

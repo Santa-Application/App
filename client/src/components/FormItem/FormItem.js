@@ -45,9 +45,6 @@ const renderFormInput = formType => {
   }
 
   return Comp;
-
-  // 디버깅 목적
-  // FormInput.displayName = 'FormInput';
 };
 
 const FormItem = ({
@@ -57,8 +54,6 @@ const FormItem = ({
   className,
   ...restProps
 }) => {
-  // console.log(inputProps);
-
   const containerClasses = classNames(formItem, className);
   const { name, formType } = inputProps;
   return (
@@ -91,14 +86,14 @@ const FormItem = ({
 
 export default FormItem;
 
-// FormItem.defaultProps = {
-//   descProps: {
-//     content: '',
-//   },
-// };
+FormItem.defaultProps = {
+  descProps: {
+    content: '',
+  },
+};
 
-// FormItem.propTypes = {
-//   headingProps: object.isRequired,
-//   descProps: object.isRequired,
-//   inputProps: object.isRequired,
-// };
+FormItem.propTypes = {
+  headingProps: object.isRequired,
+  descProps: object.isRequired,
+  inputProps: object.isRequired,
+};

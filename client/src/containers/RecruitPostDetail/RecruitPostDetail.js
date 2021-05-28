@@ -8,6 +8,7 @@ import {
   Button,
 } from 'components';
 import { dataFilteringUtils } from 'utils';
+import { usePostDetail } from 'Hooks';
 
 import PropTypes from 'prop-types';
 import {
@@ -17,7 +18,6 @@ import {
   statusOfRecruitees,
   buttonContainer,
 } from './RecruitPostDetail.module.scss';
-import usePostDetail from 'Hooks/usePostDetail';
 
 const RecruitPostDetail = ({ pageInfo }) => {
   const [isApplied, setIsApplied] = useState(false);

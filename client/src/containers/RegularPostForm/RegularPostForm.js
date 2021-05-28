@@ -1,17 +1,14 @@
-/* eslint-disable indent */
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 
 import { FormItem, Button } from 'components';
-import { validationSchema, path } from 'utils';
-import {
-  createRegularPostAsync,
-  getRegularPostsAsync,
-} from 'redux/modules/regularPost';
+import { usePostForm } from 'Hooks';
+import { validationSchema, pathUtils, formUtils } from 'utils';
 import {
   handleChangeFileInput,
   handleClickCancelButton,
+  submitData,
 } from 'utils/handler/formHandler';
 
 import PropTypes from 'prop-types';
@@ -23,43 +20,34 @@ import {
   cancelButton,
 } from './RegularPostForm.module.scss';
 
-import top100Mountains from 'data/top100Mountains';
-
 const RegularPostForm = ({ pageInfo, formType }) => {
-  const history = useHistory();
-
-  const userId = useSelector(state => state.auth.userInfo._id);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const isCreateForm = formType === 'create';
+  const mountainsData = useSelector(state => state.mountain.data);
+
+  const [loggedInUserId, postId, prevPost] = usePostForm(
+    pageInfo,
+    isCreateForm
+  );
 
   return (
     <div className={container}>
       <p className={heading}>멋진 리뷰를 작성해주세요~</p>
       <Formik
-        initialValues={{
-          title: '',
-          mountainName: '',
-          imageURL: '',
-          content: '',
-        }}
+        initialValues={formUtils.regularPostFormInitialValues(
+          isCreateForm,
+          prevPost
+        )}
         validationSchema={validationSchema.regularPost}
         onSubmit={async values => {
-          const formData = new FormData();
-          const newPostObj = {
-            ...values,
-            publisherID: userId,
-            postdate: new Date(),
-          };
-
-          Object.keys(newPostObj).forEach(key => {
-            formData.append(key, newPostObj[key]);
-          });
-
-          const newPostData = await dispatch(createRegularPostAsync(formData));
-          dispatch(getRegularPostsAsync());
-
-          const newPostId = newPostData.regularPost._id;
-
-          history.push(path.createDetailPagePath(pageInfo, newPostId));
+          const newPostId = await submitData(values)(dispatch)(
+            isCreateForm,
+            pageInfo,
+            postId,
+            loggedInUserId
+          );
+          pathUtils.moveToDetailPage(history)(pageInfo, newPostId);
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => (
@@ -90,7 +78,7 @@ const RegularPostForm = ({ pageInfo, formType }) => {
                 setFieldValue,
                 handleBlur,
                 handleChange,
-                datas: top100Mountains,
+                datas: mountainsData,
               }}
               className={formItem}
             />
@@ -117,7 +105,7 @@ const RegularPostForm = ({ pageInfo, formType }) => {
                 formType: 'textarea',
               }}
               descProps={{
-                content: '내가 등반한 산을 자랑해주세요',
+                content: '내가 등신한 산을 자랑해주세요',
               }}
               headingProps={{ level: 3, content: '리뷰 상세 글' }}
               className={formItem}
@@ -131,7 +119,7 @@ const RegularPostForm = ({ pageInfo, formType }) => {
               >
                 취소하기
               </Button>
-              <Button>{formType === 'create' ? '등록하기' : '수정하기'}</Button>
+              <Button>{isCreateForm ? '등록하기' : '수정하기'}</Button>
             </div>
           </Form>
         )}

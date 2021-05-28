@@ -1,12 +1,12 @@
 /* eslint-disable indent */
 import React, { useState } from 'react';
 import Icon from 'components/Icon/Icon';
+import PropTypes, { string, arrayOf, object } from 'prop-types';
 import {
   selectBoxContainer,
   selectBoxInput,
   selectBoxList,
 } from './SelectBox.module.scss';
-import PropTypes, { string, arrayOf, object } from 'prop-types';
 
 const SelectBox = ({ field, inputProps }) => {
   const {
@@ -24,11 +24,12 @@ const SelectBox = ({ field, inputProps }) => {
     list: selectBoxList,
   };
 
-  const filtered = datas.filter(data => {
-    return data.content.includes(field.value);
+  const filtered = datas.filter(({ data }) => {
+    return data.name.includes(field.value);
   });
 
   const [isOpened, setIsOpened] = useState(false);
+  const [selectedItemName, setSelectedItemName] = useState('');
 
   const handleFocusInput = e => {
     setIsOpened(true);
@@ -45,8 +46,10 @@ const SelectBox = ({ field, inputProps }) => {
     setIsOpened(!isOpened);
   };
   const handleClickItem = e => {
+    const selectedItemName = e.target.textContent;
     setIsOpened(false);
-    setFieldValue(id, e.target.textContent);
+    setFieldValue(id, selectedItemName);
+    setSelectedItemName(selectedItemName);
   };
 
   return (
@@ -72,18 +75,26 @@ const SelectBox = ({ field, inputProps }) => {
           role="listbox"
           onClick={handleClickItem}
         >
-          {filtered.length === 0
-            ? datas.map(data => {
+          {filtered.length
+            ? filtered.map(({ data }) => {
                 return (
-                  <li key={data.id} role="option">
-                    <button type="button">{data.content}</button>
+                  <li
+                    key={data._id}
+                    role="option"
+                    aria-selected={data.name === selectedItemName}
+                  >
+                    <button>{data.name}</button>
                   </li>
                 );
               })
-            : filtered.map(item => {
+            : datas.map(({ data }) => {
                 return (
-                  <li key={item.id} role="option">
-                    <button>{item.content}</button>
+                  <li
+                    key={data._id}
+                    role="option"
+                    aria-selected={data.name === selectedItemName}
+                  >
+                    <button type="button">{data.name}</button>
                   </li>
                 );
               })}
@@ -92,6 +103,7 @@ const SelectBox = ({ field, inputProps }) => {
     </div>
   );
 };
+
 SelectBox.defaultProps = {
   id: '',
   placeholder: '',

@@ -6,7 +6,7 @@ import { getRecruitPostsAsync } from 'redux/modules/recruitPost';
 import { getRegularPostsAsync } from 'redux/modules/regularPost';
 import { filterPostsData } from 'utils/dataFilteringUtils';
 
-const thunkAction = {
+const getPostThunk = {
   recruit: getRecruitPostsAsync,
   regular: getRegularPostsAsync,
 };
@@ -20,7 +20,7 @@ const usePostList = pageInfo => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(thunkAction[postType]());
+    dispatch(getPostThunk[postType]());
   }, [dispatch, postType]);
 
   useEffect(() => {

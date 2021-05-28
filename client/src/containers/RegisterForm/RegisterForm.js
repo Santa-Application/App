@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { formHandler, validationSchema } from 'utils/';
 import { Formik, Form } from 'formik';
-import { FormItem, Button, Heading } from 'components';
+import { FormItem, Button } from 'components';
 import { useDispatch } from 'react-redux';
 import { registerNewUserAsync } from 'redux/modules/auth';
-import { handleFocusAllInput } from 'utils/handler/formHandler';
 import { useHistory } from 'react-router-dom';
 
 const RegisterForm = ({ className }) => {

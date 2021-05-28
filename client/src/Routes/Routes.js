@@ -2,6 +2,7 @@ import { Redirect, Switch } from 'react-router-dom';
 
 import { PublicRoute, PrivateRoute } from 'Routes';
 import {
+  ComingSoonPage,
   HomePage,
   Login,
   Main,
@@ -37,10 +38,10 @@ const Routes = () => (
     <PrivateRoute path="/reviews/edit/:postId" exact component={RegularEdit} />
     <PrivateRoute path="/reviews/:postId" exact component={RegularDetail} />
 
-    <PrivateRoute path="/mountains" exact component={PageNotFound} />
+    <PrivateRoute path="/mountains" exact component={ComingSoonPage} />
     <PrivateRoute path="/mountains/:mountainName" component={Mountain} />
 
-    <PrivateRoute path="/profile/:userName/edit" component={Register} />
+    <PrivateRoute path="/profile/:userName/edit" component={ComingSoonPage} />
     <PrivateRoute path="/profile/:userName" component={Profile} />
     <PrivateRoute path="/page-not-found" component={PageNotFound} />
     <Redirect to="/page-not-found" />
