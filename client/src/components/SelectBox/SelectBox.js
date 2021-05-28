@@ -24,8 +24,8 @@ const SelectBox = ({ field, inputProps }) => {
     list: selectBoxList,
   };
 
-  const filtered = datas.filter(data => {
-    return data.content.includes(field.value);
+  const filtered = datas.filter(({ data }) => {
+    return data.name.includes(field.value);
   });
 
   const [isOpened, setIsOpened] = useState(false);
@@ -73,17 +73,17 @@ const SelectBox = ({ field, inputProps }) => {
           onClick={handleClickItem}
         >
           {filtered.length === 0
-            ? datas.map(data => {
+            ? datas.map(({ data }) => {
                 return (
-                  <li key={data.id} role="option">
-                    <button type="button">{data.content}</button>
+                  <li key={data._id} role="option">
+                    <button type="button">{data.name}</button>
                   </li>
                 );
               })
-            : filtered.map(item => {
+            : filtered.map(({ data }) => {
                 return (
-                  <li key={item.id} role="option">
-                    <button>{item.content}</button>
+                  <li key={data._id} role="option">
+                    <button>{data.name}</button>
                   </li>
                 );
               })}
