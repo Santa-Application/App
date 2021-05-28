@@ -1,7 +1,6 @@
-/* eslint-disable indent */
 import React from 'react';
 import classNames from 'classnames';
-import { string } from 'prop-types';
+import { string, shape } from 'prop-types';
 import { numberInput } from './NumberInput.module.scss';
 
 const NumberInput = ({ field, inputProps }) => {
@@ -31,7 +30,7 @@ NumberInput.defaultProps = {
 };
 
 NumberInput.propTypes = {
-  inputProps: {
+  inputProps: shape({
     /** 식별 가능한 id값을 필수로 전달합니다. */
     id: string.isRequired,
     /** 폼 컨트롤 시, 사용자가 입력한 값과 매칭되는 네임 값을 설정합니다. */
@@ -40,7 +39,7 @@ NumberInput.propTypes = {
     unit: string,
     /** 추가적으로 필요한 class name을 전달받습니다. */
     className: string,
-  },
+  }),
 };
 
 export default NumberInput;
