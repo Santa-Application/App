@@ -52,80 +52,16 @@ export const removeRecruitPostAsync = postId =>
     [postId]
   );
 // 모집 신청 성크 액션(신청한 유져 데이터 바뀌게 서버 api 수정 필요), thunk creator를 활용한 성크 액션 함수 에러 해결해야함
-// export const toggleApplyRecruitingAsync = (postId, applicantId) => {
-//   reduxUtils.createThunkActionCreator(
-//     {
-//       loading: LOADING_RECRUIT_POST,
-//       type: TOGGLE_APPLY_RECRUITING,
-//       error: ERROR_RECRUIT_POST,
-//     },
-//     recruitPostAPI.toggleApplyRecruiting,
-//     [postId, applicantId]
-//   );
-// };
-export const toggleApplyRecruitingAsync = (
-  postId,
-  applicantId
-) => async dispatch => {
-  dispatch({ type: LOADING_RECRUIT_POST });
-
-  try {
-    const payload = await recruitPostAPI.toggleApplyRecruiting(
-      postId,
-      applicantId
-    );
-
-    dispatch({ type: TOGGLE_APPLY_RECRUITING, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_RECRUIT_POST, payload: e });
-  }
-};
-/*
-export const getRecruitPostsAsync = () => async dispatch => {
-  dispatch({ type: LOADING_RECRUIT_POST });
-
-  try {
-    const payload = await recruitPostAPI.getAllRecruitPosts();
-
-    dispatch({ type: GET_RECRUIT_POSTS, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_RECRUIT_POST, payload: e });
-  }
-};
-export const createRecruitPost = newPost => async dispatch => {
-  dispatch({ type: LOADING_RECRUIT_POST });
-
-  try {
-    const payload = await recruitPostAPI.createRecruitPost(newPost);
-
-    dispatch({ type: CREATE_RECRUIT_POST, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_RECRUIT_POST, payload: e });
-  }
-};
-export const updateRecruitPost = (id, updatePost) => async dispatch => {
-  dispatch({ type: LOADING_RECRUIT_POST });
-
-  try {
-    const payload = await recruitPostAPI.updateRecruitPost(id, updatePost);
-
-    dispatch({ type: UPDATE_RECRUIT_POST, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_RECRUIT_POST, payload: e });
-  }
-};
-export const removeRecruitPost = id => async dispatch => {
-  dispatch({ type: LOADING_RECRUIT_POST });
-
-  try {
-    const payload = await recruitPostAPI.removeRecruitPost(id);
-
-    dispatch({ type: REMOVE_RECRUIT_POST, payload });
-  } catch (e) {
-    dispatch({ type: ERROR_RECRUIT_POST, payload: e });
-  }
-};
-*/
+export const toggleApplyRecruitingAsync = (postId, applicantId) =>
+  reduxUtils.createThunkActionCreator(
+    {
+      loading: LOADING_RECRUIT_POST,
+      type: TOGGLE_APPLY_RECRUITING,
+      error: ERROR_RECRUIT_POST,
+    },
+    recruitPostAPI.toggleApplyRecruiting,
+    [postId, applicantId]
+  );
 
 // reducer
 const recruitPostReducer = (state = reduxUtils.initialState(), action) => {
