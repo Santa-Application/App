@@ -18,3 +18,4 @@ export { default as RegularCreate } from 'pages/Regular/RegularCreate';
 export { default as Profile } from 'pages/Profile/Profile';
 
 export { default as PageNotFound } from 'pages/PageNotFound/PageNotFound';
+export { default as ComingSoonPage } from 'pages/ComingSoonPage/ComingSoonPage';

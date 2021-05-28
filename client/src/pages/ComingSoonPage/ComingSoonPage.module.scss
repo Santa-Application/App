@@ -1,0 +1,33 @@
+@import 'styles/';
+
+.container {
+  @include flex(center, center, column, nowrap);
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 50vh;
+
+  h2 {
+    @include font-dark-20-700;
+    margin-top: 2rem;
+  }
+
+  a {
+    color: $dark-gray;
+    font-size: 1.8rem;
+    margin-top: 1rem;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.background {
+  background-image: url(https://blush.design/api/download?shareUri=QwUInsNjN4UMMxZz&c=Clothes_0%7E323c84-0.1%7Ee85d5d_Hair_0%7Eb5d3ff-0.1%7E50271b_Skin_0%7Effbf94-0.1%7Ee88f70&w=800&h=800&fm=png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  min-width: 70vw;
+  min-height: 20vh;
+}
