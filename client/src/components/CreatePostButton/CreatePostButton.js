@@ -10,7 +10,7 @@ const CreatePostButton = ({ pageInfo }) => {
 
   const handleClickCreateButton = useCallback(() => {
     history.push(createFormPagePath(pageInfo, 'create'));
-  });
+  }, [history, pageInfo]);
 
   return (
     <button className={createButton} onClick={handleClickCreateButton}>
