@@ -7,7 +7,7 @@ import {
   toggleApplyRecruitingAsync,
 } from 'redux/modules/recruitPost';
 import { removeRegularPostAsync } from 'redux/modules/regularPost';
-import { createFormPagePath, createListPagePath } from 'utils/pathUtils';
+import { moveToFormPagePath, moveToListPage } from 'utils/pathUtils';
 
 const removeHandler = {
   recruit: removeRecruitPostAsync,
@@ -31,13 +31,13 @@ const usePostDetail = (pageInfo, isApplied, setIsApplied) => {
   const isUserPublisher = publisherId === userId;
 
   const handleClickEditPost = useCallback(() => {
-    history.push(createFormPagePath(pageInfo, 'edit', postId));
+    moveToFormPagePath(history)(pageInfo, postId, 'edit');
   }, [pageInfo, postId, history]);
 
   const handleClickRemovePost = useCallback(async () => {
     const removePostAsync = removeHandler[postType];
     await dispatch(removePostAsync(postId));
-    history.push(createListPagePath(pageInfo));
+    moveToListPage(history)(pageInfo);
   }, [pageInfo, postId, postType, history, dispatch]);
 
   const handlers = {
