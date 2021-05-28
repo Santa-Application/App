@@ -1,17 +1,12 @@
-/* eslint-disable indent */
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 
 import { FormItem, Button } from 'components';
-import { formHandler, validationSchema, path } from 'utils';
-import top100Mountains from 'data/top100Mountains';
-import {
-  createRecruitPostAsync,
-  getRecruitPostsAsync,
-  updateRecruitPostAsync,
-} from 'redux/modules/recruitPost';
+import { formHandler, validationSchema, pathUtils, formUtils } from 'utils';
+import { submitData } from 'utils/handler/formHandler';
+import { usePostForm } from 'Hooks';
 
 import {
   container,
@@ -20,7 +15,6 @@ import {
   buttonContainer,
   cancelButton,
 } from './RecruitPostForm.module.scss';
-import usePostForm from 'Hooks/usePostForm';
 
 const RecruitForm = ({ pageInfo, formType }) => {
   const {
@@ -35,49 +29,36 @@ const RecruitForm = ({ pageInfo, formType }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const isCreateForm = formType === 'create';
-  const [loggedInUserId, postId, prevPost] = usePostForm(isCreateForm);
+  const mountainsData = useSelector(state => state.mountain.data);
 
-  const ageInitial = isCreateForm ? [20, 45] : prevPost.recruitingAge;
-  const selectedDateInitial = isCreateForm ? new Date() : new Date();
-
-  const [selectedDate, setSelectedDate] = useState(selectedDateInitial);
-  const [currentAge, setCurrentAge] = useState(ageInitial);
+  const [loggedInUserId, postId, prevPost] = usePostForm(
+    pageInfo,
+    isCreateForm
+  );
+  const [selectedDate, setSelectedDate] = useState(
+    isCreateForm ? new Date() : new Date(prevPost.postDate)
+  );
+  const [currentAge, setCurrentAge] = useState(
+    isCreateForm ? [20, 45] : prevPost.recruitingAge
+  );
 
   return (
     <div className={container}>
       <p className={heading}>메이트를 모집하세요~</p>
       <Formik
-        initialValues={{
-          mountainName: isCreateForm ? '' : prevPost.mountainName,
-          recruitingNumber: isCreateForm ? 1 : prevPost.recruitingNumber,
-          hikingLevel: isCreateForm ? '' : prevPost.hikingLevel,
-          recruitingGender: isCreateForm ? '' : prevPost.recruitingGender,
-          recruitingAge: isCreateForm ? [20, 45] : prevPost.recruitingAge,
-          description: isCreateForm ? '' : prevPost.description,
-          recruitDate: isCreateForm ? new Date() : prevPost.recruitDate,
-          title: isCreateForm ? '' : prevPost.title,
-          imageURL: isCreateForm ? {} : prevPost.imageURL,
-        }}
+        initialValues={formUtils.recruitPostFormInitialValues(
+          isCreateForm,
+          prevPost
+        )}
         validationSchema={validationSchema.recruitPost}
         onSubmit={async values => {
-          const newPost = {
-            ...values,
-            publisherID: loggedInUserId,
-            postdate: new Date(),
-          };
-
-          const updatePost = {
-            ...values,
-          };
-
-          const newPostData = isCreateForm
-            ? await dispatch(createRecruitPostAsync(newPost))
-            : await dispatch(updateRecruitPostAsync(postId, updatePost));
-          await dispatch(getRecruitPostsAsync());
-
-          const newPostId = newPostData.recruitPost._id;
-
-          history.push(path.createDetailPagePath(pageInfo, newPostId));
+          const newPostId = await submitData(values)(dispatch)(
+            isCreateForm,
+            pageInfo,
+            postId,
+            loggedInUserId
+          );
+          pathUtils.moveToDetailPage(history)(pageInfo, newPostId);
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => {
@@ -113,7 +94,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
                   setFieldValue,
                   handleBlur,
                   handleChange,
-                  datas: top100Mountains,
+                  datas: mountainsData,
                 }}
                 className={formItem}
               />
@@ -158,7 +139,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
                   content: '등산 메이트 나이대',
                 }}
                 descProps={{
-                  content: '같이 등산할 메이트의 나이대를 정해주세요',
+                  content: '같이 등산하고 싶은 메이트의 나이대를 지정해주세요',
                 }}
                 inputProps={{
                   formType: 'rangeSlider',

@@ -1,3 +1,14 @@
+/* eslint-disable indent */
+import {
+  createRecruitPostAsync,
+  getRecruitPostsAsync,
+  updateRecruitPostAsync,
+} from 'redux/modules/recruitPost';
+import {
+  createRegularPostAsync,
+  getRegularPostsAsync,
+  updateRegularPostAsync,
+} from 'redux/modules/regularPost';
 import { createListPagePath } from 'utils/pathUtils';
 
 // select all input
@@ -63,4 +74,61 @@ export const handleChangeSlider = (
 
 export const handleClickCancelButton = (history, pageInfo) => {
   history.push(createListPagePath(pageInfo));
+};
+
+const createPostThunk = {
+  recruit: createRecruitPostAsync,
+  regular: createRegularPostAsync,
+};
+const updatePostThunk = {
+  recruit: updateRecruitPostAsync,
+  regular: updateRegularPostAsync,
+};
+const getPostThunk = {
+  recruit: getRecruitPostsAsync,
+  regular: getRegularPostsAsync,
+};
+
+const post = {
+  recruit: 'recruitPost',
+  regular: 'regularPost',
+};
+
+const createFormData = newPost => {
+  const formData = new FormData();
+  Object.keys(newPost).forEach(key => {
+    formData.append(key, newPost[key]);
+  });
+
+  return formData;
+};
+
+export const submitData = values => dispatch => async (
+  isCreateForm,
+  pageInfo,
+  postId,
+  loggedInUserId
+) => {
+  const postType = pageInfo.postType;
+
+  const newPost = isCreateForm
+    ? {
+        ...values,
+        publisherID: loggedInUserId,
+        postdate: new Date(),
+      }
+    : {
+        ...values,
+      };
+
+  const newPostData = await dispatch(
+    isCreateForm
+      ? createPostThunk[postType](
+          postType === 'recruit' ? newPost : createFormData(newPost)
+        )
+      : updatePostThunk[postType](postId, newPost)
+  );
+  await dispatch(getPostThunk[postType]());
+
+  return newPostData[post[postType]]._id;
 };

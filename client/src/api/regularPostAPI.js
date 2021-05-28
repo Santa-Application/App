@@ -33,11 +33,7 @@ export const createRegularPost = async newPost => {
 };
 
 export const updateRegularPost = async (id, updatePost) => {
-  const response = await axios.patch(`${URI}regularpost/${id}`, updatePost, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  const response = await axios.patch(`${URI}regularpost/${id}`, updatePost);
 
   return response.data;
 };
