@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { CreatePostButton, RecruitPostCard } from 'components';
 import { pathUtils } from 'utils';
-import { usePostList } from 'Hooks';
+import { usePostList } from 'hooks';
 
 import PropTypes from 'prop-types';
 import { listContainer, postCard } from './RecruitPostList.module.scss';

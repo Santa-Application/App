@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 
 import { FormItem, Button } from 'components';
-import { usePostForm } from 'Hooks';
+import { usePostForm } from 'hooks';
 import { validationSchema, pathUtils, formUtils } from 'utils';
 import {
   handleChangeFileInput,
