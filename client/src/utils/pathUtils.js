@@ -26,14 +26,18 @@ export const createFormPagePath = (pageInfo, formType, postId) =>
     pageInfo.params ? pageInfo.params : ''
   }${postPath[pageInfo.postType]}${formPath[formType]}${postId ? postId : ''}`;
 
-export const moveToListPage = history => pageInfo => {
+export const moveToListPage = (history, pageInfo) => {
   history.push(createListPagePath(pageInfo));
 };
 
-export const moveToDetailPage = history => (pageInfo, postId) => {
+export const moveToDetailPage = (history, pageInfo, postId) => {
   history.push(createDetailPagePath(pageInfo, postId));
 };
 
-export const moveToFormPagePath = history => (pageInfo, postId, formType) => {
+export const moveToFormPagePath = (history, pageInfo, postId, formType) => {
   history.push(createFormPagePath(pageInfo, formType, postId));
+};
+
+export const replaceToListPage = (history, pageInfo) => {
+  history.replace(createListPagePath(pageInfo));
 };

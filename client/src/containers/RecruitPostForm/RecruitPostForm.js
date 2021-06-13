@@ -58,7 +58,7 @@ const RecruitForm = ({ pageInfo, formType }) => {
             postId,
             loggedInUserId
           );
-          pathUtils.moveToDetailPage(history)(pageInfo, newPostId);
+          pathUtils.moveToDetailPage(history, pageInfo, newPostId);
         }}
       >
         {({ setFieldValue, handleBlur, handleChange }) => {
