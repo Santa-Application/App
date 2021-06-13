@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   UserInformation,
@@ -8,7 +8,7 @@ import {
   Button,
 } from 'components';
 import { dataFilteringUtils } from 'utils';
-import { usePostDetail } from 'hooks';
+import { useCreateDetailPageData, useCreateHandlers } from 'hooks';
 
 import PropTypes from 'prop-types';
 import {
@@ -22,18 +22,18 @@ import {
 const RecruitPostDetail = ({ pageInfo }) => {
   const [isApplied, setIsApplied] = useState(false);
 
-  const [postData, isUserPublisher, handlers] = usePostDetail(
-    pageInfo,
-    isApplied,
-    setIsApplied
-  );
-
-  const { recruitPost } = postData;
+  const [postData, isUserPublisher] = useCreateDetailPageData(pageInfo);
   const {
     handleClickEditPost,
     handleClickRemovePost,
     handleChangeApplyRecruitingButton,
-  } = handlers;
+  } = useCreateHandlers(pageInfo, isApplied, setIsApplied);
+
+  useEffect(() => {
+    if (!postData) return null;
+  }, [postData]);
+
+  const { recruitPost } = postData;
 
   return (
     <div className={container}>
