@@ -41,7 +41,7 @@
   background-color: $white;
   border-radius: 1rem;
   box-shadow: $box-shadow;
-  z-index: 100;
+  z-index: 10;
 
   li {
     border-top: 1px solid $light-gray;
@@ -68,7 +68,7 @@
   background-color: $white;
   border-radius: 1rem;
   box-shadow: $box-shadow;
-  z-index: 100;
+  z-index: 10;
 
   span {
     color: $red;

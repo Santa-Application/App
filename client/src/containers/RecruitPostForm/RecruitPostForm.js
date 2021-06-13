@@ -6,7 +6,7 @@ import { Form, Formik } from 'formik';
 import { FormItem, Button } from 'components';
 import { formHandler, validationSchema, pathUtils, formUtils } from 'utils';
 import { submitData } from 'utils/handler/formHandler';
-import { usePostForm } from 'Hooks';
+import { usePostForm } from 'hooks';
 
 import {
   container,

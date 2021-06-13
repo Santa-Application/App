@@ -8,7 +8,7 @@ import {
   Button,
 } from 'components';
 import { dataFilteringUtils } from 'utils';
-import { usePostDetail } from 'Hooks';
+import { usePostDetail } from 'hooks';
 
 import PropTypes from 'prop-types';
 import {

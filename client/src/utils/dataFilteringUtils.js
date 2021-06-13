@@ -1,20 +1,13 @@
 /* eslint-disable indent */
 import { postDate } from 'utils';
 
-const postsType = {
-  recruit: 'recruit',
-  reviews: 'regular',
-};
-
 export const filterPostsData = (data, pageInfo) => {
   const { type, postType, params } = pageInfo;
 
   return type === 'profile'
     ? data.filter(_data => _data.publisherInfo.name === params)
     : type === 'mountain'
-    ? data.filter(
-        _data => _data[`${postsType[postType]}Post`].mountainName === params
-      )
+    ? data.filter(_data => _data[`${postType}Post`].mountainName === params)
     : data;
 };
 

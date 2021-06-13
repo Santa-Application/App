@@ -1,6 +1,6 @@
 import { Redirect, Switch } from 'react-router-dom';
 
-import { PublicRoute, PrivateRoute } from 'Routes';
+import { PublicRoute, PrivateRoute } from 'routes';
 import {
   ComingSoonPage,
   HomePage,

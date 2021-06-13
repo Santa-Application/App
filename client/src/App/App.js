@@ -1,6 +1,6 @@
 import { HelmetProvider } from 'react-helmet-async';
 
-import { Routes, ScrollToTop } from 'Routes';
+import { Routes, ScrollToTop } from 'routes';
 import { Footer, Header } from 'components';
 
 function App() {

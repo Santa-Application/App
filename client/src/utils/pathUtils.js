@@ -1,6 +1,6 @@
 const pagePath = {
   profile: '/profile/',
-  mountains: '/mountains/',
+  mountain: '/mountains/',
 };
 const postPath = {
   recruit: '/recruit/',
